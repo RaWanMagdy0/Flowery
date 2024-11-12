@@ -1,5 +1,6 @@
-import 'package:flowery/presentation/screens/main_page/main_page.dart';
 import 'package:flutter/material.dart';
+
+import 'presentation/home_layout/screens/main_page/main_page.dart';
 
 void main() {
   runApp(const MyApp());
