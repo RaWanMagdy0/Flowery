@@ -4,11 +4,13 @@ class AppColors{
   static  Color kWhite=Colors.white;
   static  Color kBlack=const Color(0xFF0F0F0F);
   static  Color kGray=const Color(0xFF535353);
+  static Color kMediumGray = const Color(0xFF7D7D7D);
   static const Color  kDarkGray=Color(0xFFb6A6A6);
   static const  Color kRed=Colors.red;
   static const   kBlue=Color(0xFF02369C);
   static const lightBlue=Color(0xFFEDEFF3);
   static const kLightGrey = Color(0xFFCFCFCF);
+  static const kVividCerise = Color(0xFFD21E6A);
   static const kGreen = Color(0xFF11CE19);
   static const kLightGreen = Color(0xFFCAF9CC);
   static const kLightBlue = Color(0xFFEDEFF3);
