@@ -1,7 +1,5 @@
+class ApiConstants {
+  static const String baseUrl="https://flower.elevateegy.com/";
+  static const String forgotPasswordApi= "api/v1/auth/forgotPassword";
 
-
-
-import 'api_manger.dart';
-
-class ApiMangerImpl implements ApiManger {
 }
