@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../../presentation/auth/forgot_password/view/forget_password_screen.dart';
 import '../../presentation/auth/forgot_password/view/password_verification.dart';
-import '../../splash/splash_view.dart';
 
 class AppRoutes {
   static Route<dynamic> onGenerateRoute(RouteSettings setting) {

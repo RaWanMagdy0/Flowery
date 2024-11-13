@@ -16,8 +16,8 @@ class AppDialogs {
         builder: (context) {
           return Lottie.asset(
             AppImages.loading1,
-            height: 10.h,
-            width: 10.w,
+            height: 50.h,
+            width: 20.w,
           );
         });
   }
@@ -40,7 +40,7 @@ class AppDialogs {
             },
             child: Text(
               'Got it',
-              style: AppFonts.font14GreyWeight400,
+              style: AppFonts.font20BlackWeight400,
             ),
           ),
         ],

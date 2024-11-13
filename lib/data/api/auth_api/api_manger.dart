@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/http.dart';
 
-import '../../core/api/api_const.dart';
+import '../../../core/api/api_const.dart';
 part 'api_manger.g.dart';
 @lazySingleton
 @RestApi(baseUrl: ApiConstants.baseUrl)

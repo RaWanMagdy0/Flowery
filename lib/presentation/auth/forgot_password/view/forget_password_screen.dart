@@ -2,14 +2,15 @@ import 'package:flowery/core/di/di.dart';
 import 'package:flowery/core/routes/page_route_name.dart';
 import 'package:flowery/core/styles/colors/app_colors.dart';
 import 'package:flowery/core/styles/fonts/app_fonts.dart';
-import 'package:flowery/presentation/auth/forgot_password/view/widgets/custom_text_form_field.dart';
 import 'package:flowery/presentation/auth/forgot_password/view_model/forget_passwoed_cubit.dart';
 import 'package:flowery/presentation/auth/forgot_password/view_model/forget_password_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../core/utils/const/app_string.dart';
 import '../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../core/utils/functions/validators/my_validators.dart';
+import '../../../../core/utils/widget/custom_text_form_field.dart';
 
 class ForgetPassword extends StatefulWidget {
   static String routeName = "ForgetPassword";
@@ -35,20 +36,22 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                 Row(
                   children: [
                     Icon(Icons.arrow_back_ios_outlined),
-                    Text("Password", style: AppFonts.font20BlackWeight500),
+                    Text(
+                        AppStrings.passwordAppBarTitle,
+                        style: AppFonts.font20BlackWeight500),
                   ],
                 ),
                 SizedBox(
                   height: 40.h,
                 ),
                 Text(
-                  "Forget password",
+                  AppStrings.forgetPasswordScreenTitle,
                   style: AppFonts.font20BlackWeight500,
                 ),
                 SizedBox(
                   height: 10.h,
                 ),
-                Text("please enter your email associates to \n your account",
+                Text(AppStrings.forgetPasswordScreenDescription,
                     textAlign: TextAlign.center,
                     style: AppFonts.font14GreyWeight400),
                 SizedBox(
@@ -60,8 +63,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     onChanged: () => viewModel.updateValidationState(),
                     key: viewModel.formKey,
                     child: CustomTextFromField(
-                      hintText: "Enter your email",
-                      labelText: "Email",
+                      hintText: AppStrings.emailHintText,
+                      labelText: AppStrings.emailLabelText,
                       validator: (value) => MyValidators.validateEmail(value),
                       keyBordType: TextInputType.text,
                       controller: viewModel.emailController,
@@ -80,7 +83,9 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                             borderRadius: BorderRadius.circular(25.r))),
                     onPressed: () => viewModel.submitForgotPassword(),
                     child:
-                        Text("Confirm", style: AppFonts.font15WhiteWeight500))
+                        Text(
+                            AppStrings.confirmTitle,
+                            style: AppFonts.font15WhiteWeight500))
               ],
             ),
           ),

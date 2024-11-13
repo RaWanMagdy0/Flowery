@@ -11,7 +11,7 @@
 import 'package:dio/dio.dart' as _i361;
 import 'package:flowery/core/api/dio/dio_factory.dart' as _i1013;
 import 'package:flowery/core/api/dio/dio_module.dart' as _i827;
-import 'package:flowery/data/api/api_manger.dart' as _i1049;
+import 'package:flowery/data/api/auth_api/api_manger.dart' as _i242;
 import 'package:flowery/data/data_source/remote_data_source/auth/auth_remote_data_source.dart'
     as _i223;
 import 'package:flowery/data/data_source/remote_data_source/auth/auth_remote_data_source_impl.dart'
@@ -40,9 +40,9 @@ extension GetItInjectableX on _i174.GetIt {
     final dioModule = _$DioModule();
     gh.factory<_i1013.DioFactory>(() => _i1013.DioFactory());
     gh.lazySingleton<_i361.Dio>(() => dioModule.dio);
-    gh.lazySingleton<_i1049.ApiManger>(() => _i1049.ApiManger(gh<_i361.Dio>()));
-    gh.factory<_i223.AuthRemoteDataSource>(() =>
-        _i376.AuthRemoteDataSourceImpl(apiManger: gh<_i1049.ApiManger>()));
+    gh.lazySingleton<_i242.ApiManger>(() => _i242.ApiManger(gh<_i361.Dio>()));
+    gh.factory<_i223.AuthRemoteDataSource>(
+        () => _i376.AuthRemoteDataSourceImpl(apiManger: gh<_i242.ApiManger>()));
     gh.factory<_i1008.AuthRepository>(() =>
         _i786.AuthRepositoryImpl(dataSource: gh<_i223.AuthRemoteDataSource>()));
     gh.factory<_i355.ForgotPasswordUseCase>(() =>

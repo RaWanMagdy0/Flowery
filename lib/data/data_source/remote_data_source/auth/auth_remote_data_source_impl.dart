@@ -1,8 +1,7 @@
 import 'package:flowery/core/api/api_result.dart';
 import 'package:flowery/core/api/execute_api_call.dart';
-import 'package:flowery/data/api/api_manger.dart';
 import 'package:injectable/injectable.dart';
-
+import '../../../api/auth_api/api_manger.dart';
 import 'auth_remote_data_source.dart';
 @Injectable(as: AuthRemoteDataSource)
 class AuthRemoteDataSourceImpl extends AuthRemoteDataSource{

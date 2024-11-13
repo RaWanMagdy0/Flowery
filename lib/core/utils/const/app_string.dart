@@ -1,6 +1,7 @@
 class AppStrings {
   static const String passwordAppBarTitle = "Password";
   static const String loginTitle = "Login";
+  static const String confirmTitle = "Confirm";
   static const String signUpTitle = "Sign up";
   static const String forgetPasswordText = 'Forget password?';
   static const String alreadyHaveAccount = 'Already have an Account?';
@@ -18,7 +19,7 @@ class AppStrings {
       'Password must not be empty and must contain \n 6 characters with upper case letter and one \nnumber at least';
 
   static const String donotHaveAccountText = "Don't have an account?";
-  static const String didnotRcieveCode = "Didn't receive code?";
+  static const String didnotReceiveCode = "Didn't receive code?";
   static const String resendText = "Resend";
 
   static const String emailHintText = 'Enter Your Email';
