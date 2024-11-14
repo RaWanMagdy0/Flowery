@@ -1,4 +1,5 @@
 import 'package:flowery/core/styles/colors/app_colors.dart';
+import 'package:flowery/core/styles/images/app_images.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -34,6 +35,50 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: 16.0, vertical: 8.0), // Modified padding
+            child: Row(
+              children: [
+                ImageIcon(
+                  AssetImage(AppImages.location),
+                  color: AppColors.kGray,
+                ),
+                SizedBox(width: 6), // Smaller spacing
+                Expanded(
+                  child: Row(
+                    children: [
+                      Text(
+                        'Deliver to ',
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontSize: 16,
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          '2XVP+XC - Sheikh Zayed',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      Icon(
+                        Icons.keyboard_arrow_down,
+                        color: AppColors.kPink,
+                      ),
+                    ],
+                  ),
+                ),
+                // Added dropdown icon
               ],
             ),
           ),
