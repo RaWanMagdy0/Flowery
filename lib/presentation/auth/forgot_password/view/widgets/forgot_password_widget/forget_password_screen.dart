@@ -7,10 +7,10 @@ import 'package:flowery/presentation/auth/forgot_password/view_model/forget_pass
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../core/utils/const/app_string.dart';
-import '../../../../core/utils/functions/dialogs/app_dialogs.dart';
-import '../../../../core/utils/functions/validators/my_validators.dart';
-import '../../../../core/utils/widget/custom_text_form_field.dart';
+import '../../../../../../core/utils/const/app_string.dart';
+import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
+import '../../../../../../core/utils/functions/validators/my_validators.dart';
+import '../../../../../../core/utils/widget/custom_text_form_field.dart';
 
 class ForgetPassword extends StatefulWidget {
   static String routeName = "ForgetPassword";
@@ -20,13 +20,14 @@ class ForgetPassword extends StatefulWidget {
   @override
   State<ForgetPassword> createState() => _ForgetPasswordState();
 }
+
 class _ForgetPasswordState extends State<ForgetPassword> {
   var viewModel = getIt.get<ForgetPasswordCubit>();
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<ForgetPasswordCubit, ForgotPasswordStates>(
-      bloc: viewModel,
+        bloc: viewModel,
         listener: (context, state) => _handelStateChange(state),
         child: Scaffold(
           body: Padding(
@@ -36,8 +37,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                 Row(
                   children: [
                     Icon(Icons.arrow_back_ios_outlined),
-                    Text(
-                        AppStrings.passwordAppBarTitle,
+                    Text(AppStrings.passwordAppBarTitle,
                         style: AppFonts.font20BlackWeight500),
                   ],
                 ),
@@ -82,10 +82,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25.r))),
                     onPressed: () => viewModel.submitForgotPassword(),
-                    child:
-                        Text(
-                            AppStrings.confirmTitle,
-                            style: AppFonts.font15WhiteWeight500))
+                    child: Text(AppStrings.confirmTitle,
+                        style: AppFonts.font15WhiteWeight500))
               ],
             ),
           ),
@@ -94,8 +92,12 @@ class _ForgetPasswordState extends State<ForgetPassword> {
 
   dynamic _handelStateChange(ForgotPasswordStates state) {
     if (state is ForgotPasswordSuccessState) {
-      Navigator.pushReplacementNamed(
-          context, PageRouteName.passwordVerification);
+      AppDialogs.showSuccessDialog(
+          context: context, message: "OTP sent to your email.\n Please check your Email");
+      Future.delayed(Duration(seconds: 2), () {
+        Navigator.pushReplacementNamed(
+            context, PageRouteName.passwordVerification);
+      });
     } else if (state is ForgotPasswordErrorState) {
       Navigator.pop(context);
       AppDialogs.showErrorDialog(

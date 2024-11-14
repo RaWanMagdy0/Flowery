@@ -13,4 +13,9 @@ AuthRepositoryImpl({required this.dataSource});
     return dataSource.forgotPassword(email: email);
   }
 
+  @override
+  Future<Result<String?>> verifyResetCode({required String resetCode}) {
+  return dataSource.verifyResetCode(resetCode: resetCode);
+  }
+
 }

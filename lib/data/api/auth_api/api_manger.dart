@@ -12,4 +12,6 @@ abstract class ApiManger {
 
   @POST(ApiConstants.forgotPasswordApi)
   Future<String?> forgetPassword(@Body() Map<String, dynamic> email);
+  @POST(ApiConstants.verifyResetCodeApi)
+  Future<String?>verifyResetCode(@Body() Map<String,dynamic>resetCode);
 }

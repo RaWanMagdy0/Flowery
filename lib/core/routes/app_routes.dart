@@ -1,8 +1,8 @@
 import 'package:flowery/core/routes/page_route_name.dart';
 import 'package:flutter/material.dart';
 
-import '../../presentation/auth/forgot_password/view/forget_password_screen.dart';
-import '../../presentation/auth/forgot_password/view/password_verification.dart';
+import '../../presentation/auth/forgot_password/view/widgets/email_verification_widget/email_verification.dart';
+import '../../presentation/auth/forgot_password/view/widgets/forgot_password_widget/forget_password_screen.dart';
 
 class AppRoutes {
   static Route<dynamic> onGenerateRoute(RouteSettings setting) {
@@ -14,7 +14,7 @@ class AppRoutes {
       case PageRouteName.forgetPassword:
         return _handleMaterialPageRoute(widget: ForgetPassword());
       case PageRouteName.passwordVerification:
-        return _handleMaterialPageRoute(widget: PasswordVerification());
+        return _handleMaterialPageRoute(widget: EmailVerification());
 
       default:
         return _handleMaterialPageRoute(widget: const Scaffold());

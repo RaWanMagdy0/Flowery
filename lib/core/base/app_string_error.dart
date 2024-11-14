@@ -5,10 +5,10 @@ class AppStringErrors{
   static const String connectionError="Connection failed. Please check your network connection.";
   static const String badCertificate="The server's certificate is not trusted. Please check your network security.";
   static const String unknown="An unknown error occurred. Please try again";
-  static const String badRequest="Invalid request. Please check the data and try again.";
+  static const String badRequest="Code is invalid or has expired.";
   static const String unauthorized="Unauthorized access. Please log in and try again.";
   static const String conflict="conflict detected. The resource already exists or conflicts with the current state.";
-  static const String notFound="Resource not found. The requested item does not exist";
+  static const String notFound="There is no account with this email address";
   static const String internalServerError="Internal server error. Please try again later";
 
 }

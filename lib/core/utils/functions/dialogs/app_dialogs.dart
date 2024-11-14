@@ -15,7 +15,7 @@ class AppDialogs {
         context: context,
         builder: (context) {
           return Lottie.asset(
-            AppImages.loading1,
+            AppImages.pinkLoading,
             height: 50.h,
             width: 20.w,
           );
@@ -27,7 +27,7 @@ class AppDialogs {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: AppColors.kWhite,
-        icon: Lottie.asset(AppImages.error, width: 70.w, height: 50.h),
+        icon: Lottie.asset(AppImages.pinkError,  height: 80.h),
         content: Text(
           textAlign: TextAlign.center,
           errorMassage,
@@ -44,6 +44,22 @@ class AppDialogs {
             ),
           ),
         ],
+      ),
+    );
+  }
+  static void showSuccessDialog(
+      {required BuildContext context, required String message}) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: AppColors.kWhite,
+        icon: Lottie.asset(AppImages.pinkDone,  height: 80.h),
+        content: Text(
+          textAlign: TextAlign.center,
+          message,
+          style: AppFonts.font18BlackWeight500,
+        ),
+
       ),
     );
   }

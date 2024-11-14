@@ -5,12 +5,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../core/base/base_view_model.dart';
+import '../../../../domain/use_case/auth/verify_reset_code_use_case.dart';
 
 @injectable
 class ForgetPasswordCubit extends BaseViewModel<ForgotPasswordStates> {
   final ForgotPasswordUseCase forgotPasswordUseCase;
+  final VerifyResetCodeUseCase verifyResetCodeUseCase;
   ForgetPasswordCubit(
-    this.forgotPasswordUseCase,
+    this.forgotPasswordUseCase, this.verifyResetCodeUseCase,
   ) : super(ForgotPasswordInitialState());
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -29,6 +31,19 @@ class ForgetPasswordCubit extends BaseViewModel<ForgotPasswordStates> {
     }
   }
 
+
+  Future<void> verifyResetCode({required String resetCode})async{
+    emit(VerifyEmailCodeLoadingState(loadingMessage: 'Loading...'));
+    var result=await verifyResetCodeUseCase.invoke(resetCode: resetCode);
+    switch(result){
+      case Success<String?>():
+        emit(VerifyEmailCodeSuccessState(success: result.data));
+      case Fail<String?>():
+        emit(VerifyEmailCodeErrorState(errorMassage: getErrorMassageFromException(result.exception)));
+    }
+  }
+
+
   void submitForgotPassword() {
     if (formKey.currentState!.validate()) {
       forgotPassword();
@@ -43,7 +58,5 @@ class ForgetPasswordCubit extends BaseViewModel<ForgotPasswordStates> {
     }
     emit(UpdateValidationState());
   }
-
-
 
 }

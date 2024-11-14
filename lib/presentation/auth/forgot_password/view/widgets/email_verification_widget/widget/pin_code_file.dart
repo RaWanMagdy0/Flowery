@@ -1,12 +1,16 @@
+import 'package:flowery/presentation/auth/forgot_password/view_model/forget_passwoed_cubit.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-import '../../../../../core/styles/colors/app_colors.dart';
+import '../../../../../../../core/styles/colors/app_colors.dart';
 
 class PinCodeFile extends StatelessWidget {
-  const PinCodeFile({super.key});
+  final Function(String) onCodeCompleted;
+
+  const PinCodeFile({super.key, required this.onCodeCompleted});
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +26,16 @@ class PinCodeFile extends StatelessWidget {
         inactiveColor:AppColors.kLightGrey,
         selectedFillColor: AppColors.kWhite,
         activeFillColor: AppColors.kWhite,
-        selectedColor: AppColors.kPink,
-      ),
+        selectedColor: AppColors.kPink,),
+      animationDuration: const Duration(milliseconds: 200),
+      keyboardType: TextInputType.phone,
+         enabled: true,
+      onCompleted: (value) {
+        if (value.length == 6) {
+          onCodeCompleted(value);
+        }
+      },
+
     );
   }
 }

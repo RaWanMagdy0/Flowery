@@ -15,4 +15,12 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource{
     });
   }
 
+  @override
+  Future<Result<String?>> verifyResetCode({required String resetCode}) {
+   return executeApiCall<String?>(apiCall: ()async{
+     String? message=await apiManger.verifyResetCode({"resetCode": resetCode});
+     return message;
+   });
+  }
+
 }
