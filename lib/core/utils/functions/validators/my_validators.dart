@@ -11,8 +11,20 @@ class MyValidators {
     }
     return null;
   }
+
   static bool _isEmpty(String? value) {
     return value == null || value.trim().isEmpty;
   }
 
+  static String? validatePassword(String? value) {
+    if (_isEmpty(value)) {
+      return 'Password is required';
+    }
+    var regex = RegExp(
+        r"(?=^.{8,}$)(?=.*[!@#$%^&*]+)(?![.\\n])(?=.*[A-Z])(?=.*[a-z])(?=.*\d).*$");
+    if (!regex.hasMatch(value!)) {
+      return 'Must contains A-Z, a-z, @-#-&.. , 1-9';
+    }
+    return null;
+  }
 }

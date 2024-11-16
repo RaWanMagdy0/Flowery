@@ -27,10 +27,10 @@ class DioFactory {
       [
         !kReleaseMode
             ? PrettyDioLogger(
-          requestBody: true,
-          requestHeader: true,
-          responseHeader: true,
-        )
+                requestBody: true,
+                requestHeader: true,
+                responseHeader: true,
+              )
             : const Interceptor(),
       ],
     );
