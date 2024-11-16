@@ -1,32 +1,40 @@
-import 'package:flowery/core/styles/colors/app_colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../styles/colors/app_colors.dart';
+
 class CustomTextFromField extends StatelessWidget {
-  String hintText;
-  String labelText;
+  final String hintText;
+  final String labelText;
+  final TextEditingController controller;
+  final TextInputType keyBordType;
+  final TextInputAction? textInputAction;
+  final bool isPassword;
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
 
-  final TextEditingController controller;
-  TextInputType keyBordType;
-  CustomTextFromField(
-      {super.key,
-      this.validator,
-      required this.hintText,
-      required this.labelText,
-      required this.controller,
-        this.onChanged,
+  const CustomTextFromField({
+    super.key,
+    required this.hintText,
+    required this.labelText,
+    required this.controller,
+    required this.keyBordType,
+    this.textInputAction,
+    this.isPassword = false,
+    this.validator,
+    this.onChanged,
+  });
 
-        required this.keyBordType});
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
       validator: validator,
       onChanged: onChanged,
+      onTapOutside: (event) => FocusScope.of(context).unfocus(),
       autovalidateMode: AutovalidateMode.onUserInteraction,
+      textInputAction: TextInputAction.next,
+      obscureText: isPassword,
       decoration: InputDecoration(
         filled: true,
         errorMaxLines: 1,
@@ -41,10 +49,10 @@ class CustomTextFromField extends StatelessWidget {
         labelText: labelText,
         enabled: true,
         floatingLabelStyle:
-        MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
-          if (states.contains(MaterialState.error)) {
+            WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+          if (states.contains(WidgetState.error)) {
             return TextStyle(color: AppColors.kError);
-          } else if (states.contains(MaterialState.focused)) {
+          } else if (states.contains(WidgetState.focused)) {
             return TextStyle(color: AppColors.kGray);
           }
           return TextStyle(color: Colors.grey);

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
@@ -21,13 +20,14 @@ class AppDialogs {
           );
         });
   }
+
   static void showErrorDialog(
       {required BuildContext context, required String errorMassage}) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: AppColors.kWhite,
-        icon: Lottie.asset(AppImages.pinkError,  height: 80.h),
+        icon: Lottie.asset(AppImages.pinkError, height: 80.h),
         content: Text(
           textAlign: TextAlign.center,
           errorMassage,
@@ -47,22 +47,20 @@ class AppDialogs {
       ),
     );
   }
+
   static void showSuccessDialog(
       {required BuildContext context, required String message}) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: AppColors.kWhite,
-        icon: Lottie.asset(AppImages.pinkDone,  height: 80.h),
+        icon: Lottie.asset(AppImages.pinkDone, height: 80.h),
         content: Text(
           textAlign: TextAlign.center,
           message,
           style: AppFonts.font18BlackWeight500,
         ),
-
       ),
     );
   }
-
-
 }

@@ -5,6 +5,11 @@ class AppStrings {
   static const String signUpTitle = "Sign up";
   static const String forgetPasswordText = 'Forget password?';
   static const String alreadyHaveAccount = 'Already have an Account?';
+  static const String gender = 'Gender';
+  static const String male = 'Male';
+  static const String female = 'Female';
+  static const String createAccount = 'Creating an account, you agree to our\t';
+  static const String termsAndConditions = 'Terms and Conditions';
 
   static const String forgetPasswordScreenTitle = 'Forget Password';
   static const String forgetPasswordScreenDescription =

@@ -10,6 +10,7 @@ part of 'api_manger.dart';
 abstract class ParseErrorLogger {
   void logError(Object error, StackTrace stackTrace, RequestOptions options);
 }
+
 class _ApiManger implements ApiManger {
   _ApiManger(
     this._dio, {
@@ -24,6 +25,41 @@ class _ApiManger implements ApiManger {
   String? baseUrl;
 
   final ParseErrorLogger? errorLogger;
+
+  @override
+  Future<SignUpResponseModel> signUp(
+      SignUpRequestBodyModel signUpRequestBody) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(signUpRequestBody.toJson());
+    final _options = _setStreamType<SignUpResponseModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'api/v1/auth/signup',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SignUpResponseModel _value;
+    try {
+      _value = SignUpResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
 
   @override
   Future<String?> forgetPassword(Map<String, dynamic> email) async {
