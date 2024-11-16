@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: AppTheme.appTheme,
-          initialRoute: PageRouteName.forgetPassword,
+          initialRoute: PageRouteName.homeLayout,
           onGenerateRoute: (settings) => AppRoutes.onGenerateRoute(settings),
         );
       },
