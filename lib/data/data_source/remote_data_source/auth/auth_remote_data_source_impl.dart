@@ -36,4 +36,14 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
       return message;
     });
   }
+
+  @override
+  Future<Result<String?>> logIn(
+      {required String email, required String password}) {
+    return executeApiCall<String?>(apiCall: () async {
+      String? message =
+          await apiManger.logIn({"email": email, "password": password});
+      return message;
+    });
+  }
 }

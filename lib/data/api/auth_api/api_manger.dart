@@ -18,8 +18,13 @@ abstract class ApiManger {
   Future<SignUpResponseModel> signUp(
     @Body() SignUpRequestBodyModel signUpRequestBody,
   );
+  
   @POST(ApiConstants.forgotPasswordApi)
   Future<String?> forgetPassword(@Body() Map<String, dynamic> email);
+  
   @POST(ApiConstants.verifyResetCodeApi)
   Future<String?> verifyResetCode(@Body() Map<String, dynamic> resetCode);
+  
+  @POST(ApiConstants.loginApi)
+  Future<String?> logIn(@Body() Map<String, dynamic> body);
 }

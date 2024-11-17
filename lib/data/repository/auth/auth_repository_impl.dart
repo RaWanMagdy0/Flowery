@@ -25,4 +25,10 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<Result<String?>> verifyResetCode({required String resetCode}) {
     return dataSource.verifyResetCode(resetCode: resetCode);
   }
+
+  @override
+  Future<Result<String?>> logIn(
+      {required String email, required String password}) {
+    return dataSource.logIn(password: password, email: email);
+  }
 }
