@@ -1,5 +1,5 @@
- 
 class PageRouteName{
+  static const String signUp = "signUp";
   static const String forgetPassword="forgetPassword";
   static const String splash="splash";
   static const String homeLayout = 'homeLayout';

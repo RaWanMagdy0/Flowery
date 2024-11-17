@@ -1,11 +1,11 @@
-import 'package:flowery/core/api/api_result.dart';
-import 'package:flowery/domain/use_case/auth/forgot_password_use_case.dart';
-import 'package:flowery/presentation/auth/forgot_password/view_model/forget_password_states.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../core/api/api_result.dart';
 import '../../../../core/base/base_view_model.dart';
+import '../../../../domain/use_case/auth/forgot_password_use_case.dart';
 import '../../../../domain/use_case/auth/verify_reset_code_use_case.dart';
+import 'forget_password_states.dart';
 
 @injectable
 class ForgetPasswordCubit extends BaseViewModel<ForgotPasswordStates> {

@@ -11,6 +11,7 @@ class CustomButton extends StatelessWidget {
   final TextStyle? textStyle;
   final Widget? child;
   final Color? color, textColor, disabledColor, borderColor;
+
   const CustomButton({
     super.key,
     this.onPressed,
@@ -25,6 +26,7 @@ class CustomButton extends StatelessWidget {
     this.disabledColor,
     this.borderColor,
   });
+
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(

@@ -6,11 +6,11 @@ import 'core/di/di.dart';
 import 'core/routes/app_routes.dart';
 import 'core/routes/page_route_name.dart';
 import 'core/theme/app_theme.dart';
-import 'core/utils/bloc_observer/bloc_observer.dart';
+import 'core/utils/bloc_observer/app_bloc_observer.dart';
 
 void main() {
   configureDependencies();
-  Bloc.observer = MyBlocObserver();
+  Bloc.observer = AppBlocObserver();
   runApp(const MyApp());
 }
 
