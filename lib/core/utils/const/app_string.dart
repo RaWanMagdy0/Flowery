@@ -60,9 +60,12 @@ class AppStrings {
   static const String invalidCode = 'Invalid code';
 
   static const String continueText = "Continue";
+  static const String continueAsGusetText = "Continue as Guset";
 
   static const String loadingText = "Loading..";
   static const String somethingWentWrong = "Somthing went wrong";
+  static const String pleaseCheckInternetConnection =
+      "Please check internet connection";
   static const String ok = 'Ok';
 
   static const String userLoggedInSuccessfully = 'User Logged In Successfully';

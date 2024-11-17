@@ -10,6 +10,7 @@ part of 'api_manger.dart';
 abstract class ParseErrorLogger {
   void logError(Object error, StackTrace stackTrace, RequestOptions options);
 }
+
 class _ApiManger implements ApiManger {
   _ApiManger(
     this._dio, {
@@ -74,6 +75,40 @@ class _ApiManger implements ApiManger {
         .compose(
           _dio.options,
           'api/v1/auth/verifyResetCode',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<String>(_options);
+    late String? _value;
+    try {
+      _value = _result.data;
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<String?> logIn(Map<String, dynamic> body) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(body);
+    final _options = _setStreamType<String>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'api/v1/auth/signin',
           queryParameters: queryParameters,
           data: _data,
         )

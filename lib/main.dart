@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'core/di/di.dart';
 import 'core/routes/app_routes.dart';
 import 'core/routes/page_route_name.dart';
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: AppTheme.appTheme,
-          initialRoute: PageRouteName.homeLayout,
+          initialRoute: PageRouteName.logIn,
+
           onGenerateRoute: (settings) => AppRoutes.onGenerateRoute(settings),
         );
       },

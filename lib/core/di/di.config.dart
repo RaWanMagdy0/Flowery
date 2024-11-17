@@ -21,10 +21,13 @@ import 'package:flowery/data/repository/auth/auth_repository_impl.dart'
 import 'package:flowery/domain/repository/auth/auth_repository.dart' as _i1008;
 import 'package:flowery/domain/use_case/auth/forgot_password_use_case.dart'
     as _i355;
+import 'package:flowery/domain/use_case/auth/login_use_case.dart' as _i359;
 import 'package:flowery/domain/use_case/auth/verify_reset_code_use_case.dart'
     as _i23;
 import 'package:flowery/presentation/auth/forgot_password/view_model/forget_passwoed_cubit.dart'
     as _i9;
+import 'package:flowery/presentation/auth/view_model/login/login_cubit.dart'
+    as _i242;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
@@ -47,10 +50,14 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i376.AuthRemoteDataSourceImpl(apiManger: gh<_i242.ApiManger>()));
     gh.factory<_i1008.AuthRepository>(() =>
         _i786.AuthRepositoryImpl(dataSource: gh<_i223.AuthRemoteDataSource>()));
+    gh.factory<_i359.LogInUseCase>(
+        () => _i359.LogInUseCase(gh<_i1008.AuthRepository>()));
     gh.factory<_i355.ForgotPasswordUseCase>(() =>
         _i355.ForgotPasswordUseCase(repository: gh<_i1008.AuthRepository>()));
     gh.factory<_i23.VerifyResetCodeUseCase>(() =>
         _i23.VerifyResetCodeUseCase(repository: gh<_i1008.AuthRepository>()));
+    gh.factory<_i242.LoginViewModel>(
+        () => _i242.LoginViewModel(gh<_i359.LogInUseCase>()));
     gh.factory<_i9.ForgetPasswordCubit>(() => _i9.ForgetPasswordCubit(
           gh<_i355.ForgotPasswordUseCase>(),
           gh<_i23.VerifyResetCodeUseCase>(),
