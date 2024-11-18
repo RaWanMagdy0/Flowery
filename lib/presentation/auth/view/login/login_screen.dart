@@ -1,18 +1,17 @@
-import 'package:flowery/core/styles/colors/app_colors.dart';
-import 'package:flowery/core/utils/const/app_string.dart';
-import 'package:flowery/core/utils/functions/dialogs/app_dialogs.dart';
-import 'package:flowery/core/utils/functions/validators/my_validators.dart';
-import 'package:flowery/core/utils/widget/custom_button.dart';
-import 'package:flowery/presentation/auth/forgot_password/view/widgets/forgot_password_widget/forget_password_screen.dart';
-import 'package:flowery/presentation/auth/view_model/login/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/base/exceptions.dart';
-import '../../../../core/di/di.dart';
+import '../../../../core/routes/page_route_name.dart';
+import '../../../../core/styles/colors/app_colors.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
+import '../../../../core/utils/const/app_string.dart';
+import '../../../../core/utils/functions/dialogs/app_dialogs.dart';
+import '../../../../core/utils/functions/validators/my_validators.dart';
+import '../../../../core/utils/widget/custom_button.dart';
 import '../../../../core/utils/widget/custom_text_form_field.dart';
+import '../../view_model/login/login_cubit.dart';
 import '../../view_model/login/login_state.dart';
 
 class LogInScreen extends StatefulWidget {
@@ -21,19 +20,22 @@ class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});
 
   @override
-  _LogInScreenState createState() => _LogInScreenState();
+  State<LogInScreen> createState() => _LogInScreenState();
 }
 
 class _LogInScreenState extends State<LogInScreen> {
+  late final LoginViewModel viewModel;
+
   bool isLoading = false;
   final GlobalKey<FormState> formKey = GlobalKey();
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
   bool _isRememberMe = false;
-  bool _isEmailValid = false;
+  final bool _isEmailValid = false;
 
   @override
   void initState() {
+    viewModel = context.read<LoginViewModel>();
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
     super.initState();
@@ -45,8 +47,6 @@ class _LogInScreenState extends State<LogInScreen> {
     _passwordController.dispose();
     super.dispose();
   }
-
-  LoginViewModel viewModel = getIt.get<LoginViewModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -95,9 +95,12 @@ class _LogInScreenState extends State<LogInScreen> {
                         }
                       case SuccessState():
                         {
-                          return AppDialogs.showSuccessDialog(
+                          AppDialogs.showSuccessDialog(
                               context: context,
                               message: AppStrings.userLoggedInSuccessfully);
+                          Future.delayed(Duration(seconds: 2), () {
+                            Navigator.pop(context);
+                          });
                         }
                       default:
                         {}
@@ -141,7 +144,7 @@ class _LogInScreenState extends State<LogInScreen> {
                             GestureDetector(
                               onTap: () {
                                 Navigator.pushNamed(
-                                    context, ForgetPassword.routeName);
+                                    context, PageRouteName.forgetPassword);
                               },
                               child: Text(AppStrings.forgetPasswordText,
                                   style: AppFonts.font16BlackWeight500.copyWith(
@@ -167,7 +170,10 @@ class _LogInScreenState extends State<LogInScreen> {
                         isLoading
                             ? const CircularProgressIndicator.adaptive()
                             : CustomButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                      context, PageRouteName.homeLayout);
+                                },
                                 color: AppColors.kWhite,
                                 text: AppStrings.continueAsGusetText,
                                 textStyle: AppFonts.font16BlackWeight500)
@@ -184,7 +190,9 @@ class _LogInScreenState extends State<LogInScreen> {
                       style: AppFonts.font16BlackWeight500,
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, PageRouteName.signUp);
+                      },
                       child: Text(
                         AppStrings.signUpTitle,
                         style: AppFonts.font16BlackWeight500.copyWith(

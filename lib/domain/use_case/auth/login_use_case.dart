@@ -1,7 +1,7 @@
-import 'package:flowery/domain/repository/auth/auth_repository.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../core/api/api_result.dart';
+import '../../repository/auth/auth_repository.dart';
 
 @Injectable()
 class LogInUseCase {

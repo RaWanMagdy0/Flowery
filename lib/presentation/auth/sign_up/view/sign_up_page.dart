@@ -10,7 +10,7 @@ import '../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../core/utils/functions/validators/my_validators.dart';
 import '../../../../core/utils/widget/custom_button.dart';
 import '../../../../core/utils/widget/custom_text_form_field.dart';
-import '../../../../data/models/requests/sign_up_request_model.dart';
+import '../../../../data/models/auth/requests/sign_up_request_model.dart';
 import '../view_model/sign_up_cubit.dart';
 
 class SignUpPage extends StatefulWidget {

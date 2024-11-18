@@ -1,6 +1,7 @@
-import 'package:flowery/core/styles/colors/app_colors.dart';
-import 'package:flowery/core/styles/images/app_images.dart';
 import 'package:flutter/material.dart';
+
+import '../../../core/styles/colors/app_colors.dart';
+import '../../../core/styles/images/app_images.dart';
 
 class BottomNavBar extends StatelessWidget {
   final int currentIndex;

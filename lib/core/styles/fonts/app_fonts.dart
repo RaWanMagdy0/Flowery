@@ -22,6 +22,12 @@ class AppFonts {
     fontSize: 18.sp,
   );
 
+  static TextStyle font16BlackWeight500 = TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w500,
+    color: AppColors.kBlack,
+  );
+
   static TextStyle font16LightWhiteWeight500 = TextStyle(
     fontSize: 16.sp,
     fontWeight: FontWeight.w500,
@@ -65,7 +71,7 @@ class AppFonts {
     decoration: TextDecoration.underline,
     decorationColor: AppColors.kPink,
   );
-  
+
   static TextStyle font15PinkWeight500UnderlinedPink = TextStyle(
     color: AppColors.kPink,
     fontWeight: FontWeight.w400,
@@ -80,6 +86,5 @@ class AppFonts {
     color: AppColors.kBlack,
     decoration: TextDecoration.underline,
     decorationColor: AppColors.kBlack,
-
   );
 }
