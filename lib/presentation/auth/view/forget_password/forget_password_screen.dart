@@ -19,27 +19,22 @@ class ForgetPassword extends StatelessWidget {
             Row(
               children: [
                 Icon(Icons.arrow_back_ios_outlined),
-                Text(
-                  "Password",
-                  style:
-                  AppFonts.font20BlackWeight500
-                ),
+                Text("Password", style: AppFonts.font20BlackWeight500),
               ],
             ),
             SizedBox(
               height: 40.h,
             ),
             Text(
-              "Forget password",style: AppFonts.font20BlackWeight500,
+              "Forget password",
+              style: AppFonts.font20BlackWeight500,
             ),
             SizedBox(
               height: 10.h,
             ),
-            Text(
-              "please enter your email associates to \n your account",
-              textAlign: TextAlign.center,
-              style: AppFonts.font14GreyWeight400
-            ),
+            Text("please enter your email associates to \n your account",
+                textAlign: TextAlign.center,
+                style: AppFonts.font14GreyWeight400),
             SizedBox(
               height: 20.h,
             ),
@@ -56,16 +51,12 @@ class ForgetPassword extends StatelessWidget {
             ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     padding:
-                    EdgeInsets.symmetric(horizontal: 130.w, vertical: 13.h),
+                        EdgeInsets.symmetric(horizontal: 130.w, vertical: 13.h),
                     backgroundColor: AppColors.kPink,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25.r))),
                 onPressed: () {},
-                child: Text(
-                  "Confirm",
-                  style:
-                  AppFonts.font15WhiteWeight500
-                ))
+                child: Text("Confirm", style: AppFonts.font15WhiteWeight500))
           ],
         ),
       ),

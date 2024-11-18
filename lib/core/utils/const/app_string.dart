@@ -88,4 +88,12 @@ class AppStrings {
   static const String currentPassword = 'Current password';
 
   static RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+  static RegExp passwordRegExp =
+      RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+  static const String resetPasswordAppbarTitle = "Password";
+  static const String resetPasswordLabelText = "New password";
+  static const String resetPasswordHintText = "Enter your password";
+  static const String resetPasswordConfirmPassword = "Confirm password";
+
+  static const String resetPasswordElevatedText = "Confirm";
 }
