@@ -24,6 +24,15 @@ class AppRoutes {
     switch (setting.name) {
       case PageRouteName.splash:
         return _handleMaterialPageRoute(widget: const SplashScreen());
+
+      case PageRouteName.logIn:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<LoginViewModel>(),
+            child: LogInScreen(),
+          ),
+        );
+
       case PageRouteName.signUp:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -31,6 +40,7 @@ class AppRoutes {
             child: SignUpPage(),
           ),
         );
+
       case PageRouteName.forgetPassword:
         createForgetPassword();
 
@@ -42,9 +52,6 @@ class AppRoutes {
         );
       // _handleMaterialPageRoute(widget: const ForgetPassword());
 
-      case PageRouteName.homeLayout:
-        return _handleMaterialPageRoute(widget: MainPage());
-
       case PageRouteName.passwordVerification:
         createForgetPassword();
 
@@ -55,13 +62,10 @@ class AppRoutes {
           ),
         );
       // return _handleMaterialPageRoute(widget: EmailVerification());
-      case PageRouteName.logIn:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => getIt<LoginViewModel>(),
-            child: LogInScreen(),
-          ),
-        );
+
+      case PageRouteName.homeLayout:
+        return _handleMaterialPageRoute(widget: MainPage());
+
       default:
         return _handleMaterialPageRoute(widget: const Scaffold());
     }

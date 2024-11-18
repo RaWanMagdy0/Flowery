@@ -252,8 +252,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       InkWell(
                         onTap: () {
-                          // TODO: navigate to login
-                          // Navigator.of(context).pop();
+                          Navigator.of(context).pop();
                         },
                         borderRadius: BorderRadius.circular(15.r),
                         child: RichText(
