@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../../core/di/di.dart';
 import '../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../core/utils/const/app_string.dart';
 import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
@@ -21,7 +20,14 @@ class EmailVerification extends StatefulWidget {
 }
 
 class _EmailVerificationState extends State<EmailVerification> {
-  var viewModel = getIt.get<ForgetPasswordCubit>();
+  late final ForgetPasswordCubit viewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    viewModel = context.read<ForgetPasswordCubit>();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<ForgetPasswordCubit, ForgotPasswordStates>(
