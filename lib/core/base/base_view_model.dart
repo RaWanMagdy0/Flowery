@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 
-import 'app_string_errors.dart';
+import 'app_string_error.dart';
 
 class BaseViewModel<T> extends Cubit<T> {
   BaseViewModel(super.initialState);
