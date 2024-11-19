@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -231,7 +229,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: RichText(
                           text: TextSpan(
                             text: AppStrings.termsAndConditions,
-                            style: AppFonts.font12PinkWeight600UnderlinedBlack,
+                            style: AppFonts.font12BlackWeight600UnderlinedBlack,
                           ),
                         ),
                       ),
@@ -275,27 +273,20 @@ class _SignUpPageState extends State<SignUpPage> {
 
   void _handelStateChange(SignUpState state) {
     if (state is SignUpSuccess) {
-      log('SignUpSuccess');
+      Navigator.pop(context);
       AppDialogs.showSuccessDialog(
           context: context,
           message: "Account Created Successfully.\n Please Login to proceed");
       Future.delayed(Duration(seconds: 2), () {
         Navigator.pop(context);
-        // Navigator.pushReplacementNamed(
-        //     context, PageRouteName.passwordVerification);
+        Navigator.pop(context);
       });
     } else if (state is SignUpFail) {
-      log('SignUpFail');
-
       Navigator.pop(context);
       AppDialogs.showErrorDialog(
           context: context, errorMassage: state.errorMassage ?? "");
     } else if (state is SignUpLoading) {
-      log('SignUpLoading');
-
-      AppDialogs.showLoading(
-        context: context,
-      );
+      AppDialogs.showLoading(context: context);
     }
   }
 }

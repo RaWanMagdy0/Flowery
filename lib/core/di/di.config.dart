@@ -30,10 +30,13 @@ import '../../domain/use_case/auth/forgot_password_use_case.dart' as _i120;
 import '../../domain/use_case/auth/login_use_case.dart' as _i408;
 import '../../domain/use_case/auth/sign_up/sign_up_use_case.dart' as _i34;
 import '../../domain/use_case/auth/verify_reset_code_use_case.dart' as _i759;
+import '../../domain/use_case/home/get_home_data_use_case.dart' as _i76;
 import '../../presentation/auth/forgot_password/view_model/forget_passwoed_cubit.dart'
     as _i351;
 import '../../presentation/auth/sign_up/view_model/sign_up_cubit.dart' as _i140;
 import '../../presentation/auth/view_model/login/login_cubit.dart' as _i1004;
+import '../../presentation/home_layout/screens/home/view_model/home_view_model.dart'
+    as _i58;
 import '../api/dio/dio_factory.dart' as _i763;
 import '../api/dio/dio_module.dart' as _i223;
 
@@ -58,8 +61,12 @@ extension GetItInjectableX on _i174.GetIt {
         _i440.HomeRemoteDataSourceImpl(apiManger: gh<_i48.HomeApiManger>()));
     gh.factory<_i839.HomeRepository>(() => _i605.HomeRepositoryImpl(
         onlineDataSource: gh<_i367.HomeRemoteDataSource>()));
+    gh.factory<_i76.GetHomeDataUseCase>(
+        () => _i76.GetHomeDataUseCase(gh<_i839.HomeRepository>()));
     gh.factory<_i993.AuthRemoteDataSource>(() =>
         _i568.AuthRemoteDataSourceImpl(apiManger: gh<_i1055.ApiManger>()));
+    gh.factory<_i58.HomeViewModel>(
+        () => _i58.HomeViewModel(gh<_i76.GetHomeDataUseCase>()));
     gh.factory<_i912.AuthRepository>(() =>
         _i392.AuthRepositoryImpl(dataSource: gh<_i993.AuthRemoteDataSource>()));
     gh.factory<_i408.LogInUseCase>(

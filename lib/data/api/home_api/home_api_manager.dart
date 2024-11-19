@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:retrofit/http.dart';
 
 import '../../../core/api/api_const.dart';
+import '../../models/home/home_data_model.dart';
 
 part 'home_api_manager.g.dart';
 
@@ -11,4 +12,7 @@ part 'home_api_manager.g.dart';
 abstract class HomeApiManger {
   @factoryMethod
   factory HomeApiManger(Dio dio) = _HomeApiManger;
+
+  @GET(ApiConstants.getHomeData)
+  Future<HomeDataModel> getHomeData();
 }
