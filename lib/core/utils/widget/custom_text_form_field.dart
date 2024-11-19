@@ -1,3 +1,4 @@
+import 'package:flowery/core/styles/colors/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -12,7 +13,16 @@ class CustomTextFromField extends StatelessWidget {
   final bool isPassword;
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
-
+  final TextEditingController controller;
+  TextInputType keyBordType;
+  CustomTextFromField(
+      {super.key,
+      this.validator,
+      required this.hintText,
+      required this.labelText,
+      required this.controller,
+      this.onChanged,
+      required this.keyBordType});
   const CustomTextFromField({
     super.key,
     required this.hintText,
@@ -49,6 +59,8 @@ class CustomTextFromField extends StatelessWidget {
         labelText: labelText,
         enabled: true,
         floatingLabelStyle:
+            MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+          if (states.contains(MaterialState.error)) {
             WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
           if (states.contains(WidgetState.error)) {
             return TextStyle(color: AppColors.kError);
