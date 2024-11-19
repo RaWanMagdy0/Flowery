@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        Navigator.pushReplacementNamed(context, PageRouteName.forgetPassword);
+        Navigator.pushReplacementNamed(context, PageRouteName.logIn);
       }
     });
   }

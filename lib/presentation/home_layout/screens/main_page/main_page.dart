@@ -1,13 +1,16 @@
-import 'package:flowery/presentation/home_layout/screens/cart/cart_screen.dart';
-import 'package:flowery/presentation/home_layout/screens/categories/categories_screen.dart';
-import 'package:flowery/presentation/home_layout/screens/home/home_screen.dart';
-import 'package:flowery/presentation/home_layout/screens/profile/profile_screen.dart';
-import 'package:flowery/presentation/home_layout/widgets/bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
+import '../../widgets/bottom_navigation_bar.dart';
+import '../cart/cart_screen.dart';
+import '../categories/categories_screen.dart';
+import '../home/home_screen.dart';
+import '../profile/profile_screen.dart';
+
 class MainPage extends StatefulWidget {
+  const MainPage({super.key});
+
   @override
-  _MainPageState createState() => _MainPageState();
+  State<MainPage> createState() => _MainPageState();
 }
 
 class _MainPageState extends State<MainPage> {

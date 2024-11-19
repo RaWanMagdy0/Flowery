@@ -2,7 +2,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../core/api/api_result.dart';
 import '../../../../core/base/base_view_model.dart';
-import '../../../../data/models/requests/sign_up_request_model.dart';
+import '../../../../data/models/auth/requests/sign_up_request_model.dart';
 import '../../../../domain/use_case/auth/sign_up/sign_up_use_case.dart';
 
 part 'sign_up_state.dart';

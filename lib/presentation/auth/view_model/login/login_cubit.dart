@@ -1,9 +1,9 @@
-import 'package:flowery/core/base/base_view_model.dart';
-import 'package:flowery/domain/use_case/auth/login_use_case.dart';
-import 'package:flowery/presentation/auth/view_model/login/login_state.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../core/api/api_result.dart';
+import '../../../../core/base/base_view_model.dart';
+import '../../../../domain/use_case/auth/login_use_case.dart';
+import 'login_state.dart';
 
 @injectable
 class LoginViewModel extends BaseViewModel<LoginScreenState> {

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../../core/di/di.dart';
 import '../../../../../../core/routes/page_route_name.dart';
 import '../../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../../core/styles/fonts/app_fonts.dart';
@@ -23,7 +22,13 @@ class ForgetPassword extends StatefulWidget {
 }
 
 class _ForgetPasswordState extends State<ForgetPassword> {
-  var viewModel = getIt<ForgetPasswordCubit>();
+  late final ForgetPasswordCubit viewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    viewModel = context.read<ForgetPasswordCubit>();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,8 +103,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
           context: context,
           message: "OTP sent to your email.\n Please check your Email");
       Future.delayed(Duration(seconds: 2), () {
-        Navigator.pushReplacementNamed(
-            context, PageRouteName.passwordVerification);
+        Navigator.pushNamed(context, PageRouteName.passwordVerification);
       });
     } else if (state is ForgotPasswordErrorState) {
       Navigator.pop(context);
