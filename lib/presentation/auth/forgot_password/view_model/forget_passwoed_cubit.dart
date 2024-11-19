@@ -6,7 +6,6 @@ import 'package:flowery/presentation/auth/forgot_password/view_model/forget_pass
 import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../core/api/api_result.dart';
 import '../../../../core/base/base_view_model.dart';
 import '../../../../core/di/di.dart';
 import '../../../../core/providers/app_provider.dart';
@@ -77,44 +76,34 @@ class ForgetPasswordCubit extends BaseViewModel<ForgotPasswordStates> {
       case Fail<String?>():
         emit(ResendErrorState(
             errorMassage: getErrorMassageFromException(result.exception)));
-  Future<void> forgotPassword() async {
-    emit(ForgotPasswordLoadingState(loadingMessage: "loading..."));
-    var result =
-        await forgotPasswordUseCase.invoke(email: emailController.text);
-    switch (result) {
-      case Success<String?>():
-        emit(ForgotPasswordSuccessState(success: result.data));
-      case Fail<String?>():
-        emit(ForgotPasswordErrorState(
-            errorMassage: getErrorMassageFromException(result.exception)));
-    }
-  }
+    }}
+        Future<void> verifyResetCode({required String resetCode}) async {
+          emit(VerifyEmailCodeLoadingState(loadingMessage: 'Loading...'));
+          var result = await verifyResetCodeUseCase.invoke(
+              resetCode: resetCode);
+          switch (result) {
+            case Success<String?>():
+              emit(VerifyEmailCodeSuccessState(success: result.data));
+            case Fail<String?>():
+              emit(VerifyEmailCodeErrorState(
+                  errorMassage: getErrorMassageFromException(
+                      result.exception)));
+          }
+        }
 
-  Future<void> verifyResetCode({required String resetCode}) async {
-    emit(VerifyEmailCodeLoadingState(loadingMessage: 'Loading...'));
-    var result = await verifyResetCodeUseCase.invoke(resetCode: resetCode);
-    switch (result) {
-      case Success<String?>():
-        emit(VerifyEmailCodeSuccessState(success: result.data));
-      case Fail<String?>():
-        emit(VerifyEmailCodeErrorState(
-            errorMassage: getErrorMassageFromException(result.exception)));
-    }
-  }
+        void submitForgotPassword() {
+          if (formKey.currentState!.validate()) {
+            forgotPassword();
+          }
+        }
 
-  void submitForgotPassword() {
-    if (formKey.currentState!.validate()) {
-      forgotPassword();
+        bool isValid = true;
+        void updateValidationState() {
+          if (formKey.currentState!.validate()) {
+            isValid = true;
+          } else {
+            isValid = false;
+          }
+          emit(UpdateValidationState());
+        }
     }
-  }
-
-  bool isValid = true;
-  void updateValidationState() {
-    if (formKey.currentState!.validate()) {
-      isValid = true;
-    } else {
-      isValid = false;
-    }
-    emit(UpdateValidationState());
-  }
-}

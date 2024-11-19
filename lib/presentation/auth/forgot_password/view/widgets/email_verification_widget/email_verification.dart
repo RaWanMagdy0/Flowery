@@ -13,7 +13,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/styles/fonts/app_fonts.dart';
-import '../../../../../../core/utils/const/app_string.dart';import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
+import '../../../../../../core/utils/const/app_string.dart';
+import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../view_model/forget_passwoed_cubit.dart';
 import '../../../view_model/forget_password_states.dart';
 import '../reset_password_widget/reset_password_widget.dart';
@@ -29,7 +30,6 @@ class EmailVerification extends StatefulWidget {
 
 class _EmailVerificationState extends State<EmailVerification> {
   var viewModel = getIt.get<ForgetPasswordCubit>();
-  late final ForgetPasswordCubit viewModel;
 
   @override
   void initState() {
@@ -109,7 +109,8 @@ class _EmailVerificationState extends State<EmailVerification> {
                       ),
                     ),
                     Text(AppStrings.resendText,
-                        style: AppFonts.font15PinkWeight500UnderlinedPink),                  ],
+                        style: AppFonts.font15PinkWeight500UnderlinedPink),
+                  ],
                 ),
               ],
             ),
