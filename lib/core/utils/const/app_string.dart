@@ -5,6 +5,11 @@ class AppStrings {
   static const String signUpTitle = "Sign up";
   static const String forgetPasswordText = 'Forget password?';
   static const String alreadyHaveAccount = 'Already have an Account?';
+  static const String gender = 'Gender';
+  static const String male = 'Male';
+  static const String female = 'Female';
+  static const String createAccount = 'Creating an account, you agree to our\t';
+  static const String termsAndConditions = 'Terms and Conditions';
 
   static const String forgetPasswordScreenTitle = 'Forget Password';
   static const String forgetPasswordScreenDescription =
@@ -60,9 +65,12 @@ class AppStrings {
   static const String invalidCode = 'Invalid code';
 
   static const String continueText = "Continue";
+  static const String continueAsGusetText = "Continue as Guset";
 
   static const String loadingText = "Loading..";
   static const String somethingWentWrong = "Somthing went wrong";
+  static const String pleaseCheckInternetConnection =
+      "Please check internet connection";
   static const String ok = 'Ok';
 
   static const String userLoggedInSuccessfully = 'User Logged In Successfully';

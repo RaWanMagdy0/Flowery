@@ -6,10 +6,13 @@ import 'package:flowery/presentation/auth/forgot_password/view_model/forget_pass
 import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../core/api/api_result.dart';
 import '../../../../core/base/base_view_model.dart';
 import '../../../../core/di/di.dart';
 import '../../../../core/providers/app_provider.dart';
+import '../../../../domain/use_case/auth/forgot_password_use_case.dart';
 import '../../../../domain/use_case/auth/verify_reset_code_use_case.dart';
+import 'forget_password_states.dart';
 
 @injectable
 class ForgetPasswordCubit extends BaseViewModel<ForgotPasswordStates> {
@@ -73,6 +76,16 @@ class ForgetPasswordCubit extends BaseViewModel<ForgotPasswordStates> {
         emit(ResendSuccessState(success: result.data));
       case Fail<String?>():
         emit(ResendErrorState(
+            errorMassage: getErrorMassageFromException(result.exception)));
+  Future<void> forgotPassword() async {
+    emit(ForgotPasswordLoadingState(loadingMessage: "loading..."));
+    var result =
+        await forgotPasswordUseCase.invoke(email: emailController.text);
+    switch (result) {
+      case Success<String?>():
+        emit(ForgotPasswordSuccessState(success: result.data));
+      case Fail<String?>():
+        emit(ForgotPasswordErrorState(
             errorMassage: getErrorMassageFromException(result.exception)));
     }
   }

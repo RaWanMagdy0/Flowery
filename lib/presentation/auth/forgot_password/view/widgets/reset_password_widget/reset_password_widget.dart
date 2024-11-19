@@ -1,6 +1,7 @@
-import 'package:flowery/core/utils/const/app_string.dart';
 import 'package:flutter/material.dart';
+
 import '../../../../../../core/styles/fonts/app_fonts.dart';
+import '../../../../../../core/utils/const/app_string.dart';
 
 class ResetPasswordWidget extends StatelessWidget {
   const ResetPasswordWidget({super.key});

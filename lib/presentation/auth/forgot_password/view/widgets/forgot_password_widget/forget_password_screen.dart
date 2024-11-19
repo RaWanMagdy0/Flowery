@@ -1,16 +1,16 @@
-import 'package:flowery/core/di/di.dart';
-import 'package:flowery/core/routes/page_route_name.dart';
-import 'package:flowery/core/styles/colors/app_colors.dart';
-import 'package:flowery/core/styles/fonts/app_fonts.dart';
-import 'package:flowery/presentation/auth/forgot_password/view_model/forget_passwoed_cubit.dart';
-import 'package:flowery/presentation/auth/forgot_password/view_model/forget_password_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../../../core/routes/page_route_name.dart';
+import '../../../../../../core/styles/colors/app_colors.dart';
+import '../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../core/utils/const/app_string.dart';
 import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../../../core/utils/functions/validators/my_validators.dart';
 import '../../../../../../core/utils/widget/custom_text_form_field.dart';
+import '../../../view_model/forget_passwoed_cubit.dart';
+import '../../../view_model/forget_password_states.dart';
 
 
 class ForgetPassword extends StatefulWidget {
@@ -23,7 +23,13 @@ class ForgetPassword extends StatefulWidget {
 }
 
 class _ForgetPasswordState extends State<ForgetPassword> {
-  var viewModel = getIt.get<ForgetPasswordCubit>();
+  late final ForgetPasswordCubit viewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    viewModel = context.read<ForgetPasswordCubit>();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +67,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Form(
-                    onChanged: () => viewModel.updateValidationState(),
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    // onChanged: () => viewModel.updateValidationState(),
                     key: viewModel.formKey,
                     child: CustomTextFromField(
                       hintText: AppStrings.emailHintText,
@@ -94,11 +101,14 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   dynamic _handelStateChange(ForgotPasswordStates state) {
     if (state is ForgotPasswordSuccessState) {
       AppDialogs.showSuccessDialog(
-          context: context, message: "OTP sent to your email.\n Please check your Email");
+          context: context,
+          message: "OTP sent to your email.\n Please check your Email");
       Future.delayed(Duration(seconds: 2), () {
         Navigator.pushReplacementNamed(
             context,
             PageRouteName.passwordVerification);
+
+        Navigator.pushNamed(context, PageRouteName.passwordVerification);
       });
     } else if (state is ForgotPasswordErrorState) {
       Navigator.pop(context);
