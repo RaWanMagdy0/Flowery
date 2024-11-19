@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flowery/core/di/di.dart';
 import 'package:flowery/core/styles/fonts/app_fonts.dart';
 import 'package:flowery/core/utils/const/app_string.dart';
@@ -7,26 +9,25 @@ import 'package:flowery/presentation/auth/forgot_password/view_model/forget_pass
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../reset_password_widget/reset_password_widget.dart';
 
 class EmailVerification extends StatefulWidget {
   static const String routeName = "PasswordVerification";
 
-  const EmailVerification({super.key});
-
+  const EmailVerification({super.key,});
   @override
   State<EmailVerification> createState() => _EmailVerificationState();
 }
 
 class _EmailVerificationState extends State<EmailVerification> {
   var viewModel = getIt.get<ForgetPasswordCubit>();
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<ForgetPasswordCubit, ForgotPasswordStates>(
       bloc: viewModel,
-      listener: (context, state) => _handelStateChange(state),
+      listener: (context, state) => _handleStateChange(state),
       child: Scaffold(
           body: PageView(
         controller: viewModel.pageController,
@@ -79,8 +80,20 @@ class _EmailVerificationState extends State<EmailVerification> {
                       style: TextStyle(
                           fontSize: 18.sp, fontWeight: FontWeight.w400),
                     ),
-                    Text(AppStrings.resendText,
-                        style: AppFonts.font15PinkWeight500),
+                    InkWell(
+                      onTap: () {
+                        viewModel.resendResetCode();
+                      },
+                      child: ValueListenableBuilder<String?>(
+                        valueListenable: viewModel.resendButtonText,
+                        builder: (context, value, child) {
+                          return Text(
+                            value ?? " Resend",
+                            style: AppFonts.font16PinkWeight400,
+                          );
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ],
@@ -92,7 +105,7 @@ class _EmailVerificationState extends State<EmailVerification> {
     );
   }
 
-  dynamic _handelStateChange(ForgotPasswordStates state) {
+  dynamic _handleStateChange(ForgotPasswordStates state) {
     if (state is VerifyEmailCodeSuccessState) {
       Navigator.pop(context);
       viewModel.pageController.nextPage(
@@ -107,6 +120,20 @@ class _EmailVerificationState extends State<EmailVerification> {
         context: context,
         errorMassage: state.errorMassage ?? "An unknown error occurred",
       );
+    } else if (state is ResendLoadingState) {
+      AppDialogs.showLoading(context: context);
+    } else if (state is ResendSuccessState) {
+      Navigator.pop(context);
+      AppDialogs.showSuccessDialog(
+        context: context,
+        message: "Resend OTP to your email.\n Please check your Email",
+      );
+      viewModel.startResendTimer();
+    } else if (state is ResendErrorState) {
+      Navigator.pop(context);
+      AppDialogs.showErrorDialog(
+        context: context,
+        errorMassage: state.errorMassage ?? "An unknown error occurred",
+      );
     }
-  }
-}
+  }}

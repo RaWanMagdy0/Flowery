@@ -12,6 +12,7 @@ import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../../../core/utils/functions/validators/my_validators.dart';
 import '../../../../../../core/utils/widget/custom_text_form_field.dart';
 
+
 class ForgetPassword extends StatefulWidget {
   static String routeName = "ForgetPassword";
 
@@ -96,7 +97,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
           context: context, message: "OTP sent to your email.\n Please check your Email");
       Future.delayed(Duration(seconds: 2), () {
         Navigator.pushReplacementNamed(
-            context, PageRouteName.passwordVerification);
+            context,
+            PageRouteName.passwordVerification);
       });
     } else if (state is ForgotPasswordErrorState) {
       Navigator.pop(context);

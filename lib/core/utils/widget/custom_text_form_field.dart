@@ -1,5 +1,4 @@
 import 'package:flowery/core/styles/colors/app_colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,9 +16,8 @@ class CustomTextFromField extends StatelessWidget {
       required this.hintText,
       required this.labelText,
       required this.controller,
-        this.onChanged,
-
-        required this.keyBordType});
+      this.onChanged,
+      required this.keyBordType});
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -41,7 +39,7 @@ class CustomTextFromField extends StatelessWidget {
         labelText: labelText,
         enabled: true,
         floatingLabelStyle:
-        MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+            MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
           if (states.contains(MaterialState.error)) {
             return TextStyle(color: AppColors.kError);
           } else if (states.contains(MaterialState.focused)) {

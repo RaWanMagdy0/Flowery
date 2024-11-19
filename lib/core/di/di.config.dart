@@ -11,6 +11,7 @@
 import 'package:dio/dio.dart' as _i361;
 import 'package:flowery/core/api/dio/dio_factory.dart' as _i1013;
 import 'package:flowery/core/api/dio/dio_module.dart' as _i827;
+import 'package:flowery/core/providers/app_provider.dart' as _i41;
 import 'package:flowery/data/api/auth_api/api_manger.dart' as _i242;
 import 'package:flowery/data/data_source/remote_data_source/auth/auth_remote_data_source.dart'
     as _i223;
@@ -41,6 +42,7 @@ extension GetItInjectableX on _i174.GetIt {
     );
     final dioModule = _$DioModule();
     gh.factory<_i1013.DioFactory>(() => _i1013.DioFactory());
+    gh.singleton<_i41.AppProvider>(() => _i41.AppProvider());
     gh.lazySingleton<_i361.Dio>(() => dioModule.dio);
     gh.lazySingleton<_i242.ApiManger>(() => _i242.ApiManger(gh<_i361.Dio>()));
     gh.factory<_i223.AuthRemoteDataSource>(
