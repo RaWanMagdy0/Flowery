@@ -19,13 +19,14 @@ class ProductDetails extends StatefulWidget {
   State<ProductDetails> createState() => _ProductDetailsState();
 }
 class _ProductDetailsState extends State<ProductDetails> {
+  late ProductEntity productEntity;
   var viewModel = getIt.get<ProductDetailsCubit>();
   @override
   Widget build(BuildContext context) {
     var args = ModalRoute.of(context)?.settings.arguments as ProductEntity;
 
     return BlocListener<ProductDetailsCubit, ProductDetailsStates>(
-        bloc: viewModel,
+        bloc: viewModel..getProductDetails(productId: productEntity.id.toString()),
         listener: (context, state) => _handleStateChange(state),
         child: Scaffold(
           body: Container(

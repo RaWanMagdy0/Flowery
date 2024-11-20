@@ -1,3 +1,4 @@
+/*********************************
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class SecureStorageFunction {
@@ -24,3 +25,4 @@ class SecureStorageFunction {
     await storage.delete(key: key);
   }
 }
+*********************/

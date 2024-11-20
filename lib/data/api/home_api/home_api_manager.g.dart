@@ -7,7 +7,9 @@ part of 'home_api_manager.dart';
 // **************************************************************************
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
-
+abstract class ParseErrorLogger {
+  void logError(Object error, StackTrace stackTrace, RequestOptions options);
+}
 class _HomeApiManger implements HomeApiManger {
   _HomeApiManger(
     this._dio, {

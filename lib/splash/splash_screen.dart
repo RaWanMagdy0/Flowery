@@ -28,18 +28,23 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        _navigateToInitialRoute();
+       // _navigateToInitialRoute();
+         Navigator.of(context).pushReplacementNamed(
+          PageRouteName.homeLayout,
+        );
       }
     });
   }
+  /************
   _navigateToInitialRoute() async {
-    var token = await TokenManger.getToken();
+    //var token = await TokenManger.getToken();
     String initialRoute =
     token != null ? PageRouteName.homeLayout : PageRouteName.logIn;
     return Navigator.of(context).pushReplacementNamed(
       initialRoute,
     );
   }
+      ********************/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
