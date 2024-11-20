@@ -12,6 +12,7 @@ import '../../../../../../core/utils/widget/custom_text_form_field.dart';
 import '../../../view_model/forget_passwoed_cubit.dart';
 import '../../../view_model/forget_password_states.dart';
 
+
 class ForgetPassword extends StatefulWidget {
   static String routeName = "ForgetPassword";
 
@@ -103,6 +104,10 @@ class _ForgetPasswordState extends State<ForgetPassword> {
           context: context,
           message: "OTP sent to your email.\n Please check your Email");
       Future.delayed(Duration(seconds: 2), () {
+        Navigator.pushReplacementNamed(
+            context,
+            PageRouteName.passwordVerification);
+
         Navigator.pushNamed(context, PageRouteName.passwordVerification);
       });
     } else if (state is ForgotPasswordErrorState) {

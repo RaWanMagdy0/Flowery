@@ -5,18 +5,20 @@ sealed class ForgotPasswordStates {}
 
 //ForgotPasswordStates
 class ForgotPasswordInitialState extends ForgotPasswordStates {}
+
 class ForgotPasswordErrorState extends ForgotPasswordStates {
   final String? errorMassage;
   ForgotPasswordErrorState({required this.errorMassage});
 }
+
 class ForgotPasswordLoadingState extends ForgotPasswordStates {
   String? loadingMessage;
   ForgotPasswordLoadingState({required this.loadingMessage});
 }
+
 class ForgotPasswordSuccessState extends ForgotPasswordStates {
   final String? success;
   ForgotPasswordSuccessState({required this.success});
-
 }
 
 //VerifyEmailCode
@@ -24,14 +26,31 @@ class VerifyEmailCodeErrorState extends ForgotPasswordStates {
   final String? errorMassage;
   VerifyEmailCodeErrorState({required this.errorMassage});
 }
+
 class VerifyEmailCodeLoadingState extends ForgotPasswordStates {
   String? loadingMessage;
   VerifyEmailCodeLoadingState({required this.loadingMessage});
 }
+
 class VerifyEmailCodeSuccessState extends ForgotPasswordStates {
   final String? success;
   VerifyEmailCodeSuccessState({required this.success});
-
 }
 
-class UpdateValidationState extends ForgotPasswordStates{}
+//ResendCode
+class ResendLoadingState extends ForgotPasswordStates {
+  String? loadingMessage;
+  ResendLoadingState({required this.loadingMessage});
+
+}
+class ResendSuccessState extends ForgotPasswordStates {
+  final String? success;
+  ResendSuccessState({required this.success});
+
+}
+class ResendErrorState extends ForgotPasswordStates {
+  final String? errorMassage;
+  ResendErrorState({required this.errorMassage});
+}
+
+class UpdateValidationState extends ForgotPasswordStates {}
