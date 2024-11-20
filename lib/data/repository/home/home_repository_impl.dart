@@ -1,3 +1,5 @@
+import 'package:flowery/core/api/api_result.dart';
+import 'package:flowery/data/model/auth/response/ProductDetailsModel.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../domain/repository/home/home_repository.dart';
@@ -8,4 +10,9 @@ class HomeRepositoryImpl extends HomeRepository {
   final HomeRemoteDataSource onlineDataSource;
 
   HomeRepositoryImpl({required this.onlineDataSource});
+
+  @override
+  Future<Result<ProductDetailsModel?>> getProductDetails({required String productId}) {
+   return onlineDataSource.getProductDetails(productId: productId);
+  }
 }

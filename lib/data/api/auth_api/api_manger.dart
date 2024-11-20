@@ -3,10 +3,10 @@ import 'package:injectable/injectable.dart';
 import 'package:retrofit/http.dart';
 
 import '../../../core/api/api_const.dart';
-import '../../models/auth/requests/sign_up_request_model.dart';
-import '../../models/auth/response/sign_up_response_model.dart';
-
+import '../../model/auth/requests/sign_up_request_model.dart';
+import '../../model/auth/response/sign_up_response_model.dart';
 part 'api_manger.g.dart';
+
 
 @lazySingleton
 @RestApi(baseUrl: ApiConstants.baseUrl)

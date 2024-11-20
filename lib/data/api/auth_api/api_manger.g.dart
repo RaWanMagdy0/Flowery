@@ -10,7 +10,6 @@ part of 'api_manger.dart';
 abstract class ParseErrorLogger {
   void logError(Object error, StackTrace stackTrace, RequestOptions options);
 }
-
 class _ApiManger implements ApiManger {
   _ApiManger(
     this._dio, {

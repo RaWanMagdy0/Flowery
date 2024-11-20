@@ -1,5 +1,5 @@
 import '../../../../core/api/api_result.dart';
-import '../../../models/auth/requests/sign_up_request_model.dart';
+import '../../../model/auth/requests/sign_up_request_model.dart';
 
 abstract class AuthRemoteDataSource {
   Future<Result<String?>> signUp(SignUpRequestBodyModel signUpRequestBody);

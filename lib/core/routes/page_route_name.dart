@@ -2,6 +2,7 @@ class PageRouteName{
   static const String signUp = "signUp";
   static const String forgetPassword="forgetPassword";
   static const String splash="splash";
+  static const String productDetails="productDetails";
   static const String homeLayout = 'homeLayout';
   static const String passwordVerification="passwordVerification";
   static const String splash2="splash2";
