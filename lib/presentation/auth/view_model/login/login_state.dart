@@ -1,3 +1,5 @@
+import '../../../../data/model/user_model.dart';
+
 sealed class LoginScreenState {}
 
 class InitialState extends LoginScreenState {}
@@ -11,6 +13,6 @@ class ErrorState extends LoginScreenState {
 }
 
 class SuccessState extends LoginScreenState {
-  String? string;
-  SuccessState(this.string);
+  UserModel? user;
+  SuccessState(this.user);
 }

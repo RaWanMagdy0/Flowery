@@ -7,9 +7,7 @@ part of 'api_manger.dart';
 // **************************************************************************
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
-abstract class ParseErrorLogger {
-  void logError(Object error, StackTrace stackTrace, RequestOptions options);
-}
+
 class _ApiManger implements ApiManger {
   _ApiManger(
     this._dio, {
@@ -129,13 +127,13 @@ class _ApiManger implements ApiManger {
   }
 
   @override
-  Future<String?> logIn(Map<String, dynamic> body) async {
+  Future<UserModel?> logIn(Map<String, dynamic> body) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
-    final _options = _setStreamType<String>(Options(
+    final _options = _setStreamType<UserModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -151,10 +149,10 @@ class _ApiManger implements ApiManger {
           _dio.options.baseUrl,
           baseUrl,
         )));
-    final _result = await _dio.fetch<String>(_options);
-    late String? _value;
+    final _result = await _dio.fetch<Map<String, dynamic>?>(_options);
+    late UserModel? _value;
     try {
-      _value = _result.data;
+      _value = _result.data == null ? null : UserModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
