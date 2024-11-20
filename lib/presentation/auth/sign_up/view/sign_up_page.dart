@@ -10,7 +10,7 @@ import '../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../core/utils/functions/validators/my_validators.dart';
 import '../../../../core/utils/widget/custom_button.dart';
 import '../../../../core/utils/widget/custom_text_form_field.dart';
-import '../../../../data/models/auth/requests/sign_up_request_model.dart';
+import '../../../../data/model/auth/requests/sign_up_request_model.dart';
 import '../view_model/sign_up_cubit.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -126,7 +126,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     children: [
                       Expanded(
                         child: CustomTextFromField(
-                          hintText: AppStrings.passwordHintText,
+                          hintText: AppStrings.signupPasswordHintText,
                           labelText: AppStrings.passwordLabelText,
                           isPassword: true,
                           validator: (value) =>
@@ -171,13 +171,14 @@ class _SignUpPageState extends State<SignUpPage> {
                   24.verticalSpace,
                   SizedBox(
                     width: 1.sw,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    child:
+                    Row(
                       children: [
                         Text(
                           AppStrings.gender,
                           style: AppFonts.font18BlackWeight500,
                         ),
+                        50.horizontalSpace,
                         Row(
                           children: [
                             Radio(
@@ -214,7 +215,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       ],
                     ),
                   ),
-                  16.verticalSpace,
+                  15.verticalSpace,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -231,13 +232,13 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: RichText(
                           text: TextSpan(
                             text: AppStrings.termsAndConditions,
-                            style: AppFonts.font12PinkWeight600UnderlinedBlack,
+                            style: AppFonts.font12BlackWeight400UnderlinedBlack,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  16.verticalSpace,
+                  35.verticalSpace,
                   CustomButton(
                     onPressed: signUp,
                     text: AppStrings.signUpTitle,
@@ -276,6 +277,7 @@ class _SignUpPageState extends State<SignUpPage> {
   void _handelStateChange(SignUpState state) {
     if (state is SignUpSuccess) {
       log('SignUpSuccess');
+      Navigator.pop(context);
       AppDialogs.showSuccessDialog(
           context: context,
           message: "Account Created Successfully.\n Please Login to proceed");

@@ -1,5 +1,5 @@
 import '../../../core/api/api_result.dart';
-import '../../../data/models/auth/requests/sign_up_request_model.dart';
+import '../../../data/model/auth/requests/sign_up_request_model.dart';
 
 abstract class AuthRepository {
   Future<Result<String?>> signUp(SignUpRequestBodyModel signUpRequestBody);

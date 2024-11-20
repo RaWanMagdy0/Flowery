@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../presentation/auth/forgot_password/view/widgets/email_verification_widget/email_verification.dart';
 import '../../presentation/auth/forgot_password/view/widgets/forgot_password_widget/forget_password_screen.dart';
 import '../../presentation/auth/forgot_password/view_model/forget_passwoed_cubit.dart';
@@ -8,6 +7,7 @@ import '../../presentation/auth/sign_up/view/sign_up_page.dart';
 import '../../presentation/auth/sign_up/view_model/sign_up_cubit.dart';
 import '../../presentation/auth/view/login/login_screen.dart';
 import '../../presentation/auth/view_model/login/login_cubit.dart';
+import '../../presentation/home_layout/product_details/view/product_details_screen.dart';
 import '../../presentation/home_layout/screens/main_page/main_page.dart';
 import '../../splash/splash_screen.dart';
 import '../di/di.dart';
@@ -24,6 +24,8 @@ class AppRoutes {
     switch (setting.name) {
       case PageRouteName.splash:
         return _handleMaterialPageRoute(widget: const SplashScreen());
+        case PageRouteName.productDetails:
+        return _handleMaterialPageRoute(widget: ProductDetails());
 
       case PageRouteName.logIn:
         return MaterialPageRoute(
@@ -51,10 +53,8 @@ class AppRoutes {
           ),
         );
       // _handleMaterialPageRoute(widget: const ForgetPassword());
-
       case PageRouteName.passwordVerification:
         createForgetPassword();
-
         return MaterialPageRoute(
           builder: (context) => BlocProvider.value(
             value: forgetPasswordCubit!,

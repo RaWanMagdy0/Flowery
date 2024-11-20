@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flowery/data/model/auth/response/ProductDetailsModel.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/http.dart';
 
@@ -11,4 +12,8 @@ part 'home_api_manager.g.dart';
 abstract class HomeApiManger {
   @factoryMethod
   factory HomeApiManger(Dio dio) = _HomeApiManger;
+
+  @GET(ApiConstants.productDetailsApi)
+  Future<ProductDetailsModel?> getProductDetails(@Path("productId") String productId);
+
 }
