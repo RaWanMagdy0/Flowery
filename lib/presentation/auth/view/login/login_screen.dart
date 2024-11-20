@@ -1,3 +1,6 @@
+import 'package:flowery/core/api/local/secure_storage.dart';
+import 'package:flowery/core/api/local/token_manger.dart';
+import 'package:flowery/data/model/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -100,6 +103,11 @@ class _LogInScreenState extends State<LogInScreen> {
                               message: AppStrings.userLoggedInSuccessfully);
                           Future.delayed(Duration(seconds: 2), () {
                             Navigator.pop(context);
+                            if(_isRememberMe){
+                              var token=  state.user!.token;
+                              //   TokenManger.setToken(token: token.toString());
+                            }
+                            Navigator.pushReplacementNamed(context, PageRouteName.homeLayout);
                           });
                         }
                       default:
@@ -131,6 +139,12 @@ class _LogInScreenState extends State<LogInScreen> {
                         Row(
                           children: [
                             Checkbox(
+                              fillColor: MaterialStateProperty. resolveWith<Color>((Set<WidgetState> states) {
+                                if (states. contains(WidgetState.selected)) {
+                                  return AppColors.kPink;
+                                }
+                                return AppColors.kWhite;
+                              }),
                               value: _isRememberMe,
                               onChanged: (value) {
                                 setState(() {
@@ -139,7 +153,7 @@ class _LogInScreenState extends State<LogInScreen> {
                               },
                             ),
                             Text(AppStrings.rememberMeText,
-                                style: AppFonts.font16BlackWeight500),
+                                style: AppFonts.font13BlackWeight400),
                             const Spacer(),
                             GestureDetector(
                               onTap: () {
@@ -147,13 +161,11 @@ class _LogInScreenState extends State<LogInScreen> {
                                     context, PageRouteName.forgetPassword);
                               },
                               child: Text(AppStrings.forgetPasswordText,
-                                  style: AppFonts.font16BlackWeight500.copyWith(
-                                      color: Colors.black,
-                                      decoration: TextDecoration.underline)),
-                            ),
+                                  style: AppFonts.font12BlackWeight400UnderlinedBlack,
+                    ))
                           ],
                         ),
-                        64.verticalSpace,
+                        50.verticalSpace,
                         isLoading
                             ? const CircularProgressIndicator.adaptive()
                             : CustomButton(
@@ -175,8 +187,11 @@ class _LogInScreenState extends State<LogInScreen> {
                                       context, PageRouteName.homeLayout);
                                 },
                                 color: AppColors.kWhite,
+
                                 text: AppStrings.continueAsGusetText,
-                                textStyle: AppFonts.font16BlackWeight500)
+                                textStyle: AppFonts.font16BlackWeight500,
+                        borderColor: AppColors.kGray,
+                        )
                       ],
                     );
                   },
@@ -195,10 +210,8 @@ class _LogInScreenState extends State<LogInScreen> {
                       },
                       child: Text(
                         AppStrings.signUpTitle,
-                        style: AppFonts.font16BlackWeight500.copyWith(
-                          color: Colors.pink,
-                          decoration: TextDecoration.underline,
-                        ),
+                        style: AppFonts.font16PinkWeight500UnderlinedPink
+
                       ),
                     ),
                   ],

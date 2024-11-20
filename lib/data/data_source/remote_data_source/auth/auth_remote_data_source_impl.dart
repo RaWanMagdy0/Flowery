@@ -1,3 +1,4 @@
+import 'package:flowery/data/model/user_model.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../core/api/api_result.dart';
@@ -38,10 +39,10 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   }
 
   @override
-  Future<Result<String?>> logIn(
+  Future<Result<UserModel?>> logIn(
       {required String email, required String password}) {
-    return executeApiCall<String?>(apiCall: () async {
-      String? message =
+    return executeApiCall<UserModel?>(apiCall: () async {
+      UserModel? message =
           await apiManger.logIn({"email": email, "password": password});
       return message;
     });

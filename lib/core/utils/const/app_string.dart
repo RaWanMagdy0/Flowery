@@ -9,7 +9,7 @@ class AppStrings {
   static const String male = 'Male';
   static const String female = 'Female';
   static const String createAccount = 'Creating an account, you agree to our\t';
-  static const String termsAndConditions = 'Terms and Conditions';
+  static const String termsAndConditions = 'Terms&Conditions';
 
   static const String forgetPasswordScreenTitle = 'Forget Password';
   static const String forgetPasswordScreenDescription =
@@ -28,16 +28,19 @@ class AppStrings {
   static const String resendText = "Resend";
 
   static const String emailHintText = 'Enter Your Email';
+  static const String signupEmailHintText = 'Enter Email';
   static const String emailLabelText = 'Email';
-
   static const String passwordHintText = 'Enter Your Password';
+  static const String signupPasswordHintText = 'Enter Password';
   static const String newPasswordLabelText = 'New password';
   static const String passwordLabelText = 'Password';
   static const String enterPassword = 'Enter password';
+  static const String description = 'Description';
+  static const String allPricesIncludeTax = 'All prices include tax';
 
   static const String rememberMeText = 'Remember me';
 
-  static const String confirmPasswordHintText = 'Enter Your Password';
+  static const String confirmPasswordHintText = 'Confirm Password';
   static const String confirmPasswordLabelText = 'Confirm password';
 
   static const String emptyEmailAddress = "Please enter your email address";
@@ -55,15 +58,13 @@ class AppStrings {
   static const String lastNameLabelText = "Last name";
   static const String phoneHintText = "Enter phone number";
   static const String phoneLabelText = "Phone number";
-
   static const String emptyUserName = 'Please enter your user name';
-  static const String emptyFirstName = 'Please enter your frist name';
+  static const String emptyFirstName = 'Please enter your first name';
   static const String emptyLastName = 'Please enter your user name';
   static const String emptyPhone = 'Please enter your phone';
   static const String passwordDontMatch = "Password don't match";
-
+  static const String addToCart = "Add to cart";
   static const String invalidCode = 'Invalid code';
-
   static const String continueText = "Continue";
   static const String continueAsGusetText = "Continue as Guset";
 
@@ -88,6 +89,7 @@ class AppStrings {
   static const String surveyText = "Survey";
   static const String resultText = "Results";
   static const String profileText = "Profile";
+  static const String status = "Status";
 
   static const String changeText = 'Change';
   static const String updateText = 'Update';
