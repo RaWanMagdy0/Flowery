@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../core/base/exceptions.dart';
+import '../../../../core/local/token_manger.dart';
 import '../../../../core/routes/page_route_name.dart';
 import '../../../../core/styles/colors/app_colors.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
@@ -30,7 +32,6 @@ class _LogInScreenState extends State<LogInScreen> {
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
   bool _isRememberMe = false;
-  final bool _isEmailValid = false;
 
   @override
   void initState() {
@@ -98,12 +99,15 @@ class _LogInScreenState extends State<LogInScreen> {
                               context: context,
                               message: AppStrings.userLoggedInSuccessfully);
                           Future.delayed(Duration(seconds: 2), () {
-                            Navigator.pop(context);
-                            if(_isRememberMe){
-                              var token=  state.user!.token;
-                              //   TokenManger.setToken(token: token.toString());
+                            if (context.mounted) {
+                              Navigator.pop(context);
+                              if (_isRememberMe) {
+                                var token = state.user!.token;
+                                TokenManger.setToken(token: token.toString());
+                              }
+                              Navigator.pushReplacementNamed(
+                                  context, PageRouteName.homeLayout);
                             }
-                            Navigator.pushReplacementNamed(context, PageRouteName.homeLayout);
                           });
                         }
                       default:
@@ -135,8 +139,9 @@ class _LogInScreenState extends State<LogInScreen> {
                         Row(
                           children: [
                             Checkbox(
-                              fillColor: MaterialStateProperty. resolveWith<Color>((Set<WidgetState> states) {
-                                if (states. contains(WidgetState.selected)) {
+                              fillColor: WidgetStateProperty.resolveWith<Color>(
+                                  (Set<WidgetState> states) {
+                                if (states.contains(WidgetState.selected)) {
                                   return AppColors.kPink;
                                 }
                                 return AppColors.kWhite;
@@ -152,13 +157,15 @@ class _LogInScreenState extends State<LogInScreen> {
                                 style: AppFonts.font13BlackWeight400),
                             const Spacer(),
                             GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, PageRouteName.forgetPassword);
-                              },
-                              child: Text(AppStrings.forgetPasswordText,
-                                  style: AppFonts.font12BlackWeight400UnderlinedBlack,
-                    ))
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                      context, PageRouteName.forgetPassword);
+                                },
+                                child: Text(
+                                  AppStrings.forgetPasswordText,
+                                  style: AppFonts
+                                      .font12BlackWeight400UnderlinedBlack,
+                                ))
                           ],
                         ),
                         50.verticalSpace,
@@ -183,11 +190,10 @@ class _LogInScreenState extends State<LogInScreen> {
                                       context, PageRouteName.homeLayout);
                                 },
                                 color: AppColors.kWhite,
-
                                 text: AppStrings.continueAsGusetText,
                                 textStyle: AppFonts.font16BlackWeight500,
-                        borderColor: AppColors.kGray,
-                        )
+                                borderColor: AppColors.kGray,
+                              )
                       ],
                     );
                   },
@@ -204,11 +210,8 @@ class _LogInScreenState extends State<LogInScreen> {
                       onTap: () {
                         Navigator.pushNamed(context, PageRouteName.signUp);
                       },
-                      child: Text(
-                        AppStrings.signUpTitle,
-                        style: AppFonts.font16PinkWeight500UnderlinedPink
-
-                      ),
+                      child: Text(AppStrings.signUpTitle,
+                          style: AppFonts.font16PinkWeight500UnderlinedPink),
                     ),
                   ],
                 ),

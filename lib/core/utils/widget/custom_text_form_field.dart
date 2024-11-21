@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../styles/colors/app_colors.dart';
-
 class CustomTextFormField extends StatefulWidget {
   final TextEditingController? controller;
   final String hintText;
@@ -78,7 +76,6 @@ class CustomTextFormField extends StatefulWidget {
     this.errorMaxLines,
     this.errorStyle,
     this.backgroundColor,
-
     this.focusNode,
     this.focusedBorder,
     this.focusedBorderColor,
@@ -159,8 +156,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       scrollPadding: widget.scrollPaddingValue == null
           ? const EdgeInsets.all(20.0)
           : EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom +
-              (widget.scrollPaddingValue!)),
+              bottom: MediaQuery.of(context).viewInsets.bottom +
+                  (widget.scrollPaddingValue!)),
       focusNode: widget.focusNode,
       enabled: widget.enabled,
       decoration: InputDecoration(
@@ -171,18 +168,18 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             : widget.backgroundColor ?? AppColors.kWhite,
         filled: widget.isFilled ?? true,
         prefixIcon: widget.prefixIcon,
-        prefixIconColor:AppColors.kPink,
+        prefixIconColor: AppColors.kPink,
         suffixIcon: widget.isPassword ?? false
             ? GestureDetector(
-          onTap: () {
-            setState(() {
-              isTextObscured = !isTextObscured;
-            });
-          },
-          child: Icon(
-            isTextObscured ? Icons.visibility_off : Icons.visibility,
-          ),
-        )
+                onTap: () {
+                  setState(() {
+                    isTextObscured = !isTextObscured;
+                  });
+                },
+                child: Icon(
+                  isTextObscured ? Icons.visibility_off : Icons.visibility,
+                ),
+              )
             : widget.suffixIcon,
         counterText: "",
         border: widget.border ??
@@ -196,7 +193,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         enabledBorder: widget.enabledBorder ??
             OutlineInputBorder(
               borderRadius:
-              BorderRadius.circular(widget.enabledBorderRadius ?? 0),
+                  BorderRadius.circular(widget.enabledBorderRadius ?? 0),
               borderSide: BorderSide(
                 color: widget.enabledBorderColor ?? AppColors.kGray,
                 width: widget.enabledBorderWidth ?? 1,
@@ -205,30 +202,29 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         focusedBorder: widget.focusedBorder ??
             OutlineInputBorder(
               borderRadius:
-              BorderRadius.circular(widget.focusedBorderRadius ?? 0),
+                  BorderRadius.circular(widget.focusedBorderRadius ?? 0),
               borderSide: BorderSide(
-                color: widget.focusedBorderColor ??
-                    AppColors.kPink,
+                color: widget.focusedBorderColor ?? AppColors.kPink,
                 width: widget.focusedBorderWidth ?? 1,
               ),
             ),
         disabledBorder: widget.disabledBorder ??
             OutlineInputBorder(
               borderRadius:
-              BorderRadius.circular(widget.disabledBorderRadius ?? 0),
+                  BorderRadius.circular(widget.disabledBorderRadius ?? 0),
               borderSide: BorderSide(
                 color:
-                widget.disabledBackgroundColor ?? const Color(0xFFE6E6E6),
+                    widget.disabledBackgroundColor ?? const Color(0xFFE6E6E6),
                 width: widget.disabledBorderWidth ?? 1,
               ),
             ),
-        errorStyle:
-        widget.errorStyle ??  TextStyle(color: AppColors.kError,fontSize: 14.sp),
+        errorStyle: widget.errorStyle ??
+            TextStyle(color: AppColors.kError, fontSize: 14.sp),
         errorMaxLines: widget.errorMaxLines ?? 4,
         errorBorder: widget.errorBorder ??
             OutlineInputBorder(
               borderRadius:
-              BorderRadius.circular(widget.errorBorderRadius ?? 0),
+                  BorderRadius.circular(widget.errorBorderRadius ?? 0),
               borderSide: BorderSide(
                 color: widget.errorBorderColor ?? AppColors.kError,
                 width: widget.errorBorderWidth ?? 1,
@@ -236,8 +232,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             ),
         focusedErrorBorder: widget.focusedErrorBorder ??
             OutlineInputBorder(
-              borderRadius: BorderRadius.circular(
-                  widget.focusedErrorBorderRadius ?? 0),
+              borderRadius:
+                  BorderRadius.circular(widget.focusedErrorBorderRadius ?? 0),
               borderSide: BorderSide(
                 color: widget.focusedErrorBorderColor ?? AppColors.kError,
                 width: widget.focusedErrorBorderWidth ?? 1,

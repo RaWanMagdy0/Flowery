@@ -3,21 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../core/di/di.dart';
 import '../../../../core/styles/colors/app_colors.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../core/utils/const/app_string.dart';
 import '../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../core/utils/widget/custom_button.dart';
-import '../../../../domain/entities/home_layout/ProductDetailsEntity.dart';
+import '../../../../domain/entities/home_layout/product_details_entity.dart';
 import '../view_model/product_details_states.dart';
 
 class ProductDetails extends StatefulWidget {
-  static const String routeName = "ProductDetails";
+  const ProductDetails({super.key});
 
   @override
   State<ProductDetails> createState() => _ProductDetailsState();
 }
+
 class _ProductDetailsState extends State<ProductDetails> {
   late ProductEntity productEntity;
   var viewModel = getIt.get<ProductDetailsCubit>();
@@ -26,7 +28,8 @@ class _ProductDetailsState extends State<ProductDetails> {
     var args = ModalRoute.of(context)?.settings.arguments as ProductEntity;
 
     return BlocListener<ProductDetailsCubit, ProductDetailsStates>(
-        bloc: viewModel..getProductDetails(productId: productEntity.id.toString()),
+        bloc: viewModel
+          ..getProductDetails(productId: productEntity.id.toString()),
         listener: (context, state) => _handleStateChange(state),
         child: Scaffold(
           body: Container(
@@ -42,8 +45,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                           color: AppColors.kBabyPink,
                           height: 390.h,
                           width: 356.w,
-                          child:
-                          ClipRRect(
+                          child: ClipRRect(
                             child: ImageSlideshow(
                               initialPage: 0,
                               indicatorColor: Colors.pink,
@@ -51,14 +53,13 @@ class _ProductDetailsState extends State<ProductDetails> {
                               indicatorRadius: 5.w,
                               indicatorBackgroundColor: Colors.grey,
                               isLoop: true,
-                              children:
-                              args.images!
+                              children: args.images!
                                   .map((url) => Image.network(
-                                url,
-                                fit: BoxFit.scaleDown,
-                                // height: 300.h,
-                                width: double.infinity,
-                              ))
+                                        url,
+                                        fit: BoxFit.scaleDown,
+                                        // height: 300.h,
+                                        width: double.infinity,
+                                      ))
                                   .toList(),
                             ),
                           ),
@@ -90,7 +91,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                                     AppStrings.status,
                                     style: AppFonts.font16BlackWeight500,
                                   ),
-                                  Text(" In stock", style: AppFonts.font14GreyWeight400)
+                                  Text(" In stock",
+                                      style: AppFonts.font14GreyWeight400)
                                 ],
                               )
                             ],
@@ -151,8 +153,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                     ),
                   ],
                 ),
-              )
-              ),
+              )),
         ));
   }
 

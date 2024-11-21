@@ -2,6 +2,7 @@ import 'package:flowery/core/utils/widget/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../../../core/routes/page_route_name.dart';
 import '../../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../../core/styles/fonts/app_fonts.dart';
@@ -10,7 +11,6 @@ import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../../../core/utils/functions/validators/my_validators.dart';
 import '../../../view_model/forget_passwoed_cubit.dart';
 import '../../../view_model/forget_password_states.dart';
-
 
 class ForgetPassword extends StatefulWidget {
   static String routeName = "ForgetPassword";
@@ -103,9 +103,9 @@ class _ForgetPasswordState extends State<ForgetPassword> {
           context: context,
           message: "OTP sent to your email.\n Please check your Email");
       Future.delayed(Duration(seconds: 2), () {
+        if (!mounted) return;
         Navigator.pushReplacementNamed(
-            context,
-            PageRouteName.passwordVerification);
+            context, PageRouteName.passwordVerification);
 
         Navigator.pushNamed(context, PageRouteName.passwordVerification);
       });

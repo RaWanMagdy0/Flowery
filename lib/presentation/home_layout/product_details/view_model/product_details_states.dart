@@ -1,4 +1,4 @@
-import 'package:flowery/data/model/auth/response/ProductDetailsModel.dart';
+import 'package:flowery/data/model/auth/response/produc_details_model.dart';
 import 'package:flutter/cupertino.dart';
 
 @immutable
@@ -7,7 +7,7 @@ sealed class ProductDetailsStates {}
 class ProductDetailsInitialState extends ProductDetailsStates {}
 
 class ProductDetailsErrorState extends ProductDetailsStates {
-  String? errorMessage;
+  final String? errorMessage;
   ProductDetailsErrorState({required this.errorMessage});
 }
 
@@ -17,6 +17,6 @@ class ProductDetailsSuccessState extends ProductDetailsStates {
 }
 
 class ProductDetailsLoadingState extends ProductDetailsStates {
-  String? loadingMessage;
+  final String? loadingMessage;
   ProductDetailsLoadingState({required this.loadingMessage});
 }

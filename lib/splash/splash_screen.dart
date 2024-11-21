@@ -1,9 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-import '../core/api/local/token_manger.dart';
+import '../core/local/token_manger.dart';
 import '../core/routes/page_route_name.dart';
 import '../core/styles/images/app_images.dart';
 
@@ -28,23 +26,25 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-       // _navigateToInitialRoute();
-         Navigator.of(context).pushReplacementNamed(
-          PageRouteName.homeLayout,
-        );
+        _navigateToInitialRoute();
+        // Navigator.of(context).pushReplacementNamed(
+        //   PageRouteName.homeLayout,
+        // );
       }
     });
   }
-  /************
+
   _navigateToInitialRoute() async {
-    //var token = await TokenManger.getToken();
+    var token = await TokenManger.getToken();
     String initialRoute =
-    token != null ? PageRouteName.homeLayout : PageRouteName.logIn;
-    return Navigator.of(context).pushReplacementNamed(
-      initialRoute,
-    );
+        token != null ? PageRouteName.homeLayout : PageRouteName.logIn;
+    if (mounted) {
+      Navigator.of(context).pushReplacementNamed(
+        initialRoute,
+      );
+    }
   }
-      ********************/
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

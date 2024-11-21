@@ -10,6 +10,7 @@ part of 'home_api_manager.dart';
 abstract class ParseErrorLogger {
   void logError(Object error, StackTrace stackTrace, RequestOptions options);
 }
+
 class _HomeApiManger implements HomeApiManger {
   _HomeApiManger(
     this._dio, {
@@ -24,6 +25,39 @@ class _HomeApiManger implements HomeApiManger {
   String? baseUrl;
 
   final ParseErrorLogger? errorLogger;
+
+  @override
+  Future<HomeDataModel> getHomeData() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<HomeDataModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'api/v1/home',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late HomeDataModel _value;
+    try {
+      _value = HomeDataModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
 
   @override
   Future<ProductDetailsModel?> getProductDetails(String productId) async {
