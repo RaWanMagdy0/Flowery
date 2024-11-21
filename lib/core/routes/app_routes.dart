@@ -1,3 +1,5 @@
+import 'package:flowery/presentation/home_layout/screens/occasions/occasions_screen.dart';
+import 'package:flowery/presentation/home_layout/screens/occasions/view_model/ocusin_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -65,6 +67,14 @@ class AppRoutes {
 
       case PageRouteName.homeLayout:
         return _handleMaterialPageRoute(widget: MainPage());
+
+      case PageRouteName.Occasion:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<OccasionCubit>()..loadFlowers(),
+            child: OccasionScreen(),
+          ),
+        );
 
       default:
         return _handleMaterialPageRoute(widget: const Scaffold());

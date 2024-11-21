@@ -161,6 +161,8 @@ class _LogInScreenState extends State<LogInScreen> {
                                   if (formKey.currentState!.validate()) {
                                     viewModel.login(_emailController.text,
                                         _passwordController.text);
+                                    Navigator.pushNamed(
+                                        context, PageRouteName.homeLayout);
                                   }
                                 },
                                 color: AppColors.kPink,

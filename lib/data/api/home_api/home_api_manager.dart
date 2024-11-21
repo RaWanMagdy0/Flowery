@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flowery/data/models/occasions/occasions_response_model.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/http.dart';
 
@@ -11,4 +12,7 @@ part 'home_api_manager.g.dart';
 abstract class HomeApiManger {
   @factoryMethod
   factory HomeApiManger(Dio dio) = _HomeApiManger;
+
+  @GET(ApiConstants.occasionsApi)
+  Future<OccasionsResponseModel> occasions();
 }
