@@ -84,20 +84,30 @@ class _EmailVerificationState extends State<EmailVerification> {
                       style: TextStyle(
                           fontSize: 18.sp, fontWeight: FontWeight.w400),
                     ),
-                    InkWell(
-                      onTap: () {
-                        viewModel.resendResetCode();
+                    ValueListenableBuilder<bool>(
+                      valueListenable: viewModel.isResendButtonEnabled,
+                      builder: (context, isEnabled, child) {
+                        return InkWell(
+                          onTap: isEnabled
+                              ? () {
+                            viewModel.resendResetCode();
+                          }
+                              : null,
+                          child: ValueListenableBuilder<String?>(
+                            valueListenable: viewModel.resendButtonText,
+                            builder: (context, value, child) {
+                              return Text(
+                                value ?? " Resend",
+                                style: isEnabled
+                                    ? AppFonts.font16PinkWeight400
+                                    : AppFonts.font16PinkWeight400,
+                              );
+                            },
+                          ),
+                        );
                       },
-                      child: ValueListenableBuilder<String?>(
-                        valueListenable: viewModel.resendButtonText,
-                        builder: (context, value, child) {
-                          return Text(
-                            value ?? " Resend",
-                            style: AppFonts.font16PinkWeight400,
-                          );
-                        },
-                      ),
                     ),
+
                   ],
                 ),
               ],

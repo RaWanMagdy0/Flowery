@@ -1,10 +1,6 @@
-import 'package:flowery/core/api/local/secure_storage.dart';
-import 'package:flowery/core/api/local/token_manger.dart';
-import 'package:flowery/data/model/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../core/base/exceptions.dart';
 import '../../../../core/routes/page_route_name.dart';
 import '../../../../core/styles/colors/app_colors.dart';
@@ -118,7 +114,7 @@ class _LogInScreenState extends State<LogInScreen> {
                     isLoading = state is LoadingState;
                     return Column(
                       children: [
-                        CustomTextFromField(
+                        CustomTextFormField(
                           hintText: AppStrings.emailHintText,
                           labelText: AppStrings.emailLabelText,
                           controller: _emailController,
@@ -127,7 +123,7 @@ class _LogInScreenState extends State<LogInScreen> {
                               MyValidators.validateEmail(value),
                         ),
                         24.verticalSpace,
-                        CustomTextFromField(
+                        CustomTextFormField(
                           hintText: AppStrings.passwordHintText,
                           labelText: AppStrings.passwordLabelText,
                           controller: _passwordController,
