@@ -91,7 +91,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   Row(
                     children: [
                       Expanded(
-                        child: CustomTextFromField(
+                        child: CustomTextFormField(
                           hintText: AppStrings.firstNameHintText,
                           labelText: AppStrings.firstNameLabelText,
                           validator: (value) =>
@@ -102,7 +102,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       16.horizontalSpace,
                       Expanded(
-                        child: CustomTextFromField(
+                        child: CustomTextFormField(
                           hintText: AppStrings.lastNameHintText,
                           labelText: AppStrings.lastNameLabelText,
                           validator: (value) =>
@@ -114,7 +114,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ],
                   ),
                   24.verticalSpace,
-                  CustomTextFromField(
+                  CustomTextFormField(
                     hintText: AppStrings.emailHintText,
                     labelText: AppStrings.emailLabelText,
                     validator: (value) => MyValidators.validateEmail(value),
@@ -125,7 +125,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   Row(
                     children: [
                       Expanded(
-                        child: CustomTextFromField(
+                        child: CustomTextFormField(
                           hintText: AppStrings.signupPasswordHintText,
                           labelText: AppStrings.passwordLabelText,
                           isPassword: true,
@@ -137,7 +137,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       16.horizontalSpace,
                       Expanded(
-                        child: CustomTextFromField(
+                        child: CustomTextFormField(
                           hintText: AppStrings.confirmPasswordHintText,
                           labelText: AppStrings.confirmPasswordLabelText,
                           isPassword: true,
@@ -153,7 +153,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ],
                   ),
                   24.verticalSpace,
-                  CustomTextFromField(
+                  CustomTextFormField(
                     hintText: AppStrings.phoneHintText,
                     labelText: AppStrings.phoneLabelText,
                     validator: (value) =>

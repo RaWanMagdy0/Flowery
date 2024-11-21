@@ -17,6 +17,8 @@ class ForgetPasswordCubit extends BaseViewModel<ForgotPasswordStates> {
   int time = 60;
   String? userEmail;
   ValueNotifier<String?> resendButtonText = ValueNotifier<String?>(" Resend");
+  ValueNotifier<bool> isResendButtonEnabled = ValueNotifier<bool>(true);
+
   final appProvider = getIt.get<AppProvider>();
 
   ForgetPasswordCubit(
@@ -31,6 +33,7 @@ class ForgetPasswordCubit extends BaseViewModel<ForgotPasswordStates> {
 
   void startResendTimer() {
     time = 60;
+    isResendButtonEnabled.value = false;
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (time > 1) {
         time--;
@@ -38,6 +41,7 @@ class ForgetPasswordCubit extends BaseViewModel<ForgotPasswordStates> {
       } else {
         timer.cancel();
         resendButtonText.value = " Resend";
+        isResendButtonEnabled.value = true;
       }
     });
   }
@@ -66,7 +70,6 @@ class ForgetPasswordCubit extends BaseViewModel<ForgotPasswordStates> {
             errorMassage: getErrorMassageFromException(result.exception)));
     }
   }
-
   Future<void> resendResetCode() async {
     emit(ResendLoadingState(loadingMessage: "loading..."));
     var result = await forgotPasswordUseCase.invoke(email: appProvider!.email);

@@ -1,14 +1,13 @@
+import 'package:flowery/core/utils/widget/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../../../core/routes/page_route_name.dart';
 import '../../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../core/utils/const/app_string.dart';
 import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../../../core/utils/functions/validators/my_validators.dart';
-import '../../../../../../core/utils/widget/custom_text_form_field.dart';
 import '../../../view_model/forget_passwoed_cubit.dart';
 import '../../../view_model/forget_password_states.dart';
 
@@ -70,7 +69,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     // onChanged: () => viewModel.updateValidationState(),
                     key: viewModel.formKey,
-                    child: CustomTextFromField(
+                    child: CustomTextFormField(
                       hintText: AppStrings.emailHintText,
                       labelText: AppStrings.emailLabelText,
                       validator: (value) => MyValidators.validateEmail(value),
