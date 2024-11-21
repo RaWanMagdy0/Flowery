@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../../domain/entities/home/home_category_entity.dart';
 import '../../../view_model/home_view_model.dart';
+import 'home_categories_loading.dart';
 import 'home_category_item.dart';
 
 class HomeCategoriesList extends StatelessWidget {
@@ -16,9 +16,7 @@ class HomeCategoriesList extends StatelessWidget {
     return BlocBuilder<HomeViewModel, HomeState>(
       builder: (context, state) {
         if (state is HomeDataLoading) {
-          return Center(
-            child: CupertinoActivityIndicator(),
-          );
+          return HomeCategoriesLoading();
         } else if (state is HomeDataError) {
           return Center(
             child: Text(state.message ?? ''),

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,6 +6,7 @@ import '../../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../../domain/entities/home/home_occasion_entity.dart';
 import '../../../view_model/home_view_model.dart';
 import 'home_occasion_item.dart';
+import 'home_occasions_loading.dart';
 
 class HomeOccasionsList extends StatelessWidget {
   const HomeOccasionsList({super.key});
@@ -16,9 +16,7 @@ class HomeOccasionsList extends StatelessWidget {
     return BlocBuilder<HomeViewModel, HomeState>(
       builder: (context, state) {
         if (state is HomeDataLoading) {
-          return Center(
-            child: CupertinoActivityIndicator(),
-          );
+          return HomeOccasionsLoading();
         } else if (state is HomeDataError) {
           return Center(
             child: Text(state.message ?? ''),

@@ -1,3 +1,4 @@
+import 'package:flowery/presentation/home_layout/screens/home/view/widgets/home_discover/home_discover_loading.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,9 +16,7 @@ class HomeDiscoverList extends StatelessWidget {
     return BlocBuilder<HomeViewModel, HomeState>(
       builder: (context, state) {
         if (state is HomeDataLoading) {
-          return Center(
-            child: CupertinoActivityIndicator(),
-          );
+          return HomeDiscoverLoading();
         } else if (state is HomeDataError) {
           return Center(
             child: Text(state.message ?? ''),

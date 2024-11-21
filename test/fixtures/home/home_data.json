@@ -1,0 +1,515 @@
+{
+    "message": "success",
+    "products": [
+        {
+            "_id": "673e1cd711599201718280fb",
+            "title": "Wdding Flower",
+            "slug": "wdding-flower",
+            "description": "This is a Pack of White Widding Flowers",
+            "imgCover": "https://flower.elevateegy.com/uploads/fefa790a-f0c1-42a0-8699-34e8fc065812-cover_image.png",
+            "images": [
+                "https://flower.elevateegy.com/uploads/66c36d5d-c067-46d9-b339-d81be57e0149-image_one.png",
+                "https://flower.elevateegy.com/uploads/f27e1903-74cf-4ed6-a42c-e43e35b6dd14-image_three.png",
+                "https://flower.elevateegy.com/uploads/500fe197-0e16-4b01-9a0d-031ccb032714-image_two.png"
+            ],
+            "price": 250,
+            "priceAfterDiscount": 100,
+            "quantity": 220,
+            "category": "673c46fd1159920171827c85",
+            "occasion": "673b34c21159920171827ae0",
+            "createdAt": "2024-11-20T17:31:03.303Z",
+            "updatedAt": "2024-11-20T17:31:03.303Z",
+            "__v": 0,
+            "id": "673e1cd711599201718280fb"
+        },
+        {
+            "_id": "673e2bd91159920171828139",
+            "title": "Red Wdding Flower",
+            "slug": "red-wdding-flower",
+            "description": "This is a Pack of Red Widding Flowers",
+            "imgCover": "https://flower.elevateegy.com/uploads/5452abf4-2040-43d7-bb3d-3ae8f53c4576-cover_image.png",
+            "images": [
+                "https://flower.elevateegy.com/uploads/ba028e59-410f-43ac-aed5-f4f97c102b98-image_four.png",
+                "https://flower.elevateegy.com/uploads/f89bc954-eb0d-4efb-928f-6717f77b69ed-image_one.png",
+                "https://flower.elevateegy.com/uploads/5ed2d072-485b-4a53-a0fa-a41412791397-image_three.png",
+                "https://flower.elevateegy.com/uploads/c0992ec6-d3c0-4a54-b7ec-4cf000138367-image_two.png"
+            ],
+            "price": 250,
+            "priceAfterDiscount": 150,
+            "quantity": 1000,
+            "category": "673c46fd1159920171827c85",
+            "occasion": "673b34c21159920171827ae0",
+            "createdAt": "2024-11-20T18:35:05.594Z",
+            "updatedAt": "2024-11-20T18:35:05.594Z",
+            "__v": 0,
+            "id": "673e2bd91159920171828139"
+        },
+        {
+            "_id": "673e2d1b1159920171828146",
+            "title": "GABRIELLE CHANEL",
+            "slug": "gabrielle-chanel",
+            "description": "PRODUCT\nBefore creating the House of CHANEL, Coco was Gabrielle. A rebel at heart...passionate and free. The inspiration for the luminous floral fragrance: GABRIELLE CHANEL.\n\nThe fragrance appears to be weightlessly suspended within the striking square bottle. Made with ultra-thin glass, the 4 transparent sides fade into the background, letting light radiate through. The label and the stopper have the same square shape and precious lamé hue, a delicate balance between gold and silver, and the interior is warmed with an even more resplendent gold. The bottle is carefully protected by a sleeve imprinted with its silhouette.",
+            "imgCover": "https://flower.elevateegy.com/uploads/0c6c00d1-d816-44e4-8119-cf97807427f2-cover_image.png",
+            "images": [
+                "https://flower.elevateegy.com/uploads/f286e018-63bb-4e6b-9d6b-feefdf28cdf3-image_one.png",
+                "https://flower.elevateegy.com/uploads/75fae675-a16e-4d26-98a4-63f34e8423f0-image_three.png",
+                "https://flower.elevateegy.com/uploads/7f3bcf05-7e55-476c-9d3d-8026c709a80c-image_two.png"
+            ],
+            "price": 340,
+            "priceAfterDiscount": 172,
+            "quantity": 1000,
+            "category": "673c47751159920171827c93",
+            "occasion": "673b368c1159920171827afc",
+            "createdAt": "2024-11-20T18:40:27.076Z",
+            "updatedAt": "2024-11-20T18:40:27.076Z",
+            "__v": 0,
+            "id": "673e2d1b1159920171828146"
+        },
+        {
+            "_id": "673e2e1f1159920171828153",
+            "title": "Dreamy White Roses Bouquet",
+            "slug": "dreamy-white-roses-bouquet",
+            "description": "Elevate any celebration with our luxury rose bouquet. This exquisite arrangement features pristine white roses wrapped in a sophisticated dark teal wrap, creating a stunning visual contrast. Perfect for celebrations, anniversaries, or as a heartfelt gift, this bouquet combines timeless elegance with modern style. Make a memorable impression with this luxurious floral arrangement. Buy now to delight your loved ones with the beauty and grace of these premium roses.",
+            "imgCover": "https://flower.elevateegy.com/uploads/2d8ddf11-935f-4a45-a100-e1e0765a39c3-cover_image.png",
+            "images": [
+                "https://flower.elevateegy.com/uploads/8ee8e389-da6a-4371-8b13-5e35fcca16c6-image_one.png",
+                "https://flower.elevateegy.com/uploads/66fc9304-3ceb-4b73-97dd-730ccf790c49-image_three.png",
+                "https://flower.elevateegy.com/uploads/acf9531b-5ca9-4c45-97fc-f81df9d62091-image_two.png"
+            ],
+            "price": 320,
+            "priceAfterDiscount": 199,
+            "quantity": 100,
+            "category": "673c46fd1159920171827c85",
+            "occasion": "673b35c01159920171827aed",
+            "createdAt": "2024-11-20T18:44:47.407Z",
+            "updatedAt": "2024-11-20T18:44:47.407Z",
+            "__v": 0,
+            "id": "673e2e1f1159920171828153"
+        },
+        {
+            "_id": "673e2f701159920171828164",
+            "title": "Fuchsia Brilliance Vase",
+            "slug": "fuchsia-brilliance-vase",
+            "description": "Discover the elegance of Fuchsia Roses in a Glass Vase, the perfect luxury gift for any occasion. This stunning arrangement showcases the vibrant beauty of fuchsia roses, creating a captivating display that adds a touch of sophistication to any setting. Ideal for birthdays, anniversaries, or just because this luxurious arrangement is sure to impress. Order now to enjoy the best luxury flower delivery and make your special moments unforgettable. Indulge in luxury gifts online with this exquisite floral arrangement.",
+            "imgCover": "https://flower.elevateegy.com/uploads/5165a2c1-3e6c-44db-96f3-97ee83a29da9-cover_image.png",
+            "images": [
+                "https://flower.elevateegy.com/uploads/535a663d-b5de-497b-aa4b-cfde74ab7f92-image_one.png",
+                "https://flower.elevateegy.com/uploads/172e848c-e43b-4f1b-8cf9-d4e4ef90101c-image_three.png"
+            ],
+            "price": 220,
+            "priceAfterDiscount": 112,
+            "quantity": 1000,
+            "category": "673c46fd1159920171827c85",
+            "occasion": "673b351e1159920171827ae5",
+            "createdAt": "2024-11-20T18:50:24.117Z",
+            "updatedAt": "2024-11-20T18:50:24.117Z",
+            "__v": 0,
+            "id": "673e2f701159920171828164"
+        },
+        {
+            "_id": "673e308c115992017182816d",
+            "title": "Moko Chocolate Set | Esperance Rose",
+            "slug": "moko-chocolate-set-or-esperance-rose",
+            "description": "Indulge in the ultimate chocolate experience with the Moko Chocolate Bundle! This delightful assortment features the Moko Cranberry White Chocolate Dragee and three irresistible 41% Milk Chocolate Bars Crunchy Hazelnut, Salted Caramel, and Crunchy Pistachio Praline. Perfect for satisfying your sweet cravings or as a thoughtful gift for someone special. Enjoy premium flavors and quality with every bite. Don’t wait treat yourself or a loved one to this delectable chocolate bundle. Buy now and make every moment sweeter!",
+            "imgCover": "https://flower.elevateegy.com/uploads/aa6c2099-17db-4e81-85eb-2314cdaf31e8-cover_image.png",
+            "images": [
+                "https://flower.elevateegy.com/uploads/081c1a80-67ae-4c5a-962b-894c9d32f6db-image_four.png",
+                "https://flower.elevateegy.com/uploads/3a44160e-3a56-4aa5-91ae-b54ceb752f7d-image_one.png",
+                "https://flower.elevateegy.com/uploads/c55c2f05-5d64-4086-b0be-3b383cee3fef-image_three.png",
+                "https://flower.elevateegy.com/uploads/8b2708f3-4384-475e-b4e0-e7368b2a6e2f-image_two.png"
+            ],
+            "price": 1200,
+            "priceAfterDiscount": 900,
+            "quantity": 1000,
+            "category": "673c479e1159920171827c99",
+            "occasion": "673b39241159920171827b28",
+            "createdAt": "2024-11-20T18:55:08.188Z",
+            "updatedAt": "2024-11-20T18:55:08.188Z",
+            "__v": 0,
+            "id": "673e308c115992017182816d"
+        },
+        {
+            "_id": "673e31ee1159920171828177",
+            "title": "Patchi Chocolate 500g | Lilies Vase",
+            "slug": "patchi-chocolate-500g-or-lilies-vase",
+            "description": "The Patchi Chocolate Box, adorned with delicate Pink Lilies and White Baby Orchids, is a true feast for the senses. This 500-gram box of Patchi chocolates, carefully encased in a stylish Cylinder Glass Vase, is the epitome of elegance and indulgence. With a harmonious blend of delectable chocolates and the natural beauty of fresh flowers, it's a perfect gift that combines sweetness for the palate with the beauty of nature for the soul. A tantalizing treat for chocolate lovers and flower enthusiasts alike, this enchanting arrangement promises a delightful and luxurious experience.",
+            "imgCover": "https://flower.elevateegy.com/uploads/31ec8c75-a82b-42ff-81ce-44c1b0c9d42e-cover_image.png",
+            "images": [
+                "https://flower.elevateegy.com/uploads/9f861773-e79a-44fb-a3af-6554727f6bec-image_four.png",
+                "https://flower.elevateegy.com/uploads/ed916315-2f60-428b-9b45-da6dcad7a4b9-image_one.png",
+                "https://flower.elevateegy.com/uploads/2e964585-b7aa-47b1-84c9-a3f1c7ec9f0e-image_three.png",
+                "https://flower.elevateegy.com/uploads/fca847e5-1079-4882-859a-3aad8c2f6e9b-image_two.png"
+            ],
+            "price": 1900,
+            "priceAfterDiscount": 999,
+            "quantity": 1200,
+            "category": "673c479e1159920171827c99",
+            "occasion": "673b39241159920171827b28",
+            "createdAt": "2024-11-20T19:01:02.577Z",
+            "updatedAt": "2024-11-20T19:01:02.577Z",
+            "__v": 0,
+            "id": "673e31ee1159920171828177"
+        },
+        {
+            "_id": "673e32c7115992017182817b",
+            "title": "Moko's Assorted Chocolate Box | Bright Roses",
+            "slug": "moko's-assorted-chocolate-box-or-bright-roses",
+            "description": "Presenting the Moko Chocolate Box, a luxurious indulgence crafted to delight the senses. This exquisite box contains 25 pieces of mixed-flavor chocolates, each a masterpiece of taste and texture. From rich dark chocolate to creamy milk chocolate, every piece is a celebration of fine craftsmanship and gourmet delight. Accompanied by delicate white baby roses and cheerful yellow gerbera daisies, this gift embodies elegance and warmth. Whether you're celebrating a special occasion or simply expressing appreciation, the Moko Chocolate Box promises a tasteful and heartfelt gesture that will leave a lasting impression.",
+            "imgCover": "https://flower.elevateegy.com/uploads/772fba4d-4c99-480f-bc67-f3d28483648e-cover_image.png",
+            "images": [
+                "https://flower.elevateegy.com/uploads/05b528fc-7551-4a3d-8841-da0e8b97e049-image_four.png",
+                "https://flower.elevateegy.com/uploads/a3d326bf-c883-4a19-8445-cf15e44c0cd0-image_one.png",
+                "https://flower.elevateegy.com/uploads/cef9431f-6022-4d0d-b2c1-7282d0bc1a18-image_three.png",
+                "https://flower.elevateegy.com/uploads/0b8df0fc-19e1-4b39-80b5-1c52d0a196ee-image_two.png"
+            ],
+            "price": 1200,
+            "priceAfterDiscount": 999,
+            "quantity": 400,
+            "category": "673c479e1159920171827c99",
+            "occasion": "673b39241159920171827b28",
+            "createdAt": "2024-11-20T19:04:39.518Z",
+            "updatedAt": "2024-11-20T19:04:39.518Z",
+            "__v": 0,
+            "id": "673e32c7115992017182817b"
+        },
+        {
+            "_id": "673e33e9115992017182817f",
+            "title": "Shan Shal Turquoise Chocolate Box | Red Roses",
+            "slug": "shan-shal-turquoise-chocolate-box-or-red-roses",
+            "description": "Indulge in the luxurious ShanShal Turquoise Chocolate Box, featuring 23 pieces of exquisite chocolates that are perfect for any occasion. This delightful gift comes beautifully paired with 25 vibrant red roses, elegantly wrapped in a sophisticated black wrap. The combination of rich chocolates and the classic beauty of red roses makes this an ideal present to express love, gratitude, or celebration. Elevate your gifting experience with this elegant ensemble from ShanShal, designed to leave a lasting impression on your loved ones.",
+            "imgCover": "https://flower.elevateegy.com/uploads/11b17f45-a01e-47fe-8484-c58efb6f38d1-cover_image.png",
+            "images": [
+                "https://flower.elevateegy.com/uploads/d922f15c-f699-44f2-8529-2cc67cd5e19b-image_four.png",
+                "https://flower.elevateegy.com/uploads/e155c6b3-063d-4ccf-9307-8febc893b3df-image_one.png",
+                "https://flower.elevateegy.com/uploads/c1b454d6-954b-4f67-8569-87ec25ee49f8-image_three.png",
+                "https://flower.elevateegy.com/uploads/cac16b7a-bbe0-4a88-a239-40cc0485b8c9-image_two.png"
+            ],
+            "price": 4200,
+            "priceAfterDiscount": 2999,
+            "quantity": 400,
+            "category": "673c479e1159920171827c99",
+            "occasion": "673b39241159920171827b28",
+            "createdAt": "2024-11-20T19:09:29.241Z",
+            "updatedAt": "2024-11-20T19:09:29.241Z",
+            "__v": 0,
+            "id": "673e33e9115992017182817f"
+        }
+    ],
+    "bestSeller": [
+        {
+            "_id": "673e1cd711599201718280fb",
+            "title": "Wdding Flower",
+            "slug": "wdding-flower",
+            "description": "This is a Pack of White Widding Flowers",
+            "imgCover": "https://flower.elevateegy.com/uploads/fefa790a-f0c1-42a0-8699-34e8fc065812-cover_image.png",
+            "images": [
+                "https://flower.elevateegy.com/uploads/66c36d5d-c067-46d9-b339-d81be57e0149-image_one.png",
+                "https://flower.elevateegy.com/uploads/f27e1903-74cf-4ed6-a42c-e43e35b6dd14-image_three.png",
+                "https://flower.elevateegy.com/uploads/500fe197-0e16-4b01-9a0d-031ccb032714-image_two.png"
+            ],
+            "price": 250,
+            "priceAfterDiscount": 100,
+            "quantity": 220,
+            "category": "673c46fd1159920171827c85",
+            "occasion": "673b34c21159920171827ae0",
+            "createdAt": "2024-11-20T17:31:03.303Z",
+            "updatedAt": "2024-11-20T17:31:03.303Z",
+            "__v": 0,
+            "id": "673e1cd711599201718280fb"
+        },
+        {
+            "_id": "673e2bd91159920171828139",
+            "title": "Red Wdding Flower",
+            "slug": "red-wdding-flower",
+            "description": "This is a Pack of Red Widding Flowers",
+            "imgCover": "https://flower.elevateegy.com/uploads/5452abf4-2040-43d7-bb3d-3ae8f53c4576-cover_image.png",
+            "images": [
+                "https://flower.elevateegy.com/uploads/ba028e59-410f-43ac-aed5-f4f97c102b98-image_four.png",
+                "https://flower.elevateegy.com/uploads/f89bc954-eb0d-4efb-928f-6717f77b69ed-image_one.png",
+                "https://flower.elevateegy.com/uploads/5ed2d072-485b-4a53-a0fa-a41412791397-image_three.png",
+                "https://flower.elevateegy.com/uploads/c0992ec6-d3c0-4a54-b7ec-4cf000138367-image_two.png"
+            ],
+            "price": 250,
+            "priceAfterDiscount": 150,
+            "quantity": 1000,
+            "category": "673c46fd1159920171827c85",
+            "occasion": "673b34c21159920171827ae0",
+            "createdAt": "2024-11-20T18:35:05.594Z",
+            "updatedAt": "2024-11-20T18:35:05.594Z",
+            "__v": 0,
+            "id": "673e2bd91159920171828139"
+        },
+        {
+            "_id": "673e2d1b1159920171828146",
+            "title": "GABRIELLE CHANEL",
+            "slug": "gabrielle-chanel",
+            "description": "PRODUCT\nBefore creating the House of CHANEL, Coco was Gabrielle. A rebel at heart...passionate and free. The inspiration for the luminous floral fragrance: GABRIELLE CHANEL.\n\nThe fragrance appears to be weightlessly suspended within the striking square bottle. Made with ultra-thin glass, the 4 transparent sides fade into the background, letting light radiate through. The label and the stopper have the same square shape and precious lamé hue, a delicate balance between gold and silver, and the interior is warmed with an even more resplendent gold. The bottle is carefully protected by a sleeve imprinted with its silhouette.",
+            "imgCover": "https://flower.elevateegy.com/uploads/0c6c00d1-d816-44e4-8119-cf97807427f2-cover_image.png",
+            "images": [
+                "https://flower.elevateegy.com/uploads/f286e018-63bb-4e6b-9d6b-feefdf28cdf3-image_one.png",
+                "https://flower.elevateegy.com/uploads/75fae675-a16e-4d26-98a4-63f34e8423f0-image_three.png",
+                "https://flower.elevateegy.com/uploads/7f3bcf05-7e55-476c-9d3d-8026c709a80c-image_two.png"
+            ],
+            "price": 340,
+            "priceAfterDiscount": 172,
+            "quantity": 1000,
+            "category": "673c47751159920171827c93",
+            "occasion": "673b368c1159920171827afc",
+            "createdAt": "2024-11-20T18:40:27.076Z",
+            "updatedAt": "2024-11-20T18:40:27.076Z",
+            "__v": 0,
+            "id": "673e2d1b1159920171828146"
+        },
+        {
+            "_id": "673e2e1f1159920171828153",
+            "title": "Dreamy White Roses Bouquet",
+            "slug": "dreamy-white-roses-bouquet",
+            "description": "Elevate any celebration with our luxury rose bouquet. This exquisite arrangement features pristine white roses wrapped in a sophisticated dark teal wrap, creating a stunning visual contrast. Perfect for celebrations, anniversaries, or as a heartfelt gift, this bouquet combines timeless elegance with modern style. Make a memorable impression with this luxurious floral arrangement. Buy now to delight your loved ones with the beauty and grace of these premium roses.",
+            "imgCover": "https://flower.elevateegy.com/uploads/2d8ddf11-935f-4a45-a100-e1e0765a39c3-cover_image.png",
+            "images": [
+                "https://flower.elevateegy.com/uploads/8ee8e389-da6a-4371-8b13-5e35fcca16c6-image_one.png",
+                "https://flower.elevateegy.com/uploads/66fc9304-3ceb-4b73-97dd-730ccf790c49-image_three.png",
+                "https://flower.elevateegy.com/uploads/acf9531b-5ca9-4c45-97fc-f81df9d62091-image_two.png"
+            ],
+            "price": 320,
+            "priceAfterDiscount": 199,
+            "quantity": 100,
+            "category": "673c46fd1159920171827c85",
+            "occasion": "673b35c01159920171827aed",
+            "createdAt": "2024-11-20T18:44:47.407Z",
+            "updatedAt": "2024-11-20T18:44:47.407Z",
+            "__v": 0,
+            "id": "673e2e1f1159920171828153"
+        },
+        {
+            "_id": "673e2f701159920171828164",
+            "title": "Fuchsia Brilliance Vase",
+            "slug": "fuchsia-brilliance-vase",
+            "description": "Discover the elegance of Fuchsia Roses in a Glass Vase, the perfect luxury gift for any occasion. This stunning arrangement showcases the vibrant beauty of fuchsia roses, creating a captivating display that adds a touch of sophistication to any setting. Ideal for birthdays, anniversaries, or just because this luxurious arrangement is sure to impress. Order now to enjoy the best luxury flower delivery and make your special moments unforgettable. Indulge in luxury gifts online with this exquisite floral arrangement.",
+            "imgCover": "https://flower.elevateegy.com/uploads/5165a2c1-3e6c-44db-96f3-97ee83a29da9-cover_image.png",
+            "images": [
+                "https://flower.elevateegy.com/uploads/535a663d-b5de-497b-aa4b-cfde74ab7f92-image_one.png",
+                "https://flower.elevateegy.com/uploads/172e848c-e43b-4f1b-8cf9-d4e4ef90101c-image_three.png"
+            ],
+            "price": 220,
+            "priceAfterDiscount": 112,
+            "quantity": 1000,
+            "category": "673c46fd1159920171827c85",
+            "occasion": "673b351e1159920171827ae5",
+            "createdAt": "2024-11-20T18:50:24.117Z",
+            "updatedAt": "2024-11-20T18:50:24.117Z",
+            "__v": 0,
+            "id": "673e2f701159920171828164"
+        },
+        {
+            "_id": "673e308c115992017182816d",
+            "title": "Moko Chocolate Set | Esperance Rose",
+            "slug": "moko-chocolate-set-or-esperance-rose",
+            "description": "Indulge in the ultimate chocolate experience with the Moko Chocolate Bundle! This delightful assortment features the Moko Cranberry White Chocolate Dragee and three irresistible 41% Milk Chocolate Bars Crunchy Hazelnut, Salted Caramel, and Crunchy Pistachio Praline. Perfect for satisfying your sweet cravings or as a thoughtful gift for someone special. Enjoy premium flavors and quality with every bite. Don’t wait treat yourself or a loved one to this delectable chocolate bundle. Buy now and make every moment sweeter!",
+            "imgCover": "https://flower.elevateegy.com/uploads/aa6c2099-17db-4e81-85eb-2314cdaf31e8-cover_image.png",
+            "images": [
+                "https://flower.elevateegy.com/uploads/081c1a80-67ae-4c5a-962b-894c9d32f6db-image_four.png",
+                "https://flower.elevateegy.com/uploads/3a44160e-3a56-4aa5-91ae-b54ceb752f7d-image_one.png",
+                "https://flower.elevateegy.com/uploads/c55c2f05-5d64-4086-b0be-3b383cee3fef-image_three.png",
+                "https://flower.elevateegy.com/uploads/8b2708f3-4384-475e-b4e0-e7368b2a6e2f-image_two.png"
+            ],
+            "price": 1200,
+            "priceAfterDiscount": 900,
+            "quantity": 1000,
+            "category": "673c479e1159920171827c99",
+            "occasion": "673b39241159920171827b28",
+            "createdAt": "2024-11-20T18:55:08.188Z",
+            "updatedAt": "2024-11-20T18:55:08.188Z",
+            "__v": 0,
+            "id": "673e308c115992017182816d"
+        },
+        {
+            "_id": "673e31ee1159920171828177",
+            "title": "Patchi Chocolate 500g | Lilies Vase",
+            "slug": "patchi-chocolate-500g-or-lilies-vase",
+            "description": "The Patchi Chocolate Box, adorned with delicate Pink Lilies and White Baby Orchids, is a true feast for the senses. This 500-gram box of Patchi chocolates, carefully encased in a stylish Cylinder Glass Vase, is the epitome of elegance and indulgence. With a harmonious blend of delectable chocolates and the natural beauty of fresh flowers, it's a perfect gift that combines sweetness for the palate with the beauty of nature for the soul. A tantalizing treat for chocolate lovers and flower enthusiasts alike, this enchanting arrangement promises a delightful and luxurious experience.",
+            "imgCover": "https://flower.elevateegy.com/uploads/31ec8c75-a82b-42ff-81ce-44c1b0c9d42e-cover_image.png",
+            "images": [
+                "https://flower.elevateegy.com/uploads/9f861773-e79a-44fb-a3af-6554727f6bec-image_four.png",
+                "https://flower.elevateegy.com/uploads/ed916315-2f60-428b-9b45-da6dcad7a4b9-image_one.png",
+                "https://flower.elevateegy.com/uploads/2e964585-b7aa-47b1-84c9-a3f1c7ec9f0e-image_three.png",
+                "https://flower.elevateegy.com/uploads/fca847e5-1079-4882-859a-3aad8c2f6e9b-image_two.png"
+            ],
+            "price": 1900,
+            "priceAfterDiscount": 999,
+            "quantity": 1200,
+            "category": "673c479e1159920171827c99",
+            "occasion": "673b39241159920171827b28",
+            "createdAt": "2024-11-20T19:01:02.577Z",
+            "updatedAt": "2024-11-20T19:01:02.577Z",
+            "__v": 0,
+            "id": "673e31ee1159920171828177"
+        },
+        {
+            "_id": "673e32c7115992017182817b",
+            "title": "Moko's Assorted Chocolate Box | Bright Roses",
+            "slug": "moko's-assorted-chocolate-box-or-bright-roses",
+            "description": "Presenting the Moko Chocolate Box, a luxurious indulgence crafted to delight the senses. This exquisite box contains 25 pieces of mixed-flavor chocolates, each a masterpiece of taste and texture. From rich dark chocolate to creamy milk chocolate, every piece is a celebration of fine craftsmanship and gourmet delight. Accompanied by delicate white baby roses and cheerful yellow gerbera daisies, this gift embodies elegance and warmth. Whether you're celebrating a special occasion or simply expressing appreciation, the Moko Chocolate Box promises a tasteful and heartfelt gesture that will leave a lasting impression.",
+            "imgCover": "https://flower.elevateegy.com/uploads/772fba4d-4c99-480f-bc67-f3d28483648e-cover_image.png",
+            "images": [
+                "https://flower.elevateegy.com/uploads/05b528fc-7551-4a3d-8841-da0e8b97e049-image_four.png",
+                "https://flower.elevateegy.com/uploads/a3d326bf-c883-4a19-8445-cf15e44c0cd0-image_one.png",
+                "https://flower.elevateegy.com/uploads/cef9431f-6022-4d0d-b2c1-7282d0bc1a18-image_three.png",
+                "https://flower.elevateegy.com/uploads/0b8df0fc-19e1-4b39-80b5-1c52d0a196ee-image_two.png"
+            ],
+            "price": 1200,
+            "priceAfterDiscount": 999,
+            "quantity": 400,
+            "category": "673c479e1159920171827c99",
+            "occasion": "673b39241159920171827b28",
+            "createdAt": "2024-11-20T19:04:39.518Z",
+            "updatedAt": "2024-11-20T19:04:39.518Z",
+            "__v": 0,
+            "id": "673e32c7115992017182817b"
+        },
+        {
+            "_id": "673e33e9115992017182817f",
+            "title": "Shan Shal Turquoise Chocolate Box | Red Roses",
+            "slug": "shan-shal-turquoise-chocolate-box-or-red-roses",
+            "description": "Indulge in the luxurious ShanShal Turquoise Chocolate Box, featuring 23 pieces of exquisite chocolates that are perfect for any occasion. This delightful gift comes beautifully paired with 25 vibrant red roses, elegantly wrapped in a sophisticated black wrap. The combination of rich chocolates and the classic beauty of red roses makes this an ideal present to express love, gratitude, or celebration. Elevate your gifting experience with this elegant ensemble from ShanShal, designed to leave a lasting impression on your loved ones.",
+            "imgCover": "https://flower.elevateegy.com/uploads/11b17f45-a01e-47fe-8484-c58efb6f38d1-cover_image.png",
+            "images": [
+                "https://flower.elevateegy.com/uploads/d922f15c-f699-44f2-8529-2cc67cd5e19b-image_four.png",
+                "https://flower.elevateegy.com/uploads/e155c6b3-063d-4ccf-9307-8febc893b3df-image_one.png",
+                "https://flower.elevateegy.com/uploads/c1b454d6-954b-4f67-8569-87ec25ee49f8-image_three.png",
+                "https://flower.elevateegy.com/uploads/cac16b7a-bbe0-4a88-a239-40cc0485b8c9-image_two.png"
+            ],
+            "price": 4200,
+            "priceAfterDiscount": 2999,
+            "quantity": 400,
+            "category": "673c479e1159920171827c99",
+            "occasion": "673b39241159920171827b28",
+            "createdAt": "2024-11-20T19:09:29.241Z",
+            "updatedAt": "2024-11-20T19:09:29.241Z",
+            "__v": 0,
+            "id": "673e33e9115992017182817f"
+        }
+    ],
+    "occasions": [
+        {
+            "_id": "673b34c21159920171827ae0",
+            "name": "Wedding",
+            "slug": "wedding",
+            "image": "https://flower.elevateegy.com/uploads/da6919e9-6d7b-4e1e-9578-1c5b6fd098b2-sofia-hernandez-8cCfjxR8KTw-unsplash.jpg",
+            "createdAt": "2024-11-18T12:36:18.366Z",
+            "updatedAt": "2024-11-18T12:36:18.366Z"
+        },
+        {
+            "_id": "673b351e1159920171827ae5",
+            "name": "Graduation",
+            "slug": "graduation",
+            "image": "https://flower.elevateegy.com/uploads/33f50c5b-2f99-4a64-90d3-e50cbf1d8727-vasily-koloda-8CqDvPuo_kI-unsplash.jpg",
+            "createdAt": "2024-11-18T12:37:50.433Z",
+            "updatedAt": "2024-11-18T12:37:50.433Z"
+        },
+        {
+            "_id": "673b354b1159920171827ae8",
+            "name": "Birthday",
+            "slug": "birthday",
+            "image": "https://flower.elevateegy.com/uploads/fb2a0878-d236-4954-9720-9668d2ee5d30-ana-tavares-4Lmzh6vVLJ8-unsplash.jpg",
+            "createdAt": "2024-11-18T12:38:35.254Z",
+            "updatedAt": "2024-11-18T12:38:35.254Z"
+        },
+        {
+            "_id": "673b35c01159920171827aed",
+            "name": "Anniversary",
+            "slug": "anniversary",
+            "image": "https://flower.elevateegy.com/uploads/d6971db8-4fdc-4d4d-b87e-c997d79e8f1b-Rectangle 3862.png",
+            "createdAt": "2024-11-18T12:40:32.912Z",
+            "updatedAt": "2024-11-18T12:40:32.912Z"
+        },
+        {
+            "_id": "673b364e1159920171827af9",
+            "name": "New Year",
+            "slug": "new-year",
+            "image": "https://flower.elevateegy.com/uploads/dad03ac6-87ea-4467-aaea-0ef5fe9b0076-flower_image.png",
+            "createdAt": "2024-11-18T12:42:54.617Z",
+            "updatedAt": "2024-11-18T12:42:54.617Z"
+        },
+        {
+            "_id": "673b368c1159920171827afc",
+            "name": "Valentine's Day",
+            "slug": "valentine's-day",
+            "image": "https://flower.elevateegy.com/uploads/a6ecd2f0-85ca-412e-bb08-3693b00dbc1f-flower_image.png",
+            "createdAt": "2024-11-18T12:43:56.070Z",
+            "updatedAt": "2024-11-18T12:43:56.070Z"
+        },
+        {
+            "_id": "673b36e71159920171827b05",
+            "name": "Mother's Day",
+            "slug": "mother's-day",
+            "image": "https://flower.elevateegy.com/uploads/f2be4ed7-de98-42d1-9958-0aa7039c0ec3-flower_image.png",
+            "createdAt": "2024-11-18T12:45:27.841Z",
+            "updatedAt": "2024-11-18T12:45:27.841Z"
+        },
+        {
+            "_id": "673b37511159920171827b0e",
+            "name": "Father's Day",
+            "slug": "father's-day",
+            "image": "https://flower.elevateegy.com/uploads/6f60ae3d-bc4f-4d57-bf87-63e91bcb7d50-flower_image.png",
+            "createdAt": "2024-11-18T12:47:13.101Z",
+            "updatedAt": "2024-11-18T12:47:13.101Z"
+        },
+        {
+            "_id": "673b37a31159920171827b13",
+            "name": "Christmas",
+            "slug": "christmas",
+            "image": "https://flower.elevateegy.com/uploads/cc63221c-acd9-4eeb-a2b3-b9ff9c28e2ba-flower_image.png",
+            "createdAt": "2024-11-18T12:48:35.694Z",
+            "updatedAt": "2024-11-18T12:48:35.694Z"
+        },
+        {
+            "_id": "673b37c41159920171827b16",
+            "name": "Easter",
+            "slug": "easter",
+            "image": "https://flower.elevateegy.com/uploads/7b9318b5-5c7f-4cb5-a9aa-b02590e57fbc-flower_image.png",
+            "createdAt": "2024-11-18T12:49:08.850Z",
+            "updatedAt": "2024-11-18T12:49:08.850Z"
+        },
+        {
+            "_id": "673b382e1159920171827b19",
+            "name": "Baby Shower",
+            "slug": "baby-shower",
+            "image": "https://flower.elevateegy.com/uploads/2ba4ace8-446b-4705-ab4d-dcecc64918f3-flower_image.png",
+            "createdAt": "2024-11-18T12:50:54.110Z",
+            "updatedAt": "2024-11-18T12:50:54.110Z"
+        },
+        {
+            "_id": "673b38641159920171827b1d",
+            "name": "Engagement",
+            "slug": "engagement",
+            "image": "https://flower.elevateegy.com/uploads/43621086-b702-40d0-8e3f-a633564de4b2-flower_image.png",
+            "createdAt": "2024-11-18T12:51:48.960Z",
+            "updatedAt": "2024-11-18T12:51:48.960Z"
+        },
+        {
+            "_id": "673b38a91159920171827b20",
+            "name": "Friendship Day",
+            "slug": "friendship-day",
+            "image": "https://flower.elevateegy.com/uploads/c7cc73e9-db9d-4c3d-9106-eb2ff90e8d20-flower_image.png",
+            "createdAt": "2024-11-18T12:52:57.616Z",
+            "updatedAt": "2024-11-18T12:52:57.616Z"
+        },
+        {
+            "_id": "673b38d01159920171827b25",
+            "name": "Get Well Soon",
+            "slug": "get-well-soon",
+            "image": "https://flower.elevateegy.com/uploads/fdbe5102-aa87-4236-9487-8aebd9e3be80-flower_image.png",
+            "createdAt": "2024-11-18T12:53:36.386Z",
+            "updatedAt": "2024-11-18T12:53:36.386Z"
+        },
+        {
+            "_id": "673b39241159920171827b28",
+            "name": "Apology",
+            "slug": "apology",
+            "image": "https://flower.elevateegy.com/uploads/20cf856d-33e2-489f-af08-21a23bd6ecce-flower_image.png",
+            "createdAt": "2024-11-18T12:55:00.849Z",
+            "updatedAt": "2024-11-18T12:55:00.849Z"
+        }
+    ]
+}
