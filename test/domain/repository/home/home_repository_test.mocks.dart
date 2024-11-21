@@ -8,13 +8,15 @@ import 'dart:async' as _i4;
 import 'package:flowery/core/api/api_result.dart' as _i5;
 import 'package:flowery/data/data_source/remote_data_source/home/home_remote_data_source.dart'
     as _i3;
+import 'package:flowery/data/model/auth/response/produc_details_model.dart'
+    as _i8;
 import 'package:flowery/data/models/home/home_data_model.dart' as _i6;
 import 'package:flowery/domain/entities/home/home_best_seller_product_entity.dart'
-    as _i10;
-import 'package:flowery/domain/entities/home/home_category_entity.dart' as _i9;
+    as _i11;
+import 'package:flowery/domain/entities/home/home_category_entity.dart' as _i10;
 import 'package:flowery/domain/entities/home/home_data_entity.dart' as _i2;
-import 'package:flowery/domain/entities/home/home_discovery_entity.dart' as _i8;
-import 'package:flowery/domain/entities/home/home_occasion_entity.dart' as _i11;
+import 'package:flowery/domain/entities/home/home_discovery_entity.dart' as _i9;
+import 'package:flowery/domain/entities/home/home_occasion_entity.dart' as _i12;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i7;
 
@@ -66,6 +68,26 @@ class MockHomeRemoteDataSource extends _i1.Mock
           ),
         )),
       ) as _i4.Future<_i5.Result<_i6.HomeDataModel>>);
+
+  @override
+  _i4.Future<_i5.Result<_i8.ProductDetailsModel?>> getProductDetails(
+          {required String? productId}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getProductDetails,
+          [],
+          {#productId: productId},
+        ),
+        returnValue: _i4.Future<_i5.Result<_i8.ProductDetailsModel?>>.value(
+            _i7.dummyValue<_i5.Result<_i8.ProductDetailsModel?>>(
+          this,
+          Invocation.method(
+            #getProductDetails,
+            [],
+            {#productId: productId},
+          ),
+        )),
+      ) as _i4.Future<_i5.Result<_i8.ProductDetailsModel?>>);
 }
 
 /// A class which mocks [HomeData].
@@ -78,10 +100,10 @@ class MockHomeData extends _i1.Mock implements _i2.HomeData {
 
   @override
   _i2.HomeData copyWith({
-    List<_i8.HomeDiscovery>? discovery,
-    List<_i9.HomeCategory>? categories,
-    List<_i10.HomeBestSellerProduct>? bestSellerProducts,
-    List<_i11.HomeOccasion>? occasions,
+    List<_i9.HomeDiscovery>? discovery,
+    List<_i10.HomeCategory>? categories,
+    List<_i11.HomeBestSellerProduct>? bestSellerProducts,
+    List<_i12.HomeOccasion>? occasions,
   }) =>
       (super.noSuchMethod(
         Invocation.method(

@@ -6,10 +6,11 @@
 import 'dart:async' as _i4;
 
 import 'package:flowery/data/api/auth_api/api_manger.dart' as _i3;
-import 'package:flowery/data/models/auth/requests/sign_up_request_model.dart'
+import 'package:flowery/data/model/auth/requests/sign_up_request_model.dart'
     as _i5;
-import 'package:flowery/data/models/auth/response/sign_up_response_model.dart'
+import 'package:flowery/data/model/auth/response/sign_up_response_model.dart'
     as _i2;
+import 'package:flowery/data/model/user_model.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -83,11 +84,12 @@ class MockApiManger extends _i1.Mock implements _i3.ApiManger {
       ) as _i4.Future<String?>);
 
   @override
-  _i4.Future<String?> logIn(Map<String, dynamic>? body) => (super.noSuchMethod(
+  _i4.Future<_i6.UserModel?> logIn(Map<String, dynamic>? body) =>
+      (super.noSuchMethod(
         Invocation.method(
           #logIn,
           [body],
         ),
-        returnValue: _i4.Future<String?>.value(),
-      ) as _i4.Future<String?>);
+        returnValue: _i4.Future<_i6.UserModel?>.value(),
+      ) as _i4.Future<_i6.UserModel?>);
 }

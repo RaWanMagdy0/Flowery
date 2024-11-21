@@ -26,7 +26,7 @@ class HomeCategoryItem extends StatelessWidget {
           ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.r),
-            color: AppColors.kLightPink,
+            color: AppColors.kBabyPink,
           ),
           child: Image.network(
             categoryModel.imageUrl ?? '',
@@ -38,6 +38,8 @@ class HomeCategoryItem extends StatelessWidget {
         Text(
           categoryModel.name ?? '',
           style: AppFonts.font14BlackWeight400,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
       ],
     );

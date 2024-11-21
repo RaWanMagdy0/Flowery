@@ -8,7 +8,7 @@ import '../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../core/utils/functions/validators/my_validators.dart';
 import '../../../../core/utils/widget/custom_button.dart';
 import '../../../../core/utils/widget/custom_text_form_field.dart';
-import '../../../../data/models/auth/requests/sign_up_request_model.dart';
+import '../../../../data/model/auth/requests/sign_up_request_model.dart';
 import '../view_model/sign_up_cubit.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -89,7 +89,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   Row(
                     children: [
                       Expanded(
-                        child: CustomTextFromField(
+                        child: CustomTextFormField(
                           hintText: AppStrings.firstNameHintText,
                           labelText: AppStrings.firstNameLabelText,
                           validator: (value) =>
@@ -100,7 +100,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       16.horizontalSpace,
                       Expanded(
-                        child: CustomTextFromField(
+                        child: CustomTextFormField(
                           hintText: AppStrings.lastNameHintText,
                           labelText: AppStrings.lastNameLabelText,
                           validator: (value) =>
@@ -112,7 +112,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ],
                   ),
                   24.verticalSpace,
-                  CustomTextFromField(
+                  CustomTextFormField(
                     hintText: AppStrings.emailHintText,
                     labelText: AppStrings.emailLabelText,
                     validator: (value) => MyValidators.validateEmail(value),
@@ -123,8 +123,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   Row(
                     children: [
                       Expanded(
-                        child: CustomTextFromField(
-                          hintText: AppStrings.passwordHintText,
+                        child: CustomTextFormField(
+                          hintText: AppStrings.signupPasswordHintText,
                           labelText: AppStrings.passwordLabelText,
                           isPassword: true,
                           validator: (value) =>
@@ -135,7 +135,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       16.horizontalSpace,
                       Expanded(
-                        child: CustomTextFromField(
+                        child: CustomTextFormField(
                           hintText: AppStrings.confirmPasswordHintText,
                           labelText: AppStrings.confirmPasswordLabelText,
                           isPassword: true,
@@ -151,7 +151,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ],
                   ),
                   24.verticalSpace,
-                  CustomTextFromField(
+                  CustomTextFormField(
                     hintText: AppStrings.phoneHintText,
                     labelText: AppStrings.phoneLabelText,
                     validator: (value) =>
@@ -170,12 +170,12 @@ class _SignUpPageState extends State<SignUpPage> {
                   SizedBox(
                     width: 1.sw,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           AppStrings.gender,
                           style: AppFonts.font18BlackWeight500,
                         ),
+                        50.horizontalSpace,
                         Row(
                           children: [
                             Radio(
@@ -212,7 +212,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       ],
                     ),
                   ),
-                  16.verticalSpace,
+                  15.verticalSpace,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -221,21 +221,18 @@ class _SignUpPageState extends State<SignUpPage> {
                         style: AppFonts.font12BlackWeight400,
                       ),
                       InkWell(
-                        onTap: () {
-                          // TODO: navigate to login
-                          // Navigator.of(context).pop();
-                        },
+                        onTap: () {},
                         borderRadius: BorderRadius.circular(15.r),
                         child: RichText(
                           text: TextSpan(
                             text: AppStrings.termsAndConditions,
-                            style: AppFonts.font12BlackWeight600UnderlinedBlack,
+                            style: AppFonts.font12BlackWeight400UnderlinedBlack,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  16.verticalSpace,
+                  35.verticalSpace,
                   CustomButton(
                     onPressed: signUp,
                     text: AppStrings.signUpTitle,
@@ -278,8 +275,10 @@ class _SignUpPageState extends State<SignUpPage> {
           context: context,
           message: "Account Created Successfully.\n Please Login to proceed");
       Future.delayed(Duration(seconds: 2), () {
-        Navigator.pop(context);
-        Navigator.pop(context);
+        if (mounted) {
+          Navigator.pop(context);
+          Navigator.pop(context);
+        }
       });
     } else if (state is SignUpFail) {
       Navigator.pop(context);

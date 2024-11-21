@@ -21,4 +21,5 @@ class AppImages {
   static const pinkError = "assets/images/pink_error.json";
   static const pinkDone = "assets/images/pink_done.json";
   static const logoWithTitle = "assets/images/flowery_logo_with_title.png";
+  static const image3 = "assets/images/image 3.json";
 }

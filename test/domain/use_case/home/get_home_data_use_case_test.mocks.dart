@@ -6,12 +6,14 @@
 import 'dart:async' as _i4;
 
 import 'package:flowery/core/api/api_result.dart' as _i5;
+import 'package:flowery/data/model/auth/response/produc_details_model.dart'
+    as _i7;
 import 'package:flowery/domain/entities/home/home_best_seller_product_entity.dart'
-    as _i9;
-import 'package:flowery/domain/entities/home/home_category_entity.dart' as _i8;
+    as _i10;
+import 'package:flowery/domain/entities/home/home_category_entity.dart' as _i9;
 import 'package:flowery/domain/entities/home/home_data_entity.dart' as _i2;
-import 'package:flowery/domain/entities/home/home_discovery_entity.dart' as _i7;
-import 'package:flowery/domain/entities/home/home_occasion_entity.dart' as _i10;
+import 'package:flowery/domain/entities/home/home_discovery_entity.dart' as _i8;
+import 'package:flowery/domain/entities/home/home_occasion_entity.dart' as _i11;
 import 'package:flowery/domain/repository/home/home_repository.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i6;
@@ -62,6 +64,26 @@ class MockHomeRepository extends _i1.Mock implements _i3.HomeRepository {
           ),
         )),
       ) as _i4.Future<_i5.Result<_i2.HomeData?>>);
+
+  @override
+  _i4.Future<_i5.Result<_i7.ProductDetailsModel?>> getProductDetails(
+          {required String? productId}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getProductDetails,
+          [],
+          {#productId: productId},
+        ),
+        returnValue: _i4.Future<_i5.Result<_i7.ProductDetailsModel?>>.value(
+            _i6.dummyValue<_i5.Result<_i7.ProductDetailsModel?>>(
+          this,
+          Invocation.method(
+            #getProductDetails,
+            [],
+            {#productId: productId},
+          ),
+        )),
+      ) as _i4.Future<_i5.Result<_i7.ProductDetailsModel?>>);
 }
 
 /// A class which mocks [HomeData].
@@ -74,10 +96,10 @@ class MockHomeData extends _i1.Mock implements _i2.HomeData {
 
   @override
   _i2.HomeData copyWith({
-    List<_i7.HomeDiscovery>? discovery,
-    List<_i8.HomeCategory>? categories,
-    List<_i9.HomeBestSellerProduct>? bestSellerProducts,
-    List<_i10.HomeOccasion>? occasions,
+    List<_i8.HomeDiscovery>? discovery,
+    List<_i9.HomeCategory>? categories,
+    List<_i10.HomeBestSellerProduct>? bestSellerProducts,
+    List<_i11.HomeOccasion>? occasions,
   }) =>
       (super.noSuchMethod(
         Invocation.method(

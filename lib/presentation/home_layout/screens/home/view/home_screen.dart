@@ -29,18 +29,25 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: AppColors.kWhite,
       appBar: HomeAppBar(),
-      body: ListView(
-        padding: EdgeInsets.symmetric(vertical: 16.h),
-        children: [
-          HomeDiscoverList(),
-          24.verticalSpace,
-          HomeCategoriesList(),
-          24.verticalSpace,
-          HomeBestSellerList(),
-          24.verticalSpace,
-          HomeOccasionsList(),
-          24.verticalSpace,
-        ],
+      body: RefreshIndicator(
+        onRefresh: () async {
+          context.read<HomeViewModel>().getHomeData();
+        },
+        backgroundColor: AppColors.kBabyPink,
+        color: AppColors.kPink,
+        child: ListView(
+          padding: EdgeInsets.symmetric(vertical: 16.h),
+          children: [
+            HomeDiscoverList(),
+            24.verticalSpace,
+            HomeCategoriesList(),
+            24.verticalSpace,
+            HomeBestSellerList(),
+            24.verticalSpace,
+            HomeOccasionsList(),
+            24.verticalSpace,
+          ],
+        ),
       ),
     );
   }

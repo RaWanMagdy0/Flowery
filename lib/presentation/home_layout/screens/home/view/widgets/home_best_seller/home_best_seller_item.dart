@@ -14,25 +14,33 @@ class HomeBestSellerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Image.network(
-          productModel.imageUrl ?? '',
-          width: 131.w,
-          height: 151.h,
-          fit: BoxFit.cover,
+    return SizedBox(
+      width: 131.w,
+      child: Padding(
+        padding: EdgeInsets.only(right: 16.0.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image.network(
+              productModel.imageUrl ?? '',
+              width: 131.w,
+              height: 151.h,
+              fit: BoxFit.cover,
+            ),
+            8.verticalSpace,
+            Text(
+              productModel.title ?? '',
+              style: AppFonts.font12BlackWeight400,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            Text(
+              '${productModel.priceAfterDiscount} EGP',
+              style: AppFonts.font14BlackWeight500,
+            ),
+          ],
         ),
-        8.verticalSpace,
-        Text(
-          productModel.title ?? '',
-          style: AppFonts.font12BlackWeight400,
-        ),
-        Text(
-          '${productModel.priceAfterDiscount} EGP',
-          style: AppFonts.font14BlackWeight500,
-        ),
-      ],
+      ),
     );
   }
 }

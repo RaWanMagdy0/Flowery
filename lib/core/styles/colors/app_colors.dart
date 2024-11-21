@@ -10,5 +10,5 @@ class AppColors {
   static const kLightWhite = Color(0xFFF9F9F9);
   static const kError = Color(0xFFCC1010);
   static const kPink = Color(0xFFD21E6A);
-  static const kLightPink = Color(0xFFF9ECF0);
+  static const kBabyPink = Color(0xFFF9ECF0);
 }

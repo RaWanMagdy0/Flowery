@@ -6,7 +6,7 @@ import '../../styles/fonts/app_fonts.dart';
 
 class CustomButton extends StatelessWidget {
   final VoidCallback? onPressed;
-  final double? minWidth, minHeight, maxWidth, maxHeight, borderRadius;
+  final double? width, height, maxWidth, maxHeight, borderRadius;
   final String? text;
   final TextStyle? textStyle;
   final Widget? child;
@@ -16,8 +16,8 @@ class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
     this.onPressed,
-    this.minWidth,
-    this.minHeight,
+    this.width,
+    this.height,
     this.maxWidth,
     this.maxHeight,
     this.borderRadius,
@@ -36,8 +36,7 @@ class CustomButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        minimumSize: Size(minWidth ?? double.infinity, minHeight ?? 48.h),
-        // maximumSize: Size(maxWidth ?? double.maxFinite, maxHeight ?? 50.h),
+        minimumSize: Size(width ?? double.infinity, height ?? 45.h),
         backgroundColor: color ?? AppColors.kPink,
         disabledBackgroundColor: disabledColor ?? AppColors.kGray,
         padding: padding,
