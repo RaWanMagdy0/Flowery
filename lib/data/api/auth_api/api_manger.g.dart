@@ -7,15 +7,11 @@ part of 'api_manger.dart';
 // **************************************************************************
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
-abstract class ParseErrorLogger {
-  void logError(Object error, StackTrace stackTrace, RequestOptions options);
-}
 
 class _ApiManger implements ApiManger {
   _ApiManger(
     this._dio, {
     this.baseUrl,
-    this.errorLogger,
   }) {
     baseUrl ??= 'https://flower.elevateegy.com/';
   }
@@ -24,7 +20,6 @@ class _ApiManger implements ApiManger {
 
   String? baseUrl;
 
-  final ParseErrorLogger? errorLogger;
 
   @override
   Future<SignUpResponseModel> signUp(
@@ -55,7 +50,6 @@ class _ApiManger implements ApiManger {
     try {
       _value = SignUpResponseModel.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
@@ -89,7 +83,6 @@ class _ApiManger implements ApiManger {
     try {
       _value = _result.data;
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
@@ -123,7 +116,6 @@ class _ApiManger implements ApiManger {
     try {
       _value = _result.data;
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
@@ -157,7 +149,6 @@ class _ApiManger implements ApiManger {
     try {
       _value = _result.data == null ? null : UserModel.fromJson(_result.data!);
     } on Object catch (e, s) {
-      errorLogger?.logError(e, s, _options);
       rethrow;
     }
     return _value;
