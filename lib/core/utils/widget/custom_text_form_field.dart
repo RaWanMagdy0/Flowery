@@ -161,6 +161,16 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       focusNode: widget.focusNode,
       enabled: widget.enabled,
       decoration: InputDecoration(
+        labelText: widget.labelText,
+        floatingLabelStyle: MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
+          if (states.contains(MaterialState.focused)) {
+            return TextStyle(color:AppColors.kPink);
+          } else if (states.contains(MaterialState.error)) {
+            return TextStyle(color: AppColors.kError);
+          }
+          return TextStyle(color: Colors.grey);
+        }),
+        floatingLabelBehavior: FloatingLabelBehavior.always,
         hintText: widget.hintText,
         hintStyle: widget.hintStyle ?? AppFonts.font14GreyWeight400,
         fillColor: (widget.enabled != null && widget.enabled == false)
@@ -184,6 +194,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         counterText: "",
         border: widget.border ??
             OutlineInputBorder(
+
               borderRadius: BorderRadius.circular(widget.borderRadius ?? 0),
               borderSide: BorderSide(
                 color: widget.borderColor ?? AppColors.kGray,

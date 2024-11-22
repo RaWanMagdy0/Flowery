@@ -44,6 +44,7 @@ class _BestSellerScreenState extends State<BestSellerScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                  5.verticalSpace,
                   Text(
                     'Bloom with our exquisite best sellers',
                     style: TextStyle(
@@ -80,11 +81,11 @@ class _BestSellerScreenState extends State<BestSellerScreen> {
               ),
             ),
             BestSellerLoaded(products: final products) => GridView.builder(
-              padding: EdgeInsets.all(16.w),
+              padding: EdgeInsets.all(8.w),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 0.7,
-                crossAxisSpacing: 16.w,
+                childAspectRatio: 0.78,
+                crossAxisSpacing: 10.w,
                 mainAxisSpacing: 16.h,
               ),
               itemCount: products.length,
@@ -99,7 +100,7 @@ class _BestSellerScreenState extends State<BestSellerScreen> {
                   title: product.title,
                   imageUrl: product.imageUrl,
                   price: 'EGP ${product.priceAfterDiscount}',
-                  originalPrice: 'EGP ${product.price}',
+                  originalPrice:product.price.toString(),
                   descount: '$discount',
                   descountColor: Colors.green,
                   backgroundColor: Colors.white,
@@ -108,7 +109,7 @@ class _BestSellerScreenState extends State<BestSellerScreen> {
                   width: 150.w,
                   height: 200.h,
                   titleSize: 12.sp,
-                  priceSize: 12.sp,
+                  priceSize: 15.sp,
                   onTap: () => Navigator.pushNamed(
                     context,
                     '/product-details',

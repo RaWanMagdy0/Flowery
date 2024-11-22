@@ -9,4 +9,5 @@ class PageRouteName{
   static const String splash10="splash10";
   static const String logIn = "login page";
   static const String bestSeller = "bestSeller";
+  static const String categoriesScreen = "categoriesScreen";
 }

@@ -10,6 +10,7 @@ import '../../presentation/auth/view/login/login_screen.dart';
 import '../../presentation/auth/view_model/login/login_cubit.dart';
 import '../../presentation/best_seller/view/best_seller_screen.dart';
 import '../../presentation/home_layout/product_details/view/product_details_screen.dart';
+import '../../presentation/home_layout/screens/categories/categories_screen.dart';
 import '../../presentation/home_layout/screens/main_page/main_page.dart';
 import '../../splash/splash_screen.dart';
 import '../di/di.dart';
@@ -28,7 +29,6 @@ class AppRoutes {
         return _handleMaterialPageRoute(widget: const SplashScreen());
         case PageRouteName.productDetails:
         return _handleMaterialPageRoute(widget: ProductDetails());
-
       case PageRouteName.logIn:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -75,6 +75,8 @@ class AppRoutes {
 
       case PageRouteName.homeLayout:
         return _handleMaterialPageRoute(widget: MainPage());
+      case PageRouteName.categoriesScreen:
+        return _handleMaterialPageRoute(widget: CategoriesScreen());
 
       default:
         return _handleMaterialPageRoute(widget: const Scaffold());
