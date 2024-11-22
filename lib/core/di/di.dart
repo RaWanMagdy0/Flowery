@@ -1,7 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:dio/dio.dart';
-
 import '../../data/api/best_seller_api.dart';
 import 'di.config.dart';
 

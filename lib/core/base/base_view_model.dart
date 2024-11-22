@@ -1,5 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'app_string_error.dart';
 

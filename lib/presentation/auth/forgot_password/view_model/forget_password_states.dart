@@ -1,6 +1,3 @@
-import 'package:flutter/cupertino.dart';
-
-@immutable
 sealed class ForgotPasswordStates {}
 
 //ForgotPasswordStates
@@ -12,7 +9,7 @@ class ForgotPasswordErrorState extends ForgotPasswordStates {
 }
 
 class ForgotPasswordLoadingState extends ForgotPasswordStates {
-  String? loadingMessage;
+  final String? loadingMessage;
   ForgotPasswordLoadingState({required this.loadingMessage});
 }
 
@@ -28,7 +25,7 @@ class VerifyEmailCodeErrorState extends ForgotPasswordStates {
 }
 
 class VerifyEmailCodeLoadingState extends ForgotPasswordStates {
-  String? loadingMessage;
+  final String? loadingMessage;
   VerifyEmailCodeLoadingState({required this.loadingMessage});
 }
 
@@ -41,13 +38,13 @@ class VerifyEmailCodeSuccessState extends ForgotPasswordStates {
 class ResendLoadingState extends ForgotPasswordStates {
   String? loadingMessage;
   ResendLoadingState({required this.loadingMessage});
-
 }
+
 class ResendSuccessState extends ForgotPasswordStates {
   final String? success;
   ResendSuccessState({required this.success});
-
 }
+
 class ResendErrorState extends ForgotPasswordStates {
   final String? errorMassage;
   ResendErrorState({required this.errorMassage});

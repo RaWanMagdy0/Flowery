@@ -1,11 +1,9 @@
 import 'package:flowery/core/api/api_result.dart';
 import 'package:flowery/domain/repository/auth/auth_repository.dart';
 import 'package:injectable/injectable.dart';
-
-import '../../../core/api/api_result.dart';
-import '../../../domain/repository/auth/auth_repository.dart';
 import '../../data_source/remote_data_source/auth/auth_remote_data_source.dart';
-import '../../models/auth/requests/sign_up_request_model.dart';
+import '../../model/auth/requests/sign_up_request_model.dart';
+import '../../model/user_model.dart';
 
 @Injectable(as: AuthRepository)
 class AuthRepositoryImpl extends AuthRepository {
@@ -29,7 +27,7 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<Result<String?>> logIn(
+  Future<Result<UserModel?>> logIn(
       {required String email, required String password}) {
     return dataSource.logIn(password: password, email: email);
   }

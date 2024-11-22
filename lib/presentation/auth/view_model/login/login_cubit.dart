@@ -2,6 +2,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../core/api/api_result.dart';
 import '../../../../core/base/base_view_model.dart';
+import '../../../../data/model/user_model.dart';
 import '../../../../domain/use_case/auth/login_use_case.dart';
 import 'login_state.dart';
 
@@ -16,9 +17,9 @@ class LoginViewModel extends BaseViewModel<LoginScreenState> {
     var result =
         await logInUseCase.invokeLogIn(email: email, password: password);
     switch (result) {
-      case Success<String?>():
+      case Success<UserModel?>():
         emit(SuccessState(result.data));
-      case Fail<String?>():
+      case Fail<UserModel?>():
         emit(ErrorState(result.exception));
     }
   }
