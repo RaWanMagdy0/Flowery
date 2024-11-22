@@ -45,10 +45,6 @@ import '../../presentation/auth/sign_up/view_model/sign_up_cubit.dart' as _i140;
 import '../../presentation/auth/view_model/login/login_cubit.dart' as _i1004;
 import '../../presentation/best_seller/view_model/%20best_seller_view_model.dart'
     as _i265;
-import '../api/dio/dio_factory.dart' as _i763;
-import '../api/dio/dio_module.dart' as _i223;
-import '../providers/app_provider.dart' as _i1023;
-import 'di.dart' as _i913;
 import '../../presentation/home_layout/product_details/view_model/product_details_cubit.dart'
     as _i134;
 import '../../presentation/home_layout/screens/home/view_model/home_view_model.dart'
@@ -56,6 +52,7 @@ import '../../presentation/home_layout/screens/home/view_model/home_view_model.d
 import '../api/dio/dio_factory.dart' as _i763;
 import '../api/dio/dio_module.dart' as _i223;
 import '../utils/functions/providers/app_provider.dart' as _i240;
+import 'di.dart' as _i913;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -69,11 +66,7 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final dioModule = _$DioModule();
-
     final apiModule = _$ApiModule();
-    gh.factory<_i763.DioFactory>(() => _i763.DioFactory());
-    gh.singleton<_i1023.AppProvider>(() => _i1023.AppProvider());
-
     gh.factory<_i763.DioFactory>(() => _i763.DioFactory());
     gh.singleton<_i240.AppProvider>(() => _i240.AppProvider());
     gh.lazySingleton<_i361.Dio>(() => dioModule.dio);
@@ -90,16 +83,14 @@ extension GetItInjectableX on _i174.GetIt {
         _i440.HomeRemoteDataSourceImpl(apiManger: gh<_i48.HomeApiManger>()));
     gh.factory<_i839.HomeRepository>(() => _i605.HomeRepositoryImpl(
         onlineDataSource: gh<_i367.HomeRemoteDataSource>()));
-
-    gh.factory<_i372.BestSellerViewModel>(() =>
-        _i372.BestSellerViewModel(gh<_i465.BestSellerRemoteDataSource>()));
-    gh.factory<_i265.BestSellerViewModel>(() =>
-        _i265.BestSellerViewModel(gh<_i465.BestSellerRemoteDataSource>()));
-
     gh.factory<_i76.GetHomeDataUseCase>(
         () => _i76.GetHomeDataUseCase(gh<_i839.HomeRepository>()));
     gh.factory<_i728.ProductDetailsUseCase>(() =>
         _i728.ProductDetailsUseCase(repository: gh<_i839.HomeRepository>()));
+    gh.factory<_i372.BestSellerViewModel>(() =>
+        _i372.BestSellerViewModel(gh<_i465.BestSellerRemoteDataSource>()));
+    gh.factory<_i265.BestSellerViewModel>(() =>
+        _i265.BestSellerViewModel(gh<_i465.BestSellerRemoteDataSource>()));
     gh.factory<_i993.AuthRemoteDataSource>(() =>
         _i568.AuthRemoteDataSourceImpl(apiManger: gh<_i1055.ApiManger>()));
     gh.factory<_i58.HomeViewModel>(

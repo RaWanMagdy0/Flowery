@@ -1,5 +1,5 @@
 import 'package:flowery/core/api/api_result.dart';
-import 'package:flowery/data/model/auth/response/produc_details_model.dart';
+import 'package:flowery/data/model/home/produc_details_model.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../domain/entities/home/home_data_entity.dart';

@@ -25,10 +25,10 @@ class HomeOccasionItem extends StatelessWidget {
             height: 151.h,
             fit: BoxFit.cover,
           ),
-          8.verticalSpace,
+          3.verticalSpace,
           Text(
             occasionModel.name ?? '',
-            style: AppFonts.font14BlackWeight500,
+            style: AppFonts.font16BlackWeight400,
           ),
         ],
       ),

@@ -10,7 +10,6 @@ part of 'home_api_manager.dart';
 abstract class ParseErrorLogger {
   void logError(Object error, StackTrace stackTrace, RequestOptions options);
 }
-
 class _HomeApiManger implements HomeApiManger {
   _HomeApiManger(
     this._dio, {

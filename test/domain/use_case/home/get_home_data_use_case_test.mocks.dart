@@ -6,8 +6,7 @@
 import 'dart:async' as _i4;
 
 import 'package:flowery/core/api/api_result.dart' as _i5;
-import 'package:flowery/data/model/auth/response/produc_details_model.dart'
-    as _i7;
+import 'package:flowery/data/model/home/produc_details_model.dart' as _i7;
 import 'package:flowery/domain/entities/home/home_best_seller_product_entity.dart'
     as _i10;
 import 'package:flowery/domain/entities/home/home_category_entity.dart' as _i9;

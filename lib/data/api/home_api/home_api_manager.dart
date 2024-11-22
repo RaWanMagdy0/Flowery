@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flowery/data/model/auth/response/produc_details_model.dart';
+import 'package:flowery/data/model/home/produc_details_model.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/http.dart';
 

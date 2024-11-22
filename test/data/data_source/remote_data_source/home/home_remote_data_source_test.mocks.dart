@@ -6,8 +6,7 @@
 import 'dart:async' as _i4;
 
 import 'package:flowery/data/api/home_api/home_api_manager.dart' as _i3;
-import 'package:flowery/data/model/auth/response/produc_details_model.dart'
-    as _i5;
+import 'package:flowery/data/model/home/produc_details_model.dart' as _i5;
 import 'package:flowery/data/models/home/home_data_model.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 

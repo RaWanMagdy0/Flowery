@@ -10,6 +10,7 @@ class ProductDetailsEntity {
 
 class ProductEntity {
   ProductEntity({
+    this.id,
       this.title,
       this.slug, 
       this.description, 
@@ -23,7 +24,7 @@ class ProductEntity {
       this.createdAt, 
       this.updatedAt, 
       this.v, 
-      this.id,});
+      });
 
   String? id;
   String? title;

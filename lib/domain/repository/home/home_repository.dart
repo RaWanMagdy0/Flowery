@@ -1,4 +1,4 @@
-import 'package:flowery/data/model/auth/response/produc_details_model.dart';
+import 'package:flowery/data/model/home/produc_details_model.dart';
 
 import '../../../core/api/api_result.dart';
 import '../../entities/home/home_data_entity.dart';

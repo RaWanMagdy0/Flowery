@@ -163,8 +163,7 @@ class _LogInScreenState extends State<LogInScreen> {
                                 },
                                 child: Text(
                                   AppStrings.forgetPasswordText,
-                                  style: AppFonts
-                                      .font12BlackWeight400UnderlinedBlack,
+                                  style: AppFonts.font12BlackWeight400UnderlinedBlack,
                                 ))
                           ],
                         ),

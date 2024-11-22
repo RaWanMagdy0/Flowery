@@ -61,9 +61,11 @@ class HomeBestSellerList extends StatelessWidget {
                     itemCount: items.length,
                     itemBuilder: (context, index) {
                       return InkWell(
-                        onTap: () => Navigator.of(context).pushNamed(
+                        onTap: () =>
+                            Navigator.of(context).pushNamed(
                           PageRouteName.productDetails,
-                          arguments: items[index],
+                          arguments: items[index].id ,
+
                         ),
                         child: HomeBestSellerItem(
                           productModel: items[index],
