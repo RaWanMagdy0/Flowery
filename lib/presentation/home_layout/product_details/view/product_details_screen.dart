@@ -1,35 +1,40 @@
-import 'package:flowery/domain/entities/home_layout/product_details_entity.dart';
 import 'package:flowery/presentation/home_layout/product_details/view_model/product_details_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:readmore/readmore.dart';
+
 import '../../../../core/di/di.dart';
 import '../../../../core/styles/colors/app_colors.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
-import '../../../../core/utils/const/app_string.dart';
 import '../../../../core/utils/widget/custom_button.dart';
-import '../../../../domain/entities/home/home_best_seller_product_entity.dart';
 import '../view_model/product_details_states.dart';
 
 class ProductDetails extends StatelessWidget {
-  final String productId = "673e2f701159920171828164";
+  const ProductDetails({super.key});
+
+  // final String productId = "673e2f701159920171828164";
 
   @override
   Widget build(BuildContext context) {
     var viewModel = getIt.get<ProductDetailsCubit>();
-    //  final String productId = ModalRoute.of(context)?.settings.arguments as String;
+    final String productId =
+        ModalRoute.of(context)?.settings.arguments as String;
+
     return Scaffold(
       body: BlocBuilder<ProductDetailsCubit, ProductDetailsStates>(
         bloc: viewModel..getProductDetails(productId: productId),
         builder: (context, state) {
           if (state is ProductDetailsLoadingState) {
-            return Center(child: CircularProgressIndicator(color: AppColors.kPink,));
+            return Center(
+                child: CircularProgressIndicator(
+              color: AppColors.kPink,
+            ));
           } else if (state is ProductDetailsSuccessState) {
             final productDetailsEntity = state.success;
             final product = productDetailsEntity?.products?.firstWhere(
-                  (p) => p.id == productId,
+              (p) => p.id == productId,
             );
             if (product != null) {
               return SingleChildScrollView(
@@ -37,7 +42,7 @@ class ProductDetails extends StatelessWidget {
                   children: [
                     Stack(
                       children: [
-                        Container(
+                        SizedBox(
                           height: 500.h,
                           width: double.infinity,
                           child: ClipRRect(
@@ -49,11 +54,11 @@ class ProductDetails extends StatelessWidget {
                               indicatorBackgroundColor: Colors.grey,
                               isLoop: true,
                               children: product.images
-                                  ?.map((url) => Image.network(
-                                url,
-                                fit: BoxFit.contain,
-                              ))
-                                  .toList() ??
+                                      ?.map((url) => Image.network(
+                                            url,
+                                            fit: BoxFit.contain,
+                                          ))
+                                      .toList() ??
                                   [],
                             ),
                           ),
@@ -115,8 +120,10 @@ class ProductDetails extends StatelessWidget {
                             trimMode: TrimMode.Line,
                             trimCollapsedText: "Show More",
                             trimExpandedText: "Show Less",
-                            moreStyle: AppFonts.font12PinkWeight500UnderlinedPink,
-                            lessStyle: AppFonts.font12PinkWeight500UnderlinedPink,
+                            moreStyle:
+                                AppFonts.font12PinkWeight500UnderlinedPink,
+                            lessStyle:
+                                AppFonts.font12PinkWeight500UnderlinedPink,
                           ),
                           15.verticalSpace,
                           CustomButton(
@@ -136,7 +143,8 @@ class ProductDetails extends StatelessWidget {
             }
           } else if (state is ProductDetailsErrorState) {
             return Center(
-              child: Text(state.errorMessage ?? "Error loading product details"),
+              child:
+                  Text(state.errorMessage ?? "Error loading product details"),
             );
           } else {
             return Center(child: Text("Unexpected state."));

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../domain/repository/best_seller_repository_impl.dart';
 import '../../presentation/auth/forgot_password/view/widgets/email_verification_widget/email_verification.dart';
 import '../../presentation/auth/forgot_password/view/widgets/forgot_password_widget/forget_password_screen.dart';
@@ -27,8 +28,12 @@ class AppRoutes {
     switch (setting.name) {
       case PageRouteName.splash:
         return _handleMaterialPageRoute(widget: const SplashScreen());
-        case PageRouteName.productDetails:
-        return _handleMaterialPageRoute(widget: ProductDetails());
+      case PageRouteName.productDetails:
+        return MaterialPageRoute(
+          builder: (context) => ProductDetails(),
+          settings: setting,
+        );
+      // return _handleMaterialPageRoute(widget: ProductDetails());
       case PageRouteName.logIn:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -49,7 +54,7 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
             create: (context) => getIt<BestSellerViewModel>(),
-            child:  BestSellerScreen(),
+            child: BestSellerScreen(),
           ),
         );
 

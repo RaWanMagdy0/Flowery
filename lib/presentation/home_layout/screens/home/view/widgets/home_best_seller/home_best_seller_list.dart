@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flowery/core/routes/page_route_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -61,12 +63,13 @@ class HomeBestSellerList extends StatelessWidget {
                     itemCount: items.length,
                     itemBuilder: (context, index) {
                       return InkWell(
-                        onTap: () =>
-                            Navigator.of(context).pushNamed(
-                          PageRouteName.productDetails,
-                          arguments: items[index].id ,
-
-                        ),
+                        onTap: () {
+                          log('Home best seller ID Product ID: ${items[index].id}');
+                          Navigator.of(context).pushNamed(
+                            PageRouteName.productDetails,
+                            arguments: items[index].id,
+                          );
+                        },
                         child: HomeBestSellerItem(
                           productModel: items[index],
                         ),
