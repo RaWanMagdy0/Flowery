@@ -1,7 +1,7 @@
 import 'package:flowery/core/api/api_result.dart';
 import 'package:flowery/core/base/base_view_model.dart';
 import 'package:flowery/data/model/home/produc_details_model.dart';
-import 'package:flowery/domain/use_case/home_layout/product_details_use_case.dart';
+import 'package:flowery/domain/use_case/home/product_details_use_case.dart';
 import 'package:flowery/presentation/home_layout/product_details/view_model/product_details_states.dart';
 import 'package:injectable/injectable.dart';
 
