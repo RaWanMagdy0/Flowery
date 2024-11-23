@@ -132,6 +132,7 @@ class _LogInScreenState extends State<LogInScreen> {
                           labelText: AppStrings.passwordLabelText,
                           controller: _passwordController,
                           keyBordType: TextInputType.text,
+                          isPassword: true,
                           validator: (value) =>
                               MyValidators.validatePassword(value),
                         ),

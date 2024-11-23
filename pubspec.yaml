@@ -11,13 +11,12 @@ environment:
 dependencies:
   cupertino_icons: ^1.0.8
   dio: ^5.7.0
-  encrypt: ^5.0.3
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.6
   flutter_image_slideshow: ^0.1.6
   flutter_screenutil: ^5.9.3
-  # flutter_secure_storage: ^9.0.0
+  flutter_secure_storage: ^9.0.0
   get_it: ^8.0.2
   injectable: ^2.5.0
   json_annotation: ^4.9.0
