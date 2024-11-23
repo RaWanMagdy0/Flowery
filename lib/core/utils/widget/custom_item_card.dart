@@ -108,21 +108,24 @@ class FlowerCard extends StatelessWidget {
                       ],
                     ),
                   ),
-                  10.verticalSpace,
+                  SizedBox(height: 8.h),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 4.w),
                     child: Text(
                       title ?? 'Flower',
-                      style: AppFonts.font12BlackWeight400,
+                      style: TextStyle(
+                        color: textColor,
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  6.verticalSpace,
+                  SizedBox(height: 4.h),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 4.w),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Text(
                           price ?? 'EGP 0',
@@ -135,10 +138,11 @@ class FlowerCard extends StatelessWidget {
                               fontSize: 12.sp,
                               fontWeight: FontWeight.w400,
                                 decoration: TextDecoration.lineThrough,
-                              decorationColor: AppColors.kBlack
-
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                           ),
+                          SizedBox(width: 4.w),
                           Flexible(
                             child: Text(
                               '$descount%',
@@ -147,16 +151,16 @@ class FlowerCard extends StatelessWidget {
                                 fontSize: 12.sp,
                                 fontWeight: FontWeight.w400,
 
+                                fontSize: 11.sp,
                               ),
                             ),
                           ),
-
+                        ],
                       ],
                     ),
                   ),
                   const Spacer(),
                   SizedBox(
-                    height: 35.h,
                     width: double.infinity,
                     child: ElevatedButton.icon(
                       onPressed: onButtonPressed ?? () {},
@@ -164,6 +168,10 @@ class FlowerCard extends StatelessWidget {
                         backgroundColor: buttonColor,
                         foregroundColor: buttonTextColor,
                         iconColor: iconColor,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 12.w,
+                          vertical: 8.h,
+                        ),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(100.r),
                         ),
@@ -173,8 +181,8 @@ class FlowerCard extends StatelessWidget {
                         buttonText ?? "",
                         style: TextStyle(
                           color: buttonTextColor,
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w500,
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),

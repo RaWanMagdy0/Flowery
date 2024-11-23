@@ -20,8 +20,7 @@ class _BestSellerScreenState extends State<BestSellerScreen> {
   @override
   void initState() {
     super.initState();
-    _viewModel = context.read<BestSellerViewModel>();
-    _viewModel.getBestSellers();
+    context.read<BestSellerViewModel>().getBestSellers();
   }
 
   @override
@@ -81,11 +80,11 @@ class _BestSellerScreenState extends State<BestSellerScreen> {
               ),
             ),
             BestSellerLoaded(products: final products) => GridView.builder(
-              padding: EdgeInsets.all(8.w),
+              padding: EdgeInsets.all(16.w),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 0.78,
-                crossAxisSpacing: 10.w,
+                childAspectRatio: 0.7,
+                crossAxisSpacing: 16.w,
                 mainAxisSpacing: 16.h,
               ),
               itemCount: products.length,
@@ -100,7 +99,7 @@ class _BestSellerScreenState extends State<BestSellerScreen> {
                   title: product.title,
                   imageUrl: product.imageUrl,
                   price: 'EGP ${product.priceAfterDiscount}',
-                  originalPrice:product.price.toString(),
+                  originalPrice: 'EGP ${product.price}',
                   descount: '$discount',
                   descountColor: Colors.green,
                   backgroundColor: Colors.white,
@@ -118,6 +117,9 @@ class _BestSellerScreenState extends State<BestSellerScreen> {
                   onButtonPressed: () {
                     // Add to cart logic
                   },
+                  priceSize: 14.sp,
+                  onTap: () {},
+                  onButtonPressed: () {},
                 );
               },
             ),
