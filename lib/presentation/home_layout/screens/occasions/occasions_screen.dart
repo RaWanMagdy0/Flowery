@@ -64,7 +64,9 @@ class _OccasionScreenState extends State<OccasionScreen> {
                           setState(() {
                             selectedCategoryIndex = index;
                           });
-                          context.read<OccasionCubit>().selectCategory(index);
+                          context
+                              .read<OccasionCubit>()
+                              .selectCategory(state.occasions![index]);
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),

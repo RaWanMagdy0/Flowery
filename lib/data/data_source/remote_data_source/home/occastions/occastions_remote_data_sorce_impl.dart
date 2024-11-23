@@ -14,7 +14,7 @@ class OccastionsRemoteDataSorceImpl extends OccastionsRmoteDataSourcse {
   @override
   Future<Result<OccasionsResponseModel?>> GetOccasions() {
     return executeApiCall<OccasionsResponseModel?>(apiCall: () async {
-      await apiManger.occasions();
+      return await apiManger.occasions();
     });
   }
 }

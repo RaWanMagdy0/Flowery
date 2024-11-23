@@ -47,5 +47,5 @@ class OccasionCubit extends BaseViewModel<OccasionState> {
     }
   }
 
-  void selectCategory(int index) {}
+  void selectCategory(Occasions category) {}
 }
