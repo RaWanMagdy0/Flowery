@@ -15,13 +15,10 @@ class BestSellerScreen extends StatefulWidget {
 }
 
 class _BestSellerScreenState extends State<BestSellerScreen> {
-  late final BestSellerViewModel _viewModel;
-
   @override
   void initState() {
     super.initState();
-    _viewModel = context.read<BestSellerViewModel>();
-    _viewModel.getBestSellers();
+    context.read<BestSellerViewModel>().getBestSellers();
   }
 
   @override
@@ -31,35 +28,35 @@ class _BestSellerScreenState extends State<BestSellerScreen> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(70.h),
         child: AppBar(
-          title: Row(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios, color: AppColors.kBlack),
+            onPressed: () => Navigator.pop(context),
+          ),
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back_ios)),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Best Sellers',
-                    style: TextStyle(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    'Bloom with our exquisite best sellers',
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ],
+              Text(
+                'Best Sellers',
+                style: TextStyle(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.kBlack,
+                ),
+              ),
+              Text(
+                'Bloom with our exquisite best sellers',
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  color: Colors.grey,
+                ),
               ),
             ],
           ),
           backgroundColor: AppColors.kWhite,
+          elevation: 0,
         ),
       ),
       body: BlocBuilder<BestSellerViewModel, BestSellerState>(
-        bloc: _viewModel,
         builder: (context, state) {
           return switch (state) {
             BestSellerLoading() => const Center(
@@ -99,7 +96,7 @@ class _BestSellerScreenState extends State<BestSellerScreen> {
                   title: product.title,
                   imageUrl: product.imageUrl,
                   price: 'EGP ${product.priceAfterDiscount}',
-                  originalPrice: 'EGP ${product.price}',
+                  originalPrice: '${product.price}',
                   descount: '$discount',
                   descountColor: Colors.green,
                   backgroundColor: Colors.white,
@@ -108,15 +105,9 @@ class _BestSellerScreenState extends State<BestSellerScreen> {
                   width: 150.w,
                   height: 200.h,
                   titleSize: 12.sp,
-                  priceSize: 12.sp,
-                  onTap: () => Navigator.pushNamed(
-                    context,
-                    '/product-details',
-                    arguments: product.id,
-                  ),
-                  onButtonPressed: () {
-                    // Add to cart logic
-                  },
+                  priceSize: 14.sp,
+                  onTap: () {},
+                  onButtonPressed: () {},
                 );
               },
             ),

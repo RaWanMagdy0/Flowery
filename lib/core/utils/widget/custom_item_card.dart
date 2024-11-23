@@ -141,7 +141,7 @@ class FlowerCard extends StatelessWidget {
                               originalPrice!,
                               style: TextStyle(
                                 color: Colors.grey,
-                                fontSize: 10.sp,
+                                fontSize: 12.sp,
                                 decoration: TextDecoration.lineThrough,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -153,7 +153,7 @@ class FlowerCard extends StatelessWidget {
                               '$descount%',
                               style: TextStyle(
                                 color: descountColor,
-                                fontSize: 10.sp,
+                                fontSize: 11.sp,
                               ),
                             ),
                           ),
