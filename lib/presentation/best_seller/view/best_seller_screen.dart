@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../core/routes/page_route_name.dart';
 import '../../../core/styles/colors/app_colors.dart';
 import '../../../core/utils/widget/custom_item_card.dart';
 import '../../../domain/repository/best_seller_repository_impl.dart';
@@ -15,8 +16,6 @@ class BestSellerScreen extends StatefulWidget {
 }
 
 class _BestSellerScreenState extends State<BestSellerScreen> {
-  late final BestSellerViewModel _viewModel;
-
   @override
   void initState() {
     super.initState();
@@ -28,38 +27,40 @@ class _BestSellerScreenState extends State<BestSellerScreen> {
     return Scaffold(
       backgroundColor: AppColors.kLightWhite,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(70.h),
+        preferredSize: Size.fromHeight(80.h),
         child: AppBar(
-          title: Row(
+          titleSpacing: 0.0,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios_rounded, color: AppColors.kBlack),
+            onPressed: () => Navigator.pop(context),
+          ),
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back_ios)),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Best Sellers',
-                    style: TextStyle(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  5.verticalSpace,
-                  Text(
-                    'Bloom with our exquisite best sellers',
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ],
+              20.verticalSpace,
+              Text(
+                'Best Sellers',
+                style: TextStyle(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.kBlack,
+                ),
+              ),
+              5.verticalSpace,
+              Text(
+                'Bloom with our exquisite best sellers',
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  color: Colors.grey,
+                ),
               ),
             ],
           ),
-          backgroundColor: AppColors.kWhite,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
         ),
       ),
       body: BlocBuilder<BestSellerViewModel, BestSellerState>(
-        bloc: _viewModel,
         builder: (context, state) {
           return switch (state) {
             BestSellerLoading() => const Center(
@@ -83,8 +84,8 @@ class _BestSellerScreenState extends State<BestSellerScreen> {
               padding: EdgeInsets.all(16.w),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                childAspectRatio: 0.7,
-                crossAxisSpacing: 16.w,
+                childAspectRatio: 0.72,
+                crossAxisSpacing: 12.w,
                 mainAxisSpacing: 16.h,
               ),
               itemCount: products.length,
@@ -99,26 +100,21 @@ class _BestSellerScreenState extends State<BestSellerScreen> {
                   title: product.title,
                   imageUrl: product.imageUrl,
                   price: 'EGP ${product.priceAfterDiscount}',
-                  originalPrice: 'EGP ${product.price}',
+                  originalPrice: '${product.price}',
                   descount: '$discount',
                   descountColor: Colors.green,
                   backgroundColor: Colors.white,
                   buttonColor: AppColors.kPink,
                   buttonTextColor: Colors.white,
-                  width: 150.w,
-                  height: 200.h,
                   titleSize: 12.sp,
-                  priceSize: 15.sp,
-                  onTap: () => Navigator.pushNamed(
-                    context,
-                    '/product-details',
-                    arguments: product.id,
-                  ),
-                  onButtonPressed: () {
-                    // Add to cart logic
-                  },
+
                   priceSize: 14.sp,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushNamed(
+                      PageRouteName.productDetails,
+                      arguments: product.id,
+                    );
+                  },
                   onButtonPressed: () {},
                 );
               },

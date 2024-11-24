@@ -27,6 +27,9 @@ class _SplashScreenState extends State<SplashScreen>
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         _navigateToInitialRoute();
+        // Navigator.of(context).pushReplacementNamed(
+        //   PageRouteName.homeLayout,
+        // );
       }
     });
   }
@@ -34,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen>
   _navigateToInitialRoute() async {
     var token = await TokenManger.getToken();
     String initialRoute =
-        token != null ? PageRouteName.homeLayout : PageRouteName.logIn;
+    token != null ? PageRouteName.homeLayout : PageRouteName.logIn;
     if (mounted) {
       Navigator.of(context).pushReplacementNamed(
         initialRoute,

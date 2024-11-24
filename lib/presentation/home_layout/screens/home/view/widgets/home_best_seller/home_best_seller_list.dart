@@ -1,16 +1,13 @@
-import 'dart:developer';
-
-import 'package:flowery/core/routes/page_route_name.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../../core/styles/fonts/app_fonts.dart';
+import '../../../../../../../core/routes/page_route_name.dart'; // Add this import
 import '../../../../../../../domain/entities/home/home_best_seller_product_entity.dart';
 import '../../../view_model/home_view_model.dart';
 import 'home_best_seller_item.dart';
-import 'home_best_seller_loading.dart';
 
 class HomeBestSellerList extends StatelessWidget {
   const HomeBestSellerList({super.key});
@@ -20,10 +17,9 @@ class HomeBestSellerList extends StatelessWidget {
     return BlocBuilder<HomeViewModel, HomeState>(
       builder: (context, state) {
         if (state is HomeDataLoading) {
-          return HomeBestSellerLoading();
-          // return Center(
-          //   child: CupertinoActivityIndicator(),
-          // );
+          return const Center(
+            child: CupertinoActivityIndicator(),
+          );
         } else if (state is HomeDataError) {
           return Center(
             child: Text(state.message ?? ''),
@@ -46,8 +42,8 @@ class HomeBestSellerList extends StatelessWidget {
                         'Best Seller',
                         style: AppFonts.font18BlackWeight500,
                       ),
-                      InkWell(
-                        onTap: () {},
+                      GestureDetector(
+                        onTap: () => _navigateToBestSeller(context),
                         child: Text(
                           'View All',
                           style: AppFonts.font12PinkWeight500UnderlinedPink,
@@ -65,14 +61,11 @@ class HomeBestSellerList extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
-                          log('Home best seller ID Product ID: ${items[index].id}');
                           Navigator.of(context).pushNamed(
                             PageRouteName.productDetails,
                             arguments: items[index].id,
                           );
                         },
-                      return GestureDetector(
-                        onTap: () {},
                         child: HomeBestSellerItem(
                           productModel: items[index],
                         ),
@@ -84,9 +77,13 @@ class HomeBestSellerList extends StatelessWidget {
             ),
           );
         } else {
-          return SizedBox();
+          return const SizedBox();
         }
       },
     );
+  }
+
+  void _navigateToBestSeller(BuildContext context) {
+    Navigator.pushNamed(context, PageRouteName.bestSeller);
   }
 }
