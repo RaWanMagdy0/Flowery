@@ -24,7 +24,6 @@ class BottomNavBar extends StatelessWidget {
       onTap: onTap,
       items: [
         BottomNavigationBarItem(
-
           icon: const ImageIcon(AssetImage(AppImages.homeIcon)),
           label: 'Home',
         ),
@@ -45,7 +44,6 @@ class BottomNavBar extends StatelessWidget {
       unselectedItemColor: AppColors.kGray,
       unselectedLabelStyle: TextStyle(color: AppColors.kGray),
       selectedFontSize: 15.0.sp,
-      // unselectedFontSize: 12.0,
       iconSize: 22.0.sp,
     );
   }

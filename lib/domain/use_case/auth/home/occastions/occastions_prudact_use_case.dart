@@ -1,8 +1,10 @@
-import 'package:flowery/core/api/api_result.dart';
-import 'package:flowery/domain/repository/home/occastions/occastons_repository.dart';
+import 'dart:developer';
+
 import 'package:injectable/injectable.dart';
 
-import '../../../../entities/best_seller_entity.dart';
+import '../../../../../core/api/api_result.dart';
+import '../../../../entities/home_layout/product_details_entity.dart';
+import '../../../../repository/home/occastions/occastons_repository.dart';
 
 @injectable
 class GetPrudactUseCase {
@@ -10,16 +12,19 @@ class GetPrudactUseCase {
 
   GetPrudactUseCase(this._repository);
 
-  Future<Result<List<BestSeller?>>> invoke(String id) async {
+  Future<Result<List<ProductEntity?>>> invoke(String id) async {
     final result = await _repository.getOccasionsPrudact();
     switch (result) {
       case Success():
-        final products = result.data?.map((model) {
-              if (model.id == id) {
-                return model;
-              }
-            }).toList() ??
-            [];
+        log('products: ${result.data}', name: 'Occasions prodcuts usecase');
+
+        List<ProductEntity>? products = [];
+
+        for (var model in result.data!) {
+          products.add(model);
+        }
+        log('products: ${result.data}',
+            name: 'Occasions prodcuts usecase -- products');
         return Success(data: products);
       case Fail():
         return Fail(exception: result.exception);

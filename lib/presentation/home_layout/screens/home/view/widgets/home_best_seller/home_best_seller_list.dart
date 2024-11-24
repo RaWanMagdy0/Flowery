@@ -58,7 +58,13 @@ class HomeBestSellerList extends StatelessWidget {
                     itemCount: items.length,
                     itemBuilder: (context, index) {
                       return GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            PageRouteName.productDetails,
+                            arguments: items[index].id,
+                          );
+                        },
                         child: HomeBestSellerItem(
                           productModel: items[index],
                         ),

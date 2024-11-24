@@ -1,7 +1,8 @@
 class ProductDetailsModel {
   ProductDetailsModel({
-      this.message, 
-      this.products,});
+    this.message,
+    this.products,
+  });
 
   ProductDetailsModel.fromJson(dynamic json) {
     message = json['message'];
@@ -23,25 +24,25 @@ class ProductDetailsModel {
     }
     return map;
   }
-
 }
 
 class ProductModel {
   ProductModel({
-      this.title,
-      this.slug, 
-      this.description, 
-      this.imgCover, 
-      this.images, 
-      this.price, 
-      this.priceAfterDiscount, 
-      this.quantity, 
-      this.category, 
-      this.occasion, 
-      this.createdAt, 
-      this.updatedAt, 
-      this.v, 
-      this.id,});
+    this.title,
+    this.slug,
+    this.description,
+    this.imgCover,
+    this.images,
+    this.price,
+    this.priceAfterDiscount,
+    this.quantity,
+    this.category,
+    this.occasion,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+    this.id,
+  });
 
   ProductModel.fromJson(dynamic json) {
     id = json['_id'];
@@ -92,5 +93,4 @@ class ProductModel {
     map['__v'] = v;
     return map;
   }
-
 }

@@ -102,8 +102,9 @@ class _EmailVerificationState extends State<EmailVerification> {
                               return Text(
                                 value ?? " Resend",
                                 style: isEnabled
-                                    ? AppFonts.font16PinkWeight400underline
-                                    : AppFonts.font16PinkWeight400underline,
+                                    ? AppFonts.font16PinkWeight400UnderlinedPink
+                                    : AppFonts
+                                        .font16PinkWeight400UnderlinedPink,
                               );
                             },
                           ),

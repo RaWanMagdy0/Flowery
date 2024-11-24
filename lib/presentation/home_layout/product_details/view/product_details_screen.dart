@@ -14,8 +14,6 @@ import '../view_model/product_details_states.dart';
 class ProductDetails extends StatelessWidget {
   const ProductDetails({super.key});
 
-  // final String productId = "673e2f701159920171828164";
-
   @override
   Widget build(BuildContext context) {
     var viewModel = getIt.get<ProductDetailsCubit>();

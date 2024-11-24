@@ -67,7 +67,6 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   padding: const EdgeInsets.all(8.0),
                   child: Form(
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    // onChanged: () => viewModel.updateValidationState(),
                     key: viewModel.formKey,
                     child: CustomTextFormField(
                       hintText: AppStrings.emailHintText,

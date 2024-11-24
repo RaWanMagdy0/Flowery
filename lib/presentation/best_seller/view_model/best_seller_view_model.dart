@@ -1,11 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../core/api/api_result.dart';
-import '../../data/data_source/remote_data_source/best_seller_remote_data_source.dart';
-import '../../data/models/best_seller_model.dart';
-import '../../presentation/best_seller/view_model/best_seller_state.dart';
-import '../entities/best_seller_entity.dart';
+import '../../../core/api/api_result.dart';
+import '../../../data/data_source/remote_data_source/best_seller_remote_data_source.dart';
+import '../../../data/models/best_seller_model.dart';
+import '../../../domain/entities/best_seller_entity.dart';
+import 'best_seller_state.dart';
 
 @injectable
 class BestSellerViewModel extends Cubit<BestSellerState> {
@@ -32,6 +32,14 @@ class BestSellerViewModel extends Cubit<BestSellerState> {
           [];
 
       emit(BestSellerLoaded(products));
-    } else if (result is Fail) {}
+    } else if (result is Fail<List<BestSellerModel>>) {
+      final failResult = result;
+      emit(
+          BestSellerError(failResult.exception?.toString() ?? 'Unknown error'));
+    } else if (result is Fail<List<BestSellerModel>>) {
+      final failResult = result;
+      emit(
+          BestSellerError(failResult.exception?.toString() ?? 'Unknown error'));
+    }
   }
 }

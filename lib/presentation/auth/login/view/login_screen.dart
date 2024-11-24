@@ -76,6 +76,7 @@ class _LogInScreenState extends State<LogInScreen> {
                         }
                       case ErrorState():
                         {
+                          Navigator.of(context).pop();
                           var exception = state.exception;
                           String? message = AppStrings.somethingWentWrong;
                           if (exception is NoInternetException) {
@@ -90,6 +91,7 @@ class _LogInScreenState extends State<LogInScreen> {
                         }
                       case SuccessState():
                         {
+                          Navigator.of(context).pop();
                           AppDialogs.showSuccessDialog(
                             context: context,
                             message: AppStrings.userLoggedInSuccessfully,

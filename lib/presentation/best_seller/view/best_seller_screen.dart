@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../core/routes/page_route_name.dart';
 import '../../../core/styles/colors/app_colors.dart';
 import '../../../core/utils/widget/custom_item_card.dart';
-import '../../../domain/repository/best_seller_repository_impl.dart';
 import '../view_model/best_seller_state.dart';
+import '../view_model/best_seller_view_model.dart';
 
 class BestSellerScreen extends StatefulWidget {
   const BestSellerScreen({super.key});
@@ -28,9 +29,15 @@ class _BestSellerScreenState extends State<BestSellerScreen> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(70.h),
         child: AppBar(
+          // TODO: use leading instead of icon button
+          automaticallyImplyLeading: false,
           title: Row(
             children: [
-              IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back_ios)),
+              IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(Icons.arrow_back_ios)),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -110,12 +117,10 @@ class _BestSellerScreenState extends State<BestSellerScreen> {
                     priceSize: 15.sp,
                     onTap: () => Navigator.pushNamed(
                       context,
-                      '/product-details',
+                      PageRouteName.productDetails,
                       arguments: product.id,
                     ),
-                    onButtonPressed: () {
-                      // Add to cart logic
-                    },
+                    onButtonPressed: () {},
                   );
                 },
               ),

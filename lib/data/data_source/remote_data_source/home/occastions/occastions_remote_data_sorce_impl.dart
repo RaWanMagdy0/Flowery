@@ -1,10 +1,13 @@
-import 'package:flowery/core/api/api_result.dart';
-import 'package:flowery/core/api/execute_api_call.dart';
-import 'package:flowery/data/api/home_api/home_api_manager.dart';
-import 'package:flowery/data/data_source/remote_data_source/home/occastions/occastions_emote_data_sourcse.dart';
-import 'package:flowery/data/models/best_seller_model.dart';
-import 'package:flowery/data/models/occasions/occasions_response_model.dart';
+import 'dart:developer';
+
 import 'package:injectable/injectable.dart';
+
+import '../../../../../core/api/api_result.dart';
+import '../../../../../core/api/execute_api_call.dart';
+import '../../../../api/home_api/home_api_manager.dart';
+import '../../../../model/home/produc_details_model.dart';
+import '../../../../models/occasions/occasions_response_model.dart';
+import 'occastions_emote_data_sourcse.dart';
 
 @Injectable(as: OccastionsRmoteDataSourcse)
 class OccastionsRemoteDataSorceImpl extends OccastionsRmoteDataSourcse {
@@ -13,18 +16,19 @@ class OccastionsRemoteDataSorceImpl extends OccastionsRmoteDataSourcse {
   OccastionsRemoteDataSorceImpl({required this.apiManger});
 
   @override
-  Future<Result<OccasionsResponseModel?>> GetOccasions() {
+  Future<Result<OccasionsResponseModel?>> getOccasions() {
     return executeApiCall<OccasionsResponseModel?>(apiCall: () async {
       return await apiManger.occasions();
     });
   }
 
   @override
-  Future<Result<List<BestSellerModel>>> getOccasionsPrudact() {
+  Future<Result<List<ProductModel>?>> getOccasionsPrudact() {
     return executeApiCall(apiCall: () async {
       final response = await apiManger.getOccasionsPrudact();
-      final List<dynamic> data = response['products'];
-      return data.map((json) => BestSellerModel.fromJson(json)).toList();
+      final data = response.products;
+      log('data: $data', name: 'OccastionsRemoteDataSorceImpl');
+      return data!;
     });
   }
 }

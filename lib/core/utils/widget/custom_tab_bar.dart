@@ -1,7 +1,8 @@
-import 'package:flowery/core/styles/colors/app_colors.dart';
-import 'package:flowery/core/styles/fonts/app_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../styles/colors/app_colors.dart';
+import '../../styles/fonts/app_fonts.dart';
 
 class TabBarWidget extends StatelessWidget {
   final List<String> tabTitles;
@@ -16,8 +17,8 @@ class TabBarWidget extends StatelessWidget {
   final TextScaler? textScale;
   final double? dividerHeight;
 
-  TabBarWidget({
-    Key? key,
+  const TabBarWidget({
+    super.key,
     required this.tabTitles,
     required this.tabViews,
     this.selectedTextStyle,

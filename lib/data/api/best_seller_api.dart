@@ -1,26 +1,18 @@
 import 'package:dio/dio.dart';
-import 'package:retrofit/http.dart';
+import 'package:injectable/injectable.dart';
+import 'package:retrofit/retrofit.dart';
 
 import '../../core/api/api_const.dart';
+import '../models/best_seller_response_model.dart';
 
+part 'best_seller_api.g.dart';
+
+@lazySingleton
 @RestApi(baseUrl: ApiConstants.baseUrl)
 abstract class BestSellerApi {
-  factory BestSellerApi(Dio dio, {String baseUrl}) = BestSellerApiImpl;
+  @factoryMethod
+  factory BestSellerApi(Dio dio) = _BestSellerApi;
 
-  @GET('api/v1/best-seller')
-  Future<Map<String, dynamic>> getBestSellers();
-}
-
-class BestSellerApiImpl implements BestSellerApi {
-  final Dio _dio;
-  final String baseUrl;
-
-  BestSellerApiImpl(this._dio, {String? baseUrl})
-      : baseUrl = baseUrl ?? ApiConstants.baseUrl;
-
-  @override
-  Future<Map<String, dynamic>> getBestSellers() async {
-    final response = await _dio.get('${baseUrl}api/v1/best-seller');
-    return response.data as Map<String, dynamic>;
-  }
+  @GET(ApiConstants.getBestSeller)
+  Future<BestSellerResponseModel> getBestSellers();
 }

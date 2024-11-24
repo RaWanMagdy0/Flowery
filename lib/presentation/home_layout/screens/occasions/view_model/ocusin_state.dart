@@ -1,22 +1,5 @@
-// sealed class OccasionState {}
-
-// class InitialState extends OccasionState {}
-
-// class OccasionLoadingState extends OccasionState {}
-
-// class OccasionErrorState extends OccasionState {
-//   Exception? exception;
-
-//   OccasionErrorState(this.exception);
-// }
-
-// class OccasionSuccessState extends OccasionState {
-//   String? string;
-//   OccasionSuccessState(this.string);
-// }
-
 import '../../../../../data/models/occasions/occasions_response_model.dart';
-import '../../../../../domain/entities/best_seller_entity.dart';
+import '../../../../../domain/entities/home_layout/product_details_entity.dart';
 
 abstract class OccasionState {}
 
@@ -45,7 +28,7 @@ class GetOccasionPrudactErrorState extends OccasionState {
 }
 
 class GetOccasionPrudactSuccessState extends OccasionState {
-  final List<BestSeller?> prudact;
+  final List<ProductEntity?>? prudact;
 
   GetOccasionPrudactSuccessState(this.prudact);
 }

@@ -1,7 +1,8 @@
 class ForgetPasswordModel {
   ForgetPasswordModel({
-      this.message, 
-      this.info,});
+    this.message,
+    this.info,
+  });
 
   ForgetPasswordModel.fromJson(dynamic json) {
     message = json['message'];
@@ -16,5 +17,4 @@ class ForgetPasswordModel {
     map['info'] = info;
     return map;
   }
-
 }

@@ -1,8 +1,8 @@
-import 'package:flowery/data/models/occasions/occasions_response_model.dart';
-import 'package:flowery/domain/repository/home/occastions/occastons_repository.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../core/api/api_result.dart';
+import '../../../../../data/models/occasions/occasions_response_model.dart';
+import '../../../../repository/home/occastions/occastons_repository.dart';
 
 @Injectable()
 class OccasionsUseCase {
@@ -11,6 +11,6 @@ class OccasionsUseCase {
   OccasionsUseCase(this.occasionsRepository);
 
   Future<Result<List<Occasions>?>> invoke() {
-    return occasionsRepository.GetOccasions();
+    return occasionsRepository.getOccasions();
   }
 }

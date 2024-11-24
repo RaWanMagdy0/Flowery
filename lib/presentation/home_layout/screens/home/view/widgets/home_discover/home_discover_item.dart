@@ -48,7 +48,6 @@ class HomeDiscoverItem extends StatelessWidget {
                 discoveryModel.title ?? '',
                 style: AppFonts.font14LightWhiteWeight500,
               ),
-             // 6.verticalSpace,
               CustomButton(
                 onPressed: () {},
                 borderColor: AppColors.kWhite,
