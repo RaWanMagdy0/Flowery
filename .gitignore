@@ -46,7 +46,7 @@ app.*.map.json
 
 # Dart generated files
 *.g.dart
-*.config.dar
+*.config.dart
 *.mocks.dart
 
 #ignore coverage

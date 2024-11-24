@@ -7,6 +7,7 @@ import '../../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../../domain/entities/home/home_best_seller_product_entity.dart';
 import '../../../view_model/home_view_model.dart';
 import 'home_best_seller_item.dart';
+import 'home_best_seller_loading.dart';
 
 class HomeBestSellerList extends StatelessWidget {
   const HomeBestSellerList({super.key});
@@ -16,9 +17,7 @@ class HomeBestSellerList extends StatelessWidget {
     return BlocBuilder<HomeViewModel, HomeState>(
       builder: (context, state) {
         if (state is HomeDataLoading) {
-          return const Center(
-            child: CupertinoActivityIndicator(),
-          );
+          return HomeBestSellerLoading();
         } else if (state is HomeDataError) {
           return Center(
             child: Text(state.message ?? ''),
