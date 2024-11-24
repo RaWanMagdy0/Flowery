@@ -44,6 +44,14 @@ class AppRoutes {
           ),
         );
 
+      case PageRouteName.bestSeller:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<BestSellerViewModel>(),
+            child: BestSellerScreen(),
+          ),
+        );
+
       case PageRouteName.forgetPassword:
         createForgetPassword();
 

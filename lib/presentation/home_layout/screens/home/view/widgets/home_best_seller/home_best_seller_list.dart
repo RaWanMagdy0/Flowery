@@ -7,7 +7,6 @@ import '../../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../../domain/entities/home/home_best_seller_product_entity.dart';
 import '../../../view_model/home_view_model.dart';
 import 'home_best_seller_item.dart';
-import 'home_best_seller_loading.dart';
 
 class HomeBestSellerList extends StatelessWidget {
   const HomeBestSellerList({super.key});
@@ -17,10 +16,9 @@ class HomeBestSellerList extends StatelessWidget {
     return BlocBuilder<HomeViewModel, HomeState>(
       builder: (context, state) {
         if (state is HomeDataLoading) {
-          return HomeBestSellerLoading();
-          // return Center(
-          //   child: CupertinoActivityIndicator(),
-          // );
+          return const Center(
+            child: CupertinoActivityIndicator(),
+          );
         } else if (state is HomeDataError) {
           return Center(
             child: Text(state.message ?? ''),
@@ -43,8 +41,8 @@ class HomeBestSellerList extends StatelessWidget {
                         'Best Seller',
                         style: AppFonts.font18BlackWeight500,
                       ),
-                      InkWell(
-                        onTap: () {},
+                      GestureDetector(
+                        onTap: () => _navigateToBestSeller(context),
                         child: Text(
                           'View All',
                           style: AppFonts.font12PinkWeight500UnderlinedPink,
@@ -60,11 +58,8 @@ class HomeBestSellerList extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     itemCount: items.length,
                     itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () => Navigator.of(context).pushNamed(
-                          PageRouteName.productDetails,
-                          arguments: items[index],
-                        ),
+                      return GestureDetector(
+                        onTap: () {},
                         child: HomeBestSellerItem(
                           productModel: items[index],
                         ),
@@ -76,9 +71,13 @@ class HomeBestSellerList extends StatelessWidget {
             ),
           );
         } else {
-          return SizedBox();
+          return const SizedBox();
         }
       },
     );
+  }
+
+  void _navigateToBestSeller(BuildContext context) {
+    Navigator.pushNamed(context, PageRouteName.bestSeller);
   }
 }

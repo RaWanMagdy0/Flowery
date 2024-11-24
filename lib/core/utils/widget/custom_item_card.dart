@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FlowerCard extends StatelessWidget {
   final String? title;
@@ -56,136 +57,142 @@ class FlowerCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        width: width,
-        height: height,
-        padding: padding,
-        decoration: BoxDecoration(
-          color: backgroundColor,
-          borderRadius: borderRadius,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              spreadRadius: 1,
-              blurRadius: 4,
-              offset: const Offset(0, 2),
-            ),
-          ],
-        ),
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: constraints.maxHeight * 0.5,
-                  child: Stack(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.05),
-                          borderRadius: BorderRadius.circular(8),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 4.w),
+        child: Container(
+          width: width?.w,
+          height: height?.h,
+          padding: EdgeInsets.all(8.w),
+          decoration: BoxDecoration(
+            color: backgroundColor,
+            borderRadius: BorderRadius.circular(12.r),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.2),
+                spreadRadius: 1.r,
+                blurRadius: 4.r,
+                offset: Offset(0, 2.h),
+              ),
+            ],
+          ),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: constraints.maxHeight * 0.5,
+                    child: Stack(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.05),
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
+                          child: Center(
+                            child: imageUrl != null
+                                ? ClipRRect(
+                              borderRadius: BorderRadius.circular(8.r),
+                              child: Image.network(
+                                imageUrl!,
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                                height: double.infinity,
+                              ),
+                            )
+                                : Icon(Icons.local_florist, size: 40.sp),
+                          ),
                         ),
-                        child: Center(
-                          child: imageUrl != null
-                              ? ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Image.network(
-                              imageUrl!,
-                              fit: BoxFit.cover,
-                              width: double.infinity,
-                              height: double.infinity,
-                            ),
-                          )
-                              : const Icon(Icons.local_florist, size: 40),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 20,
+                      ],
                     ),
-                    Text(
+                  ),
+                  SizedBox(height: 8.h),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 4.w),
+                    child: Text(
                       title ?? 'Flower',
                       style: TextStyle(
                         color: textColor,
-                        fontSize: titleSize,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w500,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                  ],
-                ),
-                const SizedBox(height: 4),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 20,
+                  ),
+                  SizedBox(height: 4.h),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 4.w),
+                    child: Row(
+                      children: [
+                        Text(
+                          price ?? 'EGP 0',
+                          style: TextStyle(
+                            color: priceColor,
+                            fontSize: priceSize?.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        if (originalPrice != null) ...[
+                          SizedBox(width: 8.w),
+                          Flexible(
+                            fit: FlexFit.tight,
+                            child: Text(
+                              originalPrice!,
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 12.sp,
+                                decoration: TextDecoration.lineThrough,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 4.w),
+                          Flexible(
+                            child: Text(
+                              '$descount%',
+                              style: TextStyle(
+                                color: descountColor,
+                                fontSize: 11.sp,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ],
                     ),
-                    Text(
-                      price ?? 'EGP 0',
-                      style: TextStyle(
-                        color: priceColor,
-                        fontSize: priceSize,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    if (originalPrice != null) ...[
-                      const SizedBox(width: 8),
-                      Text(
-                        originalPrice!,
-                        style: const TextStyle(
-                          color: Colors.grey,
-                          fontSize: 12,
-                          decoration: TextDecoration.lineThrough,
+                  ),
+                  const Spacer(),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton.icon(
+                      onPressed: onButtonPressed ?? () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: buttonColor,
+                        foregroundColor: buttonTextColor,
+                        iconColor: iconColor,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 12.w,
+                          vertical: 8.h,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(100.r),
                         ),
                       ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Text(
-                        '$descount%',
-                        style: TextStyle(color: descountColor),
-                      ),
-                    ],
-                  ],
-                ),
-                const Spacer(), // This will push the button to the bottom
-                SizedBox(
-                  width: double.infinity, // Make button full width
-                  child: ElevatedButton.icon(
-                    onPressed: onButtonPressed ?? () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: buttonColor,
-                      foregroundColor: buttonTextColor,
-                      iconColor: iconColor,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 8,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                    ),
-                    icon: Icon(buttonIcon, size: 18),
-                    label: Text(
-                      buttonText ?? "",
-                      style: TextStyle(
-                        color: buttonTextColor,
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
+                      icon: Icon(buttonIcon, size: 18.sp),
+                      label: Text(
+                        buttonText ?? "",
+                        style: TextStyle(
+                          color: buttonTextColor,
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            );
-          },
+                ],
+              );
+            },
+          ),
         ),
       ),
     );
