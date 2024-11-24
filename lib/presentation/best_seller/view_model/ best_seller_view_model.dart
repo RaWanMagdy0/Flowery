@@ -26,11 +26,17 @@ class BestSellerViewModel extends Cubit<BestSellerState> {
                     imageUrl: model.imageUrl,
                     price: model.price,
                     priceAfterDiscount: model.priceAfterDiscount,
+                    occasionid: model.occasionid,
                   ))
               .toList() ??
           [];
 
       emit(BestSellerLoaded(products));
+    } else if (result is Fail<List<BestSellerModel>>) {
+      // Properly type the Fail case
+      final failResult = result;
+      emit(
+          BestSellerError(failResult.exception?.toString() ?? 'Unknown error'));
     } else if (result is Fail<List<BestSellerModel>>) {
       // Properly type the Fail case
       final failResult = result;

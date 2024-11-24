@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flowery/data/models/occasions/occasions_response_model.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -20,4 +21,10 @@ abstract class HomeApiManger {
   @GET(ApiConstants.productDetailsApi)
   Future<ProductDetailsModel?> getProductDetails(
       @Path("productId") String productId);
+
+  @GET(ApiConstants.occasionsApi)
+  Future<OccasionsResponseModel> occasions();
+
+  @GET('api/v1/products')
+  Future<Map<String, >> getOccasionsPrudact();
 }

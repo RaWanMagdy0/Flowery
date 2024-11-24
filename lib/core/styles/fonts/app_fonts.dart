@@ -158,4 +158,11 @@ class AppFonts {
     decoration: TextDecoration.underline,
     decorationColor: AppColors.kPink,
   );
+
+  static TextStyle font16GreyWeight400 = TextStyle(
+      color: AppColors.kPink,
+      decoration: TextDecoration.underline,
+      decorationColor: Colors.pinkAccent,
+      fontWeight: FontWeight.w400,
+      fontSize: 16.sp);
 }

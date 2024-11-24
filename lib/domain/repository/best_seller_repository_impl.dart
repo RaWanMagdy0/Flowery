@@ -26,6 +26,7 @@ class BestSellerViewModel extends Cubit<BestSellerState> {
                     imageUrl: model.imageUrl,
                     price: model.price,
                     priceAfterDiscount: model.priceAfterDiscount,
+                    occasionid: model.occasionid,
                   ))
               .toList() ??
           [];
