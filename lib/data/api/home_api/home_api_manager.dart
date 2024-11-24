@@ -24,4 +24,7 @@ abstract class HomeApiManger {
 
   @GET(ApiConstants.occasionsApi)
   Future<OccasionsResponseModel> occasions();
+
+  @GET('api/v1/products')
+  Future<Map<String, >> getOccasionsPrudact();
 }

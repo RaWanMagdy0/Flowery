@@ -19,18 +19,24 @@ class BestSellerViewModel extends Cubit<BestSellerState> {
     final result = await _dataSource.getBestSellers();
 
     if (result is Success<List<BestSellerModel>>) {
-      final products = result.data?.map((model) => BestSeller(
-        id: model.id,
-        title: model.title,
-        imageUrl: model.imageUrl,
-        price: model.price,
-        priceAfterDiscount: model.priceAfterDiscount,
-      )).toList() ?? [];
+      final products = result.data
+              ?.map((model) => BestSeller(
+                    id: model.id,
+                    title: model.title,
+                    imageUrl: model.imageUrl,
+                    price: model.price,
+                    priceAfterDiscount: model.priceAfterDiscount,
+                    occasionid: model.occasionid,
+                  ))
+              .toList() ??
+          [];
 
       emit(BestSellerLoaded(products));
-    } else if (result is Fail<List<BestSellerModel>>) { // Properly type the Fail case
+    } else if (result is Fail<List<BestSellerModel>>) {
+      // Properly type the Fail case
       final failResult = result as Fail<List<BestSellerModel>>;
-      emit(BestSellerError(failResult.exception?.toString() ?? 'Unknown error'));
+      emit(
+          BestSellerError(failResult.exception?.toString() ?? 'Unknown error'));
     }
   }
 }

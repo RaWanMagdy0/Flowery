@@ -26,13 +26,16 @@ import 'package:flowery/data/models/occasions/occasions_response_model.dart';
 import 'package:flowery/domain/use_case/auth/home/occastions/occastions_use_case.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../../domain/use_case/auth/home/occastions/occastions_prudact_use_case.dart';
 import 'ocusin_state.dart';
 
 @injectable
 class OccasionCubit extends BaseViewModel<OccasionState> {
   final OccasionsUseCase occasionsUseCase;
+  final GetPrudactUseCase getPrudactUseCase;
 
-  OccasionCubit(this.occasionsUseCase) : super(InitialState());
+  OccasionCubit(this.occasionsUseCase, this.getPrudactUseCase)
+      : super(InitialState());
 
   Future<void> loadFlowers() async {
     emit(OccasionLoadingState());
@@ -47,5 +50,16 @@ class OccasionCubit extends BaseViewModel<OccasionState> {
     }
   }
 
-  void selectCategory(Occasions category) {}
+  void selectCategory(Occasions category) async {
+    emit(GetOccasionPrudactLoadingState());
+    var result = await getPrudactUseCase.invoke(category.id!);
+    switch (result) {
+      case Success():
+        print(result.data?.length);
+        emit(GetOccasionPrudactSuccessState(result.data ?? []));
+
+      case Fail():
+        emit(GetOccasionPrudactErrorState(result.exception));
+    }
+  }
 }

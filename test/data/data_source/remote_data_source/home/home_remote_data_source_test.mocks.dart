@@ -3,12 +3,14 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
-import 'package:flowery/data/api/home_api/home_api_manager.dart' as _i3;
+import 'package:flowery/data/api/home_api/home_api_manager.dart' as _i4;
 import 'package:flowery/data/model/auth/response/produc_details_model.dart'
-    as _i5;
+    as _i6;
 import 'package:flowery/data/models/home/home_data_model.dart' as _i2;
+import 'package:flowery/data/models/occasions/occasions_response_model.dart'
+    as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -34,36 +36,73 @@ class _FakeHomeDataModel_0 extends _i1.SmartFake implements _i2.HomeDataModel {
         );
 }
 
+class _FakeOccasionsResponseModel_1 extends _i1.SmartFake
+    implements _i3.OccasionsResponseModel {
+  _FakeOccasionsResponseModel_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [HomeApiManger].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockHomeApiManger extends _i1.Mock implements _i3.HomeApiManger {
+class MockHomeApiManger extends _i1.Mock implements _i4.HomeApiManger {
   MockHomeApiManger() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<_i2.HomeDataModel> getHomeData() => (super.noSuchMethod(
+  _i5.Future<_i2.HomeDataModel> getHomeData() => (super.noSuchMethod(
         Invocation.method(
           #getHomeData,
           [],
         ),
-        returnValue: _i4.Future<_i2.HomeDataModel>.value(_FakeHomeDataModel_0(
+        returnValue: _i5.Future<_i2.HomeDataModel>.value(_FakeHomeDataModel_0(
           this,
           Invocation.method(
             #getHomeData,
             [],
           ),
         )),
-      ) as _i4.Future<_i2.HomeDataModel>);
+      ) as _i5.Future<_i2.HomeDataModel>);
 
   @override
-  _i4.Future<_i5.ProductDetailsModel?> getProductDetails(String? productId) =>
+  _i5.Future<_i6.ProductDetailsModel?> getProductDetails(String? productId) =>
       (super.noSuchMethod(
         Invocation.method(
           #getProductDetails,
           [productId],
         ),
-        returnValue: _i4.Future<_i5.ProductDetailsModel?>.value(),
-      ) as _i4.Future<_i5.ProductDetailsModel?>);
+        returnValue: _i5.Future<_i6.ProductDetailsModel?>.value(),
+      ) as _i5.Future<_i6.ProductDetailsModel?>);
+
+  @override
+  _i5.Future<_i3.OccasionsResponseModel> occasions() => (super.noSuchMethod(
+        Invocation.method(
+          #occasions,
+          [],
+        ),
+        returnValue: _i5.Future<_i3.OccasionsResponseModel>.value(
+            _FakeOccasionsResponseModel_1(
+          this,
+          Invocation.method(
+            #occasions,
+            [],
+          ),
+        )),
+      ) as _i5.Future<_i3.OccasionsResponseModel>);
+
+  @override
+  _i5.Future<Map<String, dynamic>> getOccasionsPrudact() => (super.noSuchMethod(
+        Invocation.method(
+          #getOccasionsPrudact,
+          [],
+        ),
+        returnValue:
+            _i5.Future<Map<String, dynamic>>.value(<String, dynamic>{}),
+      ) as _i5.Future<Map<String, dynamic>>);
 }

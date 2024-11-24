@@ -16,6 +16,7 @@
 // }
 
 import '../../../../../data/models/occasions/occasions_response_model.dart';
+import '../../../../../domain/entities/best_seller_entity.dart';
 
 abstract class OccasionState {}
 
@@ -33,4 +34,18 @@ class OccasionSuccessState extends OccasionState {
   final List<Occasions>? occasions;
 
   OccasionSuccessState(this.occasions);
+}
+
+class GetOccasionPrudactLoadingState extends OccasionState {}
+
+class GetOccasionPrudactErrorState extends OccasionState {
+  final Exception? exception;
+
+  GetOccasionPrudactErrorState(this.exception);
+}
+
+class GetOccasionPrudactSuccessState extends OccasionState {
+  final List<BestSeller?> prudact;
+
+  GetOccasionPrudactSuccessState(this.prudact);
 }

@@ -30,8 +30,8 @@ import '../../data/data_source/remote_data_source/home/occastions/occastions_emo
 import '../../data/data_source/remote_data_source/home/occastions/occastions_remote_data_sorce_impl.dart'
     as _i948;
 import '../../data/repository/auth/auth_repository_impl.dart' as _i392;
-import '../../data/repository/home/Occasions/occasions_repository.dart' as _i8;
 import '../../data/repository/home/home_repository_impl.dart' as _i605;
+import '../../data/repository/home/Occasions/occasions_repository.dart' as _i8;
 import '../../domain/repository/auth/auth_repository.dart' as _i912;
 import '../../domain/repository/best_seller_repository.dart' as _i40;
 import '../../domain/repository/best_seller_repository_impl.dart' as _i372;
@@ -40,6 +40,8 @@ import '../../domain/repository/home/occastions/occastons_repository.dart'
     as _i1;
 import '../../domain/use_case/%20get_best_sellers_use_case.dart' as _i277;
 import '../../domain/use_case/auth/forgot_password_use_case.dart' as _i120;
+import '../../domain/use_case/auth/home/occastions/occastions_prudact_use_case.dart'
+    as _i391;
 import '../../domain/use_case/auth/home/occastions/occastions_use_case.dart'
     as _i1068;
 import '../../domain/use_case/auth/login_use_case.dart' as _i408;
@@ -58,11 +60,10 @@ import '../../presentation/home_layout/product_details/view_model/product_detail
     as _i134;
 import '../../presentation/home_layout/screens/home/view_model/home_view_model.dart'
     as _i58;
-import '../api/dio/dio_factory.dart' as _i763;
+import '../../presentation/home_layout/screens/occasions/view_model/ocusin_cubit.dart'
+    as _i498;
 import '../api/dio/dio_factory.dart' as _i763;
 import '../api/dio/dio_module.dart' as _i223;
-import '../api/dio/dio_module.dart' as _i223;
-import '../providers/app_provider.dart' as _i1023;
 import '../utils/functions/providers/app_provider.dart' as _i240;
 import 'di.dart' as _i913;
 
@@ -78,11 +79,7 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final dioModule = _$DioModule();
-
     final apiModule = _$ApiModule();
-    gh.factory<_i763.DioFactory>(() => _i763.DioFactory());
-    gh.singleton<_i1023.AppProvider>(() => _i1023.AppProvider());
-
     gh.factory<_i763.DioFactory>(() => _i763.DioFactory());
     gh.singleton<_i240.AppProvider>(() => _i240.AppProvider());
     gh.lazySingleton<_i361.Dio>(() => dioModule.dio);
@@ -95,36 +92,45 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i277.GetBestSellersUseCase(gh<_i40.BestSellerRepository>()));
     gh.factory<_i465.BestSellerRemoteDataSource>(
         () => _i465.BestSellerRemoteDataSource(gh<_i513.BestSellerApi>()));
+    gh.factory<_i1000.OccastionsRmoteDataSourcse>(() =>
+        _i948.OccastionsRemoteDataSorceImpl(
+            apiManger: gh<_i48.HomeApiManger>()));
     gh.factory<_i367.HomeRemoteDataSource>(() =>
         _i440.HomeRemoteDataSourceImpl(apiManger: gh<_i48.HomeApiManger>()));
     gh.factory<_i839.HomeRepository>(() => _i605.HomeRepositoryImpl(
         onlineDataSource: gh<_i367.HomeRemoteDataSource>()));
-
-    gh.factory<_i372.BestSellerViewModel>(() =>
-        _i372.BestSellerViewModel(gh<_i465.BestSellerRemoteDataSource>()));
-    gh.factory<_i265.BestSellerViewModel>(() =>
-        _i265.BestSellerViewModel(gh<_i465.BestSellerRemoteDataSource>()));
-
     gh.factory<_i76.GetHomeDataUseCase>(
         () => _i76.GetHomeDataUseCase(gh<_i839.HomeRepository>()));
     gh.factory<_i728.ProductDetailsUseCase>(() =>
         _i728.ProductDetailsUseCase(repository: gh<_i839.HomeRepository>()));
+    gh.factory<_i372.BestSellerViewModel>(() =>
+        _i372.BestSellerViewModel(gh<_i465.BestSellerRemoteDataSource>()));
+    gh.factory<_i265.BestSellerViewModel>(() =>
+        _i265.BestSellerViewModel(gh<_i465.BestSellerRemoteDataSource>()));
     gh.factory<_i993.AuthRemoteDataSource>(() =>
         _i568.AuthRemoteDataSourceImpl(apiManger: gh<_i1055.ApiManger>()));
+    gh.factory<_i1.OccasionsRepository>(() => _i8.OccasionsRepositoryImpl(
+        occasionsDataSource: gh<_i1000.OccastionsRmoteDataSourcse>()));
     gh.factory<_i58.HomeViewModel>(
         () => _i58.HomeViewModel(gh<_i76.GetHomeDataUseCase>()));
     gh.factory<_i134.ProductDetailsCubit>(
         () => _i134.ProductDetailsCubit(gh<_i728.ProductDetailsUseCase>()));
+    gh.factory<_i391.GetPrudactUseCase>(
+        () => _i391.GetPrudactUseCase(gh<_i1.OccasionsRepository>()));
+    gh.factory<_i1068.OccasionsUseCase>(
+        () => _i1068.OccasionsUseCase(gh<_i1.OccasionsRepository>()));
     gh.factory<_i912.AuthRepository>(() =>
         _i392.AuthRepositoryImpl(dataSource: gh<_i993.AuthRemoteDataSource>()));
+    gh.factory<_i498.OccasionCubit>(() => _i498.OccasionCubit(
+          gh<_i1068.OccasionsUseCase>(),
+          gh<_i391.GetPrudactUseCase>(),
+        ));
     gh.factory<_i408.LogInUseCase>(
         () => _i408.LogInUseCase(gh<_i912.AuthRepository>()));
     gh.factory<_i120.ForgotPasswordUseCase>(() =>
         _i120.ForgotPasswordUseCase(repository: gh<_i912.AuthRepository>()));
     gh.factory<_i759.VerifyResetCodeUseCase>(() =>
         _i759.VerifyResetCodeUseCase(repository: gh<_i912.AuthRepository>()));
-    gh.factory<_i498.OccasionCubit>(
-        () => _i498.OccasionCubit(gh<_i1068.OccasionsUseCase>()));
     gh.factory<_i34.SignUpUseCase>(
         () => _i34.SignUpUseCase(gh<_i912.AuthRepository>()));
     gh.factory<_i1004.LoginViewModel>(

@@ -1,6 +1,7 @@
 import 'package:flowery/core/styles/colors/app_colors.dart';
 import 'package:flowery/core/styles/fonts/app_fonts.dart';
 import 'package:flowery/core/utils/const/app_string.dart';
+import 'package:flowery/core/utils/widget/custom_item_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -44,7 +45,6 @@ class _OccasionScreenState extends State<OccasionScreen> {
               style: AppFonts.font16BlackWeight500,
             ),
           ),
-
           BlocBuilder<OccasionCubit, OccasionState>(
             builder: (context, state) {
               if (state is OccasionLoadingState) {
@@ -89,22 +89,41 @@ class _OccasionScreenState extends State<OccasionScreen> {
               return Container();
             },
           ),
-          // SingleChildScrollView(
-          //   scrollDirection: Axis.horizontal,
-          //   child: Row(
-          //     children: List.generate(categories.length, (index) {
-
-          //     }),
-          //   ),
-          // ),
-          // SizedBox(height: 32.h),
-          // // Product Grid
-          // Expanded(
-          //   child: Padding(
-          //     padding: const EdgeInsets.all(16.0),
-          //     child:
-          //   ),
-          // ),
+          32.verticalSpace,
+          BlocBuilder<OccasionCubit, OccasionState>(
+            builder: (context, state) {
+              if (state is GetOccasionPrudactLoadingState) {
+                return Center(child: CircularProgressIndicator());
+              } else if (state is GetOccasionPrudactErrorState) {
+                return Center(child: Text(state.exception.toString()));
+              } else if (state is GetOccasionPrudactSuccessState) {
+                return Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: GridView.builder(
+                      itemCount: state.prudact.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 17,
+                        mainAxisSpacing: 17,
+                        childAspectRatio: 0.7,
+                      ),
+                      itemBuilder: (context, index) {
+                        return FlowerCard(
+                          title: state.prudact[index]!.title,
+                          imageUrl: state.prudact[index]!.imageUrl,
+                          price: state.prudact[index]!.price.toString(),
+                          discount: state.prudact[index]!.priceAfterDiscount
+                              .toString(),
+                        );
+                      },
+                    ),
+                  ),
+                );
+              }
+              return Container();
+            },
+          ),
         ],
       ),
     );
@@ -156,7 +175,7 @@ class _OccasionScreenState extends State<OccasionScreen> {
 //           backgroundColor: Colors.white,
 //           leading: IconButton(
 //             icon: Icon(Icons.arrow_back_ios_outlined, color: AppColors.kBlack),
-//             onPressed: () {
+//             onPressed: () { 
 //               Navigator.of(context).pop();
 //             },
 //           ),
