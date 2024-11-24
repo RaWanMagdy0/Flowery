@@ -162,6 +162,17 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       focusNode: widget.focusNode,
       enabled: widget.enabled,
       decoration: InputDecoration(
+        labelText: widget.labelText,
+        floatingLabelStyle:
+            WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
+          if (states.contains(WidgetState.focused)) {
+            return TextStyle(color: AppColors.kPink);
+          } else if (states.contains(WidgetState.error)) {
+            return TextStyle(color: AppColors.kError);
+          }
+          return TextStyle(color: Colors.grey);
+        }),
+        floatingLabelBehavior: FloatingLabelBehavior.always,
         hintText: widget.hintText,
         hintStyle: widget.hintStyle ?? AppFonts.font14GreyWeight400,
         fillColor: (widget.enabled != null && widget.enabled == false)

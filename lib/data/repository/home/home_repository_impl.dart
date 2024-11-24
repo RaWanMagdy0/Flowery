@@ -4,7 +4,7 @@ import '../../../core/api/api_result.dart';
 import '../../../domain/entities/home/home_data_entity.dart';
 import '../../../domain/repository/home/home_repository.dart';
 import '../../data_source/remote_data_source/home/home_remote_data_source.dart';
-import '../../model/auth/response/produc_details_model.dart';
+import '../../model/home/produc_details_model.dart';
 
 @Injectable(as: HomeRepository)
 class HomeRepositoryImpl extends HomeRepository {

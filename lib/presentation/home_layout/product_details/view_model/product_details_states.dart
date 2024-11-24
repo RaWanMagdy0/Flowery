@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../../../data/model/auth/response/produc_details_model.dart';
+import '../../../../domain/entities/home_layout/product_details_entity.dart';
 
 @immutable
 sealed class ProductDetailsStates {}
@@ -13,7 +13,7 @@ class ProductDetailsErrorState extends ProductDetailsStates {
 }
 
 class ProductDetailsSuccessState extends ProductDetailsStates {
-  final ProductDetailsModel? success;
+  final ProductDetailsEntity? success;
   ProductDetailsSuccessState({required this.success});
 }
 

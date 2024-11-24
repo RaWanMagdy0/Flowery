@@ -39,7 +39,7 @@ class HomeDiscoverItem extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: 16.w,
-            vertical: 16.h,
+            vertical: 15.h,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +48,7 @@ class HomeDiscoverItem extends StatelessWidget {
                 discoveryModel.title ?? '',
                 style: AppFonts.font14LightWhiteWeight500,
               ),
-              8.verticalSpace,
+             // 6.verticalSpace,
               CustomButton(
                 onPressed: () {},
                 borderColor: AppColors.kWhite,

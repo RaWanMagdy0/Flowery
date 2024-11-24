@@ -3,7 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../../../core/api/api_const.dart';
-import '../../model/auth/response/produc_details_model.dart';
+import '../../model/home/produc_details_model.dart';
 import '../../models/home/home_data_model.dart';
 
 part 'home_api_manager.g.dart';

@@ -11,6 +11,7 @@ import '../../presentation/auth/sign_up/view_model/sign_up_cubit.dart';
 import '../../presentation/best_seller/view/best_seller_screen.dart';
 import '../../presentation/best_seller/view_model/ best_seller_view_model.dart';
 import '../../presentation/home_layout/product_details/view/product_details_screen.dart';
+import '../../presentation/home_layout/screens/categories/categories_screen.dart';
 import '../../presentation/home_layout/screens/main_page/main_page.dart';
 import '../../splash/splash_screen.dart';
 import '../di/di.dart';
@@ -28,8 +29,11 @@ class AppRoutes {
       case PageRouteName.splash:
         return _handleMaterialPageRoute(widget: const SplashScreen());
       case PageRouteName.productDetails:
-        return _handleMaterialPageRoute(widget: ProductDetails());
-
+        return MaterialPageRoute(
+          builder: (context) => ProductDetails(),
+          settings: setting,
+        );
+      // return _handleMaterialPageRoute(widget: ProductDetails());
       case PageRouteName.logIn:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -76,6 +80,8 @@ class AppRoutes {
 
       case PageRouteName.homeLayout:
         return _handleMaterialPageRoute(widget: MainPage());
+      case PageRouteName.categoriesScreen:
+        return _handleMaterialPageRoute(widget: CategoriesScreen());
 
       default:
         return _handleMaterialPageRoute(widget: const Scaffold());

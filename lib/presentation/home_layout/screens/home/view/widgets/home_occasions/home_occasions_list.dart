@@ -42,7 +42,7 @@ class HomeOccasionsList extends StatelessWidget {
                         onTap: () {},
                         child: Text(
                           'View All',
-                          style: AppFonts.font12PinkWeight500UnderlinedPink,
+                          style: AppFonts.font15PinkWeight500UnderlinedPink,
                         ),
                       ),
                     ],

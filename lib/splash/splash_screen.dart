@@ -27,9 +27,6 @@ class _SplashScreenState extends State<SplashScreen>
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         _navigateToInitialRoute();
-        // Navigator.of(context).pushReplacementNamed(
-        //   PageRouteName.homeLayout,
-        // );
       }
     });
   }

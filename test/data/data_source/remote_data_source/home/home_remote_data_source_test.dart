@@ -2,6 +2,7 @@ import 'package:flowery/core/api/api_result.dart';
 import 'package:flowery/data/api/home_api/home_api_manager.dart';
 import 'package:flowery/data/data_source/remote_data_source/home/home_remote_data_source.dart';
 import 'package:flowery/data/data_source/remote_data_source/home/home_remote_data_source_impl.dart';
+import 'package:flowery/data/model/home/produc_details_model.dart';
 import 'package:flowery/data/models/home/home_data_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -50,6 +51,34 @@ void main() {
 
       // assert
       expect(result, isA<Fail<HomeDataModel?>>());
+    });
+  });
+
+  group('HomeRemoteDataSource --> getProductDetails', () {
+    final testData = ProductDetailsModel();
+    final testId = "1234";
+    const testFailMessage = "Failed to getProductDetails.";
+    test('should return productDetails  when getProductDetails is successful', () async {
+      // arrange
+      when(mockHomeApiManger.getProductDetails(testId))
+          .thenAnswer((_) async => testData);
+      // act
+      final result = await dataSource.getProductDetails(productId: testId);
+      // assert
+      expect(result, isA<Success<ProductDetailsModel?>>());
+      expect((result as Success<ProductDetailsModel?>).data, testData);
+    });
+
+    test('should return fail message when getProductDetails is Failure', () async {
+      // arrange
+      when(mockHomeApiManger.getProductDetails(testId))
+          .thenThrow(Exception(testFailMessage));
+      // act
+      final result = await dataSource.getProductDetails(productId: testId);
+      // assert
+      expect(result, isA<Fail<ProductDetailsModel?>>());
+      expect((result as Fail<ProductDetailsModel?>).exception.toString(), contains(testFailMessage));
+
     });
   });
 }

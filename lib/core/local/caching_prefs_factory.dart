@@ -64,7 +64,7 @@ class CachingPrefsFactory {
     await prefs.setString(key, value);
 
     if (kDebugMode) {
-      log('key: $key\nvalue: $value', name: 'Prefs - WRITE STRING');
+      log('Prefs - WRITE STRING: key=$key, value=$value');
     }
   }
 
@@ -159,8 +159,9 @@ class CachingPrefsFactory {
     final value = prefs.getString(key);
 
     if (kDebugMode) {
-      log('read key: $key\nvalue: $value', name: 'Prefs - READ STRING');
+      log('Prefs - READ STRING: key=$key, value=$value');
     }
+
 
     return value;
   }

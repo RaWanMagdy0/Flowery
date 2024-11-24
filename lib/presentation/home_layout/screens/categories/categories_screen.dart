@@ -5,14 +5,6 @@ class CategoriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: Center(
-            child: Text('Categories Screen'),
-          ),
-        ),
-      ],
-    );
+    return Scaffold();
   }
 }

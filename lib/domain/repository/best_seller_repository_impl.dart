@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../core/api/api_result.dart';
@@ -19,16 +19,18 @@ class BestSellerViewModel extends Cubit<BestSellerState> {
     final result = await _dataSource.getBestSellers();
 
     if (result is Success<List<BestSellerModel>>) {
-      final products = result.data?.map((model) => BestSeller(
-        id: model.id,
-        title: model.title,
-        imageUrl: model.imageUrl,
-        price: model.price,
-        priceAfterDiscount: model.priceAfterDiscount,
-      )).toList() ?? [];
+      final products = result.data
+              ?.map((model) => BestSeller(
+                    id: model.id,
+                    title: model.title,
+                    imageUrl: model.imageUrl,
+                    price: model.price,
+                    priceAfterDiscount: model.priceAfterDiscount,
+                  ))
+              .toList() ??
+          [];
 
       emit(BestSellerLoaded(products));
-    } else if (result is Fail) {
-    }
+    } else if (result is Fail) {}
   }
 }
