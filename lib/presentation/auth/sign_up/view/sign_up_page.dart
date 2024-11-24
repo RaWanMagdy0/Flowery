@@ -272,14 +272,10 @@ class _SignUpPageState extends State<SignUpPage> {
     if (state is SignUpSuccess) {
       Navigator.pop(context);
       AppDialogs.showSuccessDialog(
-          context: context,
-          message: "Account Created Successfully.\n Please Login to proceed");
-      Future.delayed(Duration(seconds: 2), () {
-        if (mounted) {
-          Navigator.pop(context);
-          Navigator.pop(context);
-        }
-      });
+        context: context,
+        message: "Account Created Successfully.\n Please Login to proceed",
+        whenAnimationFinished: () => Navigator.pop(context),
+      );
     } else if (state is SignUpFail) {
       Navigator.pop(context);
       AppDialogs.showErrorDialog(

@@ -1,8 +1,9 @@
-import 'package:flowery/core/styles/colors/app_colors.dart';
-import 'package:flowery/core/styles/fonts/app_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../styles/colors/app_colors.dart';
+import '../../styles/fonts/app_fonts.dart';
 
 class CustomTextFormField extends StatefulWidget {
   final TextEditingController? controller;
@@ -184,7 +185,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         counterText: "",
         border: widget.border ??
             OutlineInputBorder(
-              borderRadius: BorderRadius.circular(widget.borderRadius ?? 0),
+              borderRadius: BorderRadius.circular(widget.borderRadius ?? 4.r),
               borderSide: BorderSide(
                 color: widget.borderColor ?? AppColors.kGray,
                 width: widget.borderWidth ?? 1,
@@ -193,7 +194,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         enabledBorder: widget.enabledBorder ??
             OutlineInputBorder(
               borderRadius:
-                  BorderRadius.circular(widget.enabledBorderRadius ?? 0),
+                  BorderRadius.circular(widget.enabledBorderRadius ?? 4.r),
               borderSide: BorderSide(
                 color: widget.enabledBorderColor ?? AppColors.kGray,
                 width: widget.enabledBorderWidth ?? 1,
@@ -202,7 +203,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         focusedBorder: widget.focusedBorder ??
             OutlineInputBorder(
               borderRadius:
-                  BorderRadius.circular(widget.focusedBorderRadius ?? 0),
+                  BorderRadius.circular(widget.focusedBorderRadius ?? 4.r),
               borderSide: BorderSide(
                 color: widget.focusedBorderColor ?? AppColors.kPink,
                 width: widget.focusedBorderWidth ?? 1,
@@ -211,7 +212,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         disabledBorder: widget.disabledBorder ??
             OutlineInputBorder(
               borderRadius:
-                  BorderRadius.circular(widget.disabledBorderRadius ?? 0),
+                  BorderRadius.circular(widget.disabledBorderRadius ?? 4.r),
               borderSide: BorderSide(
                 color:
                     widget.disabledBackgroundColor ?? const Color(0xFFE6E6E6),
@@ -224,7 +225,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         errorBorder: widget.errorBorder ??
             OutlineInputBorder(
               borderRadius:
-                  BorderRadius.circular(widget.errorBorderRadius ?? 0),
+                  BorderRadius.circular(widget.errorBorderRadius ?? 4.r),
               borderSide: BorderSide(
                 color: widget.errorBorderColor ?? AppColors.kError,
                 width: widget.errorBorderWidth ?? 1,
@@ -233,7 +234,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         focusedErrorBorder: widget.focusedErrorBorder ??
             OutlineInputBorder(
               borderRadius:
-                  BorderRadius.circular(widget.focusedErrorBorderRadius ?? 0),
+                  BorderRadius.circular(widget.focusedErrorBorderRadius ?? 4.r),
               borderSide: BorderSide(
                 color: widget.focusedErrorBorderColor ?? AppColors.kError,
                 width: widget.focusedErrorBorderWidth ?? 1,
