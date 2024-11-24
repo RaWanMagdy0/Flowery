@@ -27,19 +27,19 @@ class _HomeApiManger implements HomeApiManger {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<OccasionsResponseModel> occasions() async {
+  Future<HomeDataModel> getHomeData() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _options = _setStreamType<OccasionsResponseModel>(Options(
+    final _options = _setStreamType<HomeDataModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          'api/v1/occasions',
+          'api/v1/home',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -49,9 +49,44 @@ class _HomeApiManger implements HomeApiManger {
           baseUrl,
         )));
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late OccasionsResponseModel _value;
+    late HomeDataModel _value;
     try {
-      _value = OccasionsResponseModel.fromJson(_result.data!);
+      _value = HomeDataModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<ProductDetailsModel?> getProductDetails(String productId) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<ProductDetailsModel>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'api/v1/products',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>?>(_options);
+    late ProductDetailsModel? _value;
+    try {
+      _value = _result.data == null
+          ? null
+          : ProductDetailsModel.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;

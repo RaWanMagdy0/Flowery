@@ -48,3 +48,6 @@ app.*.map.json
 /lib/core/di/di.config.dart
 /lib/data/api/auth_api/api_manger.g.dart
 /lib/data/api/home_api/home_api_manager.g.dart
+
+#ignore coverage
+/coverage/

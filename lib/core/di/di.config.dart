@@ -13,11 +13,14 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
 import '../../data/api/auth_api/api_manger.dart' as _i1055;
+import '../../data/api/best_seller_api.dart' as _i513;
 import '../../data/api/home_api/home_api_manager.dart' as _i48;
 import '../../data/data_source/remote_data_source/auth/auth_remote_data_source.dart'
     as _i993;
 import '../../data/data_source/remote_data_source/auth/auth_remote_data_source_impl.dart'
     as _i568;
+import '../../data/data_source/remote_data_source/best_seller_remote_data_source.dart'
+    as _i465;
 import '../../data/data_source/remote_data_source/home/home_remote_data_source.dart'
     as _i367;
 import '../../data/data_source/remote_data_source/home/home_remote_data_source_impl.dart'
@@ -27,27 +30,41 @@ import '../../data/data_source/remote_data_source/home/occastions/occastions_emo
 import '../../data/data_source/remote_data_source/home/occastions/occastions_remote_data_sorce_impl.dart'
     as _i948;
 import '../../data/repository/auth/auth_repository_impl.dart' as _i392;
-import '../../data/repository/home/home_repository_impl.dart' as _i605;
 import '../../data/repository/home/Occasions/occasions_repository.dart' as _i8;
+import '../../data/repository/home/home_repository_impl.dart' as _i605;
 import '../../domain/repository/auth/auth_repository.dart' as _i912;
+import '../../domain/repository/best_seller_repository.dart' as _i40;
+import '../../domain/repository/best_seller_repository_impl.dart' as _i372;
 import '../../domain/repository/home/home_repository.dart' as _i839;
 import '../../domain/repository/home/occastions/occastons_repository.dart'
     as _i1;
+import '../../domain/use_case/%20get_best_sellers_use_case.dart' as _i277;
 import '../../domain/use_case/auth/forgot_password_use_case.dart' as _i120;
 import '../../domain/use_case/auth/home/occastions/occastions_use_case.dart'
     as _i1068;
 import '../../domain/use_case/auth/login_use_case.dart' as _i408;
 import '../../domain/use_case/auth/sign_up/sign_up_use_case.dart' as _i34;
 import '../../domain/use_case/auth/verify_reset_code_use_case.dart' as _i759;
+import '../../domain/use_case/home/get_home_data_use_case.dart' as _i76;
+import '../../domain/use_case/home_layout/product_details_use_case.dart'
+    as _i728;
 import '../../presentation/auth/forgot_password/view_model/forget_passwoed_cubit.dart'
     as _i351;
 import '../../presentation/auth/sign_up/view_model/sign_up_cubit.dart' as _i140;
 import '../../presentation/auth/view_model/login/login_cubit.dart' as _i1004;
-import '../../presentation/home_layout/screens/occasions/view_model/ocusin_cubit.dart'
-    as _i498;
+import '../../presentation/best_seller/view_model/%20best_seller_view_model.dart'
+    as _i265;
+import '../../presentation/home_layout/product_details/view_model/product_details_cubit.dart'
+    as _i134;
+import '../../presentation/home_layout/screens/home/view_model/home_view_model.dart'
+    as _i58;
+import '../api/dio/dio_factory.dart' as _i763;
 import '../api/dio/dio_factory.dart' as _i763;
 import '../api/dio/dio_module.dart' as _i223;
+import '../api/dio/dio_module.dart' as _i223;
 import '../providers/app_provider.dart' as _i1023;
+import '../utils/functions/providers/app_provider.dart' as _i240;
+import 'di.dart' as _i913;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -61,25 +78,43 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final dioModule = _$DioModule();
+
+    final apiModule = _$ApiModule();
     gh.factory<_i763.DioFactory>(() => _i763.DioFactory());
     gh.singleton<_i1023.AppProvider>(() => _i1023.AppProvider());
+
+    gh.factory<_i763.DioFactory>(() => _i763.DioFactory());
+    gh.singleton<_i240.AppProvider>(() => _i240.AppProvider());
     gh.lazySingleton<_i361.Dio>(() => dioModule.dio);
+    gh.lazySingleton<_i513.BestSellerApi>(
+        () => apiModule.getBestSellerApi(gh<_i361.Dio>()));
     gh.lazySingleton<_i1055.ApiManger>(() => _i1055.ApiManger(gh<_i361.Dio>()));
     gh.lazySingleton<_i48.HomeApiManger>(
         () => _i48.HomeApiManger(gh<_i361.Dio>()));
-    gh.factory<_i1000.OccastionsRmoteDataSourcse>(() =>
-        _i948.OccastionsRemoteDataSorceImpl(
-            apiManger: gh<_i48.HomeApiManger>()));
+    gh.factory<_i277.GetBestSellersUseCase>(
+        () => _i277.GetBestSellersUseCase(gh<_i40.BestSellerRepository>()));
+    gh.factory<_i465.BestSellerRemoteDataSource>(
+        () => _i465.BestSellerRemoteDataSource(gh<_i513.BestSellerApi>()));
     gh.factory<_i367.HomeRemoteDataSource>(() =>
         _i440.HomeRemoteDataSourceImpl(apiManger: gh<_i48.HomeApiManger>()));
     gh.factory<_i839.HomeRepository>(() => _i605.HomeRepositoryImpl(
         onlineDataSource: gh<_i367.HomeRemoteDataSource>()));
+
+    gh.factory<_i372.BestSellerViewModel>(() =>
+        _i372.BestSellerViewModel(gh<_i465.BestSellerRemoteDataSource>()));
+    gh.factory<_i265.BestSellerViewModel>(() =>
+        _i265.BestSellerViewModel(gh<_i465.BestSellerRemoteDataSource>()));
+
+    gh.factory<_i76.GetHomeDataUseCase>(
+        () => _i76.GetHomeDataUseCase(gh<_i839.HomeRepository>()));
+    gh.factory<_i728.ProductDetailsUseCase>(() =>
+        _i728.ProductDetailsUseCase(repository: gh<_i839.HomeRepository>()));
     gh.factory<_i993.AuthRemoteDataSource>(() =>
         _i568.AuthRemoteDataSourceImpl(apiManger: gh<_i1055.ApiManger>()));
-    gh.factory<_i1.OccasionsRepository>(() => _i8.OccasionsRepositoryImpl(
-        occasionsDataSource: gh<_i1000.OccastionsRmoteDataSourcse>()));
-    gh.factory<_i1068.OccasionsUseCase>(
-        () => _i1068.OccasionsUseCase(gh<_i1.OccasionsRepository>()));
+    gh.factory<_i58.HomeViewModel>(
+        () => _i58.HomeViewModel(gh<_i76.GetHomeDataUseCase>()));
+    gh.factory<_i134.ProductDetailsCubit>(
+        () => _i134.ProductDetailsCubit(gh<_i728.ProductDetailsUseCase>()));
     gh.factory<_i912.AuthRepository>(() =>
         _i392.AuthRepositoryImpl(dataSource: gh<_i993.AuthRemoteDataSource>()));
     gh.factory<_i408.LogInUseCase>(
@@ -105,3 +140,5 @@ extension GetItInjectableX on _i174.GetIt {
 }
 
 class _$DioModule extends _i223.DioModule {}
+
+class _$ApiModule extends _i913.ApiModule {}
