@@ -1,4 +1,3 @@
-import 'package:flowery/presentation/home_layout/product_details/view_model/product_details_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
@@ -11,6 +10,7 @@ import '../../../../core/utils/const/app_string.dart';
 import '../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../core/utils/widget/custom_button.dart';
 import '../../../../domain/entities/home_layout/product_details_entity.dart';
+import '../view_model/product_details_cubit.dart';
 import '../view_model/product_details_states.dart';
 
 class ProductDetails extends StatefulWidget {

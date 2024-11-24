@@ -1,5 +1,6 @@
-import 'package:flowery/data/model/auth/response/produc_details_model.dart';
 import 'package:flutter/cupertino.dart';
+
+import '../../../../data/model/auth/response/produc_details_model.dart';
 
 @immutable
 sealed class ProductDetailsStates {}

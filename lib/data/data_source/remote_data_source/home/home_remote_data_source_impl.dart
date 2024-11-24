@@ -1,9 +1,9 @@
-import 'package:flowery/core/api/api_result.dart';
-import 'package:flowery/core/api/execute_api_call.dart';
-import 'package:flowery/data/model/auth/response/produc_details_model.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../core/api/api_result.dart';
+import '../../../../core/api/execute_api_call.dart';
 import '../../../api/home_api/home_api_manager.dart';
+import '../../../model/auth/response/produc_details_model.dart';
 import '../../../models/home/home_data_model.dart';
 import 'home_remote_data_source.dart';
 

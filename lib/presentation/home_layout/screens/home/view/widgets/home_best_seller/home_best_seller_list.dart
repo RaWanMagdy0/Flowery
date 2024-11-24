@@ -1,8 +1,8 @@
-import 'package:flowery/core/routes/page_route_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../../../core/routes/page_route_name.dart';
 import '../../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../../domain/entities/home/home_best_seller_product_entity.dart';
 import '../../../view_model/home_view_model.dart';

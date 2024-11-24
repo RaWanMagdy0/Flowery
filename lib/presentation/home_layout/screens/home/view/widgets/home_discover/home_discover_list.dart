@@ -1,4 +1,3 @@
-import 'package:flowery/presentation/home_layout/screens/home/view/widgets/home_discover/home_discover_loading.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,6 +6,7 @@ import '../../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../../domain/entities/home/home_discovery_entity.dart';
 import '../../../view_model/home_view_model.dart';
 import 'home_discover_item.dart';
+import 'home_discover_loading.dart';
 
 class HomeDiscoverList extends StatelessWidget {
   const HomeDiscoverList({super.key});

@@ -35,8 +35,8 @@ import '../../domain/use_case/home_layout/product_details_use_case.dart'
     as _i728;
 import '../../presentation/auth/forgot_password/view_model/forget_passwoed_cubit.dart'
     as _i351;
+import '../../presentation/auth/login/view_model/login_cubit.dart' as _i1004;
 import '../../presentation/auth/sign_up/view_model/sign_up_cubit.dart' as _i140;
-import '../../presentation/auth/view_model/login/login_cubit.dart' as _i1004;
 import '../../presentation/home_layout/product_details/view_model/product_details_cubit.dart'
     as _i134;
 import '../../presentation/home_layout/screens/home/view_model/home_view_model.dart'

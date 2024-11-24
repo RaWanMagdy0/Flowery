@@ -1,7 +1,8 @@
-import 'package:flowery/core/styles/colors/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
+
+import '../../styles/colors/app_colors.dart';
 
 class ShimmerLoadingWidget extends StatelessWidget {
   final Color? baseColor, highlightColor, containerColor;

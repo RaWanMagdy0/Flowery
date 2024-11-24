@@ -6,8 +6,8 @@ import '../../../core/api/api_const.dart';
 import '../../model/auth/requests/sign_up_request_model.dart';
 import '../../model/auth/response/sign_up_response_model.dart';
 import '../../model/user_model.dart';
-part 'api_manger.g.dart';
 
+part 'api_manger.g.dart';
 
 @lazySingleton
 @RestApi(baseUrl: ApiConstants.baseUrl)
