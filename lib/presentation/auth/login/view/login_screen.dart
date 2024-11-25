@@ -55,7 +55,22 @@ class _LogInScreenState extends State<LogInScreen> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: const Text(AppStrings.signUpTitle),
+          elevation: 0,
+          title: Row(
+            children: [
+              IconButton(
+                icon: Icon(Icons.arrow_back_ios_outlined),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              Text(
+                AppStrings.loginTitle,
+                style: AppFonts.font20BlackWeight500,
+              ),
+            ],
+          ),
+          centerTitle: false,
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -63,7 +78,7 @@ class _LogInScreenState extends State<LogInScreen> {
             key: formKey,
             child: ListView(
               children: [
-                24.verticalSpace,
+                16.verticalSpace,
                 BlocListener<LoginViewModel, LoginScreenState>(
                   listenWhen: (previous, current) {
                     return current is! InitialState;
