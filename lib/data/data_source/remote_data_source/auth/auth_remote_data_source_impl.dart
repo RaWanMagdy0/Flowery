@@ -1,10 +1,10 @@
+import 'package:flowery/data/model/user_model.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../core/api/api_result.dart';
 import '../../../../core/api/execute_api_call.dart';
 import '../../../api/auth_api/api_manger.dart';
 import '../../../model/auth/requests/sign_up_request_model.dart';
-import '../../../model/user_model.dart';
 import 'auth_remote_data_source.dart';
 
 @Injectable(as: AuthRemoteDataSource)
