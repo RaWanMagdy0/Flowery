@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/styles/colors/app_colors.dart';
 import '../../../core/styles/images/app_images.dart';
@@ -16,11 +17,14 @@ class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
+      backgroundColor: AppColors.kWhite,
+      type: BottomNavigationBarType.fixed,
+      showUnselectedLabels: true,
       currentIndex: currentIndex,
       onTap: onTap,
-      items: const [
+      items: [
         BottomNavigationBarItem(
-          icon: ImageIcon(AssetImage(AppImages.homeIcon)),
+          icon: const ImageIcon(AssetImage(AppImages.homeIcon)),
           label: 'Home',
         ),
         BottomNavigationBarItem(
@@ -39,10 +43,8 @@ class BottomNavBar extends StatelessWidget {
       selectedItemColor: AppColors.kPink,
       unselectedItemColor: AppColors.kGray,
       unselectedLabelStyle: TextStyle(color: AppColors.kGray),
-      selectedFontSize: 16.0,
-      unselectedFontSize: 12.0,
-      iconSize: 30.0,
-      backgroundColor: AppColors.kLightWhite,
+      selectedFontSize: 15.0.sp,
+      iconSize: 22.0.sp,
     );
   }
 }

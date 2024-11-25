@@ -1,151 +1,133 @@
-import 'package:flowery/presentation/home_layout/product_details/view_model/product_details_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:readmore/readmore.dart';
 
 import '../../../../core/di/di.dart';
 import '../../../../core/styles/colors/app_colors.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
-import '../../../../core/utils/const/app_string.dart';
-import '../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../core/utils/widget/custom_button.dart';
-import '../../../../domain/entities/home_layout/product_details_entity.dart';
+import '../view_model/product_details_cubit.dart';
 import '../view_model/product_details_states.dart';
 
-class ProductDetails extends StatefulWidget {
+class ProductDetails extends StatelessWidget {
   const ProductDetails({super.key});
 
   @override
-  State<ProductDetails> createState() => _ProductDetailsState();
-}
-
-class _ProductDetailsState extends State<ProductDetails> {
-  late ProductEntity productEntity;
-  var viewModel = getIt.get<ProductDetailsCubit>();
-  @override
   Widget build(BuildContext context) {
-    var args = ModalRoute.of(context)?.settings.arguments as ProductEntity;
+    var viewModel = getIt.get<ProductDetailsCubit>();
+    final String productId =
+        ModalRoute.of(context)?.settings.arguments as String;
 
-    return BlocListener<ProductDetailsCubit, ProductDetailsStates>(
-        bloc: viewModel
-          ..getProductDetails(productId: productEntity.id.toString()),
-        listener: (context, state) => _handleStateChange(state),
-        child: Scaffold(
-          body: Container(
-              color: Colors.white,
-              height: double.infinity,
-              width: double.infinity,
-              child: SingleChildScrollView(
+    return Scaffold(
+      body: BlocBuilder<ProductDetailsCubit, ProductDetailsStates>(
+        bloc: viewModel..getProductDetails(productId: productId),
+        builder: (context, state) {
+          if (state is ProductDetailsLoadingState) {
+            return Center(
+                child: CircularProgressIndicator(
+              color: AppColors.kPink,
+            ));
+          } else if (state is ProductDetailsSuccessState) {
+            final productDetailsEntity = state.success;
+            final product = productDetailsEntity?.products?.firstWhere(
+              (p) => p.id == productId,
+            );
+            if (product != null) {
+              return SingleChildScrollView(
                 child: Column(
                   children: [
                     Stack(
                       children: [
-                        Container(
-                          color: AppColors.kBabyPink,
-                          height: 390.h,
-                          width: 356.w,
+                        SizedBox(
+                          height: 500.h,
+                          width: double.infinity,
                           child: ClipRRect(
                             child: ImageSlideshow(
                               initialPage: 0,
                               indicatorColor: Colors.pink,
-                              indicatorPadding: 10.h,
+                              indicatorPadding: 8.h,
                               indicatorRadius: 5.w,
                               indicatorBackgroundColor: Colors.grey,
                               isLoop: true,
-                              children: args.images!
-                                  .map((url) => Image.network(
-                                        url,
-                                        fit: BoxFit.scaleDown,
-                                        // height: 300.h,
-                                        width: double.infinity,
-                                      ))
-                                  .toList(),
+                              children: product.images
+                                      ?.map((url) => Image.network(
+                                            url,
+                                            fit: BoxFit.contain,
+                                          ))
+                                      .toList() ??
+                                  [],
                             ),
                           ),
                         ),
                         Positioned(
                           top: 25.h,
                           left: 2.h,
-                          child: Icon(
-                            Icons.arrow_back_ios_sharp,
-                            size: 25.sp,
+                          child: IconButton(
+                            icon: Icon(Icons.arrow_back_ios_sharp, size: 25.sp),
+                            onPressed: () => Navigator.of(context).pop(),
                           ),
-                        )
+                        ),
                       ],
                     ),
                     Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                args.price.toString(),
+                                "EGP ${product.price} ",
                                 style: AppFonts.font20BlackWeight700,
                               ),
                               Row(
                                 children: [
                                   Text(
-                                    AppStrings.status,
+                                    "Status:",
                                     style: AppFonts.font16BlackWeight500,
                                   ),
                                   Text(" In stock",
-                                      style: AppFonts.font14GreyWeight400)
+                                      style: AppFonts.font14GreyWeight400),
                                 ],
-                              )
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text(AppStrings.allPricesIncludeTax,
-                                  style: AppFonts.font13BlackWeight400),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text("15 pink Rose Bouquet",
-                                  style: AppFonts.font16BlackWeight500),
-                            ],
-                          ),
-                          15.verticalSpace,
-                          Row(
-                            children: [
-                              Text(AppStrings.description,
-                                  style: AppFonts.font16BlackWeight500)
-                            ],
-                          ),
-                          5.verticalSpace,
-                          Row(
-                            children: [
-                              Text(
-                                args.description ?? "",
-                                style: AppFonts.font14BlackWeight400,
                               ),
                             ],
                           ),
+                          8.verticalSpace,
+                          Text(
+                            "All prices include tax",
+                            style: AppFonts.font13BlackWeight400,
+                          ),
+                          10.verticalSpace,
+                          Text(
+                            product.title ?? "Product Title",
+                            style: AppFonts.font16BlackWeight500,
+                          ),
                           15.verticalSpace,
-                          Row(
-                            children: [
-                              Text("Bouquet include",
-                                  style: AppFonts.font16BlackWeight500)
-                            ],
+                          Text(
+                            "Description",
+                            style: AppFonts.font16BlackWeight500,
                           ),
                           5.verticalSpace,
-                          Row(
-                            children: [Text("Ponl reses : "), Text("15")],
-                          ),
-                          Row(
-                            children: [
-                              Text("White wrap"),
-                            ],
+                          ReadMoreText(
+                            product.description ?? "No description available",
+                            style: AppFonts.font14BlackWeight400,
+                            trimLines: 4,
+                            trimMode: TrimMode.Line,
+                            trimCollapsedText: "Show More",
+                            trimExpandedText: "Show Less",
+                            moreStyle:
+                                AppFonts.font12PinkWeight500UnderlinedPink,
+                            lessStyle:
+                                AppFonts.font12PinkWeight500UnderlinedPink,
                           ),
                           15.verticalSpace,
                           CustomButton(
                             onPressed: () {},
                             color: AppColors.kPink,
-                            text: AppStrings.addToCart,
+                            text: "Add to Cart",
                             textStyle: AppFonts.font16WhiteWeight500,
                           ),
                         ],
@@ -153,21 +135,20 @@ class _ProductDetailsState extends State<ProductDetails> {
                     ),
                   ],
                 ),
-              )),
-        ));
-  }
-
-  dynamic _handleStateChange(ProductDetailsStates state) {
-    if (state is ProductDetailsSuccessState) {
-      Navigator.pop(context);
-    } else if (state is ProductDetailsLoadingState) {
-      AppDialogs.showLoading(context: context);
-    } else if (state is ProductDetailsErrorState) {
-      Navigator.pop(context);
-      AppDialogs.showErrorDialog(
-        context: context,
-        errorMassage: state.errorMessage ?? "An unknown error occurred",
-      );
-    }
+              );
+            } else {
+              return Center(child: Text("Product not found."));
+            }
+          } else if (state is ProductDetailsErrorState) {
+            return Center(
+              child:
+                  Text(state.errorMessage ?? "Error loading product details"),
+            );
+          } else {
+            return Center(child: Text("Unexpected state."));
+          }
+        },
+      ),
+    );
   }
 }

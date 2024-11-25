@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../../../core/routes/page_route_name.dart';
 import '../../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../../domain/entities/home/home_occasion_entity.dart';
 import '../../../view_model/home_view_model.dart';
@@ -39,10 +40,13 @@ class HomeOccasionsList extends StatelessWidget {
                         style: AppFonts.font18BlackWeight500,
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushNamed(PageRouteName.occasion);
+                        },
                         child: Text(
                           'View All',
-                          style: AppFonts.font12PinkWeight500UnderlinedPink,
+                          style: AppFonts.font15PinkWeight500UnderlinedPink,
                         ),
                       ),
                     ],

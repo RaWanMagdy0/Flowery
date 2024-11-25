@@ -1,13 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../../../core/routes/page_route_name.dart';
 import '../../../../../../../core/styles/fonts/app_fonts.dart';
-import '../../../../../../../core/routes/page_route_name.dart'; // Add this import
 import '../../../../../../../domain/entities/home/home_best_seller_product_entity.dart';
 import '../../../view_model/home_view_model.dart';
 import 'home_best_seller_item.dart';
+import 'home_best_seller_loading.dart';
 
 class HomeBestSellerList extends StatelessWidget {
   const HomeBestSellerList({super.key});
@@ -17,9 +17,7 @@ class HomeBestSellerList extends StatelessWidget {
     return BlocBuilder<HomeViewModel, HomeState>(
       builder: (context, state) {
         if (state is HomeDataLoading) {
-          return const Center(
-            child: CupertinoActivityIndicator(),
-          );
+          return HomeBestSellerLoading();
         } else if (state is HomeDataError) {
           return Center(
             child: Text(state.message ?? ''),
@@ -60,7 +58,13 @@ class HomeBestSellerList extends StatelessWidget {
                     itemCount: items.length,
                     itemBuilder: (context, index) {
                       return GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            PageRouteName.productDetails,
+                            arguments: items[index].id,
+                          );
+                        },
                         child: HomeBestSellerItem(
                           productModel: items[index],
                         ),

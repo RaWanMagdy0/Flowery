@@ -98,6 +98,8 @@ class AppStrings {
       'User profile edited successfully';
 
   static const String currentPassword = 'Current password';
+  static const String occasionAppBar = "Occasion";
+  static const String occasionTitle = "Bloom with our exquisite best sellers";
 
   static RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
 }

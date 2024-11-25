@@ -1,19 +1,22 @@
-import 'package:flowery/core/di/di.dart';
-import 'package:flowery/core/styles/fonts/app_fonts.dart';
-import 'package:flowery/core/utils/const/app_string.dart';
-import 'package:flowery/presentation/auth/forgot_password/view/widgets/email_verification_widget/widget/pin_code_file.dart';
-import 'package:flowery/presentation/auth/forgot_password/view_model/forget_passwoed_cubit.dart';
-import 'package:flowery/presentation/auth/forgot_password/view_model/forget_password_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../../../core/di/di.dart';
+import '../../../../../../core/styles/fonts/app_fonts.dart';
+import '../../../../../../core/utils/const/app_string.dart';
 import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
+import '../../../view_model/forget_passwoed_cubit.dart';
+import '../../../view_model/forget_password_states.dart';
 import '../reset_password_widget/reset_password_widget.dart';
+import 'widget/pin_code_file.dart';
 
 class EmailVerification extends StatefulWidget {
   static const String routeName = "PasswordVerification";
 
-  const EmailVerification({super.key,});
+  const EmailVerification({
+    super.key,
+  });
   @override
   State<EmailVerification> createState() => _EmailVerificationState();
 }
@@ -90,8 +93,8 @@ class _EmailVerificationState extends State<EmailVerification> {
                         return InkWell(
                           onTap: isEnabled
                               ? () {
-                            viewModel.resendResetCode();
-                          }
+                                  viewModel.resendResetCode();
+                                }
                               : null,
                           child: ValueListenableBuilder<String?>(
                             valueListenable: viewModel.resendButtonText,
@@ -99,15 +102,15 @@ class _EmailVerificationState extends State<EmailVerification> {
                               return Text(
                                 value ?? " Resend",
                                 style: isEnabled
-                                    ? AppFonts.font16PinkWeight400
-                                    : AppFonts.font16PinkWeight400,
+                                    ? AppFonts.font16PinkWeight400UnderlinedPink
+                                    : AppFonts
+                                        .font16PinkWeight400UnderlinedPink,
                               );
                             },
                           ),
                         );
                       },
                     ),
-
                   ],
                 ),
               ],
@@ -150,4 +153,5 @@ class _EmailVerificationState extends State<EmailVerification> {
         errorMassage: state.errorMassage ?? "An unknown error occurred",
       );
     }
-  }}
+  }
+}

@@ -11,14 +11,19 @@ class AppDialogs {
     required BuildContext context,
   }) {
     return showDialog(
-        context: context,
-        builder: (context) {
-          return Lottie.asset(
-            AppImages.pinkLoading,
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return PopScope(
+          canPop: false,
+          child: Lottie.asset(
+            AppImages.pinkLoadingAnimation,
             height: 50.h,
             width: 20.w,
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 
   static void showErrorDialog(
@@ -27,7 +32,7 @@ class AppDialogs {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: AppColors.kWhite,
-        icon: Lottie.asset(AppImages.pinkError, height: 80.h),
+        icon: Lottie.asset(AppImages.pinkErrorAnimation, height: 80.h),
         content: Text(
           textAlign: TextAlign.center,
           errorMassage,
@@ -48,13 +53,33 @@ class AppDialogs {
     );
   }
 
-  static void showSuccessDialog(
-      {required BuildContext context, required String message}) {
+  static void showSuccessDialog({
+    required BuildContext context,
+    required String message,
+    VoidCallback? whenAnimationFinished,
+  }) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: AppColors.kWhite,
-        icon: Lottie.asset(AppImages.pinkDone, height: 80.h),
+        icon: Lottie.asset(
+          AppImages.pinkDoneAnimation,
+          height: 80.h,
+          repeat: false,
+          onLoaded: (composition) {
+            Future.delayed(
+              composition.duration,
+              () {
+                if (context.mounted) {
+                  Navigator.of(context).pop();
+                  if (whenAnimationFinished != null) {
+                    whenAnimationFinished();
+                  }
+                }
+              },
+            );
+          },
+        ),
         content: Text(
           textAlign: TextAlign.center,
           message,

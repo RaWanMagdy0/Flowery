@@ -44,10 +44,10 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-#ignore generates files
-/lib/core/di/di.config.dart
-/lib/data/api/auth_api/api_manger.g.dart
-/lib/data/api/home_api/home_api_manager.g.dart
+# Dart generated files
+*.g.dart
+*.config.dart
+*.mocks.dart
 
 #ignore coverage
 /coverage/

@@ -12,7 +12,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      minimum: EdgeInsets.fromLTRB(16.w, 36.h, 16.w, 0),
+      minimum: EdgeInsets.fromLTRB(16.w, 50.h, 16.w, 0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -22,10 +22,10 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
             children: [
               Image.asset(
                 AppImages.logoWithTitle,
-                height: 25.h,
-                width: 89.w,
+                height: 35.h,
+                width: 95.w,
               ),
-              16.horizontalSpace,
+              15.horizontalSpace,
               SearchBarWidget(),
             ],
           ),
@@ -47,7 +47,6 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                 size: 32.r,
                 color: AppColors.kPink,
               ),
-              // Added dropdown icon
             ],
           ),
         ],
@@ -56,5 +55,5 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight + 52.h);
+  Size get preferredSize => Size.fromHeight(kToolbarHeight + 65.h);
 }

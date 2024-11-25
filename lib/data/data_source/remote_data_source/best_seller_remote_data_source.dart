@@ -5,7 +5,7 @@ import '../../../core/api/execute_api_call.dart';
 import '../../api/best_seller_api.dart';
 import '../../models/best_seller_model.dart';
 
-@Injectable()
+@injectable
 class BestSellerRemoteDataSource {
   final BestSellerApi _api;
 
@@ -14,8 +14,7 @@ class BestSellerRemoteDataSource {
   Future<Result<List<BestSellerModel>>> getBestSellers() {
     return executeApiCall(apiCall: () async {
       final response = await _api.getBestSellers();
-      final List<dynamic> data = response['bestSeller'];
-      return data.map((json) => BestSellerModel.fromJson(json)).toList();
+      return response.bestSellers!;
     });
   }
 }
