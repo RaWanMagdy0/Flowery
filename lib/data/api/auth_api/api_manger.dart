@@ -8,6 +8,7 @@ import '../../model/auth/response/sign_up_response_model.dart';
 import '../../model/user_model.dart';
 part 'api_manger.g.dart';
 
+
 @lazySingleton
 @RestApi(baseUrl: ApiConstants.baseUrl)
 abstract class ApiManger {
@@ -26,5 +27,5 @@ abstract class ApiManger {
   Future<String?> verifyResetCode(@Body() Map<String, dynamic> resetCode);
 
   @POST(ApiConstants.loginApi)
-  Future<UserModel?> logIn(@Body() Map<String, dynamic> newPassword);
+  Future<UserModel?> logIn(@Body() Map<String, dynamic> body);
 }
