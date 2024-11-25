@@ -3,8 +3,8 @@ import 'package:injectable/injectable.dart';
 import '../../../../../core/api/api_result.dart';
 import '../../../../../core/base/base_view_model.dart';
 import '../../../../../data/models/occasions/occasions_response_model.dart';
-import '../../../../../domain/use_case/auth/home/occastions/occastions_prudact_use_case.dart';
-import '../../../../../domain/use_case/auth/home/occastions/occastions_use_case.dart';
+import '../../../../../domain/use_case/home/occastions/occastions_prudact_use_case.dart';
+import '../../../../../domain/use_case/home/occastions/occastions_use_case.dart';
 import 'ocusin_state.dart';
 
 @injectable
