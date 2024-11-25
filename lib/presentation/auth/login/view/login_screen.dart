@@ -55,7 +55,7 @@ class _LogInScreenState extends State<LogInScreen> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: const Text(AppStrings.signUpTitle),
+          title: const Text(AppStrings.loginTitle),
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),

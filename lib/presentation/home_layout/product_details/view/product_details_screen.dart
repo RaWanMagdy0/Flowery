@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:readmore/readmore.dart';
 
 import '../../../../core/di/di.dart';
 import '../../../../core/styles/colors/app_colors.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../core/utils/widget/custom_button.dart';
+import '../../../../domain/entities/home_layout/product_details_entity.dart';
 import '../view_model/product_details_cubit.dart';
 import '../view_model/product_details_states.dart';
 
@@ -35,106 +35,84 @@ class ProductDetails extends StatelessWidget {
               (p) => p.id == productId,
             );
             if (product != null) {
-              return SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Stack(
-                      children: [
-                        SizedBox(
-                          height: 500.h,
-                          width: double.infinity,
-                          child: ClipRRect(
-                            child: ImageSlideshow(
-                              initialPage: 0,
-                              indicatorColor: Colors.pink,
-                              indicatorPadding: 8.h,
-                              indicatorRadius: 5.w,
-                              indicatorBackgroundColor: Colors.grey,
-                              isLoop: true,
-                              children: product.images
-                                      ?.map((url) => Image.network(
-                                            url,
-                                            fit: BoxFit.contain,
-                                          ))
-                                      .toList() ??
-                                  [],
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 25.h,
-                          left: 2.h,
-                          child: IconButton(
-                            icon: Icon(Icons.arrow_back_ios_sharp, size: 25.sp),
-                            onPressed: () => Navigator.of(context).pop(),
+              return CustomScrollView(
+                slivers: [
+                  buildSliverAppBar(product),
+                  SliverList(
+                    delegate: SliverChildListDelegate(
+                      [
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 16.w),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              24.verticalSpace,
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "EGP ${product.price} ",
+                                    style: AppFonts.font20BlackWeight700,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Status:",
+                                        style: AppFonts.font16BlackWeight500,
+                                      ),
+                                      Text(" In stock",
+                                          style: AppFonts.font14GreyWeight400),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              8.verticalSpace,
+                              Text(
+                                "All prices include tax",
+                                style: AppFonts.font13BlackWeight400,
+                              ),
+                              10.verticalSpace,
+                              Text(
+                                product.title ?? "Product Title",
+                                style: AppFonts.font16BlackWeight500,
+                              ),
+                              15.verticalSpace,
+                              Text(
+                                "Description",
+                                style: AppFonts.font16BlackWeight500,
+                              ),
+                              5.verticalSpace,
+                              Text(
+                                product.description ??
+                                    "No description available",
+                                style: AppFonts.font14BlackWeight400,
+                              ),
+                              // ReadMoreText(
+                              //   product.description ?? "No description available",
+                              //   style: AppFonts.font14BlackWeight400,
+                              //   trimLines: 4,
+                              //   trimMode: TrimMode.Line,
+                              //   trimCollapsedText: "Show More",
+                              //   trimExpandedText: "Show Less",
+                              //   moreStyle: AppFonts.font12PinkWeight500UnderlinedPink,
+                              //   lessStyle: AppFonts.font12PinkWeight500UnderlinedPink,
+                              // ),
+                              15.verticalSpace,
+                              CustomButton(
+                                onPressed: () {},
+                                color: AppColors.kPink,
+                                text: "Add to Cart",
+                                textStyle: AppFonts.font16WhiteWeight500,
+                              ),
+                              24.verticalSpace,
+                            ],
                           ),
                         ),
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "EGP ${product.price} ",
-                                style: AppFonts.font20BlackWeight700,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    "Status:",
-                                    style: AppFonts.font16BlackWeight500,
-                                  ),
-                                  Text(" In stock",
-                                      style: AppFonts.font14GreyWeight400),
-                                ],
-                              ),
-                            ],
-                          ),
-                          8.verticalSpace,
-                          Text(
-                            "All prices include tax",
-                            style: AppFonts.font13BlackWeight400,
-                          ),
-                          10.verticalSpace,
-                          Text(
-                            product.title ?? "Product Title",
-                            style: AppFonts.font16BlackWeight500,
-                          ),
-                          15.verticalSpace,
-                          Text(
-                            "Description",
-                            style: AppFonts.font16BlackWeight500,
-                          ),
-                          5.verticalSpace,
-                          ReadMoreText(
-                            product.description ?? "No description available",
-                            style: AppFonts.font14BlackWeight400,
-                            trimLines: 4,
-                            trimMode: TrimMode.Line,
-                            trimCollapsedText: "Show More",
-                            trimExpandedText: "Show Less",
-                            moreStyle:
-                                AppFonts.font12PinkWeight500UnderlinedPink,
-                            lessStyle:
-                                AppFonts.font12PinkWeight500UnderlinedPink,
-                          ),
-                          15.verticalSpace,
-                          CustomButton(
-                            onPressed: () {},
-                            color: AppColors.kPink,
-                            text: "Add to Cart",
-                            textStyle: AppFonts.font16WhiteWeight500,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               );
             } else {
               return Center(child: Text("Product not found."));
@@ -148,6 +126,38 @@ class ProductDetails extends StatelessWidget {
             return Center(child: Text("Unexpected state."));
           }
         },
+      ),
+    );
+  }
+
+  Widget buildSliverAppBar(ProductEntity product) {
+    return SliverAppBar(
+      expandedHeight: 500.h,
+      pinned: true,
+      stretch: true,
+      forceMaterialTransparency: true,
+      backgroundColor: AppColors.kWhite,
+      flexibleSpace: FlexibleSpaceBar(
+        background: Hero(
+          tag: product.id!,
+          child: ImageSlideshow(
+            initialPage: 0,
+            indicatorColor: Colors.pink,
+            indicatorPadding: 8.h,
+            indicatorRadius: 5.w,
+            indicatorBackgroundColor: Colors.grey,
+            isLoop: true,
+            children: product.images
+                    ?.map(
+                      (url) => Image.network(
+                        url,
+                        fit: BoxFit.fitHeight,
+                      ),
+                    )
+                    .toList() ??
+                [],
+          ),
+        ),
       ),
     );
   }
