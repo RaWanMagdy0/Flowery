@@ -1,3 +1,4 @@
+import 'package:flowery/core/routes/page_route_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,7 +40,10 @@ class HomeCategoriesList extends StatelessWidget {
                         style: AppFonts.font18BlackWeight500,
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(
+                              context, PageRouteName.categories);
+                        },
                         child: Text(
                           'View All',
                           style: AppFonts.font12PinkWeight500UnderlinedPink,

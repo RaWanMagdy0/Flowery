@@ -11,7 +11,8 @@ import '../../presentation/auth/sign_up/view_model/sign_up_cubit.dart';
 import '../../presentation/best_seller/view/best_seller_screen.dart';
 import '../../presentation/best_seller/view_model/best_seller_view_model.dart';
 import '../../presentation/home_layout/product_details/view/product_details_screen.dart';
-import '../../presentation/home_layout/screens/categories/categories_screen.dart';
+import '../../presentation/home_layout/screens/categories/view/categories_screen.dart';
+import '../../presentation/home_layout/screens/categories/view_model/categories_view_model.dart';
 import '../../presentation/home_layout/screens/main_page/main_page.dart';
 import '../../presentation/home_layout/screens/occasions/occasions_screen.dart';
 import '../../presentation/home_layout/screens/occasions/view_model/ocusin_cubit.dart';
@@ -31,12 +32,6 @@ class AppRoutes {
       case PageRouteName.splash:
         return _handleMaterialPageRoute(widget: const SplashScreen());
 
-      case PageRouteName.productDetails:
-        return MaterialPageRoute(
-          builder: (context) => ProductDetails(),
-          settings: setting,
-        );
-
       case PageRouteName.logIn:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -50,14 +45,6 @@ class AppRoutes {
           builder: (context) => BlocProvider(
             create: (context) => getIt<SignUpCubit>(),
             child: SignUpPage(),
-          ),
-        );
-
-      case PageRouteName.bestSeller:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => getIt<BestSellerViewModel>(),
-            child: BestSellerScreen(),
           ),
         );
 
@@ -83,9 +70,27 @@ class AppRoutes {
       case PageRouteName.homeLayout:
         return _handleMaterialPageRoute(widget: MainPage());
 
-      case PageRouteName.categoriesScreen:
-        return _handleMaterialPageRoute(widget: CategoriesScreen());
+      case PageRouteName.productDetails:
+        return MaterialPageRoute(
+          builder: (context) => ProductDetails(),
+          settings: setting,
+        );
 
+      case PageRouteName.bestSeller:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<BestSellerViewModel>(),
+            child: BestSellerScreen(),
+          ),
+        );
+
+      case PageRouteName.categories:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt.get<CategoriesViewModel>(),
+            child: CategoriesScreen(),
+          ),
+        );
       case PageRouteName.occasion:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(

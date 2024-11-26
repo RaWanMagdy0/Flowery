@@ -4,6 +4,7 @@ import 'package:retrofit/retrofit.dart';
 
 import '../../../core/api/api_const.dart';
 import '../../model/home/produc_details_model.dart';
+import '../../models/home/home_category_model.dart';
 import '../../models/home/home_data_model.dart';
 import '../../models/occasions/occasions_response_model.dart';
 
@@ -27,4 +28,10 @@ abstract class HomeApiManger {
 
   @GET(ApiConstants.getAllProducts)
   Future<ProductDetailsModel> getOccasionsPrudact();
+
+  @GET(ApiConstants.getAllCategoriesEndpoint)
+  Future<HomeCategoryModel> getAllCategories();
+
+  @GET(ApiConstants.getAllProducts)
+  Future<ProductDetailsModel> getCategoriesProduct();
 }

@@ -9,4 +9,5 @@ class ApiConstants {
   static const String occasions = "api/v1/occasions";
   static const String getBestSeller = "api/v1/best-seller";
   static const String getAllProducts = "api/v1/products";
+  static const String getAllCategoriesEndpoint = "api/v1/categories";
 }
