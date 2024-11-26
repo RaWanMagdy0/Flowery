@@ -76,6 +76,7 @@ class _SignUpPageState extends State<SignUpPage> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text(AppStrings.signUpTitle),
+          forceMaterialTransparency: true,
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
