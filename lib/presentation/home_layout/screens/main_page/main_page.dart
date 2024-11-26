@@ -25,7 +25,7 @@ class _MainPageState extends State<MainPage> {
       child: HomeScreen(),
     ),
     BlocProvider(
-      create: (context) => getIt<CategoriesViewModel>(),
+      create: (context) => getIt<CategoriesViewModel>()..loadFlowers(),
       child: CategoriesScreen(),
     ),
     CartScreen(),

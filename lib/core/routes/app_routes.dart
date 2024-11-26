@@ -87,7 +87,7 @@ class AppRoutes {
       case PageRouteName.categories:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => getIt.get<CategoriesViewModel>(),
+            create: (context) => getIt<CategoriesViewModel>()..loadFlowers(),
             child: CategoriesScreen(),
           ),
         );

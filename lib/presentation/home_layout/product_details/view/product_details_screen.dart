@@ -61,8 +61,10 @@ class ProductDetails extends StatelessWidget {
                                         "Status:",
                                         style: AppFonts.font16BlackWeight500,
                                       ),
-                                      Text(" In stock",
-                                          style: AppFonts.font14GreyWeight400),
+                                      Text(
+                                        " In stock",
+                                        style: AppFonts.font14GreyWeight400,
+                                      ),
                                     ],
                                   ),
                                 ],

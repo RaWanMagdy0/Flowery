@@ -26,9 +26,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         padding: EdgeInsets.all(15.w),
         child: Column(
           children: [
-            SizedBox(
-              height: 50.h,
-            ),
+            16.verticalSpace,
             CustomSearchBar(),
             SizedBox(height: 16.h),
             BlocBuilder<CategoriesViewModel, CategoriesState>(
