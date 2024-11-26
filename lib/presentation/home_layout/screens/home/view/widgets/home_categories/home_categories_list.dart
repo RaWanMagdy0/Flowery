@@ -26,7 +26,7 @@ class HomeCategoriesList extends StatelessWidget {
           final List<HomeCategory> items = state.homeData?.categories ?? [];
 
           return SizedBox(
-            height: 55.h,
+            height: 156.h,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

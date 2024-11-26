@@ -16,13 +16,13 @@ class HomeCategoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
           margin: EdgeInsets.only(right: 16.w),
           padding: EdgeInsets.symmetric(
-            horizontal: 50.w,
-            vertical: 50.h,
+            horizontal: 20.w,
+            vertical: 20.h,
           ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.r),
@@ -35,11 +35,14 @@ class HomeCategoryItem extends StatelessWidget {
           ),
         ),
         8.verticalSpace,
-        Text(
-          categoryModel.name ?? '',
-          style: AppFonts.font14BlackWeight400,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
+        SizedBox(
+          width: 70.w,
+          child: Text(
+            categoryModel.name ?? '',
+            style: AppFonts.font14BlackWeight400,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
       ],
     );

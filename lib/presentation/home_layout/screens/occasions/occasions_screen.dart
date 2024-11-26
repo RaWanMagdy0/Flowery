@@ -23,31 +23,35 @@ class _OccasionScreenState extends State<OccasionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_outlined, color: AppColors.kBlack),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(70.h),
+        child: AppBar(
+          automaticallyImplyLeading: false,
+          title: Row(
+            children: [
+              IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(Icons.arrow_back_ios)),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Occasion', style: AppFonts.font20BlackWeight500),
+                  5.verticalSpace,
+                  Text('Bloom with our exquisite best sellers',
+                      style: AppFonts.font13BlackWeight500),
+                ],
+              ),
+            ],
+          ),
+          backgroundColor: AppColors.kWhite,
+          elevation: 0,
         ),
-        title: Text(
-          AppStrings.occasionAppBar,
-          style: AppFonts.font16BlackWeight500,
-        ),
-        centerTitle: false,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              AppStrings.occasionTitle,
-              style: AppFonts.font16BlackWeight500,
-            ),
-          ),
           BlocBuilder<OccasionCubit, OccasionState>(
             buildWhen: (previous, current) {
               return current is OccasionLoadingState ||
@@ -56,7 +60,10 @@ class _OccasionScreenState extends State<OccasionScreen> {
             },
             builder: (context, state) {
               if (state is OccasionLoadingState) {
-                return Center(child: CircularProgressIndicator());
+                return Center(
+                    child: CircularProgressIndicator(
+                  color: AppColors.kPink,
+                ));
               } else if (state is OccasionErrorState) {
                 return Center(child: Text(state.exception.toString()));
               } else if (state is OccasionSuccessState) {
@@ -109,7 +116,10 @@ class _OccasionScreenState extends State<OccasionScreen> {
             },
             builder: (context, state) {
               if (state is GetOccasionPrudactLoadingState) {
-                return Center(child: CircularProgressIndicator());
+                return Center(
+                    child: CircularProgressIndicator(
+                  color: AppColors.kPink,
+                ));
               } else if (state is GetOccasionPrudactErrorState) {
                 return Center(child: Text(state.exception.toString()));
               } else if (state is GetOccasionPrudactSuccessState) {
