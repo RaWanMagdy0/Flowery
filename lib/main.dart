@@ -1,3 +1,4 @@
+import 'package:flowery/presentation/home_layout/screens/categories/view/categories_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: AppTheme.appTheme,
-          initialRoute: PageRouteName.logIn,
+          initialRoute: PageRouteName.categories,
           onGenerateRoute: (settings) => AppRoutes.onGenerateRoute(settings),
         );
       },

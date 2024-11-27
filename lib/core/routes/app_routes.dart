@@ -1,3 +1,5 @@
+import 'package:flowery/presentation/home_layout/screens/categories/view/categories_screen.dart';
+import 'package:flowery/presentation/home_layout/screens/categories/view_model/categories_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/repository/best_seller_repository_impl.dart';
@@ -26,7 +28,7 @@ class AppRoutes {
     switch (setting.name) {
       case PageRouteName.splash:
         return _handleMaterialPageRoute(widget: const SplashScreen());
-        case PageRouteName.productDetails:
+      case PageRouteName.productDetails:
         return _handleMaterialPageRoute(widget: ProductDetails());
 
       case PageRouteName.logIn:
@@ -49,7 +51,7 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
             create: (context) => getIt<BestSellerViewModel>(),
-            child:  BestSellerScreen(),
+            child: BestSellerScreen(),
           ),
         );
 
@@ -75,6 +77,14 @@ class AppRoutes {
 
       case PageRouteName.homeLayout:
         return _handleMaterialPageRoute(widget: MainPage());
+
+      case PageRouteName.categories:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt.get<CategoriesViewModel>(),
+            child: CategoriesScreen(),
+          ),
+        );
 
       default:
         return _handleMaterialPageRoute(widget: const Scaffold());

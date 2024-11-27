@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/di/di.dart';
 import '../../widgets/bottom_navigation_bar.dart';
 import '../cart/cart_screen.dart';
-import '../categories/categories_screen.dart';
+import '../categories/view/categories_screen.dart';
 import '../home/view/home_screen.dart';
 import '../home/view_model/home_view_model.dart';
 import '../profile/profile_screen.dart';
