@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Get the branch name
+branch_name=$(git rev-parse --abbrev-ref HEAD)
+
+# Extract the prefix (assuming the format is FECOM-x-feature-name)
+if [[ $branch_name =~ ^(FECOM-[0-9]+)- ]]; then
+    prefix="${BASH_REMATCH[1]}"
+    # Only add prefix if it's not a merge or squash commit
+    if [[ "$1" == ".git/COMMIT_EDITMSG" && -z $(grep "$prefix" "$1") ]]; then
+        # Prepend the prefix to the commit message
+        sed -i.bak -e "1s/^/$prefix /" "$1"
+    fi
+fi
