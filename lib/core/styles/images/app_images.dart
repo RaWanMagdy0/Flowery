@@ -3,8 +3,10 @@ import 'dart:core';
 class AppImages {
   static const floweryAnimation = 'assets/animations/Flowery.json';
   static const pinkLoadingAnimation = "assets/animations/pink_loading.json";
-  static const pinkErrorAnimation = "assets/animations/pink_error.json";
-  static const pinkDoneAnimation = "assets/animations/pink_done.json";
+  static const pinkErrorAnimation =
+      "assets/animations/flowery_error_animation.json";
+  static const pinkDoneAnimation =
+      "assets/animations/flowery_success_animation.json";
 
   static const personIcon = 'assets/images/person_icon.png';
   static const homeIcon = 'assets/images/home_icon.png';
