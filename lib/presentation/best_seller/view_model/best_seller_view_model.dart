@@ -1,45 +1,40 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../core/api/api_result.dart';
-import '../../../data/data_source/remote_data_source/best_seller_remote_data_source.dart';
-import '../../../data/models/best_seller_model.dart';
+import '../../../core/base/base_view_model.dart';
 import '../../../domain/entities/best_seller_entity.dart';
+import '../../../domain/use_case/home/get_best_seller_products_use_case.dart';
 import 'best_seller_state.dart';
 
 @injectable
-class BestSellerViewModel extends Cubit<BestSellerState> {
-  final BestSellerRemoteDataSource _dataSource;
+class BestSellerViewModel extends BaseViewModel<BestSellerState> {
+  final GetBestSellerProductsUseCase _bestSellerProductsUseCase;
 
-  BestSellerViewModel(this._dataSource) : super(BestSellerInitial());
+  BestSellerViewModel(this._bestSellerProductsUseCase)
+      : super(BestSellerInitial());
 
   Future<void> getBestSellers() async {
     emit(BestSellerLoading());
 
-    final result = await _dataSource.getBestSellers();
+    final response = await _bestSellerProductsUseCase.invoke();
 
-    if (result is Success<List<BestSellerModel>>) {
-      final products = result.data
-              ?.map((model) => BestSeller(
-                    id: model.id,
-                    title: model.title,
-                    imageUrl: model.imageUrl,
-                    price: model.price,
-                    priceAfterDiscount: model.priceAfterDiscount,
-                    occasionid: model.occasionid,
-                  ))
-              .toList() ??
-          [];
+    switch (response) {
+      case Success():
+        final products = response.data
+                ?.map((model) => BestSeller(
+                      id: model.id,
+                      title: model.title,
+                      imageUrl: model.imageUrl,
+                      price: model.price,
+                      priceAfterDiscount: model.priceAfterDiscount,
+                      occasionid: model.occasionid,
+                    ))
+                .toList() ??
+            [];
 
-      emit(BestSellerLoaded(products));
-    } else if (result is Fail<List<BestSellerModel>>) {
-      final failResult = result;
-      emit(
-          BestSellerError(failResult.exception?.toString() ?? 'Unknown error'));
-    } else if (result is Fail<List<BestSellerModel>>) {
-      final failResult = result;
-      emit(
-          BestSellerError(failResult.exception?.toString() ?? 'Unknown error'));
+        emit(BestSellerLoaded(products));
+      case Fail():
+        emit(BestSellerError(getErrorMassageFromException(response.exception)));
     }
   }
 }

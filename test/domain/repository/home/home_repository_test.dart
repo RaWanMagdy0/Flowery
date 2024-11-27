@@ -1,6 +1,6 @@
 import 'package:flowery/core/api/api_result.dart';
-import 'package:flowery/data/data_source/remote_data_source/home/home_remote_data_source.dart';
-import 'package:flowery/data/models/home/home_data_model.dart';
+import 'package:flowery/data/data_sources/remote_data_source/home/home/home_remote_data_source.dart';
+import 'package:flowery/data/models/home/home/home_data_model.dart';
 import 'package:flowery/data/repository/home/home_repository_impl.dart';
 import 'package:flowery/domain/entities/home/home_data_entity.dart';
 import 'package:flowery/domain/repository/home/home_repository.dart';

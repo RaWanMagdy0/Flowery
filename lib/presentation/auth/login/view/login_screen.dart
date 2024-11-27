@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/base/exceptions.dart';
-import '../../../../core/local/token_manger.dart';
 import '../../../../core/routes/page_route_name.dart';
 import '../../../../core/styles/colors/app_colors.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../core/utils/const/app_string.dart';
 import '../../../../core/utils/functions/dialogs/app_dialogs.dart';
-import '../../../../core/utils/functions/validators/my_validators.dart';
+import '../../../../core/utils/functions/validators/validators.dart';
 import '../../../../core/utils/widget/custom_button.dart';
 import '../../../../core/utils/widget/custom_text_form_field.dart';
 import '../view_model/login_cubit.dart';
@@ -77,17 +75,9 @@ class _LogInScreenState extends State<LogInScreen> {
                         }
                       case ErrorState():
                         {
-                          Navigator.of(context).pop();
-                          var exception = state.exception;
-                          String? message = AppStrings.somethingWentWrong;
-                          if (exception is NoInternetException) {
-                            message = AppStrings.pleaseCheckInternetConnection;
-                          } else if (exception is ServerError) {
-                            message = exception.serverMessage;
-                          }
-                          return AppDialogs.showErrorDialog(
+                          AppDialogs.showErrorDialog(
                             context: context,
-                            errorMassage: message ?? "",
+                            errorMassage: state.message ?? "",
                           );
                         }
                       case SuccessState():
@@ -97,10 +87,6 @@ class _LogInScreenState extends State<LogInScreen> {
                             context: context,
                             message: AppStrings.userLoggedInSuccessfully,
                             whenAnimationFinished: () {
-                              if (_isRememberMe) {
-                                var token = state.user!.token;
-                                TokenManger.setToken(token: token.toString());
-                              }
                               Navigator.pushReplacementNamed(
                                   context, PageRouteName.homeLayout);
                             },
@@ -117,7 +103,7 @@ class _LogInScreenState extends State<LogInScreen> {
                         labelText: AppStrings.emailLabelText,
                         controller: _emailController,
                         keyBordType: TextInputType.text,
-                        validator: (value) => MyValidators.validateEmail(value),
+                        validator: (value) => Validators.validateEmail(value),
                       ),
                       24.verticalSpace,
                       CustomTextFormField(
@@ -127,7 +113,7 @@ class _LogInScreenState extends State<LogInScreen> {
                         keyBordType: TextInputType.text,
                         isPassword: true,
                         validator: (value) =>
-                            MyValidators.validatePassword(value),
+                            Validators.validatePassword(value),
                       ),
                       15.verticalSpace,
                       Row(
@@ -167,8 +153,11 @@ class _LogInScreenState extends State<LogInScreen> {
                       CustomButton(
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
-                            viewModel.login(_emailController.text,
-                                _passwordController.text);
+                            viewModel.login(
+                              email: _emailController.text,
+                              password: _passwordController.text,
+                              rememberMe: _isRememberMe,
+                            );
                           }
                         },
                         color: AppColors.kPink,

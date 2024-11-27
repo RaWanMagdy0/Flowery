@@ -1,5 +1,4 @@
 class AppStrings {
-  static const String tokenEncryptionKey = '32charactertestkey1234567890';
   static const String passwordAppBarTitle = "Password";
   static const String loginTitle = "Login";
   static const String confirmTitle = "Confirm";

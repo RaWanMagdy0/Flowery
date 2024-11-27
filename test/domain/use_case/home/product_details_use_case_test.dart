@@ -1,7 +1,7 @@
 import 'package:flowery/core/api/api_result.dart';
-import 'package:flowery/data/model/home/produc_details_model.dart';
+import 'package:flowery/data/models/produc_details_model.dart';
 import 'package:flowery/domain/repository/home/home_repository.dart';
-import 'package:flowery/domain/use_case/home/product_details_use_case.dart';
+import 'package:flowery/domain/use_case/home/get_product_details_use_case.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -11,11 +11,11 @@ import 'get_home_data_use_case_test.mocks.dart';
 @GenerateMocks([HomeRepository])
 void main() {
   late MockHomeRepository mockHomeRepository;
-  late ProductDetailsUseCase usecase;
+  late GetProductDetailsUseCase usecase;
 
   setUp(() {
     mockHomeRepository = MockHomeRepository();
-    usecase = ProductDetailsUseCase(repository: mockHomeRepository);
+    usecase = GetProductDetailsUseCase(repository: mockHomeRepository);
   });
   setUpAll(() {
     provideDummy<Result<ProductDetailsModel?>>(

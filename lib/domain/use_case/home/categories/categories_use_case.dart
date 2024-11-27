@@ -1,16 +1,16 @@
-import 'package:flowery/data/models/home/home_category_model.dart';
-import 'package:flowery/domain/repository/category_repo.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../core/api/api_result.dart';
+import '../../../entities/home/home_category_entity.dart';
+import '../../../repository/home/category_repository.dart';
 
 @injectable
-class CategoriesUseCase {
+class GetAllCategoriesUseCase {
   CategoryRepository categoryRepository;
 
-  CategoriesUseCase(this.categoryRepository);
+  GetAllCategoriesUseCase(this.categoryRepository);
 
-  Future<Result<List<HomeCategoryModel>?>> invoke() {
+  Future<Result<List<HomeCategory>?>> invoke() {
     return categoryRepository.getAllCategories();
   }
 }

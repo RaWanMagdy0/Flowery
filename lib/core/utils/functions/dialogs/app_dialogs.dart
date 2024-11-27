@@ -26,8 +26,10 @@ class AppDialogs {
     );
   }
 
-  static void showErrorDialog(
-      {required BuildContext context, required String errorMassage}) {
+  static void showErrorDialog({
+    required BuildContext context,
+    required String errorMassage,
+  }) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -81,9 +83,9 @@ class AppDialogs {
           },
         ),
         content: Text(
-          textAlign: TextAlign.center,
           message,
           style: AppFonts.font18BlackWeight500,
+          textAlign: TextAlign.center,
         ),
       ),
     );

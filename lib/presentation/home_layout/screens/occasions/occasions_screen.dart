@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/routes/page_route_name.dart';
 import '../../../../core/styles/colors/app_colors.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
-import '../../../../core/utils/const/app_string.dart';
 import '../../../../core/utils/widget/custom_item_card.dart';
 import 'view_model/ocusin_cubit.dart';
 import 'view_model/ocusin_state.dart';

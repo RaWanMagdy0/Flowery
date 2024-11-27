@@ -21,7 +21,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   void getToken() async {
-    token = await TokenManger.getToken() ?? '';
+    token = await TokenManager.getToken() ?? '';
 
     setState(() {
       token = token;
@@ -36,7 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: token.isNotEmpty
             ? CustomButton(
                 onPressed: () {
-                  TokenManger.deleteToken();
+                  TokenManager.deleteToken();
                   Navigator.of(context).pushReplacementNamed(
                     PageRouteName.logIn,
                   );

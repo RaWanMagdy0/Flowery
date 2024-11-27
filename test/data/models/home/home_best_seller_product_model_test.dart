@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flowery/data/models/home/home_best_seller_product_model.dart';
+import 'package:flowery/data/models/home/home/home_best_seller_product_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../fixtures/fixture_reader.dart';

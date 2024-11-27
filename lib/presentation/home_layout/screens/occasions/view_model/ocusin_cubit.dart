@@ -2,15 +2,15 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../../core/api/api_result.dart';
 import '../../../../../core/base/base_view_model.dart';
-import '../../../../../data/models/occasions/occasions_response_model.dart';
-import '../../../../../domain/use_case/home/occastions/occastions_prudact_use_case.dart';
+import '../../../../../data/models/home/occasions/occasions_response_model.dart';
+import '../../../../../domain/use_case/home/occastions/get_occasion_products_use_case.dart';
 import '../../../../../domain/use_case/home/occastions/occastions_use_case.dart';
 import 'ocusin_state.dart';
 
 @injectable
 class OccasionCubit extends BaseViewModel<OccasionState> {
   final OccasionsUseCase occasionsUseCase;
-  final GetPrudactUseCase getPrudactUseCase;
+  final GetOccasionProductUseCase getPrudactUseCase;
 
   OccasionCubit(this.occasionsUseCase, this.getPrudactUseCase)
       : super(InitialState());

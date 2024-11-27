@@ -1,4 +1,3 @@
-import 'package:flowery/presentation/home_layout/screens/categories/view_model/categories_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -6,6 +5,7 @@ import '../../../../core/di/di.dart';
 import '../../widgets/bottom_navigation_bar.dart';
 import '../cart/cart_screen.dart';
 import '../categories/view/categories_screen.dart';
+import '../categories/view_model/categories_view_model.dart';
 import '../home/view/home_screen.dart';
 import '../home/view_model/home_view_model.dart';
 import '../profile/profile_screen.dart';

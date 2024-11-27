@@ -76,6 +76,15 @@ class AppRoutes {
           settings: setting,
         );
 
+      case PageRouteName.categories:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<CategoriesViewModel>()..loadFlowers(),
+            child: CategoriesScreen(),
+          ),
+          settings: setting,
+        );
+
       case PageRouteName.bestSeller:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -84,13 +93,6 @@ class AppRoutes {
           ),
         );
 
-      case PageRouteName.categories:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => getIt<CategoriesViewModel>()..loadFlowers(),
-            child: CategoriesScreen(),
-          ),
-        );
       case PageRouteName.occasion:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(

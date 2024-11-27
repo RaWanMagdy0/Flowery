@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'app_string_error.dart';
 
+// TODO: Needs refactoring
 class BaseViewModel<T> extends Cubit<T> {
   BaseViewModel(super.initialState);
 
@@ -31,7 +32,7 @@ class BaseViewModel<T> extends Cubit<T> {
       case DioExceptionType.unknown:
         return AppStringErrors.unknown;
       case DioExceptionType.cancel:
-        return "Request cancelled";
+        return dioException.message ?? 'Request cancelled';
       default:
         return AppStringErrors.unknown;
     }

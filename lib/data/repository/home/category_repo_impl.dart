@@ -1,12 +1,12 @@
 import 'dart:developer';
 
-import 'package:flowery/data/data_source/remote_data_source/home/category/category_remote_data_source.dart';
-import 'package:flowery/data/models/home/home_category_model.dart';
-import 'package:flowery/domain/repository/category_repo.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../core/api/api_result.dart';
 import '../../../../domain/entities/home_layout/product_details_entity.dart';
+import '../../../domain/entities/home/home_category_entity.dart';
+import '../../../domain/repository/home/category_repository.dart';
+import '../../data_sources/remote_data_source/home/category/category_remote_data_source.dart';
 
 @Injectable(as: CategoryRepository)
 class CategoryRepositoryImpl extends CategoryRepository {
@@ -15,18 +15,25 @@ class CategoryRepositoryImpl extends CategoryRepository {
   CategoryRepositoryImpl({required this.categoryRemoteDataSource});
 
   @override
-  Future<Result<List<HomeCategoryModel>?>> getAllCategories() async {
+  Future<Result<List<HomeCategory>?>> getAllCategories() async {
     final result = await categoryRemoteDataSource.getAllCategories();
     switch (result) {
       case Success():
-        return Success<List<HomeCategoryModel>?>();
+        final categories = result.data?.categories
+                ?.map(
+                  (model) => model.toEntity(),
+                )
+                .toList() ??
+            [];
+
+        return Success<List<HomeCategory>?>(data: categories);
       case Fail():
         return Fail(exception: result.exception);
     }
   }
 
   @override
-  Future<Result<List<ProductEntity>?>> getCategoriesProduct() async {
+  Future<Result<List<ProductEntity>?>> getCategoryProducts() async {
     final result = await categoryRemoteDataSource.getCategoriesProduct();
     switch (result) {
       case Success():

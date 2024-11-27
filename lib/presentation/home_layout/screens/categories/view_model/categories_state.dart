@@ -1,5 +1,4 @@
-import 'package:flowery/data/models/home/home_category_model.dart';
-
+import '../../../../../domain/entities/home/home_category_entity.dart';
 import '../../../../../domain/entities/home_layout/product_details_entity.dart';
 
 abstract class CategoriesState {}
@@ -15,7 +14,7 @@ class CategoriesErrorState extends CategoriesState {
 }
 
 class CategoriesSuccessState extends CategoriesState {
-  final List<HomeCategoryModel>? categories;
+  final List<HomeCategory>? categories;
 
   CategoriesSuccessState(this.categories);
 }

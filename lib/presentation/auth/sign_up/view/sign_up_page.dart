@@ -5,10 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../core/utils/const/app_string.dart';
 import '../../../../core/utils/functions/dialogs/app_dialogs.dart';
-import '../../../../core/utils/functions/validators/my_validators.dart';
+import '../../../../core/utils/functions/validators/validators.dart';
 import '../../../../core/utils/widget/custom_button.dart';
 import '../../../../core/utils/widget/custom_text_form_field.dart';
-import '../../../../data/model/auth/requests/sign_up_request_model.dart';
+import '../../../../data/models/auth/requests/sign_up_request_model.dart';
 import '../view_model/sign_up_cubit.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -93,8 +93,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: CustomTextFormField(
                           hintText: AppStrings.firstNameHintText,
                           labelText: AppStrings.firstNameLabelText,
-                          validator: (value) =>
-                              MyValidators.validateName(value),
+                          validator: (value) => Validators.validateName(value),
                           keyBordType: TextInputType.text,
                           controller: _firstNameController,
                         ),
@@ -104,8 +103,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: CustomTextFormField(
                           hintText: AppStrings.lastNameHintText,
                           labelText: AppStrings.lastNameLabelText,
-                          validator: (value) =>
-                              MyValidators.validateName(value),
+                          validator: (value) => Validators.validateName(value),
                           keyBordType: TextInputType.text,
                           controller: _lastNameController,
                         ),
@@ -116,7 +114,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   CustomTextFormField(
                     hintText: AppStrings.emailHintText,
                     labelText: AppStrings.emailLabelText,
-                    validator: (value) => MyValidators.validateEmail(value),
+                    validator: (value) => Validators.validateEmail(value),
                     keyBordType: TextInputType.text,
                     controller: _emailController,
                   ),
@@ -129,7 +127,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           labelText: AppStrings.passwordLabelText,
                           isPassword: true,
                           validator: (value) =>
-                              MyValidators.validatePassword(value),
+                              Validators.validatePassword(value),
                           keyBordType: TextInputType.text,
                           controller: _passwordController,
                         ),
@@ -141,7 +139,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           labelText: AppStrings.confirmPasswordLabelText,
                           isPassword: true,
                           validator: (value) =>
-                              MyValidators.validatePasswordConfirmation(
+                              Validators.validatePasswordConfirmation(
                             password: _passwordController.text,
                             confirmPassword: value,
                           ),
@@ -155,8 +153,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   CustomTextFormField(
                     hintText: AppStrings.phoneHintText,
                     labelText: AppStrings.phoneLabelText,
-                    validator: (value) =>
-                        MyValidators.validatePhoneNumber(value),
+                    validator: (value) => Validators.validatePhoneNumber(value),
                     keyBordType: TextInputType.phone,
                     textInputAction: TextInputAction.done,
                     controller: _phoneNumberController,

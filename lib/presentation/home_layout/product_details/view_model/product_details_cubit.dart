@@ -2,14 +2,14 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../core/api/api_result.dart';
 import '../../../../core/base/base_view_model.dart';
-import '../../../../data/model/home/produc_details_model.dart';
+import '../../../../data/models/produc_details_model.dart';
 import '../../../../domain/entities/home_layout/product_details_entity.dart';
-import '../../../../domain/use_case/home/product_details_use_case.dart';
+import '../../../../domain/use_case/home/get_product_details_use_case.dart';
 import 'product_details_states.dart';
 
 @injectable
 class ProductDetailsCubit extends BaseViewModel<ProductDetailsStates> {
-  ProductDetailsUseCase useCase;
+  GetProductDetailsUseCase useCase;
 
   ProductDetailsCubit(this.useCase) : super(ProductDetailsInitialState());
 

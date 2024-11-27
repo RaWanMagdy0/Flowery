@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   _navigateToInitialRoute() async {
-    var token = await TokenManger.getToken();
+    var token = await TokenManager.getToken();
     String initialRoute =
         token != null ? PageRouteName.homeLayout : PageRouteName.logIn;
     if (mounted) {

@@ -19,7 +19,6 @@ class HomeCategoryItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
-          margin: EdgeInsets.only(right: 16.w),
           padding: EdgeInsets.symmetric(
             horizontal: 20.w,
             vertical: 20.h,
@@ -42,6 +41,7 @@ class HomeCategoryItem extends StatelessWidget {
             style: AppFonts.font14BlackWeight400,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
           ),
         ),
       ],

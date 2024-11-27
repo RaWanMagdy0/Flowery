@@ -1,6 +1,6 @@
 import 'secure_storage.dart';
 
-class TokenManger {
+class TokenManager {
   static const String tokenKey = "token";
 
   static Future<void> setToken({required String token}) async {

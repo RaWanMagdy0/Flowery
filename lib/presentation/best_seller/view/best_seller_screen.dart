@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/routes/page_route_name.dart';
 import '../../../core/styles/colors/app_colors.dart';
 import '../../../core/utils/widget/custom_item_card.dart';
+import '../../../core/utils/widget/shimmer_loading_widget.dart';
 import '../view_model/best_seller_state.dart';
 import '../view_model/best_seller_view_model.dart';
 
@@ -68,8 +69,21 @@ class _BestSellerScreenState extends State<BestSellerScreen> {
       body: BlocBuilder<BestSellerViewModel, BestSellerState>(
         builder: (context, state) {
           return switch (state) {
-            BestSellerLoading() => const Center(
-                child: CircularProgressIndicator(color: AppColors.kPink),
+            BestSellerLoading() => GridView.builder(
+                padding: EdgeInsets.all(8.w),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.78,
+                  crossAxisSpacing: 10.w,
+                  mainAxisSpacing: 16.h,
+                ),
+                itemCount: 4,
+                itemBuilder: (context, index) {
+                  return ShimmerLoadingWidget(
+                    width: 150.w,
+                    height: 200.h,
+                  );
+                },
               ),
             BestSellerError(message: final message) => Center(
                 child: Column(

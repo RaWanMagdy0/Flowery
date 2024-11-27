@@ -7,14 +7,12 @@ import '../../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../core/utils/const/app_string.dart';
 import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
-import '../../../../../../core/utils/functions/validators/my_validators.dart';
+import '../../../../../../core/utils/functions/validators/validators.dart';
 import '../../../../../../core/utils/widget/custom_text_form_field.dart';
 import '../../../view_model/forget_passwoed_cubit.dart';
 import '../../../view_model/forget_password_states.dart';
 
 class ForgetPassword extends StatefulWidget {
-  static String routeName = "ForgetPassword";
-
   const ForgetPassword({super.key});
 
   @override
@@ -71,7 +69,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     child: CustomTextFormField(
                       hintText: AppStrings.emailHintText,
                       labelText: AppStrings.emailLabelText,
-                      validator: (value) => MyValidators.validateEmail(value),
+                      validator: (value) => Validators.validateEmail(value),
                       keyBordType: TextInputType.text,
                       controller: viewModel.emailController,
                     ),
