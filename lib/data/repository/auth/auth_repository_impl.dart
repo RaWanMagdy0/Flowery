@@ -54,5 +54,11 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<Result<String?>> verifyResetCode({required String resetCode}) async {
     return await dataSource.verifyResetCode(resetCode: resetCode);
+
+}
+
+  @override
+  Future<Result<String?>> resetPassword({required String email, required String newPassword,}) async {
+    return await dataSource.resetPassword(email: email, newPassword: newPassword,);
   }
 }
