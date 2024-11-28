@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../../core/styles/colors/app_colors.dart';
-import '../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../core/styles/images/app_images.dart';
+import '../../../../../../core/utils/widget/delivery_address_widget.dart';
 import '../../../../widgets/search_bar_widget.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -30,25 +29,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
             ],
           ),
           16.verticalSpace,
-          Row(
-            children: [
-              Image.asset(AppImages.location),
-              8.horizontalSpace,
-              Text(
-                'Deliver to ',
-                style: AppFonts.font14BlackWeight400,
-              ),
-              Text(
-                '2XVP+XC - Sheikh Zayed',
-                style: AppFonts.font14BlackWeight500,
-              ),
-              Icon(
-                Icons.keyboard_arrow_down,
-                size: 32.r,
-                color: AppColors.kPink,
-              ),
-            ],
-          ),
+          DeliveryAddressWidget(),
         ],
       ),
     );

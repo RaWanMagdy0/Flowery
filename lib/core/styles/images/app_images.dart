@@ -15,4 +15,5 @@ class AppImages {
   static const location = 'assets/images/location_icon.png';
   static const splash2 = "assets/images/splash2.jpg";
   static const logoWithTitle = "assets/images/flowery_logo_with_title.png";
+  static const trashIcon = "assets/icons/trash_icon.svg";
 }

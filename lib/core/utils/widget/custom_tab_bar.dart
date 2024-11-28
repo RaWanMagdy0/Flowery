@@ -65,7 +65,7 @@ class TabBarWidget extends StatelessWidget {
             Center(child: Text("Gifts Items")),
           ],
           selectedTextStyle: AppFonts.font16PinkWeight400,
-          unselectedTextStyle: AppFonts.font16GreyWeight400,
+          unselectedTextStyle: AppFonts.font16LightGreyWeight400,
           indicatorColor: AppColors.kPink,
         ),
       ),
