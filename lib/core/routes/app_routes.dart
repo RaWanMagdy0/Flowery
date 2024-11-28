@@ -1,3 +1,4 @@
+import 'package:flowery/presentation/home_layout/screens/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -69,6 +70,8 @@ class AppRoutes {
 
       case PageRouteName.homeLayout:
         return _handleMaterialPageRoute(widget: MainPage());
+ case PageRouteName.profile:
+        return _handleMaterialPageRoute(widget: ProfileScreen());
 
       case PageRouteName.productDetails:
         return MaterialPageRoute(

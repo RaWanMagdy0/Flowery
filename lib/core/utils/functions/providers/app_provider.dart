@@ -12,7 +12,6 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
   set token(String value) {
     notifyListeners();
   }
