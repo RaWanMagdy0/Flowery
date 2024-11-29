@@ -1,7 +1,7 @@
-import 'package:flowery/presentation/home_layout/screens/profile/profile_screen.dart';
+import 'package:flowery/presentation/home_layout/screens/profile/view/profile_screen.dart';
+import 'package:flowery/presentation/home_layout/screens/profile/view_model/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../presentation/auth/forgot_password/view/widgets/email_verification_widget/email_verification.dart';
 import '../../presentation/auth/forgot_password/view/widgets/forgot_password_widget/forget_password_screen.dart';
 import '../../presentation/auth/forgot_password/view_model/forget_passwoed_cubit.dart';
@@ -40,6 +40,12 @@ class AppRoutes {
             child: LogInScreen(),
           ),
         );
+      case PageRouteName.profile:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => getIt<ProfileCubit>(),
+                  child: ProfileScreen(),
+                ));
 
       case PageRouteName.signUp:
         return MaterialPageRoute(
@@ -70,8 +76,6 @@ class AppRoutes {
 
       case PageRouteName.homeLayout:
         return _handleMaterialPageRoute(widget: MainPage());
- case PageRouteName.profile:
-        return _handleMaterialPageRoute(widget: ProfileScreen());
 
       case PageRouteName.productDetails:
         return MaterialPageRoute(
