@@ -24,7 +24,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  String gender = "femail";
+  String? gender;
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +54,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Text(state.errorMessage ?? ''),
                 );
               } else if (state is GetLoggedUserInfoSuccessState) {
+                gender = state.user!.gender!;
                 return SingleChildScrollView(
                   child: Column(
                     children: [
@@ -61,7 +62,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         children: [
                           ClipOval(
                             child: Image.network(
-                              AppImages.photo,
+                              state.user!.photo??"",
                               width: 90.w,
                               height: 90.h,
                               fit: BoxFit.cover,
@@ -174,7 +175,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         activeColor: Colors.pink,
                                         onChanged: (value) {
                                           setState(() {
-                                            gender = value!;
+                                            gender = value as String;
                                           });
                                         },
                                       ),
@@ -189,7 +190,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         activeColor: Colors.pink,
                                         onChanged: (value) {
                                           setState(() {
-                                            gender = value!;
+                                            gender = value as String;
                                           });
                                         },
                                       ),
