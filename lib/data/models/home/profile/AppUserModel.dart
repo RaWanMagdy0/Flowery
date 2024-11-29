@@ -1,4 +1,3 @@
-
 import '../../../../domain/entities/home_layout/profile/User.dart';
 import 'UserModel.dart';
 
@@ -28,15 +27,13 @@ class AppUserModel {
     return User(
       id: user?.id,
       phone: user?.phone,
+      photo: user?.phone,
       firstName: user?.firstName,
       lastName: user?.lastName,
-      username: user?.username,
       email: user?.email,
-      passwordChangedAt: user?.passwordChangedAt,
-      passwordResetCode: user?.passwordResetCode,
-      passwordResetExpires: user?.passwordResetExpires,
-      resetCodeVerified: user?.resetCodeVerified,
-      isVerified: user?.isVerified,
+      gender: user?.gender,
+      role: user?.role,
+
 
     );
   }

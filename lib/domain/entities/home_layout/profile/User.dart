@@ -1,31 +1,43 @@
 class User {
   User({
     this.id,
-    this.username,
     this.firstName,
     this.lastName,
     this.email,
+    this.gender,
     this.phone,
+    this.photo,
     this.role,
-    this.isVerified,
+    this.wishlist,
+    this.addresses,
     this.createdAt,
-    this.passwordChangedAt,
-    this.passwordResetCode,
-    this.passwordResetExpires,
-    this.resetCodeVerified,
   });
 
   String? id;
-  String? username;
   String? firstName;
   String? lastName;
   String? email;
+  String? gender;
   String? phone;
+  String? photo;
   String? role;
-  bool? isVerified;
+  List<WishlistItem>? wishlist;
+  List<AddressItem>? addresses;
   String? createdAt;
-  String? passwordChangedAt;
-  String? passwordResetCode;
-  String? passwordResetExpires;
-  bool? resetCodeVerified;
+
+}
+class WishlistItem {
+  WishlistItem({this.id, this.name});
+
+  String? id;
+  String? name;
+
+}
+
+class AddressItem {
+  AddressItem({this.street, this.city});
+
+  String? street;
+  String? city;
+
 }
