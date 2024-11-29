@@ -1,14 +1,11 @@
 import 'package:flowery/core/utils/widget/custom_button.dart';
 import 'package:flowery/core/utils/widget/custom_text_form_field.dart';
-import 'package:flowery/data/models/auth/response/forget_password_model.dart';
 import 'package:flowery/presentation/auth/forgot_password/view_model/forget_passwoed_cubit.dart';
 import 'package:flowery/presentation/auth/forgot_password/view_model/forget_password_states.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
-
-import '../../../../../../core/routes/page_route_name.dart';
 import '../../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../core/utils/const/app_string.dart';
