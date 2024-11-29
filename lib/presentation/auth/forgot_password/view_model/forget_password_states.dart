@@ -49,5 +49,20 @@ class ResendErrorState extends ForgotPasswordStates {
   final String? errorMassage;
   ResendErrorState({required this.errorMassage});
 }
+//ResetPassword
+class ResetPasswordLoadingState extends ForgotPasswordStates {
+  String? loadingMessage;
+  ResetPasswordLoadingState({required this.loadingMessage});
+}
+
+class ResetPasswordSuccessState extends ForgotPasswordStates {
+  final String? success;
+  ResetPasswordSuccessState({required this.success});
+}
+
+class ResetPasswordErrorState extends ForgotPasswordStates {
+  final String? errorMassage;
+  ResetPasswordErrorState({required this.errorMassage});
+}
 
 class UpdateValidationState extends ForgotPasswordStates {}

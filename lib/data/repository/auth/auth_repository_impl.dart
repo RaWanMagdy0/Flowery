@@ -1,3 +1,4 @@
+import 'package:flowery/data/models/auth/requests/reset_password_request_model.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../core/api/api_result.dart';
@@ -54,5 +55,10 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<Result<String?>> verifyResetCode({required String resetCode}) async {
     return await dataSource.verifyResetCode(resetCode: resetCode);
+  }
+
+  @override
+  Future<Result<String?>> resetPassword(ResetPasswordRequestBody resetPassword) async{
+   return await dataSource.resetPassword(resetPassword);
   }
 }

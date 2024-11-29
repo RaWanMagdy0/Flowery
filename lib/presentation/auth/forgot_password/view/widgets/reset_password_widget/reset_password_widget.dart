@@ -1,21 +1,120 @@
+import 'package:flowery/core/utils/widget/custom_button.dart';
+import 'package:flowery/core/utils/widget/custom_text_form_field.dart';
+import 'package:flowery/data/models/auth/response/forget_password_model.dart';
+import 'package:flowery/presentation/auth/forgot_password/view_model/forget_passwoed_cubit.dart';
+import 'package:flowery/presentation/auth/forgot_password/view_model/forget_password_states.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get_it/get_it.dart';
 
+import '../../../../../../core/routes/page_route_name.dart';
+import '../../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../core/utils/const/app_string.dart';
+import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
+import '../../../../../../core/utils/functions/validators/validators.dart';
 
-class ResetPasswordWidget extends StatelessWidget {
-  const ResetPasswordWidget({super.key});
+class ResetPasswordViewBody extends StatefulWidget {
+  const ResetPasswordViewBody({super.key});
+
+  @override
+  State<ResetPasswordViewBody> createState() => _ResetPasswordViewBodyState();
+}
+
+class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
+  final _resetPasswordViewModel = GetIt.instance.get<ForgetPasswordCubit>();
+  var confirmPasswordController = TextEditingController();
+  var newPasswordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    confirmPasswordController.dispose();
+    newPasswordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-      Center(
-        child: Text(
-          AppStrings.resetPasswordScreenTitle,
-          style: AppFonts.font18BlackWeight500,
+    return BlocListener<ForgetPasswordCubit, ForgotPasswordStates>(
+      bloc: _resetPasswordViewModel,
+      listener: (context, state) => _handelStateChange(state),
+      child: Padding(
+        padding: EdgeInsets.all(15.sp),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              SizedBox(
+                height: 30.h,
+              ),
+              Text(
+                AppStrings.resetPasswordScreenTitle,
+                style: AppFonts.font18BlackWeight500.copyWith(fontSize: 18),
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              Text(AppStrings.resetPasswordScreenDescription,
+                  textAlign: TextAlign.center,
+                  style: AppFonts.font14BlackWeight400),
+              SizedBox(
+                height: 20.h,
+              ),
+              CustomTextFormField(
+                hintText: AppStrings.passwordHintText,
+                labelText: AppStrings.passwordLabelText,
+                controller: newPasswordController,
+                keyBordType: TextInputType.text,
+                isPassword: true,
+                validator: (value) => Validators.validatePassword(value),
+              ),
+              20.verticalSpace,
+              CustomTextFormField(
+                hintText: AppStrings.confirmPasswordHintText,
+                labelText: AppStrings.confirmPasswordHintText,
+                controller: confirmPasswordController,
+                keyBordType: TextInputType.text,
+                isPassword: true,
+                validator: (value) => Validators.validatePasswordConfirmation(
+                    password: newPasswordController.text,
+                    confirmPassword: value),
+              ),
+              40.verticalSpace,
+              CustomButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    _resetPasswordViewModel
+                        .resetPassword(newPasswordController.text);
+                  }
+                },
+                color: AppColors.kWhite,
+                text: AppStrings.confirmTitle,
+                textStyle: AppFonts.font16BlackWeight500,
+                borderColor: AppColors.kGray,
+              ),
+            ],
+          ),
         ),
       ),
-    ]));
+    );
+  }
+
+  void _handelStateChange(ForgotPasswordStates state) {
+    if (state is ResetPasswordSuccessState) {
+      Navigator.pop(context);
+      AppDialogs.showSuccessDialog(
+        context: context,
+        message: "Password Changed Successfully",
+        whenAnimationFinished: () => Navigator.pop(context),
+      );
+    } else if (state is ResetPasswordErrorState) {
+      Navigator.pop(context);
+      AppDialogs.showErrorDialog(
+          context: context, errorMassage: state.errorMassage ?? "");
+    } else if (state is ResetPasswordLoadingState) {
+      AppDialogs.showLoading(context: context);
+    }
   }
 }

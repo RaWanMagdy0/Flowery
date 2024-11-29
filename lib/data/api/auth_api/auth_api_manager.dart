@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flowery/data/models/auth/requests/reset_password_request_model.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -30,4 +31,7 @@ abstract class AuthApiManager {
 
   @POST(ApiConstants.verifyResetCode)
   Future<String?> verifyResetCode(@Body() Map<String, dynamic> resetCode);
+  @PUT(ApiConstants.resetPassword)
+  Future<String?> resetPassword(@Body() ResetPasswordRequestBody resetPassword);
+
 }

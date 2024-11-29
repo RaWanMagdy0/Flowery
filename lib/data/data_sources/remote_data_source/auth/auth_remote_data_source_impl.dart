@@ -1,3 +1,4 @@
+import 'package:flowery/data/models/auth/requests/reset_password_request_model.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../core/api/api_result.dart';
@@ -45,6 +46,14 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
       String? message =
           await apiManger.verifyResetCode({"resetCode": resetCode});
       return message;
+    });
+  }
+
+  @override
+  Future<Result<String?>> resetPassword(ResetPasswordRequestBody resetPassword) {
+    return executeApiCall<String?>(() async {
+      final response = await apiManger.resetPassword(resetPassword);
+      return response;
     });
   }
 }
