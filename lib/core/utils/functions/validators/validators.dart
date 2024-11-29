@@ -5,7 +5,12 @@ class Validators {
     }
     return null;
   }
-
+  static String? validateNotEmpty({String? title, String? value}) {
+    if (_isEmpty(value)) {
+      return ("$title is required");
+    }
+    return null;
+  }
   static String? validateEmail(String? value) {
     if (_isEmpty(value)) {
       return ("Email is required");

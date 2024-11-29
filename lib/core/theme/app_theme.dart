@@ -6,6 +6,16 @@ import '../styles/fonts/app_fonts.dart';
 class AppTheme {
   static ThemeData appTheme = ThemeData(
     scaffoldBackgroundColor: AppColors.kWhite,
+    radioTheme: RadioThemeData(
+
+      fillColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(MaterialState.selected)) {
+          return AppColors.kPink;
+        }
+        return AppColors.kPink;
+      }),
+      overlayColor: WidgetStateProperty.all(AppColors.kPink),
+    ),
     appBarTheme: AppBarTheme(
       centerTitle: false,
       elevation: 0.0,

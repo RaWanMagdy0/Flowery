@@ -9,8 +9,8 @@ import '../../../../models/home/occasions/occasions_response_model.dart';
 import '../../../../models/produc_details_model.dart';
 import 'occasions_remote_data_sourcse.dart';
 
-@Injectable(as: OccastionsRmoteDataSourcse)
-class OccastionsRemoteDataSorceImpl extends OccastionsRmoteDataSourcse {
+@Injectable(as: OccassionsRemoteDataSource)
+class OccastionsRemoteDataSorceImpl extends OccassionsRemoteDataSource {
   HomeApiManger apiManger;
 
   OccastionsRemoteDataSorceImpl({required this.apiManger});

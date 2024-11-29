@@ -31,7 +31,6 @@ class _BestSellerScreenState extends State<BestSellerScreen> {
         preferredSize: Size.fromHeight(70.h),
         child: AppBar(
           forceMaterialTransparency: true,
-          // TODO: use leading instead of icon button
           automaticallyImplyLeading: false,
           title: Row(
             children: [
