@@ -44,9 +44,17 @@ class CartAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       bottom: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: DeliveryAddressWidget(),
+        child: BlocBuilder<CartViewModel, CartState>(
+          builder: (context, state) {
+            if (state is NoUserLogged) {
+              return SizedBox();
+            } else {
+              return Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: DeliveryAddressWidget(),
+              );
+            }
+          },
         ),
       ),
     );

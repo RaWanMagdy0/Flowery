@@ -5,9 +5,12 @@ import 'package:svg_flutter/svg.dart';
 import '../../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../core/styles/images/app_images.dart';
+import '../../../../../../domain/entities/cart/cart_product_entity.dart';
 
 class CartProductItem extends StatelessWidget {
-  const CartProductItem({super.key});
+  final CartProduct cartProduct;
+
+  const CartProductItem({super.key, required this.cartProduct});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,7 @@ class CartProductItem extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(8.r),
                 child: Image.network(
-                  'https://upload.wikimedia.org/wikipedia/commons/8/8b/Rose_flower.jpg',
+                  cartProduct.product?.imgCover ?? '',
                   width: 96.w,
                   height: 100.h,
                   fit: BoxFit.cover,
@@ -37,7 +40,7 @@ class CartProductItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Rose Flower',
+                    cartProduct.product?.title ?? '',
                     style: AppFonts.font16BlackWeight500,
                   ),
                   4.verticalSpace,
@@ -47,7 +50,7 @@ class CartProductItem extends StatelessWidget {
                   ),
                   21.verticalSpace,
                   Text(
-                    'EGP 600',
+                    cartProduct.totalPrice.toString(),
                     style: AppFonts.font14BlackWeight600,
                   ),
                 ],
@@ -78,7 +81,7 @@ class CartProductItem extends StatelessWidget {
                 ),
                 8.horizontalSpace,
                 Text(
-                  '1',
+                  cartProduct.quantity.toString(),
                   style: AppFonts.font14BlackWeight600,
                 ),
                 8.horizontalSpace,

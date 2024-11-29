@@ -1,6 +1,7 @@
 import 'package:injectable/injectable.dart';
 
 import '../../../core/api/api_result.dart';
+import '../../../core/local/secure_storage.dart';
 import '../../../core/local/token_manger.dart';
 import '../../../domain/repository/auth/auth_repository.dart';
 import '../../data_sources/remote_data_source/auth/auth_remote_data_source.dart';
@@ -23,15 +24,17 @@ class AuthRepositoryImpl extends AuthRepository {
     switch (result) {
       case Success():
         if (rememberMe) {
-          final token = result.data?.token;
-
-          if (token == null || token.isEmpty) {
-            final exception = Exception('Token is Empty, Please try again');
-            return Fail(exception: exception);
-          }
-
-          TokenManager.setToken(token: token);
+          SecureStorageFactory.writeData(key: 'rememberMe', value: 'true');
         }
+
+        final token = result.data?.token;
+
+        if (token == null || token.isEmpty) {
+          final exception = Exception('Token is Empty, Please try again');
+          return Fail(exception: exception);
+        }
+
+        TokenManager.setToken(token: token);
 
         return Success();
 

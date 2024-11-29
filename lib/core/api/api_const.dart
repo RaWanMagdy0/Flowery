@@ -10,4 +10,5 @@ class ApiConstants {
   static const String getBestSellerProducts = "api/v1/best-seller";
   static const String getAllOccasions = "api/v1/occasions";
   static const String getAllProducts = "api/v1/products";
+  static const String getCartProducts = 'api/v1/cart';
 }

@@ -11,7 +11,7 @@ class BaseViewModel<T> extends Cubit<T> {
     if (exception is DioException) {
       return _mapDioExceptionToMessage(exception);
     } else {
-      return 'An unknown error occurred';
+      return exception!.toString();
     }
   }
 

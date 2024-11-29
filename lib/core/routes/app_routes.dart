@@ -79,7 +79,7 @@ class AppRoutes {
 
         return _handleMaterialPageRoute(
           widget: BlocProvider.value(
-            value: cartViewModel!,
+            value: cartViewModel!..checkLoggedUser(),
             child: MainPage(),
           ),
         );

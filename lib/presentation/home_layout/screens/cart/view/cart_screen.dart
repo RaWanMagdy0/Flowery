@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../view_model/cart_view_model_cubit.dart';
 import 'widgets/cart_app_bar.dart';
-import 'widgets/cart_product_item.dart';
+import 'widgets/cart_empty_widget.dart';
+import 'widgets/cart_login_widget.dart';
+import 'widgets/cart_products_list.dart';
 import 'widgets/cart_total_price_and_checkout_button.dart';
+import 'widgets/cat_products_loading.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -12,13 +16,27 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CartAppBar(),
-      body: ListView.builder(
-        padding: EdgeInsets.only(top: 24.h, left: 16.w, right: 16.w),
-        itemCount: 4,
-        itemBuilder: (context, index) => Padding(
-          padding: EdgeInsets.only(bottom: index == 4 ? 0 : 24.h),
-          child: CartProductItem(),
-        ),
+      body: BlocBuilder<CartViewModel, CartState>(
+        bloc: context.read<CartViewModel>()..getCartProducts(),
+        builder: (context, state) {
+          if (state is NoUserLogged) {
+            return CartLoginWidget();
+          } else if (state is CartLoading) {
+            return CartProductsLoading();
+          } else if (state is CartEmpty) {
+            return CartEmptyWidget();
+          } else if (state is CartLoaded) {
+            return CartProductsList(
+              cartProducts: state.data ?? [],
+            );
+          } else if (state is CartError) {
+            return Center(
+              child: Text(state.errorMessage),
+            );
+          } else {
+            return Container();
+          }
+        },
       ),
       bottomNavigationBar: TotalPriceAndCheckoutButton(),
     );

@@ -100,14 +100,6 @@ class ProductDetails extends StatelessWidget {
                               //   moreStyle: AppFonts.font12PinkWeight500UnderlinedPink,
                               //   lessStyle: AppFonts.font12PinkWeight500UnderlinedPink,
                               // ),
-                              15.verticalSpace,
-                              CustomButton(
-                                onPressed: () {},
-                                color: AppColors.kPink,
-                                text: "Add to Cart",
-                                textStyle: AppFonts.font16WhiteWeight500,
-                              ),
-                              24.verticalSpace,
                             ],
                           ),
                         ),
@@ -128,6 +120,15 @@ class ProductDetails extends StatelessWidget {
             return Center(child: Text("Unexpected state."));
           }
         },
+      ),
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+        child: CustomButton(
+          onPressed: () {},
+          color: AppColors.kPink,
+          text: "Add to Cart",
+          textStyle: AppFonts.font16WhiteWeight500,
+        ),
       ),
     );
   }
@@ -153,7 +154,7 @@ class ProductDetails extends StatelessWidget {
                     ?.map(
                       (url) => Image.network(
                         url,
-                        fit: BoxFit.fitHeight,
+                        fit: BoxFit.fill,
                       ),
                     )
                     .toList() ??
