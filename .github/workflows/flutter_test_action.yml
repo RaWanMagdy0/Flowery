@@ -3,12 +3,9 @@ name: Flutter CI
 # Trigger the workflow on push and pull request events
 on:
   push:
-    # Trigger on any branch push
     branches:
       - '*'
-  
   pull_request:
-    # Trigger when a PR is created targeting the development or master branches
     branches:
       - development
       - master
@@ -32,7 +29,11 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      # Step 4: Run unit tests
+      # Step 4: Run build_runner to generate mocks
+      - name: Generate mocks
+        run: flutter pub run build_runner build --delete-conflicting-outputs
+
+      # Step 5: Run unit tests
       - name: Run unit tests
         run: flutter test
 
