@@ -21,12 +21,12 @@ jobs:
           echo "Validating PR title: $PR_TITLE"
 
           # Regex for PR title validation
-          PR_TITLE_REGEX="^(feat|fix|release|hotfix|build|test)\/FECOM-\{[A-Za-z0-9-]+\}-[A-Za-z0-9-]+$"
+          PR_TITLE_REGEX="^(feat|fix|release|hotfix|build|test)\/FECOM-[0-9]+-[A-Za-z0-9\s-]+$"
           
           # Validate PR title format
           if [[ ! "$PR_TITLE" =~ $PR_TITLE_REGEX ]]; then
             echo "Error: PR title '$PR_TITLE' does not match the required format."
-            echo "Required format: type(scope): {TicketNum}-task name"
+            echo "Required format: type/FECOM-{TicketNum}-task name"
             exit 1
           fi
 
