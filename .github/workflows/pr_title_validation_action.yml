@@ -14,7 +14,7 @@ jobs:
 
       - name: Validate PR title
         run: |
-          shell: bash
+          # shell: bash
           PR_TITLE="${{ github.event.pull_request.title }}"
           PR_TITLE_REGEX="^(feat|fix|release|hotfix|build|test)\/FECOM-[0-9]+-[A-Za-z0-9\s-]+$"
 
