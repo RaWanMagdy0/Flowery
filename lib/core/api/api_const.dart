@@ -10,5 +10,6 @@ class ApiConstants {
   static const String getBestSellerProducts = "api/v1/best-seller";
   static const String getAllOccasions = "api/v1/occasions";
   static const String getAllProducts = "api/v1/products";
-  static const resetPassword = '/api/v1/auth/resetPassword';
+  //static const resetPassword = '/api/v1/auth/resetPassword';
+  static const String changePassword = "api/v1/auth/change-password";
 }

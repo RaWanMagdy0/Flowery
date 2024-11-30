@@ -4,7 +4,7 @@ import 'package:retrofit/retrofit.dart';
 
 import '../../../core/api/api_const.dart';
 import '../../models/auth/requests/login_request_model.dart';
-import '../../models/auth/requests/reset_password_request_model.dart';
+import '../../models/auth/requests/change_password_request_model.dart';
 import '../../models/auth/requests/sign_up_request_model.dart';
 import '../../models/auth/response/login_response_model.dart';
 import '../../models/auth/response/sign_up_response_model.dart';
@@ -32,5 +32,6 @@ abstract class AuthApiManager {
   @POST(ApiConstants.verifyResetCode)
   Future<String?> verifyResetCode(@Body() Map<String, dynamic> resetCode);
 
-  @PATCH(ApiConstants.resetPassword)
-  Future<String?> resetPassword(@Body() ResetPasswordRequestModel request);}
+  @PATCH(ApiConstants.changePassword)
+  Future<String?> changePassword(@Body() ChangePasswordRequestModel request, @Header('Authorization') String token,);
+}

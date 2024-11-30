@@ -2,9 +2,10 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../core/api/api_result.dart';
 import '../../../../core/api/execute_api_call.dart';
+import '../../../../core/local/token_manger.dart';
 import '../../../api/auth_api/auth_api_manager.dart';
 import '../../../models/auth/requests/login_request_model.dart';
-import '../../../models/auth/requests/reset_password_request_model.dart';
+import '../../../models/auth/requests/change_password_request_model.dart';
 import '../../../models/auth/requests/sign_up_request_model.dart';
 import '../../../models/auth/response/login_response_model.dart';
 import 'auth_remote_data_source.dart';
@@ -50,16 +51,21 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   }
 
   @override
-  Future<Result<String?>> resetPassword({
-    required String email,
+  Future<Result<String?>> changePassword({
+    required String currentPassword,
     required String newPassword,
   }) {
     return executeApiCall<String?>(() async {
-      final request = ResetPasswordRequestModel(
-        email: email,
+      final token = await TokenManager.getToken();
+      final request = ChangePasswordRequestModel(
+        password: currentPassword,
         newPassword: newPassword,
       );
-      return await apiManger.resetPassword(request);
+      return await apiManger.changePassword(
+        request,
+        'Bearer $token',
+      );
     });
   }
+
 }

@@ -4,17 +4,17 @@ import '../../../core/api/api_result.dart';
 import '../../repository/auth/auth_repository.dart';
 
 @injectable
-class ResetPasswordUseCase {
+class ChangePasswordUseCase {
   final AuthRepository _repository;
 
-  ResetPasswordUseCase(this._repository);
+  ChangePasswordUseCase(this._repository);
 
   Future<Result<void>> call({
+    required String currentPassword,
     required String newPassword,
-    required String email,
   }) {
-    return _repository.resetPassword(
-      email: email,
+    return _repository.changePassword(
+      currentPassword: currentPassword,
       newPassword: newPassword,
     );
   }
