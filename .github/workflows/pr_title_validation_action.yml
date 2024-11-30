@@ -1,0 +1,33 @@
+name: PR Title Validation
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Validate Pull Request Title
+      - name: Validate PR title
+        run: |
+          PR_TITLE="${{ github.event.pull_request.title }}"
+
+          echo "Validating PR title: $PR_TITLE"
+
+          # Regex for PR title validation
+          PR_TITLE_REGEX="^(feat|fix|release|hotfix|build|test)\/FECOM-\{[A-Za-z0-9-]+\}-[A-Za-z0-9-]+$"
+          
+          # Validate PR title format
+          if [[ ! "$PR_TITLE" =~ $PR_TITLE_REGEX ]]; then
+            echo "Error: PR title '$PR_TITLE' does not match the required format."
+            echo "Required format: type(scope): {TicketNum}-task name"
+            exit 1
+          fi
+
+          echo "PR title is valid."
