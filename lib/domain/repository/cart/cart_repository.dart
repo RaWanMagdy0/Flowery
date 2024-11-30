@@ -1,6 +1,7 @@
 import '../../../core/api/api_result.dart';
-import '../../entities/cart/cart_product_entity.dart';
+import '../../entities/cart/cart_response_entity.dart';
 
 abstract class CartRepository {
-  Future<Result<List<CartProduct>?>> getCartProducts();
+  Future<Result<CartResponse?>> getCartProducts();
+  Future<Result<bool?>> addProductToCart(String productId);
 }

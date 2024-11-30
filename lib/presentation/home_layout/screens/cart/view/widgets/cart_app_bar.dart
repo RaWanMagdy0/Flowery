@@ -19,7 +19,7 @@ class CartAppBar extends StatelessWidget implements PreferredSizeWidget {
           const Text('Cart'),
           BlocBuilder<CartViewModel, CartState>(
             builder: (context, state) {
-              int cartItemsCount = context.read<CartViewModel>().cartItemsCount;
+              num cartItemsCount = context.read<CartViewModel>().cartItemsCount;
 
               return Text(
                 cartItemsCount != 0 ? ' ($cartItemsCount items)' : '',

@@ -50,6 +50,11 @@ class _TotalPriceAndCheckoutButtonState
             ),
           );
         } else {
+          final num deliveryFees = 10;
+          final num subTotalPrice =
+              context.read<CartViewModel>().cart.totalPrice ?? 0;
+          final num totalPrice = subTotalPrice + deliveryFees;
+
           return Container(
             margin: EdgeInsets.only(
               top: 8.h,
@@ -62,14 +67,14 @@ class _TotalPriceAndCheckoutButtonState
               children: [
                 CartPriceInfoWidget(
                   title: 'Sub Total',
-                  value: '100',
+                  value: subTotalPrice.toString(),
                   titleStyle: AppFonts.font16GreyWeight400,
                   valueStyle: AppFonts.font16GreyWeight400,
                 ),
                 8.verticalSpace,
                 CartPriceInfoWidget(
                   title: 'Delivery Fee',
-                  value: '10',
+                  value: deliveryFees.toString(),
                   titleStyle: AppFonts.font16GreyWeight400,
                   valueStyle: AppFonts.font16GreyWeight400,
                 ),
@@ -80,7 +85,7 @@ class _TotalPriceAndCheckoutButtonState
                 8.verticalSpace,
                 CartPriceInfoWidget(
                   title: 'Total',
-                  value: '110',
+                  value: totalPrice.toStringAsFixed(2),
                 ),
                 24.verticalSpace,
                 CustomButton(

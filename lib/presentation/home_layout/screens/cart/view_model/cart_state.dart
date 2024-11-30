@@ -9,7 +9,7 @@ final class NoUserLogged extends CartState {}
 final class CartLoading extends CartState {}
 
 final class CartLoaded extends CartState {
-  final List<CartProduct>? data;
+  final Cart? data;
   CartLoaded(this.data);
 }
 
@@ -19,4 +19,14 @@ final class CartError extends CartState {
   final String errorMessage;
 
   CartError(this.errorMessage);
+}
+
+final class AddToCartLoading extends CartState {}
+
+final class AddToCartSuccess extends CartState {}
+
+final class AddToCartError extends CartState {
+  final String errorMessage;
+
+  AddToCartError(this.errorMessage);
 }

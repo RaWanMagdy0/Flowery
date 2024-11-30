@@ -85,6 +85,8 @@ class AppRoutes {
         );
 
       case PageRouteName.productDetails:
+        getCartViewModel();
+
         return MaterialPageRoute(
           builder: (context) => ProductDetails(),
           settings: setting,

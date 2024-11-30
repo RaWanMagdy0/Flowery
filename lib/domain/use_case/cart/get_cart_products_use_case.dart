@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
 
 import '../../../core/api/api_result.dart';
-import '../../entities/cart/cart_product_entity.dart';
+import '../../entities/cart/cart_response_entity.dart';
 import '../../repository/cart/cart_repository.dart';
 
 @injectable
@@ -10,7 +10,7 @@ class GetCartProductsUseCase {
 
   GetCartProductsUseCase(this._repository);
 
-  Future<Result<List<CartProduct>?>> call() async {
+  Future<Result<CartResponse?>> call() async {
     return await _repository.getCartProducts();
   }
 }

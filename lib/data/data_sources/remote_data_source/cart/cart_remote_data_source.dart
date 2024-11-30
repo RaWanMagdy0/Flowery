@@ -1,6 +1,7 @@
 import '../../../../core/api/api_result.dart';
-import '../../../models/cart/cart_products_response_model.dart';
+import '../../../models/cart/responses/cart_response_model.dart';
 
 abstract class CartRemoteDataSource {
-  Future<Result<CartProductsResponseModel>> getCartProducts();
+  Future<Result<CartResponseModel>> getCartProducts();
+  Future<Result<bool?>> addProductToCart(String productId);
 }

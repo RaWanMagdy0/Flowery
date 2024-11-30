@@ -27,7 +27,7 @@ class CartScreen extends StatelessWidget {
             return CartEmptyWidget();
           } else if (state is CartLoaded) {
             return CartProductsList(
-              cartProducts: state.data ?? [],
+              cartProducts: state.data?.products ?? [],
             );
           } else if (state is CartError) {
             return Center(

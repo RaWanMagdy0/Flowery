@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
 
 import '../../../core/api/api_result.dart';
-import '../../../domain/entities/cart/cart_product_entity.dart';
+import '../../../domain/entities/cart/cart_response_entity.dart';
 import '../../../domain/repository/cart/cart_repository.dart';
 import '../../data_sources/remote_data_source/cart/cart_remote_data_source.dart';
 
@@ -12,17 +12,20 @@ class CartRepositoryImpl implements CartRepository {
   CartRepositoryImpl(this.remoteDataSource);
 
   @override
-  Future<Result<List<CartProduct>?>> getCartProducts() async {
+  Future<Result<CartResponse?>> getCartProducts() async {
     final response = await remoteDataSource.getCartProducts();
 
     switch (response) {
       case Success():
-        final List<CartProduct>? products =
-            response.data?.cart?.map((e) => e.toEntity()).toList();
-        return Success(data: products);
+        return Success(data: response.data?.toEntity());
 
       case Fail():
         return Fail(exception: response.exception);
     }
+  }
+
+  @override
+  Future<Result<bool?>> addProductToCart(String productId) async {
+    return await remoteDataSource.addProductToCart(productId);
   }
 }
