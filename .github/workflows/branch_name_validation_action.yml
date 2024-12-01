@@ -46,8 +46,8 @@ jobs:
 
       - name: Validate Branch Name
         run: |
-          # Extract the current branch name
-          BRANCH_NAME=${GITHUB_HEAD_REF}
+          # Extract the compare (head) branch name for the PR
+          BRANCH_NAME=${{ github.event.pull_request.head.ref }}
 
           # Define the regex pattern
           PATTERN="^(feat|bugfix|hotfix|release)\/FECOM-[0-9]+-[A-Za-z0-9-]+$"
