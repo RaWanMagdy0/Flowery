@@ -1,0 +1,38 @@
+name: Dart Linting and Auto-Fix Validation
+
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - development
+      - master
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Dart SDK
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+
+      - name: Install dependencies
+        run: dart pub get
+
+      - name: Run Dart Analyzer (Linting)
+        run: dart analyze --fatal-infos --fatal-warnings
+
+      - name: Apply Dart Fixes
+        run: dart fix --apply
+
+      - name: Run Dart Analyzer After Fixes
+        run: dart analyze --fatal-infos --fatal-warnings
+
+      - name: Check Dart Format
+        run: dart format --set-exit-if-changed .
