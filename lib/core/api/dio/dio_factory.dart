@@ -19,7 +19,8 @@ class DioFactory {
       baseUrl: ApiConstants.baseUrl,
       connectTimeout: _timeout,
       receiveTimeout: _timeout,
-      validateStatus: (status) => status != null ? status <= 500 : false,
+      validateStatus: (status) =>
+          status != null ? status == 200 || status == 201 : false,
     );
     addFreeDioInterceptors(dio);
     return dio;

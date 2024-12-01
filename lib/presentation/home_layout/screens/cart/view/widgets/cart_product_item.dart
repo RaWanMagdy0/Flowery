@@ -1,4 +1,6 @@
+import 'package:flowery/presentation/home_layout/screens/cart/view_model/cart_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:svg_flutter/svg.dart';
 
@@ -25,35 +27,46 @@ class CartProductItem extends StatelessWidget {
       child: Stack(
         children: [
           Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8.r),
-                child: Image.network(
-                  cartProduct.product?.imgCover ?? '',
-                  width: 96.w,
-                  height: 100.h,
-                  fit: BoxFit.cover,
+              Flexible(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.r),
+                  child: Image.network(
+                    cartProduct.product?.imgCover ?? '',
+                    width: 96.w,
+                    height: 100.h,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               8.horizontalSpace,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    cartProduct.product?.title ?? '',
-                    style: AppFonts.font16BlackWeight500,
-                  ),
-                  4.verticalSpace,
-                  Text(
-                    '15 Pink Rose Bouquet',
-                    style: AppFonts.font14GreyWeight400,
-                  ),
-                  21.verticalSpace,
-                  Text(
-                    cartProduct.totalPrice.toString(),
-                    style: AppFonts.font14BlackWeight600,
-                  ),
-                ],
+              Flexible(
+                flex: 2,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(right: 24.w),
+                      child: Text(
+                        cartProduct.product?.title ?? '',
+                        style: AppFonts.font16BlackWeight500,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    4.verticalSpace,
+                    Text(
+                      '15 Pink Rose Bouquet',
+                      style: AppFonts.font14GreyWeight400,
+                    ),
+                    21.verticalSpace,
+                    Text(
+                      cartProduct.totalPrice.toString(),
+                      style: AppFonts.font14BlackWeight600,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -62,7 +75,11 @@ class CartProductItem extends StatelessWidget {
             right: 0,
             child: InkWell(
               borderRadius: BorderRadius.circular(50.r),
-              onTap: () {},
+              onTap: () {
+                context.read<CartViewModel>().removeProductFromCart(
+                      cartProduct.product?.id ?? '',
+                    );
+              },
               child: SvgPicture.asset(AppImages.trashIcon),
             ),
           ),
@@ -73,7 +90,16 @@ class CartProductItem extends StatelessWidget {
               children: [
                 InkWell(
                   borderRadius: BorderRadius.circular(50.r),
-                  onTap: () {},
+                  onTap: () {
+                    if ((cartProduct.quantity ?? 0) > 1) {
+                      final num numQuantity = cartProduct.quantity! - 1;
+
+                      context.read<CartViewModel>().updateCartProductQuantity(
+                            cartProduct.product?.id ?? '',
+                            numQuantity.toInt(),
+                          );
+                    }
+                  },
                   child: Icon(
                     Icons.remove,
                     color: AppColors.kBlack,
@@ -87,7 +113,14 @@ class CartProductItem extends StatelessWidget {
                 8.horizontalSpace,
                 InkWell(
                   borderRadius: BorderRadius.circular(50.r),
-                  onTap: () {},
+                  onTap: () {
+                    final num numQuantity = cartProduct.quantity! + 1;
+
+                    context.read<CartViewModel>().updateCartProductQuantity(
+                          cartProduct.product?.id ?? '',
+                          numQuantity.toInt(),
+                        );
+                  },
                   child: Icon(
                     Icons.add,
                     color: AppColors.kBlack,

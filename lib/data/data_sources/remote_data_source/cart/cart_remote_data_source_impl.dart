@@ -23,7 +23,6 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
         final tokenException =
             Exception('Token is empty, please login and try again');
         throw tokenException;
-        // return Fail(exception: tokenException);
       }
 
       token = 'Bearer $token';
@@ -33,15 +32,14 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
   }
 
   @override
-  Future<Result<bool?>> addProductToCart(String productId) async {
-    return await executeApiCall(() async {
+  Future<Result<dynamic>> addProductToCart(String productId) async {
+    return await executeApiCall<dynamic>(() async {
       String? token = await TokenManager.getToken();
 
       if (token == null || token.isEmpty) {
         final tokenException =
             Exception('Token is empty, please login and try again');
         throw tokenException;
-        // return Fail(exception: tokenException);
       }
 
       token = 'Bearer $token';
@@ -49,7 +47,67 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
       final AddToCartRequestBodyModel body =
           AddToCartRequestBodyModel(productId: productId);
 
-      return await apiManager.addProductToCart(token, body);
+      await apiManager.addProductToCart(token, body);
+
+      return true;
+    });
+  }
+
+  @override
+  Future<Result<CartResponseModel>> updateCartProductQuantity(
+      String productId, int quantity) async {
+    return await executeApiCall<CartResponseModel>(() async {
+      String? token = await TokenManager.getToken();
+
+      if (token == null || token.isEmpty) {
+        final tokenException =
+            Exception('Token is empty, please login and try again');
+        throw tokenException;
+      }
+
+      token = 'Bearer $token';
+
+      final body = {"quantity": quantity};
+
+      return await apiManager.updateCartProductQuantity(productId, token, body);
+    });
+  }
+
+  @override
+  Future<Result> removeProductFromCart(String productId) async {
+    return await executeApiCall<dynamic>(() async {
+      String? token = await TokenManager.getToken();
+
+      if (token == null || token.isEmpty) {
+        final tokenException =
+            Exception('Token is empty, please login and try again');
+        throw tokenException;
+      }
+
+      token = 'Bearer $token';
+
+      await apiManager.removeProductFromCart(productId, token);
+
+      return true;
+    });
+  }
+
+  @override
+  Future<Result> clearCart() async {
+    return await executeApiCall<dynamic>(() async {
+      String? token = await TokenManager.getToken();
+
+      if (token == null || token.isEmpty) {
+        final tokenException =
+            Exception('Token is empty, please login and try again');
+        throw tokenException;
+      }
+
+      token = 'Bearer $token';
+
+      await apiManager.clearCart(token);
+
+      return true;
     });
   }
 }

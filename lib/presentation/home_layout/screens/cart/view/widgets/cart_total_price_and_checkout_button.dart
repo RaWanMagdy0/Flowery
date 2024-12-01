@@ -6,7 +6,7 @@ import '../../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../core/utils/widget/custom_button.dart';
 import '../../../../../../core/utils/widget/shimmer_loading_widget.dart';
-import '../../view_model/cart_view_model_cubit.dart';
+import '../../view_model/cart_view_model.dart';
 import 'cart_price_info_widget.dart';
 
 class TotalPriceAndCheckoutButton extends StatefulWidget {

@@ -26,6 +26,55 @@ class CartRepositoryImpl implements CartRepository {
 
   @override
   Future<Result<bool?>> addProductToCart(String productId) async {
-    return await remoteDataSource.addProductToCart(productId);
+    final response = await remoteDataSource.addProductToCart(productId);
+
+    switch (response) {
+      case Success():
+        return Success(data: true);
+
+      case Fail():
+        return Fail(exception: response.exception);
+    }
+  }
+
+  @override
+  Future<Result<CartResponse?>> updateCartProductQuantity(
+      String productId, int quantity) async {
+    final response =
+        await remoteDataSource.updateCartProductQuantity(productId, quantity);
+
+    switch (response) {
+      case Success():
+        return Success(data: response.data?.toEntity());
+
+      case Fail():
+        return Fail(exception: response.exception);
+    }
+  }
+
+  @override
+  Future<Result<bool?>> removeProductFromCart(String productId) async {
+    final response = await remoteDataSource.removeProductFromCart(productId);
+
+    switch (response) {
+      case Success():
+        return Success(data: true);
+
+      case Fail():
+        return Fail(exception: response.exception);
+    }
+  }
+
+  @override
+  Future<Result<bool?>> clearCart() async {
+    final response = await remoteDataSource.clearCart();
+
+    switch (response) {
+      case Success():
+        return Success(data: true);
+
+      case Fail():
+        return Fail(exception: response.exception);
+    }
   }
 }

@@ -1,4 +1,4 @@
-part of 'cart_view_model_cubit.dart';
+part of 'cart_view_model.dart';
 
 sealed class CartState {}
 
@@ -30,3 +30,5 @@ final class AddToCartError extends CartState {
 
   AddToCartError(this.errorMessage);
 }
+
+final class UpdateCartProductQuantityLoading extends CartState {}

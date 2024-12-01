@@ -6,9 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/di/di.dart';
 import '../../../../core/styles/colors/app_colors.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
-import '../../../../core/utils/widget/custom_button.dart';
+import '../../../../core/utils/widget/add_to_cart_button.dart';
 import '../../../../domain/entities/home_layout/product_details_entity.dart';
-import '../../screens/cart/view_model/cart_view_model_cubit.dart';
 import '../view_model/product_details_cubit.dart';
 import '../view_model/product_details_states.dart';
 
@@ -124,14 +123,7 @@ class ProductDetails extends StatelessWidget {
       ),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-        child: CustomButton(
-          onPressed: () {
-            context.read<CartViewModel>().addProductToCart(productId);
-          },
-          color: AppColors.kPink,
-          text: "Add to Cart",
-          textStyle: AppFonts.font16WhiteWeight500,
-        ),
+        child: AddToCartButton(productId: productId),
       ),
     );
   }

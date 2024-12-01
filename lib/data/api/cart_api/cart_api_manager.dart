@@ -19,8 +19,24 @@ abstract class CartApiManager {
       @Header("Authorization") String token);
 
   @POST(ApiConstants.cart)
-  Future<bool?> addProductToCart(
+  Future<dynamic> addProductToCart(
     @Header("Authorization") String token,
     @Body() AddToCartRequestBodyModel addToCartRequestBodyModel,
   );
+
+  @PUT('${ApiConstants.cart}/{productId}')
+  Future<CartResponseModel> updateCartProductQuantity(
+    @Path("productId") String productId,
+    @Header("Authorization") String token,
+    @Body() Map<String, dynamic> body,
+  );
+
+  @DELETE('${ApiConstants.cart}/{productId}')
+  Future<CartResponseModel> removeProductFromCart(
+    @Path("productId") String productId,
+    @Header("Authorization") String token,
+  );
+
+  @DELETE(ApiConstants.cart)
+  Future<dynamic> clearCart(@Header("Authorization") String token);
 }

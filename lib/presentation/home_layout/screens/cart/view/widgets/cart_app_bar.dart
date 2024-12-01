@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../core/utils/widget/delivery_address_widget.dart';
-import '../../view_model/cart_view_model_cubit.dart';
+import '../../view_model/cart_view_model.dart';
 
 class CartAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CartAppBar({super.key});
