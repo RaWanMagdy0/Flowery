@@ -61,4 +61,15 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<Result<String?>> resetPassword(ResetPasswordRequestBody resetPassword) async{
    return await dataSource.resetPassword(resetPassword);
   }
+
+  @override
+  Future<Result<String?>> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    return await dataSource.changePassword(
+      currentPassword: currentPassword,
+      newPassword: newPassword,
+    );
+  }
 }

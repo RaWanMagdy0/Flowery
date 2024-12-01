@@ -9,5 +9,7 @@ class PageRouteName {
   static const String categories = "categories";
   static const String bestSeller = "bestSeller";
   static const String occasion = "occasion page";
+ // static const String resetPassword = "resetPassword";
   static const String profile = "profile screen";
+  static const String changePassword = "changePassword";
 }

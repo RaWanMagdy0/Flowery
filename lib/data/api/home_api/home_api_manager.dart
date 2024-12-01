@@ -39,6 +39,6 @@ abstract class HomeApiManger {
   @GET(ApiConstants.getAllProducts)
   Future<ProductDetailsModel> getOccasionProducts();
 
-  @GET(ApiConstants.getLoggedUserInfo)
+  @GET(ApiConstants.getHomeData)
   Future<AppUserModel?> getLoggedUserInfo(@Header("Authorization") String token);
 }
