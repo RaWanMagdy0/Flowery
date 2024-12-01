@@ -95,13 +95,9 @@ class CartViewModel extends BaseViewModel<CartState> {
         cart = result.data?.cart ?? Cart();
         emit(CartLoaded(result.data?.cart));
       case Fail():
-        if (result.exception.toString().contains('404')) {
-          emit(CartEmpty());
-        } else {
-          emit(
-            CartError(getErrorMassageFromException(result.exception)),
-          );
-        }
+        emit(
+          CartError(getErrorMassageFromException(result.exception)),
+        );
     }
   }
 
