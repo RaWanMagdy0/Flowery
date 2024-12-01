@@ -38,5 +38,4 @@ abstract class AuthApiManager {
   @PATCH(ApiConstants.changePassword)
   Future<String?> changePassword(@Body() ChangePasswordRequestModel request, @Header('Authorization') String token,);
 
-
 }

@@ -8,7 +8,6 @@ import '../categories/view/categories_screen.dart';
 import '../categories/view_model/categories_view_model.dart';
 import '../home/view/home_screen.dart';
 import '../home/view_model/home_view_model.dart';
-import '../profile/view/profile_screen.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});

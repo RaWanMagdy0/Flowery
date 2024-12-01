@@ -18,16 +18,16 @@ import '../../../../../domain/entities/home_layout/profile/User.dart';
 import '../view_model/profile_cubit.dart';
 import '../view_model/profile_state.dart';
 
-class ProfileScreen extends StatefulWidget {
+class EditProfileScreen extends StatefulWidget {
   static const String routeName = 'ProfileScreen';
 
-  const ProfileScreen({Key? key}) : super(key: key);
+  const EditProfileScreen({Key? key}) : super(key: key);
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<EditProfileScreen> createState() => _EditProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _EditProfileScreenState extends State<EditProfileScreen> {
   late ProfileCubit viewModel;
   String? gender;
 
