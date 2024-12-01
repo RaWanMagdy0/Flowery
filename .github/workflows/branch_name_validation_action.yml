@@ -1,0 +1,63 @@
+name: Branch Name Check
+
+on:
+  push:
+    branches:
+      - '*'  # Trigger on push to any branch
+  pull_request:
+    branches:
+      - master  # Trigger on pull request to master branch
+      - development  # Trigger on pull request to development branch
+
+jobs:
+  Validate_Feature_Branch_On_Push:
+    name: Validate Branch on Push
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Validate Branch Name
+        run: |
+          # Extract the current branch name
+          BRANCH_NAME=${GITHUB_REF_NAME}
+
+          # Define the regex pattern
+          PATTERN="^(feat|bugfix|hotfix|release)\/FECOM-[0-9]+-[A-Za-z0-9-]+$"
+
+          echo "Validating branch name '$BRANCH_NAME'..."
+
+          # Check if the branch name matches the pattern
+          if [[ ! "$BRANCH_NAME" =~ $PATTERN ]]; then
+            echo "Error: Branch name '$BRANCH_NAME' does not match the required pattern."
+            exit 1
+          else
+            echo "Branch name '$BRANCH_NAME' is valid."
+          fi
+
+  Validate_Feature_Branch_On_PR:
+    name: Validate Branch on Pull Request
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Validate Branch Name
+        run: |
+          # Extract the compare (head) branch name for the PR
+          BRANCH_NAME=${{ github.event.pull_request.head.ref }}
+
+          # Define the regex pattern
+          PATTERN="^(feat|bugfix|hotfix|release)\/FECOM-[0-9]+-[A-Za-z0-9-]+$"
+
+          echo "Validating branch name '$BRANCH_NAME'..."
+
+          # Check if the branch name matches the pattern
+          if [[ ! "$BRANCH_NAME" =~ $PATTERN ]]; then
+            echo "Error: Branch name '$BRANCH_NAME' does not match the required pattern."
+            exit 1
+          else
+            echo "Branch name '$BRANCH_NAME' is valid."
+          fi
