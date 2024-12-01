@@ -17,22 +17,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Dart SDK
-        uses: dart-lang/setup-dart@v1
+      - name: Set up Flutter SDK
+        uses: subosito/flutter-action@v2
         with:
-          sdk: stable
+          flutter-version: 'stable'
 
       - name: Install dependencies
-        run: dart pub get
+        run: flutter pub get
 
       - name: Run Dart Analyzer (Linting)
-        run: dart analyze --fatal-infos --fatal-warnings
+        run: flutter analyze --fatal-infos --fatal-warnings
 
       - name: Apply Dart Fixes
         run: dart fix --apply
 
       - name: Run Dart Analyzer After Fixes
-        run: dart analyze --fatal-infos --fatal-warnings
+        run: flutter analyze --fatal-infos --fatal-warnings
 
       - name: Check Dart Format
         run: dart format --set-exit-if-changed .
