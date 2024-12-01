@@ -71,7 +71,6 @@ class _LogInScreenState extends State<LogInScreen> {
                     switch (state) {
                       case LoadingState():
                         {
-                          Navigator.pop(context);
                           AppDialogs.showLoading(context: context);
                         }
                       case ErrorState():

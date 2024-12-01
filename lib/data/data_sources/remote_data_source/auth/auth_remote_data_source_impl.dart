@@ -6,6 +6,7 @@ import '../../../../core/local/token_manger.dart';
 import '../../../api/auth_api/auth_api_manager.dart';
 import '../../../models/auth/requests/login_request_model.dart';
 import '../../../models/auth/requests/change_password_request_model.dart';
+import '../../../models/auth/requests/reset_password_request_model.dart';
 import '../../../models/auth/requests/sign_up_request_model.dart';
 import '../../../models/auth/response/login_response_model.dart';
 import 'auth_remote_data_source.dart';

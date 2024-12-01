@@ -7,7 +7,6 @@ import 'package:flowery/data/models/produc_details_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-
 import 'home_remote_data_source_test.mocks.dart';
 
 @GenerateMocks([HomeApiManger])
