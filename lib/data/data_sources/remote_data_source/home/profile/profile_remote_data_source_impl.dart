@@ -1,8 +1,13 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:flowery/core/api/api_result.dart';
 import 'package:flowery/core/api/execute_api_call.dart';
 import 'package:flowery/data/api/home_api/home_api_manager.dart';
 import 'package:flowery/data/data_sources/remote_data_source/home/profile/profile_remote_data_source.dart';
+import 'package:flowery/data/models/auth/requests/edite_profile_request_model.dart';
 import 'package:injectable/injectable.dart';
+import 'package:mime/mime.dart';
 import '../../../../../core/local/token_manger.dart';
 import '../../../../../domain/entities/home_layout/profile/User.dart';
 
@@ -25,4 +30,32 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource{
    });
   }
 
-}
+  @override
+  Future<Result<User?>> editProfile(EditeProfileRequestModel editeProfile)async {
+    return await executeApiCall<User?>(()async{
+      var token = await TokenManager.getToken();
+      if (token == null || token.isEmpty) {
+        throw Exception("Token is missing. Please login again.");
+      }
+      token = 'Bearer $token';
+      var appUserModel = await apiManger.editProfile(token, editeProfile);
+      return appUserModel?.toUser();
+
+    });
+  }
+
+  @override
+  Future<Result<String?>> uploadPhoto(File imageFile) async {
+    return await executeApiCall<String?>(() async {
+      var token = await TokenManager.getToken();
+      if (token == null || token.isEmpty) {
+        throw Exception("Token is missing. Please login again.");
+      }
+      token = 'Bearer $token';
+
+      final mimeType = lookupMimeType(imageFile.path);
+      if (mimeType == null || !mimeType.startsWith('image/')) {
+        throw Exception("Selected file is not a valid image.");
+      }
+    });
+  }}

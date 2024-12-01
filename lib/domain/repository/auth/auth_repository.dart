@@ -13,4 +13,6 @@ abstract class AuthRepository {
   Future<Result<String?>> resetPassword(ResetPasswordRequestBody resetPassword);
   Future<Result<String?>> forgotPassword({required String email});
   Future<Result<String?>> verifyResetCode({required String resetCode});
+  //Future<Result<String?>> resetPassword({required String email, required String newPassword,});
+  Future<Result<String?>> changePassword({required String currentPassword, required String newPassword,});
 }

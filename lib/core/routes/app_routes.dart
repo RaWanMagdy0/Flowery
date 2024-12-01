@@ -1,4 +1,4 @@
-import 'package:flowery/presentation/home_layout/screens/profile/view/profile_screen.dart';
+import 'package:flowery/presentation/home_layout/screens/profile/view/edit_profile_screen.dart';
 import 'package:flowery/presentation/home_layout/screens/profile/view_model/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +8,8 @@ import '../../presentation/auth/forgot_password/view/widgets/forgot_password_wid
 import '../../presentation/auth/forgot_password/view_model/forget_passwoed_cubit.dart';
 import '../../presentation/auth/login/view/login_screen.dart';
 import '../../presentation/auth/login/view_model/login_cubit.dart';
+import '../../presentation/auth/reset_password/view/change_password_screen.dart';
+import '../../presentation/auth/reset_password/view_model/change_password_view_model.dart';
 import '../../presentation/auth/sign_up/view/sign_up_page.dart';
 import '../../presentation/auth/sign_up/view_model/sign_up_cubit.dart';
 import '../../presentation/best_seller/view/best_seller_screen.dart';
@@ -45,8 +47,16 @@ class AppRoutes {
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
                   create: (context) => getIt<ProfileCubit>(),
-                  child: ProfileScreen(),
+                  child: EditProfileScreen(),
                 ));
+
+      case PageRouteName.changePassword:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<ChangePasswordViewModel>(),
+            child: const ChangePasswordScreen(),
+          ),
+        );
 
       case PageRouteName.signUp:
         return MaterialPageRoute(
