@@ -1,3 +1,4 @@
+import 'package:flowery/presentation/home_layout/screens/profile/profile_main/profile_main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -28,7 +29,7 @@ class _MainPageState extends State<MainPage> {
       child: CategoriesScreen(),
     ),
     CartScreen(),
-    ProfileScreen(),
+    ProfileMainScreen(),
   ];
 
   void _onItemTapped(int index) {
