@@ -28,6 +28,7 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
     viewModel = getIt.get<ProfileCubit>();
     viewModel.getLoggedUserInfo();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +70,7 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                     10.verticalSpace,
+                    10.verticalSpace,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -79,14 +80,12 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                         ),
                         5.horizontalSpace,
                         InkWell(
-                          onTap: (){
-                            Navigator.pushNamed(context, PageRouteName.editProfile);
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, PageRouteName.editProfile);
                           },
-                          child: Image.asset(
-                            AppImages.editIcon
-                          ),
+                          child: Image.asset(AppImages.editIcon),
                         )
-
                       ],
                     ),
                     const SizedBox(height: 5),
