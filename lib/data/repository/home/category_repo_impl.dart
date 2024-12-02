@@ -1,5 +1,8 @@
 import 'dart:developer';
 
+import 'package:flowery/data/data_source/remote_data_source/home/category/category_remote_data_source.dart';
+import 'package:flowery/data/models/home/home_category_model.dart';
+import 'package:flowery/domain/repository/category_repo.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../core/api/api_result.dart';
@@ -15,10 +18,12 @@ class CategoryRepositoryImpl extends CategoryRepository {
   CategoryRepositoryImpl({required this.categoryRemoteDataSource});
 
   @override
+  Future<Result<List<HomeCategoryModel>?>> getAllCategories() async {
   Future<Result<List<HomeCategory>?>> getAllCategories() async {
     final result = await categoryRemoteDataSource.getAllCategories();
     switch (result) {
       case Success():
+        return Success<List<HomeCategoryModel>?>();
         final categories = result.data?.categories
                 ?.map(
                   (model) => model.toEntity(),
@@ -33,6 +38,7 @@ class CategoryRepositoryImpl extends CategoryRepository {
   }
 
   @override
+  Future<Result<List<ProductEntity>?>> getCategoriesProduct() async {
   Future<Result<List<ProductEntity>?>> getCategoryProducts() async {
     final result = await categoryRemoteDataSource.getCategoriesProduct();
     switch (result) {

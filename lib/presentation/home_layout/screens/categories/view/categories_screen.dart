@@ -1,3 +1,8 @@
+import 'package:flowery/data/models/home/home_category_model.dart';
+import 'package:flowery/presentation/home_layout/screens/categories/view/widgets/custom_search_bar.dart';
+import 'package:flowery/presentation/home_layout/screens/categories/view_model/categories_state.dart';
+import 'package:flowery/presentation/home_layout/screens/categories/view_model/categories_view_model.dart';
+import 'package:flowery/presentation/home_layout/screens/home/view_model/home_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,11 +31,13 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         padding: EdgeInsets.all(15.w),
         child: Column(
           children: [
+            SizedBox(
+              height: 50.h,
+            ),
             16.verticalSpace,
             CustomSearchBar(),
             SizedBox(height: 16.h),
             BlocBuilder<CategoriesViewModel, CategoriesState>(
-              bloc: context.read<CategoriesViewModel>(),
               buildWhen: (previous, current) {
                 return current is CategoriesLoadingState ||
                     current is CategoriesSuccessState ||

@@ -44,6 +44,8 @@ class AppRoutes {
     switch (setting.name) {
       case PageRouteName.splash:
         return _handleMaterialPageRoute(widget: const SplashScreen());
+      case PageRouteName.productDetails:
+        return _handleMaterialPageRoute(widget: ProductDetails());
 
       case PageRouteName.logIn:
         return MaterialPageRoute(
@@ -58,6 +60,14 @@ class AppRoutes {
           builder: (context) => BlocProvider(
             create: (context) => getIt<SignUpCubit>(),
             child: SignUpPage(),
+          ),
+        );
+
+      case PageRouteName.bestSeller:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<BestSellerViewModel>(),
+            child: BestSellerScreen(),
           ),
         );
 
@@ -139,6 +149,14 @@ class AppRoutes {
           builder: (context) => BlocProvider(
             create: (context) => getIt<ChangePasswordViewModel>(),
             child: const ChangePasswordScreen(),
+          ),
+        );
+
+      case PageRouteName.categories:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt.get<CategoriesViewModel>(),
+            child: CategoriesScreen(),
           ),
         );
 
