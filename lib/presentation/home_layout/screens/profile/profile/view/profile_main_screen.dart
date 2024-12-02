@@ -45,124 +45,132 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
           ),
         ],
       ),
-      body: BlocBuilder<ProfileCubit, ProfileState>(
+      body: BlocListener<ProfileCubit, ProfileState>(
         bloc: viewModel,
-        builder: (context, state) {
-          if (state is GetLoggedUserInfoLoadingState) {
-            return Center(
-              child: Lottie.asset(AppImages.pinkLoadingAnimation),
-            );
-          } else if (state is GetLoggedUserInfoErrorState) {
-            return Center(
-              child: Text(state.errorMessage ?? 'An error occurred'),
-            );
-          } else if (state is GetLoggedUserInfoSuccessState) {
-            return SingleChildScrollView(
-              child: Center(
-                child: Column(
-                  children: [
-                    ClipOval(
-                      child: Image.asset(
-                        AppImages.photo,
-                        width: 90.w,
-                        height: 90.h,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    10.verticalSpace,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          state.user?.firstName ?? '',
-                          style: AppFonts.font18BlackWeight500,
-                        ),
-                        5.horizontalSpace,
-                        InkWell(
-                          onTap: () {
-                            Navigator.pushNamed(
-                                context, PageRouteName.editProfile);
-                          },
-                          child: Image.asset(AppImages.editIcon),
-                        )
-                      ],
-                    ),
-                    const SizedBox(height: 5),
-                    Text(
-                      state.user?.email ?? "",
-                      style: AppFonts.font18BlackWeight500,
-                    ),
-                    const SizedBox(height: 32),
-
-                    // Custom List Tiles
-                    CustomListTile(
-                      leadingIcon: Icons.list_alt,
-                      title: 'My orders',
-                      trailingIcon: Icons.arrow_forward_ios,
-                      onTap: () {},
-                    ),
-                    CustomListTile(
-                      leadingIcon: Icons.location_pin,
-                      title: 'Saved address',
-                      trailingIcon: Icons.arrow_forward_ios,
-                      onTap: () {},
-                    ),
-
-                    // Options List
-                    SizedBox(height: 14.h),
-                    Divider(thickness: 1.w),
-
-                    // Notification Tile
-                    SwitchTile(
-                      value: isNotificationEnabled,
-                      onChanged: (bool newValue) {
-                        setState(() {
-                          isNotificationEnabled = newValue;
-                        });
-                      },
-                    ),
-                    SizedBox(height: 14.h),
-                    Divider(thickness: 1.w),
-                    CustomListTile(
-                      leadingIcon: Icons.translate,
-                      title: 'Language',
-                      subtitle: 'English',
-                      subtitleStyle: const TextStyle(color: Colors.pink),
-                      onTap: () {},
-                    ),
-                    CustomListTile(
-                      title: 'About us',
-                      trailingIcon: Icons.arrow_forward_ios,
-                      onTap: () {},
-                    ),
-                    CustomListTile(
-                      title: 'Terms & conditions',
-                      trailingIcon: Icons.arrow_forward_ios,
-                      onTap: () {},
-                    ),
-                    const SizedBox(height: 16),
-                    const Divider(thickness: 1),
-
-                    CustomListTile(
-                      leadingIcon: Icons.logout,
-                      title: 'Logout',
-                      trailingIcon: Icons.logout,
-                      onTap: () {},
-                    ),
-
-                    const SizedBox(height: 20),
-                    const Text(
-                      'v 6.3.0 - (446)',
-                      style: TextStyle(color: Colors.grey, fontSize: 12),
-                    ),
-                    const SizedBox(height: 24),
-                  ],
-                ),
-              ),
-            );
+        listener: (context, state) {
+          if (state is EditProfileSuccessState) {
+            viewModel.getLoggedUserInfo();
           }
-          return Container(); // Fallback for other states
         },
+        child: BlocBuilder<ProfileCubit, ProfileState>(
+          bloc: viewModel,
+          builder: (context, state) {
+            if (state is GetLoggedUserInfoLoadingState) {
+              return Center(
+                child: Lottie.asset(AppImages.pinkLoadingAnimation),
+              );
+            } else if (state is GetLoggedUserInfoErrorState) {
+              return Center(
+                child: Text(state.errorMessage ?? 'An error occurred'),
+              );
+            } else if (state is GetLoggedUserInfoSuccessState) {
+              return SingleChildScrollView(
+                child: Center(
+                  child: Column(
+                    children: [
+                      ClipOval(
+                        child: Image.asset(
+                          AppImages.photo,
+                          width: 90.w,
+                          height: 90.h,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      10.verticalSpace,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            state.user?.firstName ?? '',
+                            style: AppFonts.font18BlackWeight500,
+                          ),
+                          5.horizontalSpace,
+                          InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, PageRouteName.editProfile);
+                            },
+                            child: Image.asset(AppImages.editIcon),
+                          )
+                        ],
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        state.user?.email ?? "",
+                        style: AppFonts.font18BlackWeight500,
+                      ),
+                      const SizedBox(height: 32),
+        
+                      // Custom List Tiles
+                      CustomListTile(
+                        leadingIcon: Icons.list_alt,
+                        title: 'My orders',
+                        trailingIcon: Icons.arrow_forward_ios,
+                        onTap: () {},
+                      ),
+                      CustomListTile(
+                        leadingIcon: Icons.location_pin,
+                        title: 'Saved address',
+                        trailingIcon: Icons.arrow_forward_ios,
+                        onTap: () {},
+                      ),
+        
+                      // Options List
+                      SizedBox(height: 14.h),
+                      Divider(thickness: 1.w),
+        
+                      // Notification Tile
+                      SwitchTile(
+                        value: isNotificationEnabled,
+                        onChanged: (bool newValue) {
+                          setState(() {
+                            isNotificationEnabled = newValue;
+                          });
+                        },
+                      ),
+                      SizedBox(height: 14.h),
+                      Divider(thickness: 1.w),
+                      CustomListTile(
+                        leadingIcon: Icons.translate,
+                        title: 'Language',
+                        subtitle: 'English',
+                        subtitleStyle: const TextStyle(color: Colors.pink),
+                        onTap: () {},
+                      ),
+                      CustomListTile(
+                        title: 'About us',
+                        trailingIcon: Icons.arrow_forward_ios,
+                        onTap: () {},
+                      ),
+                      CustomListTile(
+                        title: 'Terms & conditions',
+                        trailingIcon: Icons.arrow_forward_ios,
+                        onTap: () {},
+                      ),
+                      const SizedBox(height: 16),
+                      const Divider(thickness: 1),
+        
+                      CustomListTile(
+                        leadingIcon: Icons.logout,
+                        title: 'Logout',
+                        trailingIcon: Icons.logout,
+                        onTap: () {},
+                      ),
+        
+                      const SizedBox(height: 20),
+                      const Text(
+                        'v 6.3.0 - (446)',
+                        style: TextStyle(color: Colors.grey, fontSize: 12),
+                      ),
+                      const SizedBox(height: 24),
+                    ],
+                  ),
+                ),
+              );
+            }
+            return Container(); // Fallback for other states
+          },
+        ),
       ),
     );
   }

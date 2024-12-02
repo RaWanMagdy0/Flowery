@@ -102,13 +102,9 @@ class AppRoutes {
 
       case PageRouteName.productDetails:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider.value(
-            value: getCartViewModel()..checkLoggedUser(),
-            child: ProductDetails(),
-          ),
+          builder: (context) => ProductDetails(),
           settings: setting,
         );
-
       case PageRouteName.categories:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(

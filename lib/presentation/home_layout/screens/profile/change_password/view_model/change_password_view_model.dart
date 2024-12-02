@@ -1,51 +1,33 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flowery/core/base/base_view_model.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../../core/api/api_result.dart';
 import '../../../../../../domain/repository/auth/auth_repository.dart';
 import 'change_password_state.dart';
 
-
-
 @injectable
-class ChangePasswordViewModel extends Cubit<ChangePasswordState> {
+class ChangePasswordViewModel extends BaseViewModel<ChangePasswordState> {
   final AuthRepository _authRepository;
 
-  ChangePasswordViewModel(this._authRepository) : super(ChangePasswordInitial());
+  ChangePasswordViewModel(this._authRepository)
+      : super(ChangePasswordInitial());
 
   void changePassword({
     required String currentPassword,
     required String newPassword,
     required String confirmPassword,
   }) async {
-    if (!_validatePassword(newPassword)) {
-      emit(ChangePasswordError(
-          'Password must contain at least 6 characters, one uppercase letter, and one number'));
-      return;
-    }
-
-    if (newPassword != confirmPassword) {
-      emit(ChangePasswordError('Passwords do not match'));
-      return;
-    }
-
     emit(ChangePasswordLoading());
-
     final result = await _authRepository.changePassword(
       currentPassword: currentPassword,
       newPassword: newPassword,
     );
-
     switch (result) {
-      case Success():
+      case Success<String?>():
         emit(ChangePasswordSuccess());
-      case Fail():
-        emit(ChangePasswordError(result.exception?.toString() ?? 'Unknown error'));
+      case Fail<String?>():
+        emit(ChangePasswordError(
+            errorMessage: getErrorMassageFromException(result.exception)));
     }
-  }
-
-  bool _validatePassword(String password) {
-    final RegExp passwordRegExp = RegExp(r'^(?=.*[A-Z])(?=.*[0-9]).{6,}$');
-    return passwordRegExp.hasMatch(password);
   }
 }

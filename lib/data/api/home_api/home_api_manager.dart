@@ -65,6 +65,6 @@ abstract class HomeApiManger {
   Future<ProductDetailsModel> getOccasionsProduct();
 
 
-  @GET(ApiConstants.getAllProducts)
+  @GET(ApiConstants.getAllCategoriesEndpoint)
   Future<ProductDetailsModel> getCategoriesProduct();
 }

@@ -75,10 +75,11 @@ class _LogInScreenState extends State<LogInScreen> {
                         }
                       case ErrorState():
                         {
-                          Navigator.of(context).pop();
+                          AppDialogs.showHideDialog(context);
                           AppDialogs.showErrorDialog(
                             context: context,
                             errorMassage: state.message ?? "",
+
                           );
                         }
                       case SuccessState():

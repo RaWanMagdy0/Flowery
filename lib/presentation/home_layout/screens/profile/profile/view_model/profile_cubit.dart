@@ -63,11 +63,24 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
         emailController.text = updatedUser?.email ?? '';
         phoneController.text = updatedUser?.phone ?? '';
         emit(EditProfileSuccessState(user: updatedUser));
+        await getLoggedUserInfo();
         break;
       case Fail<User?>():
         emit(EditProfileErrorState(
             errorMessage: getErrorMassageFromException(result.exception)));
     }
+  }
+  bool isFormField = true;
+  String titleAppBar() {
+    if (isFormField) {
+      return "Profile";
+    } else {
+      return "Update";
+    }
+  }
+  void changeFormField(bool isValid){
+    emit(ProfileInitialState());
+    isFormField = isValid;
   }
 
   Future<void> uploadPhoto(FormData formData) async {
@@ -85,4 +98,6 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
         break;
     }
   }
+
+
 }
