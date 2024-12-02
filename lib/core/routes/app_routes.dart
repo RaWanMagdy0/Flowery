@@ -40,12 +40,9 @@ class AppRoutes {
     createForgetPassword() {
       forgetPasswordCubit ??= getIt<ForgetPasswordCubit>();
     }
-
     switch (setting.name) {
       case PageRouteName.splash:
         return _handleMaterialPageRoute(widget: const SplashScreen());
-      case PageRouteName.productDetails:
-        return _handleMaterialPageRoute(widget: ProductDetails());
 
       case PageRouteName.logIn:
         return MaterialPageRoute(
@@ -114,14 +111,6 @@ class AppRoutes {
           settings: setting,
         );
 
-      case PageRouteName.bestSeller:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => getIt<BestSellerViewModel>(),
-            child: BestSellerScreen(),
-          ),
-        );
-
       case PageRouteName.occasion:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -148,13 +137,6 @@ class AppRoutes {
           ),
         );
 
-      case PageRouteName.categories:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => getIt.get<CategoriesViewModel>(),
-            child: CategoriesScreen(),
-          ),
-        );
 
       default:
         return _handleMaterialPageRoute(widget: const Scaffold());
