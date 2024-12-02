@@ -17,6 +17,7 @@ dependencies:
   flutter_image_slideshow: ^0.1.6
   flutter_screenutil: ^5.9.3
   flutter_secure_storage: ^9.0.0
+  flutter_svg: ^2.0.16
   get_it: ^8.0.2
   image_picker: ^1.1.2
   injectable: ^2.5.0
