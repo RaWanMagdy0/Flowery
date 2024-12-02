@@ -11,15 +11,24 @@ import '../../../../domain/entities/home_layout/product_details_entity.dart';
 import '../view_model/product_details_cubit.dart';
 import '../view_model/product_details_states.dart';
 
-class ProductDetails extends StatelessWidget {
+class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    var viewModel = getIt.get<ProductDetailsCubit>();
-    final String productId =
-        ModalRoute.of(context)?.settings.arguments as String;
+  State<ProductDetails> createState() => _ProductDetailsState();
+}
 
+class _ProductDetailsState extends State<ProductDetails> {
+  late ProductDetailsCubit viewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    viewModel = getIt.get<ProductDetailsCubit>();
+  }
+  @override
+  Widget build(BuildContext context) {
+    final String productId = ModalRoute.of(context)?.settings.arguments as String;
     return Scaffold(
       body: BlocBuilder<ProductDetailsCubit, ProductDetailsStates>(
         bloc: viewModel..getProductDetails(productId: productId),

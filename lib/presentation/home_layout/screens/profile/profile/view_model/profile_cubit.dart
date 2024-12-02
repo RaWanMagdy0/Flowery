@@ -4,13 +4,11 @@ import 'package:flowery/core/base/base_view_model.dart';
 import 'package:flowery/data/models/auth/requests/edite_profile_request_model.dart';
 import 'package:flowery/domain/use_case/home/profile/edite_profile_use_case.dart';
 import 'package:flowery/domain/use_case/home/profile/upload_photo_use_case.dart';
-import 'package:flowery/presentation/home_layout/screens/profile/view_model/profile_state.dart';
+import 'package:flowery/presentation/home_layout/screens/profile/profile/view_model/profile_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
-import 'package:mime/mime.dart';
-
-import '../../../../../domain/entities/home_layout/profile/User.dart';
-import '../../../../../domain/use_case/home/profile/get_logged_user_info_use_case.dart';
+import '../../../../../../domain/entities/home_layout/profile/User.dart';
+import '../../../../../../domain/use_case/home/profile/get_logged_user_info_use_case.dart';
 
 @injectable
 class ProfileCubit extends BaseViewModel<ProfileState> {

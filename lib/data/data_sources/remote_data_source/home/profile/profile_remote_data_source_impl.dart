@@ -18,16 +18,16 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource{
 
   @override
   Future<Result<User?>> getLoggedUserInfo()async {
-   return await executeApiCall<User?>(()async{
-     var token = await TokenManager.getToken();
-     if (token == null || token.isEmpty) {
-       throw Exception("Token is missing. Please login again.");
-     }
-     token = 'Bearer $token';
-     var appUserModel = await apiManger.getLoggedUserInfo(token);
-     return appUserModel?.toUser();
+    return await executeApiCall<User?>(()async{
+      var token = await TokenManager.getToken();
+      if (token == null || token.isEmpty) {
+        throw Exception("Token is missing. Please login again.");
+      }
+      token = 'Bearer $token';
+      var appUserModel = await apiManger.getLoggedUserInfo(token);
+      return appUserModel?.toUser();
 
-   });
+    });
   }
 
   @override

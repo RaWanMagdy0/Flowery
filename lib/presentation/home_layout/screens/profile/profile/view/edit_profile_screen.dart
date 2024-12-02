@@ -13,8 +13,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
-import '../../../../../core/styles/fonts/app_fonts.dart';
-import '../../../../../domain/entities/home_layout/profile/User.dart';
+import '../../../../../../core/routes/page_route_name.dart';
+import '../../../../../../core/styles/fonts/app_fonts.dart';
+import '../../../../../../domain/entities/home_layout/profile/User.dart';
 import '../view_model/profile_cubit.dart';
 import '../view_model/profile_state.dart';
 
@@ -105,25 +106,27 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       child: Column(
         children: [
           SizedBox(
-            width: 90.w,
-            height: 90.h,
+            width: 100.w,
+            height: 100.h,
             child: Stack(
               children: [
                 ClipOval(
                     child: isUserProfile
                         ? Image.network(
                             user.photo ?? "",
-                            width: 90.w,
-                            height: 90.h,
                             fit: BoxFit.cover,
                           )
-                        : Icon(
-                            Icons.person,
-                            size: 50.sp,
+                        : Container(
+                            color: AppColors.kLighterGrey,
+                            child: Icon(
+                              Icons.person,
+                              size: 90.sp,
+                              color: AppColors.kGray,
+                            ),
                           )),
                 Positioned(
-                  bottom: 0.h,
-                  right: 0.w,
+                  bottom: 10.h,
+                  right: 10.w,
                   child: GestureDetector(
                     onTap: () async {
                       await uploadImage();
@@ -202,7 +205,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     suffixIcon: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(
+                              context, PageRouteName.changePassword);
+                        },
                         child: Text(
                           "Change",
                           style: AppFonts.font12PinkWeight600,
@@ -295,7 +301,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     } else {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("لم يتم اختيار صو")),
+          SnackBar(content: Text("")),
         );
       }
     }

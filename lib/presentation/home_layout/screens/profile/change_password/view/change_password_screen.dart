@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/styles/colors/app_colors.dart';
-import '../../../../core/utils/widget/custom_button.dart';
-import '../../../../core/utils/widget/custom_text_form_field.dart';
+import '../../../../../../core/styles/colors/app_colors.dart';
+import '../../../../../../core/utils/widget/custom_button.dart';
+import '../../../../../../core/utils/widget/custom_text_form_field.dart';
 import '../view_model/change_password_state.dart';
 import '../view_model/change_password_view_model.dart';
 
@@ -136,8 +136,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   ),
                   SizedBox(height: 32.h),
                   CustomButton(
+                    color: AppColors.kPink,
                     text: state is ChangePasswordLoading ? 'Loading...' : 'Update',
-                    color: Colors.grey,
                     onPressed: state is ChangePasswordLoading
                         ? null
                         : () {

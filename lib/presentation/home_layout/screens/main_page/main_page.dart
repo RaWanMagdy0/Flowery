@@ -1,4 +1,3 @@
-import 'package:flowery/presentation/home_layout/screens/profile/profile_main/profile_main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,6 +8,7 @@ import '../categories/view/categories_screen.dart';
 import '../categories/view_model/categories_view_model.dart';
 import '../home/view/home_screen.dart';
 import '../home/view_model/home_view_model.dart';
+import '../profile/profile/view/profile_main_screen.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});

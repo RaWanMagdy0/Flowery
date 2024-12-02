@@ -1,15 +1,10 @@
-import 'package:flowery/presentation/home_layout/screens/profile/view/profile_screen.dart';
-import 'package:flowery/presentation/home_layout/screens/profile/view_model/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../presentation/auth/forgot_password/view/widgets/email_verification_widget/email_verification.dart';
 import '../../presentation/auth/forgot_password/view/widgets/forgot_password_widget/forget_password_screen.dart';
 import '../../presentation/auth/forgot_password/view_model/forget_passwoed_cubit.dart';
 import '../../presentation/auth/login/view/login_screen.dart';
 import '../../presentation/auth/login/view_model/login_cubit.dart';
-import '../../presentation/auth/reset_password/view/change_password_screen.dart';
-import '../../presentation/auth/reset_password/view_model/change_password_view_model.dart';
 import '../../presentation/auth/sign_up/view/sign_up_page.dart';
 import '../../presentation/auth/sign_up/view_model/sign_up_cubit.dart';
 import '../../presentation/best_seller/view/best_seller_screen.dart';
@@ -20,6 +15,11 @@ import '../../presentation/home_layout/screens/categories/view_model/categories_
 import '../../presentation/home_layout/screens/main_page/main_page.dart';
 import '../../presentation/home_layout/screens/occasions/occasions_screen.dart';
 import '../../presentation/home_layout/screens/occasions/view_model/ocusin_cubit.dart';
+import '../../presentation/home_layout/screens/profile/change_password/view/change_password_screen.dart';
+import '../../presentation/home_layout/screens/profile/change_password/view_model/change_password_view_model.dart';
+import '../../presentation/home_layout/screens/profile/profile/view/edit_profile_screen.dart';
+import '../../presentation/home_layout/screens/profile/profile/view/profile_main_screen.dart';
+import '../../presentation/home_layout/screens/profile/profile/view_model/profile_cubit.dart';
 import '../../splash/splash_screen.dart';
 import '../di/di.dart';
 import 'page_route_name.dart';
@@ -41,20 +41,6 @@ class AppRoutes {
           builder: (context) => BlocProvider(
             create: (context) => getIt<LoginViewModel>(),
             child: LogInScreen(),
-          ),
-        );
-      case PageRouteName.profile:
-        return MaterialPageRoute(
-            builder: (context) => BlocProvider(
-                  create: (context) => getIt<ProfileCubit>(),
-                  child: ProfileScreen(),
-                ));
-
-      case PageRouteName.changePassword:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => getIt<ChangePasswordViewModel>(),
-            child: const ChangePasswordScreen(),
           ),
         );
 
@@ -116,6 +102,24 @@ class AppRoutes {
           builder: (context) => BlocProvider(
             create: (context) => getIt<OccasionCubit>()..loadFlowers(),
             child: OccasionScreen(),
+          ),
+        );
+
+      case PageRouteName.mainProfile:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => getIt<ProfileCubit>(),
+                  child: ProfileMainScreen(),
+                ));
+
+      case PageRouteName.editProfile:
+        return _handleMaterialPageRoute(widget: EditProfileScreen());
+
+      case PageRouteName.changePassword:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<ChangePasswordViewModel>(),
+            child: const ChangePasswordScreen(),
           ),
         );
 

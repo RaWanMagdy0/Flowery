@@ -1,3 +1,4 @@
+import 'package:flowery/core/routes/page_route_name.dart';
 import 'package:flowery/core/styles/fonts/app_fonts.dart';
 import 'package:flowery/core/utils/widget/custom_list_tile.dart';
 import 'package:flowery/core/utils/widget/custom_switch_tile.dart';
@@ -6,27 +7,29 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../../../../core/di/di.dart';
-import '../../../../../core/styles/images/app_images.dart';
+import '../../../../../../core/di/di.dart';
+import '../../../../../../core/styles/images/app_images.dart';
 import '../view_model/profile_cubit.dart';
 import '../view_model/profile_state.dart';
 
 class ProfileMainScreen extends StatefulWidget {
   static const String routeName = 'Profile Main Screen';
-
   const ProfileMainScreen({super.key});
-
   @override
   State<ProfileMainScreen> createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileMainScreen> {
   bool isNotificationEnabled = true;
-
+  late ProfileCubit viewModel;
+  @override
+  void initState() {
+    super.initState();
+    viewModel = getIt.get<ProfileCubit>();
+    viewModel.getLoggedUserInfo();
+  }
   @override
   Widget build(BuildContext context) {
-    var viewModel = getIt.get<ProfileCubit>();
-
     return Scaffold(
       appBar: AppBar(
         forceMaterialTransparency: true,
@@ -43,7 +46,7 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
         ],
       ),
       body: BlocBuilder<ProfileCubit, ProfileState>(
-        bloc: viewModel..getLoggedUserInfo(),
+        bloc: viewModel,
         builder: (context, state) {
           if (state is GetLoggedUserInfoLoadingState) {
             return Center(
@@ -59,21 +62,36 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                 child: Column(
                   children: [
                     ClipOval(
-                      child: Image.network(
-                        state.user?.photo ?? '',
+                      child: Image.asset(
+                        AppImages.photo,
                         width: 90.w,
                         height: 90.h,
                         fit: BoxFit.cover,
                       ),
                     ),
-                    const SizedBox(height: 10),
-                    Text(
-                      state.user?.firstName ?? '',
-                      style: AppFonts.font18BlackWeight500,
+                     10.verticalSpace,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          state.user?.firstName ?? '',
+                          style: AppFonts.font18BlackWeight500,
+                        ),
+                        5.horizontalSpace,
+                        InkWell(
+                          onTap: (){
+                            Navigator.pushNamed(context, PageRouteName.editProfile);
+                          },
+                          child: Image.asset(
+                            AppImages.editIcon
+                          ),
+                        )
+
+                      ],
                     ),
                     const SizedBox(height: 5),
                     Text(
-                      state.user?.email ?? '',
+                      state.user?.email ?? "",
                       style: AppFonts.font18BlackWeight500,
                     ),
                     const SizedBox(height: 32),
@@ -93,8 +111,8 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                     ),
 
                     // Options List
-                    const SizedBox(height: 16),
-                    const Divider(thickness: 1),
+                    SizedBox(height: 14.h),
+                    Divider(thickness: 1.w),
 
                     // Notification Tile
                     SwitchTile(
@@ -105,9 +123,8 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                         });
                       },
                     ),
-                    const SizedBox(height: 16),
-                    const Divider(thickness: 1),
-
+                    SizedBox(height: 14.h),
+                    Divider(thickness: 1.w),
                     CustomListTile(
                       leadingIcon: Icons.translate,
                       title: 'Language',

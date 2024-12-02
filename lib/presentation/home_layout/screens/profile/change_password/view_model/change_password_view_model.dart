@@ -1,11 +1,11 @@
-import 'package:flowery/presentation/auth/reset_password/view_model/change_password_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../../../core/api/api_result.dart';
+import '../../../../../../domain/repository/auth/auth_repository.dart';
+import 'change_password_state.dart';
 
-import '../../../../core/api/api_result.dart';
-import '../../../../domain/repository/auth/auth_repository.dart';
-import '../../../../domain/use_case/auth/change_password_use_case.dart';
+
 
 @injectable
 class ChangePasswordViewModel extends Cubit<ChangePasswordState> {

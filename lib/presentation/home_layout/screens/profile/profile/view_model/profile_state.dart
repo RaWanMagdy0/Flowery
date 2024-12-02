@@ -1,4 +1,5 @@
-import '../../../../../domain/entities/home_layout/profile/User.dart';
+
+import '../../../../../../domain/entities/home_layout/profile/User.dart';
 
 sealed class ProfileState {}
 final class ProfileInitialState extends ProfileState {}
