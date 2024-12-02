@@ -1,8 +1,8 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-class SecureStorageFunction {
+class SecureStorageFactory {
   static FlutterSecureStorage? _secureStorageInstance;
-  SecureStorageFunction._();
+  SecureStorageFactory._();
 
   static Future<FlutterSecureStorage> getInstance() async {
     return _secureStorageInstance ?? const FlutterSecureStorage();

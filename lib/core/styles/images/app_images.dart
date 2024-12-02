@@ -7,6 +7,9 @@ class AppImages {
       "assets/animations/flowery_error_animation.json";
   static const pinkDoneAnimation =
       "assets/animations/flowery_success_animation.json";
+  static const emptyCart = "assets/animations/empty_cart.json";
+  static const loginCart = "assets/animations/profile_animation.json";
+
   static const personIcon = 'assets/images/person_icon.png';
   static const homeIcon = 'assets/images/home_icon.png';
   static const categoryIcon = 'assets/images/category_icon.png';
@@ -16,4 +19,5 @@ class AppImages {
   static const photo = "assets/images/Photo.png";
   static const logoWithTitle = "assets/images/flowery_logo_with_title.png";
   static const editIcon = "assets/images/edit_icon.png";
+  static const trashIcon = "assets/icons/trash_icon.svg";
 }

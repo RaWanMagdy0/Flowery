@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/di/di.dart';
 import '../../../../core/styles/colors/app_colors.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
-import '../../../../core/utils/widget/custom_button.dart';
+import '../../../../core/utils/widget/add_to_cart_button.dart';
 import '../../../../domain/entities/home_layout/product_details_entity.dart';
 import '../view_model/product_details_cubit.dart';
 import '../view_model/product_details_states.dart';
@@ -109,14 +109,6 @@ class _ProductDetailsState extends State<ProductDetails> {
                               //   moreStyle: AppFonts.font12PinkWeight500UnderlinedPink,
                               //   lessStyle: AppFonts.font12PinkWeight500UnderlinedPink,
                               // ),
-                              15.verticalSpace,
-                              CustomButton(
-                                onPressed: () {},
-                                color: AppColors.kPink,
-                                text: "Add to Cart",
-                                textStyle: AppFonts.font16WhiteWeight500,
-                              ),
-                              24.verticalSpace,
                             ],
                           ),
                         ),
@@ -137,6 +129,10 @@ class _ProductDetailsState extends State<ProductDetails> {
             return Center(child: Text("Unexpected state."));
           }
         },
+      ),
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+        child: AddToCartButton(productId: productId),
       ),
     );
   }
@@ -162,7 +158,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                     ?.map(
                       (url) => Image.network(
                         url,
-                        fit: BoxFit.fitHeight,
+                        fit: BoxFit.fill,
                       ),
                     )
                     .toList() ??

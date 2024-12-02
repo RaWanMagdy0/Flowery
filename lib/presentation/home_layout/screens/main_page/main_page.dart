@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/di/di.dart';
 import '../../widgets/bottom_navigation_bar.dart';
-import '../cart/cart_screen.dart';
+import '../cart/view/cart_screen.dart';
 import '../categories/view/categories_screen.dart';
 import '../categories/view_model/categories_view_model.dart';
 import '../home/view/home_screen.dart';
