@@ -7,13 +7,14 @@ import 'package:flowery/data/models/auth/requests/edite_profile_request_model.da
 import 'package:flowery/domain/entities/home_layout/profile/User.dart';
 import 'package:flowery/domain/repository/home/profile_repository.dart';
 import 'package:injectable/injectable.dart';
+
 @Injectable(as: ProfileRepository)
-class ProfileRepositoryImpl implements ProfileRepository{
+class ProfileRepositoryImpl implements ProfileRepository {
   final ProfileRemoteDataSource profileRemoteDataSource;
   ProfileRepositoryImpl({required this.profileRemoteDataSource});
   @override
   Future<Result<User?>> getLoggedUserInfo() {
-  return profileRemoteDataSource.getLoggedUserInfo();
+    return profileRemoteDataSource.getLoggedUserInfo();
   }
 
   @override
@@ -22,8 +23,7 @@ class ProfileRepositoryImpl implements ProfileRepository{
   }
 
   @override
-  Future<Result<String?>> uploadPhoto(File imageFile) {
-   return profileRemoteDataSource.uploadPhoto(imageFile);
+  Future<Result<String?>> uploadPhoto(FormData formData) {
+    return profileRemoteDataSource.uploadPhoto(formData);
   }
-
 }

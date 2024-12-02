@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flowery/core/di/di.dart';
 import 'package:flowery/core/styles/colors/app_colors.dart';
 import 'package:flowery/core/styles/images/app_images.dart';
@@ -123,7 +124,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               size: 90.sp,
                               color: AppColors.kGray,
                             ),
-                          )),
+                          )
+                ),
                 Positioned(
                   bottom: 10.h,
                   right: 10.w,
@@ -287,21 +289,29 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedImage != null) {
-      final imageFile = File(pickedImage.path);
+      File imageFile = File(pickedImage.path);
+      FormData formData = FormData.fromMap({
+        'file': await MultipartFile.fromFile(imageFile.path,
+            filename: 'profile.jpg')
+      });
       try {
-        await viewModel.uploadPhoto(imageFile);
+        await viewModel.uploadPhoto(formData);
         if (mounted) {
           setState(() {
             viewModel.getLoggedUserInfo();
           });
         }
       } catch (e) {
-        print("Error uploading image: $e");
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("Error uploading image, please try again.")),
+          );
+        }
       }
     } else {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("")),
+          SnackBar(content: Text("No image selected. Please select an image.",)),
         );
       }
     }

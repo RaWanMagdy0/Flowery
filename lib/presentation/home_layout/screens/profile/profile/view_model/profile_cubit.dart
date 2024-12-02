@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:flowery/core/api/api_result.dart';
 import 'package:flowery/core/base/base_view_model.dart';
 import 'package:flowery/data/models/auth/requests/edite_profile_request_model.dart';
@@ -69,10 +70,10 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
     }
   }
 
-  Future<void> uploadPhoto(File imageFile) async {
+  Future<void> uploadPhoto(FormData formData) async {
     emit(UploadPhotoLoadingState());
 
-    var result = await uploadPhotoUseCase.invoke(imageFile);
+    var result = await uploadPhotoUseCase.invoke(formData);
     switch (result) {
       case Success<String?>():
         emit(UploadPhotoSuccessState(message: result.data));
