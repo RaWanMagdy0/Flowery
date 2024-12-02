@@ -6,8 +6,6 @@ import '../../widgets/bottom_navigation_bar.dart';
 import '../cart/view/cart_screen.dart';
 import '../categories/view/categories_screen.dart';
 import '../categories/view_model/categories_view_model.dart';
-import '../cart/cart_screen.dart';
-import '../categories/view/categories_screen.dart';
 import '../home/view/home_screen.dart';
 import '../home/view_model/home_view_model.dart';
 import '../profile/profile/view/profile_main_screen.dart';
