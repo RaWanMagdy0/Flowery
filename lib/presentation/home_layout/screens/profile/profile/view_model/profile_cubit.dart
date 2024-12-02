@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flowery/core/api/api_result.dart';
 import 'package:flowery/core/base/base_view_model.dart';
 import 'package:flowery/data/models/auth/requests/edite_profile_request_model.dart';
+import 'package:flowery/domain/use_case/auth/logout_use_case.dart';
 import 'package:flowery/domain/use_case/home/profile/edite_profile_use_case.dart';
 import 'package:flowery/domain/use_case/home/profile/upload_photo_use_case.dart';
 import 'package:flowery/presentation/home_layout/screens/profile/profile/view_model/profile_state.dart';
@@ -16,8 +17,9 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
   final GetLoggedUserInfoUseCase getLoggedUserInfoUseCase;
   final EditeProfileUseCase editeProfileUseCase;
   final UploadPhotoUseCase uploadPhotoUseCase;
+  final LogoutUseCase logoutUseCase;
   ProfileCubit(this.getLoggedUserInfoUseCase, this.editeProfileUseCase,
-      this.uploadPhotoUseCase)
+      this.logoutUseCase, this.uploadPhotoUseCase)
       : super(ProfileInitialState());
 
   var formKey = GlobalKey<FormState>();
@@ -70,6 +72,7 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
             errorMessage: getErrorMassageFromException(result.exception)));
     }
   }
+
   bool isFormField = true;
   String titleAppBar() {
     if (isFormField) {
@@ -78,7 +81,8 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
       return "Update";
     }
   }
-  void changeFormField(bool isValid){
+
+  void changeFormField(bool isValid) {
     emit(ProfileInitialState());
     isFormField = isValid;
   }
@@ -99,5 +103,15 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
     }
   }
 
+  void logout() async {
+    final response = await logoutUseCase.invoke();
 
+    switch (response) {
+      case Success<String?>():
+        emit(LogoutSuccessState(response.data));
+      case Fail<String?>():
+        emit(
+            LogoutErrorState(getErrorMassageFromException(response.exception)));
+    }
+  }
 }

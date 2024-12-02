@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flowery/data/models/auth/requests/edite_profile_request_model.dart';
 import 'package:flowery/data/models/auth/requests/reset_password_request_model.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
@@ -35,6 +36,10 @@ abstract class AuthApiManager {
   @PUT(ApiConstants.resetPassword)
   Future<String?> resetPassword(@Body() ResetPasswordRequestBody resetPassword);
   @PATCH(ApiConstants.changePassword)
-  Future<String?> changePassword(@Body() ChangePasswordRequestModel request, @Header('Authorization') String token,);
-
+  Future<String?> changePassword(
+    @Body() ChangePasswordRequestModel request,
+    @Header('Authorization') String token,
+  );
+  @GET(ApiConstants.logout)
+  Future<String?> logout(@Header("Authorization") String token);
 }

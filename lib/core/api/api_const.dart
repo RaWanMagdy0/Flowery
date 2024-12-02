@@ -20,4 +20,5 @@ class ApiConstants {
   static const String occasions = "api/v1/occasions";
   static const String getBestSeller = "api/v1/best-seller";
   static const String getAllCategoriesEndpoint = "api/v1/categories";
+  static const String logout = "api/v1/auth/logout";
 }
