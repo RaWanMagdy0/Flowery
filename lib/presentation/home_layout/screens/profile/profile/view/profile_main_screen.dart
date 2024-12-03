@@ -1,19 +1,24 @@
 import 'package:flowery/core/routes/page_route_name.dart';
 import 'package:flowery/core/styles/fonts/app_fonts.dart';
+import 'package:flowery/core/utils/functions/dialogs/app_dialogs.dart';
 import 'package:flowery/core/utils/widget/custom_list_tile.dart';
 import 'package:flowery/core/utils/widget/custom_switch_tile.dart';
+import 'package:flowery/presentation/home_layout/screens/home/view/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import '../../../../../../core/di/di.dart';
+import '../../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../../core/styles/images/app_images.dart';
 import '../view_model/profile_cubit.dart';
 import '../view_model/profile_state.dart';
 
 class ProfileMainScreen extends StatefulWidget {
   static const String routeName = 'Profile Main Screen';
+
   const ProfileMainScreen({super.key});
+
   @override
   State<ProfileMainScreen> createState() => _ProfileScreenState();
 }
@@ -21,6 +26,7 @@ class ProfileMainScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileMainScreen> {
   bool isNotificationEnabled = true;
   late ProfileCubit viewModel;
+
   @override
   void initState() {
     super.initState();
@@ -50,6 +56,14 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
         listener: (context, state) {
           if (state is EditProfileSuccessState) {
             viewModel.getLoggedUserInfo();
+          }
+          if (state is LogoutSuccessState) {
+            Navigator.pushReplacementNamed(context, PageRouteName.homeLayout);
+          }
+          if (state is LogoutErrorState) {
+            AppDialogs.showErrorDialog(
+                context: context,
+                errorMassage: state.message ?? "An Error Occurred");
           }
         },
         child: BlocBuilder<ProfileCubit, ProfileState>(
@@ -155,7 +169,88 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                         title: 'Logout',
                         trailingIcon: Icons.logout,
                         onTap: () {
-                          viewModel.logout();
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                backgroundColor: AppColors.kWhite,
+                                content: SizedBox(
+                                  width: 240.w,
+                                  height: 150.h,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "LOGOUT",
+                                        style: AppFonts.font18BlackWeight500
+                                            .copyWith(
+                                                fontWeight: FontWeight.w600),
+                                      ),
+                                      SizedBox(height: 5.h),
+                                      Text(
+                                        "Confirm logout!!",
+                                        style: AppFonts.font16BlackWeight500
+                                            .copyWith(
+                                                fontWeight: FontWeight.w400),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              minimumSize: Size(80.w, 45.h),
+                                              backgroundColor: AppColors.kWhite,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(50.r),
+                                                side: BorderSide(
+                                                    color: Colors.grey,
+                                                    width: 1.w),
+                                              ),
+                                            ),
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: Text(
+                                              "Cancel",
+                                              style:
+                                                  AppFonts.font14GreyWeight400,
+                                            ),
+                                          ),
+                                          SizedBox(width: 10.w),
+                                          ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              minimumSize: Size(80.w, 45.h),
+                                              backgroundColor: AppColors.kPink,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(50.r),
+                                                side: BorderSide(
+                                                    color: Colors.transparent,
+                                                    width: 1.w),
+                                              ),
+                                            ),
+                                            onPressed: () {
+                                              Navigator.pop(
+                                                  context); // Close the dialog
+                                              viewModel.logout();
+                                            },
+                                            child: Text(
+                                              "Logout",
+                                              style:
+                                                  AppFonts.font15WhiteWeight500,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
                         },
                       ),
 

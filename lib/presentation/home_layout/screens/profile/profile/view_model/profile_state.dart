@@ -61,5 +61,3 @@ class LogoutErrorState extends ProfileState {
 
   LogoutErrorState(this.message);
 }
-
-class LogoutLoadingState extends ProfileState {}
