@@ -6,6 +6,7 @@ import '../../../../core/routes/page_route_name.dart';
 import '../../../../core/styles/colors/app_colors.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../core/utils/widget/custom_item_card.dart';
+import '../../../../domain/entities/home_layout/product_details_entity.dart';
 import 'view_model/ocusin_cubit.dart';
 import 'view_model/ocusin_state.dart';
 
@@ -66,9 +67,6 @@ class _OccasionScreenState extends State<OccasionScreen> {
               } else if (state is OccasionErrorState) {
                 return Center(child: Text(state.exception.toString()));
               } else if (state is OccasionSuccessState) {
-                context
-                    .read<OccasionCubit>()
-                    .selectCategory(state.occasions![0].id ?? '');
                 return SizedBox(
                   height: 20.h,
                   child: ListView.builder(
@@ -122,11 +120,13 @@ class _OccasionScreenState extends State<OccasionScreen> {
               } else if (state is GetOccasionPrudactErrorState) {
                 return Center(child: Text(state.exception.toString()));
               } else if (state is GetOccasionPrudactSuccessState) {
+                final List<ProductEntity?>? prudact =
+                    context.read<OccasionCubit>().prudact;
                 return Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: GridView.builder(
-                      itemCount: state.prudact?.length,
+                      itemCount: prudact?.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 17,
@@ -135,14 +135,11 @@ class _OccasionScreenState extends State<OccasionScreen> {
                       ),
                       itemBuilder: (context, index) {
                         return FlowerCard(
-                          title: state.prudact?[index]?.title,
-                          imageUrl: state.prudact?[index]?.imgCover,
-                          price:
-                              'EGP ${state.prudact?[index]?.priceAfterDiscount}',
-                          originalPrice:
-                              state.prudact?[index]?.price.toString(),
-                          descount:
-                              '${state.prudact?[index]?.priceAfterDiscount}',
+                          title: prudact?[index]?.title,
+                          imageUrl: prudact?[index]?.imgCover,
+                          price: 'EGP ${prudact?[index]?.priceAfterDiscount}',
+                          originalPrice: prudact?[index]?.price.toString(),
+                          descount: '${prudact?[index]?.priceAfterDiscount}',
                           descountColor: Colors.green,
                           backgroundColor: Colors.white,
                           buttonColor: AppColors.kPink,
@@ -154,7 +151,7 @@ class _OccasionScreenState extends State<OccasionScreen> {
                           onTap: () => Navigator.pushNamed(
                             context,
                             PageRouteName.productDetails,
-                            arguments: state.prudact?[index]?.id,
+                            arguments: prudact?[index]?.id,
                           ),
                           onButtonPressed: () {},
                         );

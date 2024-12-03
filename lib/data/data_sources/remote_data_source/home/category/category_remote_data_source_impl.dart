@@ -25,9 +25,9 @@ class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
   }
 
   @override
-  Future<Result<List<ProductModel>?>> getCategoriesProduct() {
+  Future<Result<List<ProductModel>?>> getCategoriesProduct(String id) {
     return executeApiCall(() async {
-      final response = await apiManger.getCategoryProducts();
+      final response = await apiManger.getCategoryProducts(id);
       final data = response.products;
       log('data: $data', name: 'CategoryRemoteDataSourceImpl');
       return data!;
