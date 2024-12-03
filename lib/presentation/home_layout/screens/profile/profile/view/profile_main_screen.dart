@@ -111,7 +111,9 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                       const SizedBox(height: 5),
                       Text(
                         state.user?.email ?? "",
-                        style: AppFonts.font18BlackWeight500,
+                        style: AppFonts.font18BlackWeight500.copyWith(
+                          color: AppColors.kGray
+                        ),
                       ),
                       28.verticalSpace,
                       // Custom List Tiles
