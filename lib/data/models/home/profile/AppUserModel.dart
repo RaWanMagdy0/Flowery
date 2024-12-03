@@ -27,13 +27,12 @@ class AppUserModel {
     return User(
       id: user?.id,
       phone: user?.phone,
-      photo: user?.phone,
+      photo: user?.photo,
       firstName: user?.firstName,
       lastName: user?.lastName,
       email: user?.email,
       gender: user?.gender,
       role: user?.role,
-
 
     );
   }

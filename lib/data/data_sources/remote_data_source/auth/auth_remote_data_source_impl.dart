@@ -6,6 +6,7 @@ import '../../../../core/local/token_manger.dart';
 import '../../../api/auth_api/auth_api_manager.dart';
 import '../../../models/auth/requests/login_request_model.dart';
 import '../../../models/auth/requests/change_password_request_model.dart';
+import '../../../models/auth/requests/reset_password_request_model.dart';
 import '../../../models/auth/requests/sign_up_request_model.dart';
 import '../../../models/auth/response/login_response_model.dart';
 import 'auth_remote_data_source.dart';
@@ -68,4 +69,25 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
     });
   }
 
+  @override
+  Future<Result<String?>> resetPassword(
+      ResetPasswordRequestBody resetPassword) {
+    return executeApiCall<String?>(() async {
+      final response = await apiManger.resetPassword(resetPassword);
+      return response;
+    });
+  }
+
+  @override
+  Future<Result<String?>> logout() async {
+    return await executeApiCall<String?>(() async {
+      var token = await TokenManager.getToken();
+      if (token == null || token.isEmpty) {
+        throw Exception("Token is missing. Please try again.");
+      }
+      token = 'Bearer $token';
+      String? message = await apiManger.logout(token);
+      return message;
+    });
+  }
 }

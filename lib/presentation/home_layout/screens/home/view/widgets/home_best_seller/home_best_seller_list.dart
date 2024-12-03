@@ -27,7 +27,7 @@ class HomeBestSellerList extends StatelessWidget {
               state.homeData?.bestSellerProducts ?? [];
 
           return SizedBox(
-            height: 240.h,
+            height: 250.h,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

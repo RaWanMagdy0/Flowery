@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
+import '../core/local/secure_storage.dart';
 import '../core/local/token_manger.dart';
 import '../core/routes/page_route_name.dart';
 import '../core/styles/images/app_images.dart';
@@ -32,9 +35,20 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   _navigateToInitialRoute() async {
-    var token = await TokenManager.getToken();
-    String initialRoute =
-        token != null ? PageRouteName.homeLayout : PageRouteName.logIn;
+    String initialRoute = PageRouteName.logIn;
+
+    final remeberMe =
+        await SecureStorageFactory.readData(key: 'rememberMe') ?? 'false';
+
+    log(remeberMe, name: 'SplashScreen rememberMe');
+
+    if (remeberMe == 'true') {
+      initialRoute = PageRouteName.homeLayout;
+    } else {
+      TokenManager.deleteToken();
+      initialRoute = PageRouteName.logIn;
+    }
+
     if (mounted) {
       Navigator.of(context).pushReplacementNamed(
         initialRoute,
