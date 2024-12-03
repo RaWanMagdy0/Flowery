@@ -23,7 +23,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
   }
 
   @override
-  Future<Result<String?>> uploadPhoto(FormData formData) {
-    return profileRemoteDataSource.uploadPhoto(formData);
+  Future<Result<String?>> uploadPhoto(File photo) {
+    return profileRemoteDataSource.uploadPhoto(photo);
   }
 }

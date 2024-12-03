@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flowery/core/api/api_result.dart';
 import 'package:flowery/core/api/execute_api_call.dart';
@@ -33,14 +35,15 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   }
 
   @override
-  Future<Result<String?>> uploadPhoto(FormData formData) async {
+  Future<Result<String?>> uploadPhoto(File photo) async {
     return await executeApiCall<String?>(() async {
       var token = await _getToken();
-      var response = await apiManger.uploadPhoto(token, formData);
+      var response = await apiManger.uploadPhoto(photo,token);
       return response;
     });
   }
 
+  }
   Future<String> _getToken() async {
     var token = await TokenManager.getToken();
     if (token == null || token.isEmpty) {
@@ -48,4 +51,4 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
     }
     return 'Bearer $token';
   }
-}
+

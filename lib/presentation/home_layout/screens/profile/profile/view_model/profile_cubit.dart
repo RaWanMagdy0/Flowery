@@ -81,29 +81,20 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
       return "Update";
     }
   }
-
   void changeFormField(bool isValid) {
     emit(ProfileInitialState());
     isFormField = isValid;
   }
 
-  Future<void> uploadPhoto(FormData formData) async {
+  Future<void> uploadPhoto(File photo) async {
     emit(UploadPhotoLoadingState());
-
-    try {
-      var result = await uploadPhotoUseCase.invoke(formData);
-      if (result is Success<String?>) {
+    final result = await uploadPhotoUseCase.invoke(photo);
+    switch (result) {
+      case Success<String?>():
         emit(UploadPhotoSuccessState(message: result.data));
-        await getLoggedUserInfo();
-      } else if (result is Fail<String?>) {
+      case Fail<String?>():
         emit(UploadPhotoErrorState(
-            errorMessage: getErrorMassageFromException(result.exception)));
-      }
-    } catch (e, stackTrace) {
-      debugPrint("Error uploading photo: $e");
-      debugPrintStack(stackTrace: stackTrace);
-      emit(
-          UploadPhotoErrorState(errorMessage: "An unexpected error occurred."));
+            errorMessage: getErrorMassageFromException(result.exception!)));
     }
   }
 

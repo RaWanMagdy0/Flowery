@@ -9,6 +9,6 @@ import '../../entities/home_layout/profile/User.dart';
 abstract class ProfileRepository{
   Future<Result<User?>>getLoggedUserInfo();
   Future<Result<User?>>editeProfile(EditeProfileRequestModel editeProfile);
-  Future<Result<String?>>uploadPhoto(FormData formData);
+  Future<Result<String?>>uploadPhoto(File photo);
 
 }

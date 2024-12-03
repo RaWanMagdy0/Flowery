@@ -19,6 +19,7 @@ import '../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../domain/entities/home_layout/profile/User.dart';
 import '../view_model/profile_cubit.dart';
 import '../view_model/profile_state.dart';
+import '../widget/profile_pic.dart';
 
 class EditProfileScreen extends StatefulWidget {
   static const String routeName = 'ProfileScreen';
@@ -97,60 +98,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   Widget _buildProfileForm(User user) {
-    bool isUserProfile;
-    if (user.photo ==
-        "https://flower.elevateegy.com/uploads/default-profile.png") {
-      isUserProfile = false;
-    } else {
-      isUserProfile = true;
-    }
     return SingleChildScrollView(
       child: Column(
         children: [
-          SizedBox(
-            width: 100.w,
-            height: 100.h,
-            child: Stack(
-              children: [
-                ClipOval(
-                    child: isUserProfile
-                        ? Image.network(
-                            user.photo ?? "",
-                            fit: BoxFit.cover,
-                          )
-                        : Container(
-                            color: AppColors.kLighterGrey,
-                            child: Icon(
-                              Icons.person,
-                              size: 90.sp,
-                              color: AppColors.kGray,
-                            ),
-                          )),
-                Positioned(
-                  bottom: 10.h,
-                  right: 10.w,
-                  child: GestureDetector(
-                    onTap: () async {
-                      await uploadImage();
-                    },
-                    child: Container(
-                      height: 24.h,
-                      width: 24.w,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5.r),
-                        color: AppColors.kBabyPink,
-                      ),
-                      child: Icon(
-                        Icons.camera_alt_outlined,
-                        size: 15.sp,
-                        color: AppColors.kGray,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          CustomProfilePic(),
           20.verticalSpace,
           Form(
             key: viewModel.formKey,
@@ -298,42 +249,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         ],
       ),
     );
-  }
-
-  Future<void> uploadImage() async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? pickedImage =
-        await picker.pickImage(source: ImageSource.gallery);
-    if (pickedImage != null) {
-      File imageFile = File(pickedImage.path);
-      FormData formData = FormData.fromMap({
-        'file': await MultipartFile.fromFile(imageFile.path,
-            filename: 'profile.jpg')
-      });
-      try {
-        await viewModel.uploadPhoto(formData);
-        if (mounted) {
-          setState(() {
-            viewModel.getLoggedUserInfo();
-          });
-        }
-      } catch (e) {
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text("Error uploading image, please try again.")),
-          );
-        }
-      }
-    } else {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text(
-            "No image selected. Please select an image.",
-          )),
-        );
-      }
-    }
   }
 
   void _checkChanges(User user) {
