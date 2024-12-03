@@ -61,7 +61,7 @@ class CartProductItem extends StatelessWidget {
                     ),
                     21.verticalSpace,
                     Text(
-                      cartProduct.totalPrice.toString(),
+                      "EGP ${cartProduct.totalPrice.toString()}",
                       style: AppFonts.font14BlackWeight600,
                     ),
                   ],

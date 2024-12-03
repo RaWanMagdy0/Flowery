@@ -9,7 +9,6 @@ import '../../../../core/utils/widget/add_to_cart_button.dart';
 import '../../../../domain/entities/home_layout/product_details_entity.dart';
 import '../view_model/product_details_cubit.dart';
 import '../view_model/product_details_states.dart';
-
 class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key});
 

@@ -45,9 +45,6 @@ class AppRoutes {
     switch (setting.name) {
       case PageRouteName.splash:
         return _handleMaterialPageRoute(widget: const SplashScreen());
-      case PageRouteName.productDetails:
-        return _handleMaterialPageRoute(widget: ProductDetails());
-
       case PageRouteName.logIn:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -111,7 +108,10 @@ class AppRoutes {
 
       case PageRouteName.productDetails:
         return MaterialPageRoute(
-          builder: (context) => ProductDetails(),
+          builder: (context) => BlocProvider.value(
+            value: getCartViewModel()..checkLoggedUser(),
+            child: ProductDetails(),
+          ),
           settings: setting,
         );
       case PageRouteName.categories:
