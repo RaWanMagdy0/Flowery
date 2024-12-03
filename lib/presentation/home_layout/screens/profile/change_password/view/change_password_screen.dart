@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../../core/styles/colors/app_colors.dart';
-import '../../../../core/utils/widget/custom_button.dart';
-import '../../../../core/utils/widget/custom_text_form_field.dart';
+import '../../../../../../core/di/di.dart';
+import '../../../../../../core/routes/page_route_name.dart';
+import '../../../../../../core/styles/colors/app_colors.dart';
+import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
+import '../../../../../../core/utils/widget/custom_button.dart';
+import '../../../../../../core/utils/widget/custom_text_form_field.dart';
+import '../../../../../../domain/repository/auth/auth_repository.dart';
 import '../view_model/change_password_state.dart';
 import '../view_model/change_password_view_model.dart';
 
@@ -49,24 +52,30 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         ),
       ),
       body: BlocConsumer<ChangePasswordViewModel, ChangePasswordState>(
-        listener: (context, state) {
-          if (state is ChangePasswordSuccess) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Password updated successfully'),
-                backgroundColor: Colors.green,
-              ),
-            );
-            Navigator.pushNamedAndRemoveUntil(
-              context,
-              PageRouteName.splash,
-                  (route) => false,
-            );
-          } else if (state is ChangePasswordError) {
-            AppDialogs.showErrorDialog(
-                context: context, errorMassage: state.errorMessage.toString());
-          }
-        },
+          listener: (context, state) {
+            if (state is ChangePasswordSuccess) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Password updated successfully'),
+                  backgroundColor: Colors.green,
+                ),
+              );
+              getIt<AuthRepository>().logout().then((_) {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  PageRouteName.splash,
+                      (route) => false,
+                );
+              });
+            } else if (state is ChangePasswordError) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('$state.errorMessage'),
+                  backgroundColor: Colors.red,
+                ),
+              );
+            }
+          },
         builder: (context, state) {
           return SingleChildScrollView(
             padding: EdgeInsets.all(16.w),
