@@ -193,13 +193,17 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                             builder: (BuildContext context) {
                               return AlertDialog(
                                 backgroundColor: AppColors.kWhite,
-                                content: SizedBox(
-                                  width: 240.w,
-                                  height: 150.h,
+                                content: Container(
+                                  width: 260.w,
+                                  height: 155.h,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
+                                      SizedBox(height: 15.h),
                                       Text(
                                         "LOGOUT",
                                         style: AppFonts.font18BlackWeight500
@@ -213,13 +217,14 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                                             .copyWith(
                                                 fontWeight: FontWeight.w400),
                                       ),
+                                      SizedBox(height: 24.h),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
                                           ElevatedButton(
                                             style: ElevatedButton.styleFrom(
-                                              minimumSize: Size(80.w, 45.h),
+                                              minimumSize: Size(105.w, 40.h),
                                               backgroundColor: AppColors.kWhite,
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
@@ -238,10 +243,10 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                                                   AppFonts.font14GreyWeight400,
                                             ),
                                           ),
-                                          SizedBox(width: 10.w),
+                                          SizedBox(width: 15.w),
                                           ElevatedButton(
                                             style: ElevatedButton.styleFrom(
-                                              minimumSize: Size(80.w, 45.h),
+                                              minimumSize: Size(105.w, 40.h),
                                               backgroundColor: AppColors.kPink,
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
@@ -258,8 +263,11 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                                             },
                                             child: Text(
                                               "Logout",
-                                              style:
-                                                  AppFonts.font15WhiteWeight500,
+                                              style: AppFonts
+                                                  .font15WhiteWeight500
+                                                  .copyWith(
+                                                      fontWeight:
+                                                          FontWeight.w400),
                                             ),
                                           ),
                                         ],

@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../../core/di/di.dart';
+import '../../../../../../core/routes/page_route_name.dart';
 import '../../../../../../core/styles/colors/app_colors.dart';
-import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../../../core/utils/functions/validators/validators.dart';
 import '../../../../../../core/utils/widget/custom_button.dart';
 import '../../../../../../core/utils/widget/custom_text_form_field.dart';
+import '../../../../../../domain/repository/auth/auth_repository.dart';
 import '../view_model/change_password_state.dart';
 import '../view_model/change_password_view_model.dart';
 
@@ -55,11 +57,26 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       body: BlocConsumer<ChangePasswordViewModel, ChangePasswordState>(
         listener: (context, state) {
           if (state is ChangePasswordSuccess) {
-            AppDialogs.showSuccessDialog(
-                context: context, message: "Change Password Successfully");
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Password updated successfully'),
+                backgroundColor: Colors.green,
+              ),
+            );
+            getIt<AuthRepository>().logout().then((_) {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                PageRouteName.splash,
+                (route) => false,
+              );
+            });
           } else if (state is ChangePasswordError) {
-            AppDialogs.showErrorDialog(
-                context: context, errorMassage: state.errorMessage.toString());
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('$state.errorMessage'),
+                backgroundColor: Colors.red,
+              ),
+            );
           }
         },
         builder: (context, state) {
@@ -116,16 +133,21 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     controller: _confirmPasswordController,
                     hintText: 'Confirm password',
                     isPassword: true,
-                    validator: (value) => Validators.validatePassword(value),
                     keyBordType: TextInputType.text,
                     labelText: '',
+                    validator: (value) {
+                      if (value != _newPasswordController.text) {
+                        return 'Passwords do not match';
+                      }
+                      return null;
+                    },
                   ),
                   SizedBox(height: 32.h),
                   CustomButton(
-                    color: AppColors.kPink,
                     text: state is ChangePasswordLoading
                         ? 'Loading...'
                         : 'Update',
+                    color: Colors.grey,
                     onPressed: state is ChangePasswordLoading
                         ? null
                         : () {
