@@ -69,12 +69,25 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
     });
   }
 
-
   @override
-  Future<Result<String?>> resetPassword(ResetPasswordRequestBody resetPassword) {
+  Future<Result<String?>> resetPassword(
+      ResetPasswordRequestBody resetPassword) {
     return executeApiCall<String?>(() async {
       final response = await apiManger.resetPassword(resetPassword);
       return response;
+    });
+  }
+
+  @override
+  Future<Result<String?>> logout() async {
+    return await executeApiCall<String?>(() async {
+      var token = await TokenManager.getToken();
+      if (token == null || token.isEmpty) {
+        throw Exception("Token is missing. Please try again.");
+      }
+      token = 'Bearer $token';
+      String? message = await apiManger.logout(token);
+      return message;
     });
   }
 }

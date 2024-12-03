@@ -61,8 +61,9 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<Result<String?>> resetPassword(ResetPasswordRequestBody resetPassword) async{
-   return await dataSource.resetPassword(resetPassword);
+  Future<Result<String?>> resetPassword(
+      ResetPasswordRequestBody resetPassword) async {
+    return await dataSource.resetPassword(resetPassword);
   }
 
   @override
@@ -74,5 +75,10 @@ class AuthRepositoryImpl extends AuthRepository {
       currentPassword: currentPassword,
       newPassword: newPassword,
     );
+  }
+
+  @override
+  Future<Result<String?>> logout() async {
+    return await dataSource.logout();
   }
 }

@@ -100,7 +100,7 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                         style: AppFonts.font18BlackWeight500,
                       ),
                       const SizedBox(height: 32),
-        
+
                       // Custom List Tiles
                       CustomListTile(
                         leadingIcon: Icons.list_alt,
@@ -114,11 +114,11 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                         trailingIcon: Icons.arrow_forward_ios,
                         onTap: () {},
                       ),
-        
+
                       // Options List
                       SizedBox(height: 14.h),
                       Divider(thickness: 1.w),
-        
+
                       // Notification Tile
                       SwitchTile(
                         value: isNotificationEnabled,
@@ -149,14 +149,16 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                       ),
                       const SizedBox(height: 16),
                       const Divider(thickness: 1),
-        
+
                       CustomListTile(
                         leadingIcon: Icons.logout,
                         title: 'Logout',
                         trailingIcon: Icons.logout,
-                        onTap: () {},
+                        onTap: () {
+                          viewModel.logout();
+                        },
                       ),
-        
+
                       const SizedBox(height: 20),
                       const Text(
                         'v 6.3.0 - (446)',

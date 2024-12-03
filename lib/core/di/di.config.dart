@@ -54,6 +54,7 @@ import '../../domain/repository/home/profile_repository.dart' as _i539;
 import '../../domain/use_case/auth/change_password_use_case.dart' as _i495;
 import '../../domain/use_case/auth/forgot_password_use_case.dart' as _i120;
 import '../../domain/use_case/auth/login_use_case.dart' as _i408;
+import '../../domain/use_case/auth/logout_use_case.dart' as _i755;
 import '../../domain/use_case/auth/reset_password_use_case.dart' as _i603;
 import '../../domain/use_case/auth/sign_up_use_case.dart' as _i322;
 import '../../domain/use_case/auth/verify_reset_code_use_case.dart' as _i759;
@@ -170,11 +171,8 @@ extension GetItInjectableX on _i174.GetIt {
         _i120.ForgotPasswordUseCase(repository: gh<_i912.AuthRepository>()));
     gh.factory<_i759.VerifyResetCodeUseCase>(() =>
         _i759.VerifyResetCodeUseCase(repository: gh<_i912.AuthRepository>()));
-    gh.factory<_i275.ProfileCubit>(() => _i275.ProfileCubit(
-          gh<_i334.GetLoggedUserInfoUseCase>(),
-          gh<_i729.EditeProfileUseCase>(),
-          gh<_i200.UploadPhotoUseCase>(),
-        ));
+    gh.factory<_i755.LogoutUseCase>(
+        () => _i755.LogoutUseCase(gh<_i912.AuthRepository>()));
     gh.factory<_i498.OccasionCubit>(() => _i498.OccasionCubit(
           gh<_i239.OccasionsUseCase>(),
           gh<_i321.GetOccasionProductUseCase>(),
@@ -202,6 +200,12 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i58.HomeViewModel(gh<_i76.GetHomeDataUseCase>()));
     gh.factory<_i603.ResetPasswordUseCase>(() =>
         _i603.ResetPasswordUseCase(authRepository: gh<_i912.AuthRepository>()));
+    gh.factory<_i275.ProfileCubit>(() => _i275.ProfileCubit(
+          gh<_i334.GetLoggedUserInfoUseCase>(),
+          gh<_i729.EditeProfileUseCase>(),
+          gh<_i755.LogoutUseCase>(),
+          gh<_i200.UploadPhotoUseCase>(),
+        ));
     gh.factory<_i700.AddProductToCartUseCase>(
         () => _i700.AddProductToCartUseCase(gh<_i1048.CartRepository>()));
     gh.factory<_i217.ClearCartUseCase>(
