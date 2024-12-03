@@ -1,3 +1,5 @@
+import '../../domain/entities/home_layout/product_details_entity.dart';
+
 class ProductDetailsModel {
   ProductDetailsModel({
     this.message,
@@ -92,5 +94,23 @@ class ProductModel {
     map['updatedAt'] = updatedAt;
     map['__v'] = v;
     return map;
+  }
+
+  ProductEntity toEntity() {
+    return ProductEntity(
+        id: id,
+        title: title,
+        slug: slug,
+        description: description,
+        imgCover: imgCover,
+        images: images,
+        price: price,
+        priceAfterDiscount: priceAfterDiscount,
+        quantity: quantity,
+        category: category,
+        occasion: occasion,
+        createdAt: createdAt,
+        updatedAt: updatedAt,
+        v: v);
   }
 }

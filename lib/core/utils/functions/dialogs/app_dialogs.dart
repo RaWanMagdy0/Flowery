@@ -40,6 +40,7 @@ class AppDialogs {
           errorMassage,
           style: AppFonts.font18BlackWeight500,
         ),
+        /************
         actions: [
           TextButton(
             onPressed: () {
@@ -51,6 +52,7 @@ class AppDialogs {
             ),
           ),
         ],
+    ************/
       ),
     );
   }

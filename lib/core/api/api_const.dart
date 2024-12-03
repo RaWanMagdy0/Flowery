@@ -16,4 +16,8 @@ class ApiConstants {
   static const String getLoggedUserInfo = "api/v1/auth/profile-data";
   static const String editProfile = "api/v1/auth/editProfile";
   static const String uploadPhoto = "api/v1/auth/upload-photo";
+  static const String cart = 'api/v1/cart';
+  static const String occasions = "api/v1/occasions";
+  static const String getBestSeller = "api/v1/best-seller";
+  static const String getAllCategoriesEndpoint = "api/v1/categories";
 }

@@ -1,10 +1,12 @@
+import 'package:flowery/core/utils/functions/dialogs/app_dialogs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/styles/colors/app_colors.dart';
-import '../../../../core/utils/widget/custom_button.dart';
-import '../../../../core/utils/widget/custom_text_form_field.dart';
+import '../../../../../../core/styles/colors/app_colors.dart';
+import '../../../../../../core/utils/functions/validators/validators.dart';
+import '../../../../../../core/utils/widget/custom_button.dart';
+import '../../../../../../core/utils/widget/custom_text_form_field.dart';
 import '../view_model/change_password_state.dart';
 import '../view_model/change_password_view_model.dart';
 
@@ -17,9 +19,11 @@ class ChangePasswordScreen extends StatefulWidget {
 }
 
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
-  final TextEditingController _currentPasswordController = TextEditingController();
+  final TextEditingController _currentPasswordController =
+      TextEditingController();
   final TextEditingController _newPasswordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -51,20 +55,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       body: BlocConsumer<ChangePasswordViewModel, ChangePasswordState>(
         listener: (context, state) {
           if (state is ChangePasswordSuccess) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Password updated successfully'),
-                backgroundColor: Colors.green,
-              ),
-            );
-            Navigator.pop(context);
+            AppDialogs.showSuccessDialog(context: context, message: "Change Password Successfully");
           } else if (state is ChangePasswordError) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.message),
-                backgroundColor: Colors.red,
-              ),
-            );
+            AppDialogs.showErrorDialog(
+                context: context, errorMassage: state.errorMessage.toString());
           }
         },
         builder: (context, state) {
@@ -87,12 +81,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     controller: _currentPasswordController,
                     hintText: 'Current password',
                     isPassword: true,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Current password is required';
-                      }
-                      return null;
-                    }, labelText: '',
+                    validator: (value) =>
+                        Validators.validatePassword(value),
+                    keyBordType: TextInputType.text,
+                    labelText: '',
                   ),
                   SizedBox(height: 24.h),
                   Text(
@@ -107,12 +99,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     controller: _newPasswordController,
                     hintText: 'New password',
                     isPassword: true,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'New password is required';
-                      }
-                      return null;
-                    }, labelText: '',
+                    validator: (value) =>
+                        Validators.validatePassword(value),
+                    keyBordType: TextInputType.text,
+                    labelText: '',
                   ),
                   SizedBox(height: 24.h),
                   Text(
@@ -127,28 +117,32 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     controller: _confirmPasswordController,
                     hintText: 'Confirm password',
                     isPassword: true,
-                    validator: (value) {
-                      if (value != _newPasswordController.text) {
-                        return 'Passwords do not match';
-                      }
-                      return null;
-                    }, labelText: '',
+                    validator: (value) =>
+                        Validators.validatePassword(value),
+                    keyBordType: TextInputType.text,
+                    labelText: '',
                   ),
                   SizedBox(height: 32.h),
                   CustomButton(
-                    text: state is ChangePasswordLoading ? 'Loading...' : 'Update',
-                    color: Colors.grey,
+                    color: AppColors.kPink,
+                    text: state is ChangePasswordLoading
+                        ? 'Loading...'
+                        : 'Update',
                     onPressed: state is ChangePasswordLoading
                         ? null
                         : () {
-                      if (_formKey.currentState?.validate() ?? false) {
-                        context.read<ChangePasswordViewModel>().changePassword(
-                          currentPassword: _currentPasswordController.text,
-                          newPassword: _newPasswordController.text,
-                          confirmPassword: _confirmPasswordController.text,
-                        );
-                      }
-                    },
+                            if (_formKey.currentState?.validate() ?? false) {
+                              context
+                                  .read<ChangePasswordViewModel>()
+                                  .changePassword(
+                                    currentPassword:
+                                        _currentPasswordController.text,
+                                    newPassword: _newPasswordController.text,
+                                    confirmPassword:
+                                        _confirmPasswordController.text,
+                                  );
+                            }
+                          },
                   ),
                 ],
               ),

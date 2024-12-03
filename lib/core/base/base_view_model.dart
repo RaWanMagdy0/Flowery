@@ -10,7 +10,7 @@ class BaseViewModel<T> extends Cubit<T> {
     if (exception is DioException) {
       return _mapDioExceptionToMessage(exception);
     } else {
-      return 'An unknown error occurred';
+      return exception!.toString();
     }
   }
 
@@ -39,6 +39,7 @@ class BaseViewModel<T> extends Cubit<T> {
   String _handleBadResponse(DioException exception) {
     final statusCode = exception.response?.statusCode;
     final responseData = exception.response?.data;
+
     if (responseData is Map && responseData.containsKey("error")) {
       return responseData["error"];
     } else if (responseData is Map && responseData.containsKey("message")) {
@@ -46,8 +47,10 @@ class BaseViewModel<T> extends Cubit<T> {
     }
     if (statusCode == 400) {
       return AppStringErrors.badRequest;
-    } else if (statusCode == 401 || statusCode == 403) {
+    } else if (statusCode == 403) {
       return AppStringErrors.unauthorized;
+    } else if (statusCode == 401) {
+      return AppStringErrors.invalidCredentials;
     } else if (statusCode == 404) {
       return AppStringErrors.notFound;
     } else if (statusCode == 409) {

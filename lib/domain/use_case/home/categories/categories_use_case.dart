@@ -1,5 +1,4 @@
 import 'package:injectable/injectable.dart';
-
 import '../../../../../core/api/api_result.dart';
 import '../../../entities/home/home_category_entity.dart';
 import '../../../repository/home/category_repository.dart';

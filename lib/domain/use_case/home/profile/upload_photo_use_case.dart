@@ -11,7 +11,7 @@ import '../../../repository/home/profile_repository.dart';
 class UploadPhotoUseCase{
   final ProfileRepository profileRepository;
   UploadPhotoUseCase({required this.profileRepository});
-  Future<Result<String?>>invoke(File imageFile)async{
-    return await profileRepository.uploadPhoto(imageFile);
+  Future<Result<String?>>invoke(FormData formData)async{
+    return await profileRepository.uploadPhoto(formData);
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flowery/core/di/di.dart';
 import 'package:flowery/core/styles/colors/app_colors.dart';
 import 'package:flowery/core/styles/images/app_images.dart';
@@ -13,8 +14,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
-import '../../../../../core/styles/fonts/app_fonts.dart';
-import '../../../../../domain/entities/home_layout/profile/User.dart';
+import '../../../../../../core/routes/page_route_name.dart';
+import '../../../../../../core/styles/fonts/app_fonts.dart';
+import '../../../../../../domain/entities/home_layout/profile/User.dart';
 import '../view_model/profile_cubit.dart';
 import '../view_model/profile_state.dart';
 
@@ -30,6 +32,7 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   late ProfileCubit viewModel;
   String? gender;
+  bool hasChanges = false;
 
   @override
   void initState() {
@@ -105,25 +108,27 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       child: Column(
         children: [
           SizedBox(
-            width: 90.w,
-            height: 90.h,
+            width: 100.w,
+            height: 100.h,
             child: Stack(
               children: [
                 ClipOval(
                     child: isUserProfile
                         ? Image.network(
                             user.photo ?? "",
-                            width: 90.w,
-                            height: 90.h,
                             fit: BoxFit.cover,
                           )
-                        : Icon(
-                            Icons.person,
-                            size: 50.sp,
+                        : Container(
+                            color: AppColors.kLighterGrey,
+                            child: Icon(
+                              Icons.person,
+                              size: 90.sp,
+                              color: AppColors.kGray,
+                            ),
                           )),
                 Positioned(
-                  bottom: 0.h,
-                  right: 0.w,
+                  bottom: 10.h,
+                  right: 10.w,
                   child: GestureDetector(
                     onTap: () async {
                       await uploadImage();
@@ -164,6 +169,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             value: value,
                             title: "First Name",
                           ),
+                          onChanged: (value) => _checkChanges(user),
                         ),
                       ),
                       16.horizontalSpace,
@@ -176,6 +182,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             value: value,
                             title: "Last Name",
                           ),
+                          onChanged: (value) => _checkChanges(user),
                         ),
                       ),
                     ],
@@ -186,6 +193,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     hintText: user.email ?? '',
                     labelText: "Email",
                     validator: (value) => Validators.validateEmail(value),
+                    onChanged: (value) => _checkChanges(user),
                   ),
                   24.verticalSpace,
                   CustomTextFormField(
@@ -193,16 +201,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     hintText: user.phone ?? '',
                     labelText: "Phone",
                     validator: (value) => Validators.validatePhoneNumber(value),
+                    onChanged: (value) => _checkChanges(user),
                   ),
                   24.verticalSpace,
                   CustomTextFormField(
+                    onChanged: (value) => _checkChanges(user),
                     hintText: "***********",
                     labelText: "",
                     controller: TextEditingController(text: "**********"),
                     suffixIcon: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(
+                              context, PageRouteName.changePassword);
+                        },
                         child: Text(
                           "Change",
                           style: AppFonts.font12PinkWeight600,
@@ -253,11 +266,23 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   ),
                   24.verticalSpace,
                   CustomButton(
-                    onPressed: () {
-                      if (viewModel.formKey.currentState!.validate()) {
-                        viewModel.editeProfile();
-                      }
-                    },
+                    onPressed: hasChanges
+                        ? () async {
+                            if (viewModel.formKey.currentState!.validate()) {
+                              await viewModel.editeProfile();
+                              setState(() {
+                                user.firstName =
+                                    viewModel.firstNameController.text;
+                                user.lastName =
+                                    viewModel.lastNameController.text;
+                                user.email = viewModel.emailController.text;
+                                user.phone = viewModel.phoneController.text;
+                                user.gender = viewModel.gender;
+                                hasChanges = false;
+                              });
+                            }
+                          }
+                        : null,
                     text: "Update",
                     textStyle: TextStyle(
                       color: Colors.white,
@@ -281,23 +306,44 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedImage != null) {
-      final imageFile = File(pickedImage.path);
+      File imageFile = File(pickedImage.path);
+      FormData formData = FormData.fromMap({
+        'file': await MultipartFile.fromFile(imageFile.path,
+            filename: 'profile.jpg')
+      });
       try {
-        await viewModel.uploadPhoto(imageFile);
+        await viewModel.uploadPhoto(formData);
         if (mounted) {
           setState(() {
             viewModel.getLoggedUserInfo();
           });
         }
       } catch (e) {
-        print("Error uploading image: $e");
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text("Error uploading image, please try again.")),
+          );
+        }
       }
     } else {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("لم يتم اختيار صو")),
+          SnackBar(
+              content: Text(
+            "No image selected. Please select an image.",
+          )),
         );
       }
     }
+  }
+
+  void _checkChanges(User user) {
+    setState(() {
+      hasChanges = viewModel.firstNameController.text != user.firstName ||
+          viewModel.lastNameController.text != user.lastName ||
+          viewModel.emailController.text != user.email ||
+          viewModel.phoneController.text != user.phone ||
+          viewModel.gender != user.gender;
+    });
   }
 }

@@ -1,4 +1,6 @@
+import '../../../../../data/models/home/home/home_category_model.dart';
 import '../../../../../domain/entities/home/home_category_entity.dart';
+
 import '../../../../../domain/entities/home_layout/product_details_entity.dart';
 
 abstract class CategoriesState {}

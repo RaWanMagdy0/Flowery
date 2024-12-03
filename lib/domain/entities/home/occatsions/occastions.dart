@@ -1,7 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-
 part 'occastions.g.dart';
-
 @JsonSerializable()
 class Occastions {
   @JsonKey(name: '_id')

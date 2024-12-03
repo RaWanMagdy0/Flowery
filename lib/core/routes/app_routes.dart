@@ -1,4 +1,4 @@
-import 'package:flowery/presentation/home_layout/screens/profile/view/edit_profile_screen.dart';
+import 'package:flowery/presentation/home_layout/screens/profile/view/profile_screen.dart';
 import 'package:flowery/presentation/home_layout/screens/profile/view_model/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,6 +28,14 @@ class AppRoutes {
   static Route<dynamic> onGenerateRoute(RouteSettings setting) {
     ForgetPasswordCubit? forgetPasswordCubit;
 
+    CartViewModel? cartViewModel;
+
+    CartViewModel getCartViewModel() {
+      cartViewModel ??= getIt<CartViewModel>();
+
+      return cartViewModel!;
+    }
+
     createForgetPassword() {
       forgetPasswordCubit ??= getIt<ForgetPasswordCubit>();
     }
@@ -35,6 +43,8 @@ class AppRoutes {
     switch (setting.name) {
       case PageRouteName.splash:
         return _handleMaterialPageRoute(widget: const SplashScreen());
+      case PageRouteName.productDetails:
+        return _handleMaterialPageRoute(widget: ProductDetails());
 
       case PageRouteName.logIn:
         return MaterialPageRoute(
@@ -47,7 +57,7 @@ class AppRoutes {
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
                   create: (context) => getIt<ProfileCubit>(),
-                  child: EditProfileScreen(),
+                  child: ProfileScreen(),
                 ));
 
       case PageRouteName.changePassword:
@@ -63,6 +73,14 @@ class AppRoutes {
           builder: (context) => BlocProvider(
             create: (context) => getIt<SignUpCubit>(),
             child: SignUpPage(),
+          ),
+        );
+
+      case PageRouteName.bestSeller:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<BestSellerViewModel>(),
+            child: BestSellerScreen(),
           ),
         );
 
@@ -86,7 +104,14 @@ class AppRoutes {
         );
 
       case PageRouteName.homeLayout:
-        return _handleMaterialPageRoute(widget: MainPage());
+        getCartViewModel();
+
+        return _handleMaterialPageRoute(
+          widget: BlocProvider(
+            create: (context) => cartViewModel!..checkLoggedUser(),
+            child: MainPage(),
+          ),
+        );
 
       case PageRouteName.productDetails:
         return MaterialPageRoute(
@@ -116,6 +141,32 @@ class AppRoutes {
           builder: (context) => BlocProvider(
             create: (context) => getIt<OccasionCubit>()..loadFlowers(),
             child: OccasionScreen(),
+          ),
+        );
+
+      case PageRouteName.mainProfile:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => getIt<ProfileCubit>(),
+                  child: ProfileMainScreen(),
+                ));
+
+      case PageRouteName.editProfile:
+        return _handleMaterialPageRoute(widget: EditProfileScreen());
+
+      case PageRouteName.changePassword:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<ChangePasswordViewModel>(),
+            child: const ChangePasswordScreen(),
+          ),
+        );
+
+      case PageRouteName.categories:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt.get<CategoriesViewModel>(),
+            child: CategoriesScreen(),
           ),
         );
 
