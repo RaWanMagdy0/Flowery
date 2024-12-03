@@ -47,9 +47,6 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               } else if (state is CategoriesErrorState) {
                 return Center(child: Text(state.exception.toString()));
               } else if (state is CategoriesSuccessState) {
-                context
-                    .read<CategoriesViewModel>()
-                    .selectCategory(state.categories![0].id ?? '');
                 return SizedBox(
                   height: 25.h,
                   child: ListView.builder(

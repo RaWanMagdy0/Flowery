@@ -21,6 +21,7 @@ class CategoriesViewModel extends BaseViewModel<CategoriesState> {
     switch (result) {
       case Success<List<HomeCategory>?>():
         emit(CategoriesSuccessState(result.data));
+        selectCategory(result.data?.first.id ?? '');
 
       case Fail<List<HomeCategory>?>():
         emit(CategoriesErrorState(result.exception));

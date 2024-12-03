@@ -109,6 +109,7 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
     switch (response) {
       case Success<String?>():
         emit(LogoutSuccessState(response.data));
+
       case Fail<String?>():
         emit(
             LogoutErrorState(getErrorMassageFromException(response.exception)));
