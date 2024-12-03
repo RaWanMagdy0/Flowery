@@ -18,4 +18,6 @@ class AppStringErrors {
   static const String notFound = "There is no account with this email address";
   static const String internalServerError =
       "Internal server error. Please try again later";
+  static const String invalidCredentials =
+      "Email or password is incorrect. Please try again.";
 }

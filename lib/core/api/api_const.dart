@@ -10,4 +10,14 @@ class ApiConstants {
   static const String getBestSellerProducts = "api/v1/best-seller";
   static const String getAllOccasions = "api/v1/occasions";
   static const String getAllProducts = "api/v1/products";
+  static const resetPassword = '/api/v1/auth/resetPassword';
+  static const String changePassword = "api/v1/auth/change-password";
+  static const String getLoggedUserInfo = "api/v1/auth/profile-data";
+  static const String editProfile = "api/v1/auth/editProfile";
+  static const String uploadPhoto = "api/v1/auth/upload-photo";
+  static const String cart = 'api/v1/cart';
+  static const String occasions = "api/v1/occasions";
+  static const String getBestSeller = "api/v1/best-seller";
+  static const String getAllCategoriesEndpoint = "api/v1/categories";
+  static const String logout = "api/v1/auth/logout";
 }

@@ -71,7 +71,7 @@ class FlowerCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(12.r),
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.2),
+                color: Colors.grey,
                 spreadRadius: 1.r,
                 blurRadius: 4.r,
                 offset: Offset(0, 2.h),
@@ -89,7 +89,7 @@ class FlowerCard extends StatelessWidget {
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.05),
+                            color: Colors.black,
                             borderRadius: BorderRadius.circular(8.r),
                           ),
                           child: Center(

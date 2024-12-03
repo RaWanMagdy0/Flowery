@@ -8,7 +8,7 @@ import '../../models/home/occasions/occasions_response_model.dart';
 
 @Injectable(as: OccasionsRepository)
 class OccasionsRepositoryImpl extends OccasionsRepository {
-  final OccastionsRmoteDataSourcse occasionsDataSource;
+  final OccassionsRemoteDataSource occasionsDataSource;
 
   OccasionsRepositoryImpl(this.occasionsDataSource);
 

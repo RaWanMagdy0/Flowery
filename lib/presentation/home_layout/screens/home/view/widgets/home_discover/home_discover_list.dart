@@ -25,7 +25,7 @@ class HomeDiscoverList extends StatelessWidget {
           final List<HomeDiscovery> items = state.homeData?.discovery ?? [];
 
           return SizedBox(
-            height: 332.h,
+            height: 335.h,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
