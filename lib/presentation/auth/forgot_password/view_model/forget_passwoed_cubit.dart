@@ -8,6 +8,7 @@ import '../../../../core/base/base_view_model.dart';
 import '../../../../core/di/di.dart';
 import '../../../../core/utils/functions/providers/app_provider.dart';
 import '../../../../domain/use_case/auth/forgot_password_use_case.dart';
+import '../../../../domain/use_case/auth/reset_password_use_case.dart';
 import '../../../../domain/use_case/auth/verify_reset_code_use_case.dart';
 import 'forget_password_states.dart';
 
@@ -15,6 +16,7 @@ import 'forget_password_states.dart';
 class ForgetPasswordCubit extends BaseViewModel<ForgotPasswordStates> {
   final ForgotPasswordUseCase forgotPasswordUseCase;
   final VerifyResetCodeUseCase verifyResetCodeUseCase;
+  final ResetPasswordUseCase resetPasswordUseCase;
   late Timer timer;
   int time = 60;
   String? userEmail;
@@ -23,10 +25,9 @@ class ForgetPasswordCubit extends BaseViewModel<ForgotPasswordStates> {
 
   final appProvider = getIt.get<AppProvider>();
 
-  ForgetPasswordCubit(
-    this.forgotPasswordUseCase,
-    this.verifyResetCodeUseCase,
-  ) : super(ForgotPasswordInitialState());
+  ForgetPasswordCubit(this.forgotPasswordUseCase, this.verifyResetCodeUseCase,
+      this.resetPasswordUseCase)
+      : super(ForgotPasswordInitialState());
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final PageController pageController = PageController();
@@ -93,6 +94,19 @@ class ForgetPasswordCubit extends BaseViewModel<ForgotPasswordStates> {
         emit(VerifyEmailCodeSuccessState(success: result.data));
       case Fail<String?>():
         emit(VerifyEmailCodeErrorState(
+            errorMassage: getErrorMassageFromException(result.exception)));
+    }
+  }
+
+  Future<void> resetPassword(String newPassword) async {
+    emit(ResetPasswordLoadingState(loadingMessage: "loading..."));
+    final result = await resetPasswordUseCase.invoke(
+        email: appProvider.email, newPassword: newPassword);
+    switch (result) {
+      case Success<String?>():
+        emit(ResetPasswordSuccessState(success: result.data));
+      case Fail<String?>():
+        emit(ResetPasswordErrorState(
             errorMassage: getErrorMassageFromException(result.exception)));
     }
   }

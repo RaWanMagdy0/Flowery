@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../core/di/di.dart';
 import '../../../../core/styles/colors/app_colors.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
@@ -11,15 +10,24 @@ import '../../../../domain/entities/home_layout/product_details_entity.dart';
 import '../view_model/product_details_cubit.dart';
 import '../view_model/product_details_states.dart';
 
-class ProductDetails extends StatelessWidget {
+class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    var viewModel = getIt.get<ProductDetailsCubit>();
-    final String productId =
-        ModalRoute.of(context)?.settings.arguments as String;
+  State<ProductDetails> createState() => _ProductDetailsState();
+}
 
+class _ProductDetailsState extends State<ProductDetails> {
+  late ProductDetailsCubit viewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    viewModel = getIt.get<ProductDetailsCubit>();
+  }
+  @override
+  Widget build(BuildContext context) {
+    final String productId = ModalRoute.of(context)?.settings.arguments as String;
     return Scaffold(
       body: BlocBuilder<ProductDetailsCubit, ProductDetailsStates>(
         bloc: viewModel..getProductDetails(productId: productId),

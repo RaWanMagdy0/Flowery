@@ -153,7 +153,9 @@ class _OccasionScreenState extends State<OccasionScreen> {
                             PageRouteName.productDetails,
                             arguments: prudact?[index]?.id,
                           ),
-                          onButtonPressed: () {},
+                          onButtonPressed: () {
+
+                          },
                         );
                       },
                     ),

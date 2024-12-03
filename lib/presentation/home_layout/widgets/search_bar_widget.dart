@@ -29,7 +29,10 @@ class SearchBarWidget extends StatelessWidget {
               return AppColors.kLightGrey;
             },
           ),
-          constraints: BoxConstraints(maxHeight: maxHeight ?? 36.h),
+          constraints: BoxConstraints(
+              maxHeight: maxHeight ?? 36.h,
+            maxWidth: 300.w
+          ),
           alignLabelWithHint: true,
           contentPadding: EdgeInsets.symmetric(
             horizontal: 8.w,

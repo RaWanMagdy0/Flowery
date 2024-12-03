@@ -3,10 +3,12 @@ import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../../../core/api/api_const.dart';
+import '../../models/auth/requests/edite_profile_request_model.dart';
 import '../../models/home/best_seller/best_seller_response_model.dart';
 import '../../models/home/category/all_categories_response_model.dart';
 import '../../models/home/home/home_data_model.dart';
 import '../../models/home/occasions/occasions_response_model.dart';
+import '../../models/home/profile/AppUserModel.dart';
 import '../../models/produc_details_model.dart';
 
 part 'home_api_manager.g.dart';
@@ -42,4 +44,27 @@ abstract class HomeApiManger {
   Future<ProductDetailsModel> getOccasionProducts(
     @Query("occasion") String id,
   );
+
+  @GET(ApiConstants.getLoggedUserInfo)
+  Future<AppUserModel?> getLoggedUserInfo(
+      @Header("Authorization") String token);
+
+  @PUT(ApiConstants.editProfile)
+  Future<AppUserModel?> editProfile(
+    @Header('Authorization') String token,
+    @Body() EditeProfileRequestModel editeProfile,
+  );
+
+  @PUT(ApiConstants.uploadPhoto)
+  @MultiPart()
+  Future<String?> uploadPhoto(
+    @Header("Authorization") String token,
+    @Body() FormData formData,
+  );
+
+  @GET(ApiConstants.getAllProducts)
+  Future<ProductDetailsModel> getOccasionsProduct();
+
+  @GET(ApiConstants.getAllCategoriesEndpoint)
+  Future<ProductDetailsModel> getCategoriesProduct();
 }

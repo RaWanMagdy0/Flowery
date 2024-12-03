@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../errors/api_error_handler.dart';
 import '../errors/api_error_model.dart';
 
-// TODO: Needs refactoring
 class BaseViewModel<T> extends Cubit<T> {
   BaseViewModel(super.initialState);
 
@@ -41,6 +40,13 @@ class BaseViewModel<T> extends Cubit<T> {
   //       return AppStringErrors.unknown;
   //   }
   // }
+
+  /*
+  else if (statusCode == 403) {
+      return AppStringErrors.unauthorized;
+    } else if (statusCode == 401) {
+      return AppStringErrors.invalidCredentials;
+    }*/
 
   // String _handleBadResponse(DioException exception) {
   //   final statusCode = exception.response?.statusCode;

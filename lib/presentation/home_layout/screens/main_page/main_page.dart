@@ -9,7 +9,7 @@ import '../categories/view/categories_screen.dart';
 import '../categories/view_model/categories_view_model.dart';
 import '../home/view/home_screen.dart';
 import '../home/view_model/home_view_model.dart';
-import '../profile/profile_screen.dart';
+import '../profile/profile/view/profile_main_screen.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -37,7 +37,7 @@ class _MainPageState extends State<MainPage> {
       child: CategoriesScreen(),
     ),
     CartScreen(),
-    ProfileScreen(),
+    ProfileMainScreen(),
   ];
 
   void _onItemTapped(int index) {

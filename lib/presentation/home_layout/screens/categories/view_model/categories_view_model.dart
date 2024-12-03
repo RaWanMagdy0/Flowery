@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:injectable/injectable.dart';
 
 import '../../../../../core/api/api_result.dart';
@@ -22,8 +20,6 @@ class CategoriesViewModel extends BaseViewModel<CategoriesState> {
     var result = await categoriesUseCase.invoke();
     switch (result) {
       case Success<List<HomeCategory>?>():
-        log('products: ${result.data}', name: 'Occasions prodcuts usecase');
-        selectCategory(result.data!.first.id ?? '');
         emit(CategoriesSuccessState(result.data));
 
       case Fail<List<HomeCategory>?>():
@@ -31,7 +27,7 @@ class CategoriesViewModel extends BaseViewModel<CategoriesState> {
     }
   }
 
-  void selectCategory(String id) async {
+  Future<void> selectCategory(String id) async {
     emit((GetCategoriesProductLoadingState()));
     var result = await categoriesProductUseCase.invoke(id);
     switch (result) {

@@ -13,40 +13,12 @@ class CustomSearchBar extends StatelessWidget {
       children: [
         Expanded(
           child: SearchBarWidget(
-            maxHeight: 45.h,
+            maxHeight: 100.h,
           ),
-          // Container(
-          //   width: 265.w,
-          //   height: 45.h,
-          //   decoration: BoxDecoration(
-          //     color: AppColors.kWhite,
-          //     borderRadius: BorderRadius.circular(8),
-          //     border: Border.all(
-          //       color: AppColors.kLighterGrey,
-          //     ),
-          //   ),
-          //   child: TextField(
-          //     decoration: InputDecoration(
-          //       hintText: 'Search',
-          //       hintStyle:
-          //           AppFonts.font14LightGreyWeight500.copyWith(fontSize: 12.sp),
-          //       prefixIcon: Icon(
-          //         Icons.search,
-          //         color: AppColors.kLighterGrey,
-          //         size: 25,
-          //       ),
-          //       border: InputBorder.none,
-          //       contentPadding: const EdgeInsets.symmetric(
-          //         horizontal: 16,
-          //         vertical: 12,
-          //       ),
-          //     ),
-          //   ),
-          // ),
         ),
         8.horizontalSpace,
         Container(
-          width: 60.w,
+          width: 50.w,
           height: 45.h,
           decoration: BoxDecoration(
             color: AppColors.kWhite,

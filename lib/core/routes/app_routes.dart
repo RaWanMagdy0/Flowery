@@ -16,6 +16,11 @@ import '../../presentation/home_layout/screens/categories/view_model/categories_
 import '../../presentation/home_layout/screens/main_page/main_page.dart';
 import '../../presentation/home_layout/screens/occasions/occasions_screen.dart';
 import '../../presentation/home_layout/screens/occasions/view_model/ocusin_cubit.dart';
+import '../../presentation/home_layout/screens/profile/change_password/view/change_password_screen.dart';
+import '../../presentation/home_layout/screens/profile/change_password/view_model/change_password_view_model.dart';
+import '../../presentation/home_layout/screens/profile/profile/view/edit_profile_screen.dart';
+import '../../presentation/home_layout/screens/profile/profile/view/profile_main_screen.dart';
+import '../../presentation/home_layout/screens/profile/profile/view_model/profile_cubit.dart';
 import '../../splash/splash_screen.dart';
 import '../di/di.dart';
 import 'page_route_name.dart';
@@ -45,6 +50,14 @@ class AppRoutes {
           builder: (context) => BlocProvider(
             create: (context) => getIt<SignUpCubit>(),
             child: SignUpPage(),
+          ),
+        );
+
+      case PageRouteName.changePassword:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<ChangePasswordViewModel>(),
+            child: const ChangePasswordScreen(),
           ),
         );
 
@@ -78,6 +91,14 @@ class AppRoutes {
           settings: setting,
         );
 
+      case PageRouteName.bestSeller:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<BestSellerViewModel>(),
+            child: BestSellerScreen(),
+          ),
+        );
+
       case PageRouteName.categories:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -87,14 +108,6 @@ class AppRoutes {
           settings: setting,
         );
 
-      case PageRouteName.bestSeller:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => getIt<BestSellerViewModel>(),
-            child: BestSellerScreen(),
-          ),
-        );
-
       case PageRouteName.occasion:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -102,6 +115,16 @@ class AppRoutes {
             child: OccasionScreen(),
           ),
         );
+
+      case PageRouteName.mainProfile:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => getIt<ProfileCubit>(),
+                  child: ProfileMainScreen(),
+                ));
+
+      case PageRouteName.editProfile:
+        return _handleMaterialPageRoute(widget: EditProfileScreen());
 
       default:
         return _handleMaterialPageRoute(widget: const Scaffold());

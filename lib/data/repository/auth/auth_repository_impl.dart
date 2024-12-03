@@ -6,6 +6,7 @@ import '../../../core/local/token_manger.dart';
 import '../../../domain/repository/auth/auth_repository.dart';
 import '../../data_sources/remote_data_source/auth/auth_remote_data_source.dart';
 import '../../models/auth/requests/login_request_model.dart';
+import '../../models/auth/requests/reset_password_request_model.dart';
 import '../../models/auth/requests/sign_up_request_model.dart';
 
 @Injectable(as: AuthRepository)
@@ -57,5 +58,27 @@ class AuthRepositoryImpl extends AuthRepository {
   @override
   Future<Result<String?>> verifyResetCode({required String resetCode}) async {
     return await dataSource.verifyResetCode(resetCode: resetCode);
+  }
+
+  @override
+  Future<Result<String?>> resetPassword(
+      ResetPasswordRequestBody resetPassword) async {
+    return await dataSource.resetPassword(resetPassword);
+  }
+
+  @override
+  Future<Result<String?>> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    return await dataSource.changePassword(
+      currentPassword: currentPassword,
+      newPassword: newPassword,
+    );
+  }
+
+  @override
+  Future<Result<String?>> logout() async {
+    return await dataSource.logout();
   }
 }
