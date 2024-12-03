@@ -13,7 +13,7 @@ jobs:
   Validate_Feature_Branch_On_Push:
     name: Validate Branch on Push
     runs-on: ubuntu-latest
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' && github.ref != 'refs/heads/master' && github.ref != 'refs/heads/development'
 
     steps:
       - uses: actions/checkout@v3
@@ -39,7 +39,7 @@ jobs:
   Validate_Feature_Branch_On_PR:
     name: Validate Branch on Pull Request
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.ref != 'master' && github.event.pull_request.head.ref != 'development'
 
     steps:
       - uses: actions/checkout@v3
