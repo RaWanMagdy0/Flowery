@@ -1,4 +1,3 @@
-import 'package:flowery/presentation/home_layout/screens/cart/view_model/cart_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,6 +7,7 @@ import '../../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../core/styles/images/app_images.dart';
 import '../../../../../../domain/entities/cart/cart_product_entity.dart';
+import '../../view_model/cart_view_model.dart';
 
 class CartProductItem extends StatelessWidget {
   final CartProduct cartProduct;

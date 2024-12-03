@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/di/di.dart';
 import '../../widgets/bottom_navigation_bar.dart';
 import '../cart/view/cart_screen.dart';
+import '../cart/view_model/cart_view_model.dart';
 import '../categories/view/categories_screen.dart';
 import '../categories/view_model/categories_view_model.dart';
 import '../home/view/home_screen.dart';
@@ -19,6 +20,13 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<CartViewModel>().checkLoggedUser();
+  }
+
   final List<Widget> _screens = [
     BlocProvider(
       create: (context) => getIt<HomeViewModel>(),

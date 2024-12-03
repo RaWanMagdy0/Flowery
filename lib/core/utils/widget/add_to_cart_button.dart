@@ -41,6 +41,13 @@ class AddToCartButton extends StatelessWidget {
         },
         child: CustomButton(
           onPressed: () {
+            if (context.read<CartViewModel>().isUserLoggedIn == false) {
+              AppDialogs.showErrorDialog(
+                context: context,
+                errorMassage: "You need to login to add products to cart",
+              );
+              return;
+            }
             context.read<CartViewModel>().addProductToCart(productId);
           },
           color: AppColors.kPink,

@@ -2,6 +2,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../core/api/api_result.dart';
 import '../../../../core/api/execute_api_call.dart';
+import '../../../../core/errors/custom_exceptions.dart';
 import '../../../../core/local/token_manger.dart';
 import '../../../api/cart_api/cart_api_manager.dart';
 import '../../../models/cart/requests/add_to_cart_request_body_model.dart';
@@ -21,7 +22,7 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
 
       if (token == null || token.isEmpty) {
         final tokenException =
-            Exception('Token is empty, please login and try again');
+            TokenException('Token is empty, please login and try again');
         throw tokenException;
       }
 
@@ -38,7 +39,7 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
 
       if (token == null || token.isEmpty) {
         final tokenException =
-            Exception('Token is empty, please login and try again');
+            TokenException('Token is empty, please login and try again');
         throw tokenException;
       }
 
@@ -61,7 +62,7 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
 
       if (token == null || token.isEmpty) {
         final tokenException =
-            Exception('Token is empty, please login and try again');
+            TokenException('Token is empty, please login and try again');
         throw tokenException;
       }
 
@@ -80,7 +81,7 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
 
       if (token == null || token.isEmpty) {
         final tokenException =
-            Exception('Token is empty, please login and try again');
+            TokenException('Token is empty, please login and try again');
         throw tokenException;
       }
 
@@ -99,7 +100,7 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
 
       if (token == null || token.isEmpty) {
         final tokenException =
-            Exception('Token is empty, please login and try again');
+            TokenException('Token is empty, please login and try again');
         throw tokenException;
       }
 

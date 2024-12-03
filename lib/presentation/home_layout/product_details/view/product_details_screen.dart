@@ -121,9 +121,19 @@ class ProductDetails extends StatelessWidget {
           }
         },
       ),
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-        child: AddToCartButton(productId: productId),
+      bottomNavigationBar:
+          BlocBuilder<ProductDetailsCubit, ProductDetailsStates>(
+        bloc: viewModel,
+        builder: (context, state) {
+          if (state is ProductDetailsSuccessState) {
+            return Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+              child: AddToCartButton(productId: productId),
+            );
+          } else {
+            return SizedBox();
+          }
+        },
       ),
     );
   }
