@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/routes/page_route_name.dart';
 import '../../../../core/styles/colors/app_colors.dart';
 import '../../../../core/utils/widget/custom_button.dart';
 import '../../../../core/utils/widget/custom_text_form_field.dart';
 import '../view_model/change_password_state.dart';
 import '../view_model/change_password_view_model.dart';
 
-// lib/presentation/auth/change_password/view/change_password_screen.dart
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({super.key});
 
@@ -57,7 +57,11 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 backgroundColor: Colors.green,
               ),
             );
-            Navigator.pop(context);
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              PageRouteName.splash,
+                  (route) => false,
+            );
           } else if (state is ChangePasswordError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
