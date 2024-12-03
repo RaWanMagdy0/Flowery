@@ -55,6 +55,7 @@ class AppRoutes {
             child: LogInScreen(),
           ),
         );
+
       case PageRouteName.changePassword:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -108,6 +109,11 @@ class AppRoutes {
           ),
         );
 
+      case PageRouteName.productDetails:
+        return MaterialPageRoute(
+          builder: (context) => ProductDetails(),
+          settings: setting,
+        );
       case PageRouteName.categories:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -131,17 +137,8 @@ class AppRoutes {
                   create: (context) => getIt<ProfileCubit>(),
                   child: ProfileMainScreen(),
                 ));
-
       case PageRouteName.editProfile:
         return _handleMaterialPageRoute(widget: EditProfileScreen());
-
-      case PageRouteName.changePassword:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => getIt<ChangePasswordViewModel>(),
-            child: const ChangePasswordScreen(),
-          ),
-        );
 
 
       default:

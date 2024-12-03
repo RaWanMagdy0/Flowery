@@ -304,7 +304,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     final ImagePicker picker = ImagePicker();
     final XFile? pickedImage =
         await picker.pickImage(source: ImageSource.gallery);
-
     if (pickedImage != null) {
       File imageFile = File(pickedImage.path);
       FormData formData = FormData.fromMap({
