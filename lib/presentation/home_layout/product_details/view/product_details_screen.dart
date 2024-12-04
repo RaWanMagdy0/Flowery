@@ -1,8 +1,8 @@
+import 'package:flowery/presentation/home_layout/product_details/view/widget/product_details_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../core/di/di.dart';
 import '../../../../core/styles/colors/app_colors.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
@@ -10,6 +10,7 @@ import '../../../../core/utils/widget/add_to_cart_button.dart';
 import '../../../../domain/entities/home_layout/product_details_entity.dart';
 import '../view_model/product_details_cubit.dart';
 import '../view_model/product_details_states.dart';
+
 class ProductDetails extends StatefulWidget {
   final String productIt;
 
@@ -41,10 +42,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         },
         builder: (context, state) {
           if (state is ProductDetailsLoadingState) {
-            return Center(
-                child: CircularProgressIndicator(
-              color: AppColors.kPink,
-            ));
+            return ProductDetailsLoading();
           } else if (state is ProductDetailsSuccessState) {
             final productDetailsEntity = state.success;
             final product = productDetailsEntity?.products?.firstWhere(
