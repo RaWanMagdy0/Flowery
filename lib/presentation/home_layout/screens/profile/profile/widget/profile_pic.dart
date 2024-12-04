@@ -9,9 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'package:path_provider/path_provider.dart';
 import '../../../../../../core/styles/colors/app_colors.dart';
 import '../view_model/profile_cubit.dart';
+import 'package:image/image.dart' as img;
 
 class CustomProfilePic extends StatefulWidget {
   const CustomProfilePic({super.key});
@@ -72,7 +73,7 @@ class _CustomProfilePicState extends State<CustomProfilePic> {
                 child: GestureDetector(
                   onTap: () {
                     setState(() {});
-                    _pickImage(ImageSource.gallery);
+                    uploadPhoto(ImageSource.gallery);
                   },
                   child: Container(
                     height: 24.h,
@@ -96,13 +97,30 @@ class _CustomProfilePicState extends State<CustomProfilePic> {
     );
   }
 
-  Future<void> _pickImage(ImageSource imageSource) async {
+  Future<void> uploadPhoto(ImageSource imageSource) async {
     final pickedFile = await _picker.pickImage(source: imageSource);
     if (pickedFile != null) {
-      setState(() {
-        photo = File(pickedFile.path);
-        viewModel.uploadPhoto(photo!);
-      });
+      final originalPhoto = File(pickedFile.path);
+
+      // قراءة الصورة بصيغة JPG
+      final jpgImage = img.decodeImage(originalPhoto.readAsBytesSync());
+
+      if (jpgImage != null) {
+        // تحويل الصورة إلى PNG
+        final pngData = img.encodePng(jpgImage);
+
+        // حفظ الصورة المحولة في ملف مؤقت
+        final tempDir = await getTemporaryDirectory();
+        final pngPhotoPath = '${tempDir.path}/converted_image.png';
+        final pngPhoto = File(pngPhotoPath)..writeAsBytesSync(pngData);
+        setState(() {
+          photo = pngPhoto;
+          viewModel.uploadPhoto(photo!);
+          debugPrint('Uploaded PNG Photo: $photo');
+        });
+      } else {
+        debugPrint('Error: Could not decode JPG image.');
+      }
     }
   }
 }

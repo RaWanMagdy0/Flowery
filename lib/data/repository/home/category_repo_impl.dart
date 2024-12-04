@@ -32,8 +32,8 @@ class CategoryRepositoryImpl extends CategoryRepository {
   }
 
   @override
-  Future<Result<List<ProductEntity>?>> getCategoryProducts(String id) async {
-    final result = await categoryRemoteDataSource.getCategoriesProduct(id);
+  Future<Result<List<ProductEntity>?>> getCategoryProducts() async {
+    final result = await categoryRemoteDataSource.getCategoriesProduct();
     switch (result) {
       case Success():
         log('data: ${result.data}', name: 'Occasions Repository');

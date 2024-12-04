@@ -70,14 +70,6 @@ class AppRoutes {
           ),
         );
 
-      case PageRouteName.changePassword:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => getIt<ChangePasswordViewModel>(),
-            child: const ChangePasswordScreen(),
-          ),
-        );
-
       case PageRouteName.forgetPassword:
         createForgetPassword();
 
@@ -118,14 +110,6 @@ class AppRoutes {
           ),
         );
 
-      case PageRouteName.productDetails:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider.value(
-            value: getCartViewModel()..checkLoggedUser(),
-            child: ProductDetails(),
-          ),
-          settings: setting,
-        );
       case PageRouteName.categories:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(

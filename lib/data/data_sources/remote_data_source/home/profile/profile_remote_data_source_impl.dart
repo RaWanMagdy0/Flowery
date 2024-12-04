@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:mime/mime.dart';
 
 import '../../../../../core/api/api_result.dart';
 import '../../../../../core/api/execute_api_call.dart';
@@ -39,11 +40,12 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   Future<Result<String?>> uploadPhoto(File photo) async {
     return await executeApiCall<String?>(() async {
       var token = await _getToken();
-      var response = await apiManger.uploadPhoto(photo,token);
+      final mimeType = lookupMimeType(photo.path);
+      print(mimeType);
+      var response = await apiManger.uploadPhoto(token, photo);
+
       return response;
     });
-  }
-
   }
   Future<String> _getToken() async {
     var token = await TokenManager.getToken();
@@ -52,4 +54,4 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
     }
     return 'Bearer $token';
   }
-
+}

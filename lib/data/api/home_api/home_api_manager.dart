@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
@@ -33,13 +35,13 @@ abstract class HomeApiManger {
   Future<AllCategoriesResponseModel> getAllCategories();
 
   @GET(ApiConstants.getAllProducts)
-  Future<ProductDetailsModel> getCategoryProducts(
-    @Query("category") String id,
-  );
+  Future<ProductDetailsModel> getCategoryProducts();
 
   @GET(ApiConstants.getAllOccasions)
   Future<OccasionsResponseModel> getAllOccasions();
 
+  @GET(ApiConstants.getAllProducts)
+  Future<ProductDetailsModel> getOccasionProducts();
 
   @GET(ApiConstants.getLoggedUserInfo)
   Future<AppUserModel?> getLoggedUserInfo(
@@ -54,13 +56,12 @@ abstract class HomeApiManger {
   @PUT(ApiConstants.uploadPhoto)
   @MultiPart()
   Future<String?> uploadPhoto(
+    @Header("Authorization") String token,
     @Part() File photo,
-    @Header('Authorization') String token,
   );
 
   @GET(ApiConstants.getAllProducts)
   Future<ProductDetailsModel> getOccasionsProduct();
-
 
   @GET(ApiConstants.getAllCategoriesEndpoint)
   Future<ProductDetailsModel> getCategoriesProduct();

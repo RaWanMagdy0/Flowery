@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
@@ -81,6 +83,7 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
       return "Update";
     }
   }
+
   void changeFormField(bool isValid) {
     emit(ProfileInitialState());
     isFormField = isValid;
@@ -88,15 +91,16 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
 
   Future<void> uploadPhoto(File photo) async {
     emit(UploadPhotoLoadingState());
-    final result = await uploadPhotoUseCase.invoke(photo);
-    switch (result) {
-      case Success<String?>():
+      var result = await uploadPhotoUseCase.invoke(photo);
+      if (result is Success<String?>) {
         emit(UploadPhotoSuccessState(message: result.data));
-      case Fail<String?>():
+        await getLoggedUserInfo();
+      } else if (result is Fail<String?>) {
         emit(UploadPhotoErrorState(
-            errorMessage: getErrorMassageFromException(result.exception!)));
+            errorMessage: getErrorMassageFromException(result.exception)));
+      }
     }
-  }
+
 
   Future<void> logout() async {
     final response = await logoutUseCase.invoke();
@@ -104,7 +108,6 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
     switch (response) {
       case Success<String?>():
         emit(LogoutSuccessState(response.data));
-
       case Fail<String?>():
         emit(
             LogoutErrorState(getErrorMassageFromException(response.exception)));
