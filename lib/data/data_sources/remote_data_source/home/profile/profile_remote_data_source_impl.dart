@@ -1,12 +1,16 @@
-import 'package:dio/dio.dart';
-import 'package:flowery/core/api/api_result.dart';
-import 'package:flowery/core/api/execute_api_call.dart';
-import 'package:flowery/data/api/home_api/home_api_manager.dart';
-import 'package:flowery/data/data_sources/remote_data_source/home/profile/profile_remote_data_source.dart';
-import 'package:flowery/data/models/auth/requests/edite_profile_request_model.dart';
+import 'dart:io';
+
 import 'package:injectable/injectable.dart';
+import 'package:mime/mime.dart';
+
+import '../../../../../core/api/api_result.dart';
+import '../../../../../core/api/execute_api_call.dart';
 import '../../../../../core/local/token_manger.dart';
 import '../../../../../domain/entities/home_layout/profile/User.dart';
+import '../../../../api/home_api/home_api_manager.dart';
+import '../../../../models/auth/requests/edite_profile_request_model.dart';
+import '../../../../models/home/profile/custom_form_data.dart';
+import 'profile_remote_data_source.dart';
 
 @Injectable(as: ProfileRemoteDataSource)
 class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
@@ -33,10 +37,18 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   }
 
   @override
-  Future<Result<String?>> uploadPhoto(FormData formData) async {
+  Future<Result<String?>> uploadPhoto(File photo) async {
     return await executeApiCall<String?>(() async {
       var token = await _getToken();
-      var response = await apiManger.uploadPhoto(token, formData);
+      final mimeType = lookupMimeType(photo.path);
+      print(mimeType);
+      CustomFormData formData = CustomFormData(fields: {
+        "photo": CustomMultipartFile(
+          path: photo.path,
+          filename: photo.path.split("/").last,
+        ),
+      });
+      var response = await apiManger.uploadPhoto(token, photo);
       return response;
     });
   }

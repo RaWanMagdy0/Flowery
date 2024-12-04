@@ -24,8 +24,8 @@ class OccasionsRepositoryImpl extends OccasionsRepository {
   }
 
   @override
-  Future<Result<List<ProductEntity>?>> getOccasionProducts() async {
-    final result = await occasionsDataSource.getOccasionsPrudact();
+  Future<Result<List<ProductEntity>?>> getOccasionProducts(String id) async {
+    final result = await occasionsDataSource.getOccasionsPrudact(id);
     switch (result) {
       case Success():
         final products = result.data

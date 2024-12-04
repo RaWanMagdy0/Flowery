@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../styles/fonts/app_fonts.dart';
 
 class CustomListTile extends StatelessWidget {
   final String title;
@@ -10,7 +13,7 @@ class CustomListTile extends StatelessWidget {
   final TextStyle? subtitleStyle;
 
   const CustomListTile({
-    Key? key,
+    super.key,
     required this.title,
     this.subtitle,
     this.leadingIcon,
@@ -18,31 +21,30 @@ class CustomListTile extends StatelessWidget {
     this.onTap,
     this.titleStyle,
     this.subtitleStyle,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      margin: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       child: InkWell(
-        onTap: onTap, // إذا تم تحديد onTap
-        borderRadius: BorderRadius.circular(12),
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(12.r),
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: EdgeInsets.all(10.sp),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               if (leadingIcon != null) ...[
-                Icon(leadingIcon),
-                SizedBox(width: 8),
+                Icon(leadingIcon,size: 20.sp,),
+                SizedBox(width: 8.w),
               ],
               Expanded(
                 child: Row(
                   children: [
                     Text(
                       title,
-                      style: titleStyle ??
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      style: AppFonts.font13BlackWeight400,
                     ),
                     Spacer(),
                     if (subtitle != null)

@@ -1,11 +1,12 @@
-import 'package:flowery/presentation/auth/forgot_password/view/widgets/email_verification_widget/widget/email_verification_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../../core/di/di.dart';
 import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../view_model/forget_passwoed_cubit.dart';
 import '../../../view_model/forget_password_states.dart';
 import '../reset_password_widget/reset_password_widget.dart';
+import 'widget/email_verification_widget.dart';
 
 class EmailVerification extends StatefulWidget {
   static const String routeName = "PasswordVerification";

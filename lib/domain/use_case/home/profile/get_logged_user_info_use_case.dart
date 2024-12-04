@@ -1,15 +1,14 @@
-import 'package:flowery/core/api/api_result.dart';
-import 'package:flowery/domain/repository/home/profile_repository.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../core/api/api_result.dart';
 import '../../../entities/home_layout/profile/User.dart';
+import '../../../repository/home/profile_repository.dart';
 
 @injectable
-
-class GetLoggedUserInfoUseCase{
+class GetLoggedUserInfoUseCase {
   final ProfileRepository profileRepository;
   GetLoggedUserInfoUseCase({required this.profileRepository});
-  Future<Result<User?>>invoke()async{
+  Future<Result<User?>> invoke() async {
     return await profileRepository.getLoggedUserInfo();
   }
 }

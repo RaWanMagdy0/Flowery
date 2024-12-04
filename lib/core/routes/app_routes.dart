@@ -45,8 +45,6 @@ class AppRoutes {
     switch (setting.name) {
       case PageRouteName.splash:
         return _handleMaterialPageRoute(widget: const SplashScreen());
-      case PageRouteName.productDetails:
-        return _handleMaterialPageRoute(widget: ProductDetails());
 
       case PageRouteName.logIn:
         return MaterialPageRoute(
@@ -55,6 +53,7 @@ class AppRoutes {
             child: LogInScreen(),
           ),
         );
+
       case PageRouteName.changePassword:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -68,14 +67,6 @@ class AppRoutes {
           builder: (context) => BlocProvider(
             create: (context) => getIt<SignUpCubit>(),
             child: SignUpPage(),
-          ),
-        );
-
-      case PageRouteName.bestSeller:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => getIt<BestSellerViewModel>(),
-            child: BestSellerScreen(),
           ),
         );
 
@@ -99,12 +90,23 @@ class AppRoutes {
         );
 
       case PageRouteName.homeLayout:
-        getCartViewModel();
-
         return _handleMaterialPageRoute(
-          widget: BlocProvider(
-            create: (context) => cartViewModel!..checkLoggedUser(),
-            child: MainPage(),
+          widget: MainPage(),
+        );
+
+      case PageRouteName.productDetails:
+        final String productId = setting.arguments as String;
+
+        return MaterialPageRoute(
+          builder: (context) => ProductDetails(productId),
+          settings: setting,
+        );
+
+      case PageRouteName.bestSeller:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<BestSellerViewModel>(),
+            child: BestSellerScreen(),
           ),
         );
 
@@ -131,9 +133,9 @@ class AppRoutes {
                   create: (context) => getIt<ProfileCubit>(),
                   child: ProfileMainScreen(),
                 ));
-
       case PageRouteName.editProfile:
         return _handleMaterialPageRoute(widget: EditProfileScreen());
+
 
       default:
         return _handleMaterialPageRoute(widget: const Scaffold());

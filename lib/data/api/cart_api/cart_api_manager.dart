@@ -32,7 +32,7 @@ abstract class CartApiManager {
   );
 
   @DELETE('${ApiConstants.cart}/{productId}')
-  Future<CartResponseModel> removeProductFromCart(
+  Future<dynamic> removeProductFromCart(
     @Path("productId") String productId,
     @Header("Authorization") String token,
   );

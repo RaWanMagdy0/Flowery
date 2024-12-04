@@ -4,5 +4,5 @@ import '../../../../models/produc_details_model.dart';
 
 abstract class OccassionsRemoteDataSource {
   Future<Result<OccasionsResponseModel?>> getOccasions();
-  Future<Result<List<ProductModel>?>> getOccasionsPrudact();
+  Future<Result<List<ProductModel>?>> getOccasionsPrudact(String id);
 }

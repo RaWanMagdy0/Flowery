@@ -10,21 +10,7 @@ class GetOccasionProductUseCase {
 
   GetOccasionProductUseCase(this._repository);
 
-  Future<Result<List<ProductEntity?>>> invoke(String id) async {
-    final result = await _repository.getOccasionProducts();
-    switch (result) {
-      case Success():
-        List<ProductEntity>? products = [];
-
-        for (var model in result.data!) {
-          if (model.occasion == id) {
-            products.add(model);
-          }
-        }
-
-        return Success<List<ProductEntity?>>(data: products);
-      case Fail():
-        return Fail<List<ProductEntity?>>(exception: result.exception);
-    }
+  Future<Result<List<ProductEntity>?>> invoke(String id) async {
+    return await _repository.getOccasionProducts(id);
   }
 }

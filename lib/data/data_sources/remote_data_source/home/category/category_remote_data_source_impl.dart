@@ -18,7 +18,7 @@ class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
   @override
   Future<Result<AllCategoriesResponseModel>> getAllCategories() {
     return executeApiCall(
-      () async {
+          () async {
         return await apiManger.getAllCategories();
       },
     );

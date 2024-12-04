@@ -1,7 +1,7 @@
-import 'package:flowery/core/base/base_view_model.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../../core/api/api_result.dart';
+import '../../../../../../core/base/base_view_model.dart';
 import '../../../../../../domain/repository/auth/auth_repository.dart';
 import 'change_password_state.dart';
 
