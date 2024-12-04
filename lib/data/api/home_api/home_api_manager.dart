@@ -57,14 +57,12 @@ abstract class HomeApiManger {
   @PUT(ApiConstants.uploadPhoto)
   @MultiPart()
   Future<String?> uploadPhoto(
-      @Part(name: "photo") File photo,
-      @Header('Authorization') String token,
-
-      );
+    @Part() File photo,
+    @Header('Authorization') String token,
+  );
 
   @GET(ApiConstants.getAllProducts)
   Future<ProductDetailsModel> getOccasionsProduct();
-
 
   @GET(ApiConstants.getAllCategoriesEndpoint)
   Future<ProductDetailsModel> getCategoriesProduct();

@@ -129,9 +129,11 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                         trailingIcon: Icons.arrow_forward_ios,
                         onTap: () {},
                       ),
+
                       // Options List
-                      9.verticalSpace,
+                      SizedBox(height: 14.h),
                       Divider(thickness: 1.w),
+
                       // Notification Tile
                       SwitchTile(
                         value: isNotificationEnabled,
@@ -141,7 +143,7 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                           });
                         },
                       ),
-                      9.verticalSpace,
+                      SizedBox(height: 14.h),
                       Divider(thickness: 1.w),
                       CustomListTile(
                         leadingIcon: Icons.translate,
@@ -160,8 +162,8 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                         trailingIcon: Icons.arrow_forward_ios,
                         onTap: () {},
                       ),
-                      12.verticalSpace,
-                       Divider(thickness: 1),
+                      const SizedBox(height: 16),
+                      const Divider(thickness: 1),
 
                       CustomListTile(
                         leadingIcon: Icons.logout,
@@ -173,88 +175,87 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                             builder: (BuildContext context) {
                               return AlertDialog(
                                 backgroundColor: AppColors.kWhite,
-                                content: SizedBox(
-                                  width: 240.w,
-                                  height: 160.h,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          "LOGOUT",
-                                          style: AppFonts.font18BlackWeight500
-                                              .copyWith(
-                                                  fontWeight: FontWeight.w600),
-                                        ),
-                                        SizedBox(height: 5.h),
-                                        Text(
-                                          "Confirm logout!!",
-                                          style: AppFonts.font16BlackWeight500
-                                              .copyWith(
-                                                  fontWeight: FontWeight.w400),
-                                        ),
-                                        15.verticalSpace,
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                minimumSize: Size(80.w, 45.h),
-                                                backgroundColor:
-                                                    AppColors.kWhite,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50.r),
-                                                  side: BorderSide(
-                                                      color: Colors.grey,
-                                                      width: 1.w),
-                                                ),
-                                              ),
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                              child: Text(
-                                                "Cancel",
-                                                style: AppFonts
-                                                    .font14GreyWeight400,
-                                              ),
-                                            ),
-                                            SizedBox(width: 10.w),
-                                            ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                minimumSize: Size(80.w, 45.h),
-                                                backgroundColor:
-                                                    AppColors.kPink,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50.r),
-                                                  side: BorderSide(
-                                                      color: Colors.transparent,
-                                                      width: 1.w),
-                                                ),
-                                              ),
-                                              onPressed: () {
-                                                Navigator.pop(
-                                                    context); // Close the dialog
-                                                viewModel.logout();
-                                              },
-                                              child: Text(
-                                                "Logout",
-                                                style: AppFonts
-                                                    .font15WhiteWeight500,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
+                                content: Container(
+                                  width: 260.w,
+                                  height: 155.h,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
                                   ),
-                                ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      SizedBox(height: 15.h),
+                                      Text(
+                                        "LOGOUT",
+                                        style: AppFonts.font18BlackWeight500
+                                            .copyWith(
+                                                fontWeight: FontWeight.w600),
+                                      ),
+                                      SizedBox(height: 5.h),
+                                      Text(
+                                        "Confirm logout!!",
+                                        style: AppFonts.font16BlackWeight500
+                                            .copyWith(
+                                                fontWeight: FontWeight.w400),
+                                      ),
+                                      SizedBox(height: 24.h),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              minimumSize: Size(105.w, 40.h),
+                                              backgroundColor: AppColors.kWhite,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(50.r),
+                                                side: BorderSide(
+                                                    color: Colors.grey,
+                                                    width: 1.w),
+                                              ),
+                                            ),
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: Text(
+                                              "Cancel",
+                                              style:
+                                                  AppFonts.font14GreyWeight400,
+                                            ),
+                                          ),
+                                          SizedBox(width: 15.w),
+                                          ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              minimumSize: Size(105.w, 40.h),
+                                              backgroundColor: AppColors.kPink,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(50.r),
+                                                side: BorderSide(
+                                                    color: Colors.transparent,
+                                                    width: 1.w),
+                                              ),
+                                            ),
+                                            onPressed: () {
+                                              Navigator.pop(
+                                                  context); // Close the dialog
+                                              viewModel.logout();
+                                            },
+                                            child: Text(
+                                              "Logout",
+                                              style: AppFonts
+                                                  .font15WhiteWeight500
+                                                  .copyWith(
+                                                      fontWeight:
+                                                          FontWeight.w400),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                              ))
                               );
                             },
                           );
@@ -266,6 +267,7 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                         'v 6.3.0 - (446)',
                         style: TextStyle(color: Colors.grey, fontSize: 12),
                       ),
+                      const SizedBox(height: 24),
                     ],
                   ),
                 ),
