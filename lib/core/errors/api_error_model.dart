@@ -1,5 +1,5 @@
 class ApiErrorModel {
-  int? statusCode;
+  dynamic statusCode;
   String? message;
 
   ApiErrorModel({

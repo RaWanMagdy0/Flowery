@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flowery/data/models/home/profile/custom_form_data.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mime/mime.dart';
 
@@ -42,11 +45,18 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
       var token = await _getToken();
       final mimeType = lookupMimeType(photo.path);
       print(mimeType);
-      var response = await apiManger.uploadPhoto(token, photo);
-
+      CustomFormData formData = CustomFormData(fields: {
+        "photo": CustomMultipartFile(
+          path: photo.path,
+          filename: photo.path.split("/").last,
+        ),
+      });
+      var response =
+          await apiManger.uploadPhoto(token, photo);
       return response;
     });
   }
+
   Future<String> _getToken() async {
     var token = await TokenManager.getToken();
     if (token == null || token.isEmpty) {

@@ -101,10 +101,8 @@ class _CustomProfilePicState extends State<CustomProfilePic> {
     final pickedFile = await _picker.pickImage(source: imageSource);
     if (pickedFile != null) {
       final originalPhoto = File(pickedFile.path);
-
-      // قراءة الصورة بصيغة JPG
+      /**************
       final jpgImage = img.decodeImage(originalPhoto.readAsBytesSync());
-
       if (jpgImage != null) {
         // تحويل الصورة إلى PNG
         final pngData = img.encodePng(jpgImage);
@@ -113,14 +111,15 @@ class _CustomProfilePicState extends State<CustomProfilePic> {
         final tempDir = await getTemporaryDirectory();
         final pngPhotoPath = '${tempDir.path}/converted_image.png';
         final pngPhoto = File(pngPhotoPath)..writeAsBytesSync(pngData);
+        ****************/
         setState(() {
-          photo = pngPhoto;
-          viewModel.uploadPhoto(photo!);
-          debugPrint('Uploaded PNG Photo: $photo');
+        //  photo = pngPhoto;
+          viewModel.uploadPhoto(originalPhoto!);
+        //  debugPrint('Uploaded PNG Photo: $photo');
         });
       } else {
         debugPrint('Error: Could not decode JPG image.');
       }
     }
   }
-}
+
