@@ -1,14 +1,15 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:flowery/core/api/api_result.dart';
-import 'package:flowery/core/api/execute_api_call.dart';
-import 'package:flowery/data/api/home_api/home_api_manager.dart';
-import 'package:flowery/data/data_sources/remote_data_source/home/profile/profile_remote_data_source.dart';
-import 'package:flowery/data/models/auth/requests/edite_profile_request_model.dart';
 import 'package:injectable/injectable.dart';
+
+import '../../../../../core/api/api_result.dart';
+import '../../../../../core/api/execute_api_call.dart';
 import '../../../../../core/local/token_manger.dart';
 import '../../../../../domain/entities/home_layout/profile/User.dart';
+import '../../../../api/home_api/home_api_manager.dart';
+import '../../../../models/auth/requests/edite_profile_request_model.dart';
+import 'profile_remote_data_source.dart';
 
 @Injectable(as: ProfileRemoteDataSource)
 class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {

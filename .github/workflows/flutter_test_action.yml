@@ -1,0 +1,47 @@
+name: Flutter CI
+
+# Trigger the workflow on push and pull request events
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - development
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest  # You can also use macos-latest or windows-latest if needed
+
+    steps:
+      # Step 1: Checkout the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Flutter
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.4'  # Specify Flutter 3.24.4 for consistency
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: flutter pub get
+
+      # Step 4: Run build_runner to generate mocks
+      - name: Generate mocks
+        run: flutter pub run build_runner build --delete-conflicting-outputs
+
+      # Step 5: Run unit tests
+      - name: Run unit tests
+        run: flutter test
+
+      # Optional: Cache Flutter dependencies to speed up the workflow
+      - name: Cache Flutter dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.pub-cache
+          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-flutter-

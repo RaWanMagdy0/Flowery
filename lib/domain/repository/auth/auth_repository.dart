@@ -1,7 +1,6 @@
-import 'package:flowery/data/models/auth/requests/reset_password_request_model.dart';
-
 import '../../../core/api/api_result.dart';
 import '../../../data/models/auth/requests/login_request_model.dart';
+import '../../../data/models/auth/requests/reset_password_request_model.dart';
 import '../../../data/models/auth/requests/sign_up_request_model.dart';
 
 abstract class AuthRepository {

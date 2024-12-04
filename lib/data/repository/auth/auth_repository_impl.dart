@@ -1,4 +1,3 @@
-import 'package:flowery/data/models/auth/requests/reset_password_request_model.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../core/api/api_result.dart';
@@ -7,6 +6,7 @@ import '../../../core/local/token_manger.dart';
 import '../../../domain/repository/auth/auth_repository.dart';
 import '../../data_sources/remote_data_source/auth/auth_remote_data_source.dart';
 import '../../models/auth/requests/login_request_model.dart';
+import '../../models/auth/requests/reset_password_request_model.dart';
 import '../../models/auth/requests/sign_up_request_model.dart';
 
 @Injectable(as: AuthRepository)

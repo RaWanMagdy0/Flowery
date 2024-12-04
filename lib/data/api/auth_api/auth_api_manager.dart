@@ -1,12 +1,11 @@
 import 'package:dio/dio.dart';
-import 'package:flowery/data/models/auth/requests/edite_profile_request_model.dart';
-import 'package:flowery/data/models/auth/requests/reset_password_request_model.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../../../core/api/api_const.dart';
 import '../../models/auth/requests/change_password_request_model.dart';
 import '../../models/auth/requests/login_request_model.dart';
+import '../../models/auth/requests/reset_password_request_model.dart';
 import '../../models/auth/requests/sign_up_request_model.dart';
 import '../../models/auth/response/login_response_model.dart';
 import '../../models/auth/response/sign_up_response_model.dart';

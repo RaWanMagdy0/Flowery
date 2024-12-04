@@ -13,7 +13,7 @@ class CustomListTile extends StatelessWidget {
   final TextStyle? subtitleStyle;
 
   const CustomListTile({
-    Key? key,
+    super.key,
     required this.title,
     this.subtitle,
     this.leadingIcon,
@@ -21,7 +21,7 @@ class CustomListTile extends StatelessWidget {
     this.onTap,
     this.titleStyle,
     this.subtitleStyle,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -7,6 +7,7 @@ import 'core/routes/app_routes.dart';
 import 'core/routes/page_route_name.dart';
 import 'core/theme/app_theme.dart';
 import 'core/utils/bloc_observer/app_bloc_observer.dart';
+import 'presentation/home_layout/screens/cart/view_model/cart_view_model.dart';
 
 void main() {
   configureDependencies();
@@ -24,6 +25,14 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
+        return BlocProvider<CartViewModel>(
+          create: (context) => getIt<CartViewModel>(),
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: AppTheme.appTheme,
+            initialRoute: PageRouteName.splash,
+            onGenerateRoute: (settings) => AppRoutes.onGenerateRoute(settings),
+          ),
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: AppTheme.appTheme,

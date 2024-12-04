@@ -1,14 +1,11 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:retrofit/retrofit.dart';
+
 import '../../../core/api/api_const.dart';
 import '../../models/auth/requests/edite_profile_request_model.dart';
 import '../../models/home/best_seller/best_seller_response_model.dart';
 import '../../models/home/category/all_categories_response_model.dart';
-import '../../models/home/home/home_category_model.dart';
 import '../../models/home/home/home_data_model.dart';
 import '../../models/home/occasions/occasions_response_model.dart';
 import '../../models/home/profile/AppUserModel.dart';
@@ -36,13 +33,13 @@ abstract class HomeApiManger {
   Future<AllCategoriesResponseModel> getAllCategories();
 
   @GET(ApiConstants.getAllProducts)
-  Future<ProductDetailsModel> getCategoryProducts();
+  Future<ProductDetailsModel> getCategoryProducts(
+    @Query("category") String id,
+  );
 
   @GET(ApiConstants.getAllOccasions)
   Future<OccasionsResponseModel> getAllOccasions();
 
-  @GET(ApiConstants.getAllProducts)
-  Future<ProductDetailsModel> getOccasionProducts();
 
   @GET(ApiConstants.getLoggedUserInfo)
   Future<AppUserModel?> getLoggedUserInfo(
@@ -63,6 +60,7 @@ abstract class HomeApiManger {
 
   @GET(ApiConstants.getAllProducts)
   Future<ProductDetailsModel> getOccasionsProduct();
+
 
   @GET(ApiConstants.getAllCategoriesEndpoint)
   Future<ProductDetailsModel> getCategoriesProduct();

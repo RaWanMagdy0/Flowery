@@ -1,14 +1,13 @@
-import 'package:flowery/presentation/home_layout/screens/categories/view/widgets/custom_search_bar.dart';
-import 'package:flowery/presentation/home_layout/screens/categories/view_model/categories_state.dart';
-import 'package:flowery/presentation/home_layout/screens/categories/view_model/categories_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../../core/routes/page_route_name.dart';
 import '../../../../../core/styles/colors/app_colors.dart';
-import '../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../core/utils/widget/custom_item_card.dart';
-import '../../profile/profile/view_model/profile_cubit.dart';
+import '../view_model/categories_state.dart';
+import '../view_model/categories_view_model.dart';
+import 'widgets/custom_search_bar.dart';
 
 class CategoriesScreen extends StatefulWidget {
   const CategoriesScreen({super.key});
@@ -48,9 +47,6 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               } else if (state is CategoriesErrorState) {
                 return Center(child: Text(state.exception.toString()));
               } else if (state is CategoriesSuccessState) {
-                context
-                    .read<CategoriesViewModel>()
-                    .selectCategory(state.categories![0].id ?? '');
                 return SizedBox(
                   height: 25.h,
                   child: ListView.builder(

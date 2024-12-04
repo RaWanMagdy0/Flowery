@@ -1,0 +1,70 @@
+{
+    "message": "success",
+    "numOfCartItems": 2,
+    "cart": {
+        "_id": "674cb2d62a8d2b899c3d0edd",
+        "user": "673a4e021159920171827a11",
+        "cartItems": [
+            {
+                "product": {
+                    "_id": "673e2bd91159920171828139",
+                    "title": "Red Wdding Flower",
+                    "slug": "red-wdding-flower",
+                    "description": "This is a Pack of Red Widding Flowers",
+                    "imgCover": "https://flower.elevateegy.com/uploads/5452abf4-2040-43d7-bb3d-3ae8f53c4576-cover_image.png",
+                    "images": [
+                        "https://flower.elevateegy.com/uploads/ba028e59-410f-43ac-aed5-f4f97c102b98-image_four.png",
+                        "https://flower.elevateegy.com/uploads/f89bc954-eb0d-4efb-928f-6717f77b69ed-image_one.png",
+                        "https://flower.elevateegy.com/uploads/5ed2d072-485b-4a53-a0fa-a41412791397-image_three.png",
+                        "https://flower.elevateegy.com/uploads/c0992ec6-d3c0-4a54-b7ec-4cf000138367-image_two.png"
+                    ],
+                    "price": 250,
+                    "priceAfterDiscount": 150,
+                    "quantity": 995,
+                    "category": "673c46fd1159920171827c85",
+                    "occasion": "673b34c21159920171827ae0",
+                    "createdAt": "2024-11-20T18:35:05.594Z",
+                    "updatedAt": "2024-11-28T00:40:07.703Z",
+                    "__v": 0,
+                    "sold": 5,
+                    "discount": 50,
+                    "id": "673e2bd91159920171828139"
+                },
+                "price": 250,
+                "quantity": 2,
+                "_id": "674cb2d62a8d2b899c3d0ede"
+            },
+            {
+                "product": {
+                    "_id": "673e2d1b1159920171828146",
+                    "title": "GABRIELLE CHANEL",
+                    "slug": "gabrielle-chanel",
+                    "description": "PRODUCT\nBefore creating the House of CHANEL, Coco was Gabrielle. A rebel at heart...passionate and free. The inspiration for the luminous floral fragrance: GABRIELLE CHANEL.\n\nThe fragrance appears to be weightlessly suspended within the striking square bottle. Made with ultra-thin glass, the 4 transparent sides fade into the background, letting light radiate through. The label and the stopper have the same square shape and precious lamé hue, a delicate balance between gold and silver, and the interior is warmed with an even more resplendent gold. The bottle is carefully protected by a sleeve imprinted with its silhouette.",
+                    "imgCover": "https://flower.elevateegy.com/uploads/0c6c00d1-d816-44e4-8119-cf97807427f2-cover_image.png",
+                    "images": [
+                        "https://flower.elevateegy.com/uploads/f286e018-63bb-4e6b-9d6b-feefdf28cdf3-image_one.png",
+                        "https://flower.elevateegy.com/uploads/75fae675-a16e-4d26-98a4-63f34e8423f0-image_three.png",
+                        "https://flower.elevateegy.com/uploads/7f3bcf05-7e55-476c-9d3d-8026c709a80c-image_two.png"
+                    ],
+                    "price": 340,
+                    "priceAfterDiscount": 172,
+                    "quantity": 1000,
+                    "category": "673c47751159920171827c93",
+                    "occasion": "673b368c1159920171827afc",
+                    "createdAt": "2024-11-20T18:40:27.076Z",
+                    "updatedAt": "2024-11-20T18:40:27.076Z",
+                    "__v": 0,
+                    "discount": 50,
+                    "id": "673e2d1b1159920171828146"
+                },
+                "price": 340,
+                "quantity": 1,
+                "_id": "674cb3142a8d2b899c3d0eef"
+            }
+        ],
+        "totalPrice": 840,
+        "createdAt": "2024-12-01T19:02:46.225Z",
+        "updatedAt": "2024-12-01T19:03:48.875Z",
+        "__v": 1
+    }
+}

@@ -1,7 +1,7 @@
-import 'package:flowery/core/styles/colors/app_colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../../../core/styles/colors/app_colors.dart';
 import '../../../../widgets/search_bar_widget.dart';
 
 class CustomSearchBar extends StatelessWidget {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../core/di/di.dart';
 import '../../../../core/styles/colors/app_colors.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
@@ -10,7 +11,9 @@ import '../../../../domain/entities/home_layout/product_details_entity.dart';
 import '../view_model/product_details_cubit.dart';
 import '../view_model/product_details_states.dart';
 class ProductDetails extends StatefulWidget {
-  const ProductDetails({super.key});
+  final String productIt;
+
+  const ProductDetails(this.productIt, {super.key});
 
   @override
   State<ProductDetails> createState() => _ProductDetailsState();
@@ -23,13 +26,19 @@ class _ProductDetailsState extends State<ProductDetails> {
   void initState() {
     super.initState();
     viewModel = getIt.get<ProductDetailsCubit>();
+    viewModel.getProductDetails(productId: widget.productIt);
   }
+
   @override
   Widget build(BuildContext context) {
-    final String productId = ModalRoute.of(context)?.settings.arguments as String;
     return Scaffold(
       body: BlocBuilder<ProductDetailsCubit, ProductDetailsStates>(
-        bloc: viewModel..getProductDetails(productId: productId),
+        bloc: viewModel,
+        buildWhen: (previous, current) {
+          return current is ProductDetailsLoadingState ||
+              current is ProductDetailsSuccessState ||
+              current is ProductDetailsErrorState;
+        },
         builder: (context, state) {
           if (state is ProductDetailsLoadingState) {
             return Center(
@@ -39,7 +48,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           } else if (state is ProductDetailsSuccessState) {
             final productDetailsEntity = state.success;
             final product = productDetailsEntity?.products?.firstWhere(
-              (p) => p.id == productId,
+              (p) => p.id == widget.productIt,
             );
             if (product != null) {
               return CustomScrollView(
@@ -128,9 +137,19 @@ class _ProductDetailsState extends State<ProductDetails> {
           }
         },
       ),
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-        child: AddToCartButton(productId: productId),
+      bottomNavigationBar:
+          BlocBuilder<ProductDetailsCubit, ProductDetailsStates>(
+        bloc: viewModel,
+        builder: (context, state) {
+          if (state is ProductDetailsSuccessState) {
+            return Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+              child: AddToCartButton(productId: widget.productIt),
+            );
+          } else {
+            return SizedBox();
+          }
+        },
       ),
     );
   }

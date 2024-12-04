@@ -1,13 +1,14 @@
-import 'package:flowery/presentation/auth/forgot_password/view/widgets/email_verification_widget/widget/pin_code_file.dart';
-import 'package:flowery/presentation/auth/forgot_password/view_model/forget_passwoed_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../../core/utils/const/app_string.dart';
+import '../../../../view_model/forget_passwoed_cubit.dart';
+import 'pin_code_file.dart';
 
 class EmailVerificationWidget extends StatelessWidget {
   final ForgetPasswordCubit viewModel;
-  const EmailVerificationWidget({super.key,required this.viewModel});
+  const EmailVerificationWidget({super.key, required this.viewModel});
 
   @override
   Widget build(BuildContext context) {
@@ -55,8 +56,7 @@ class EmailVerificationWidget extends StatelessWidget {
             children: [
               Text(
                 AppStrings.didnotReceiveCode,
-                style: TextStyle(
-                    fontSize: 18.sp, fontWeight: FontWeight.w400),
+                style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w400),
               ),
               ValueListenableBuilder<bool>(
                 valueListenable: viewModel.isResendButtonEnabled,
@@ -64,8 +64,8 @@ class EmailVerificationWidget extends StatelessWidget {
                   return InkWell(
                     onTap: isEnabled
                         ? () {
-                      viewModel.resendResetCode();
-                    }
+                            viewModel.resendResetCode();
+                          }
                         : null,
                     child: ValueListenableBuilder<String?>(
                       valueListenable: viewModel.resendButtonText,
@@ -74,8 +74,7 @@ class EmailVerificationWidget extends StatelessWidget {
                           value ?? " Resend",
                           style: isEnabled
                               ? AppFonts.font16PinkWeight400UnderlinedPink
-                              : AppFonts
-                              .font16PinkWeight400UnderlinedPink,
+                              : AppFonts.font16PinkWeight400UnderlinedPink,
                         );
                       },
                     ),

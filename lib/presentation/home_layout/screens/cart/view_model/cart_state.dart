@@ -6,6 +6,8 @@ final class CartInitial extends CartState {}
 
 final class NoUserLogged extends CartState {}
 
+final class UserLogged extends CartState {}
+
 final class CartLoading extends CartState {}
 
 final class CartLoaded extends CartState {

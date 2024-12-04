@@ -45,6 +45,7 @@ class AppRoutes {
     switch (setting.name) {
       case PageRouteName.splash:
         return _handleMaterialPageRoute(widget: const SplashScreen());
+
       case PageRouteName.logIn:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -69,11 +70,11 @@ class AppRoutes {
           ),
         );
 
-      case PageRouteName.bestSeller:
+      case PageRouteName.changePassword:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => getIt<BestSellerViewModel>(),
-            child: BestSellerScreen(),
+            create: (context) => getIt<ChangePasswordViewModel>(),
+            child: const ChangePasswordScreen(),
           ),
         );
 
@@ -97,12 +98,23 @@ class AppRoutes {
         );
 
       case PageRouteName.homeLayout:
-        getCartViewModel();
-
         return _handleMaterialPageRoute(
-          widget: BlocProvider(
-            create: (context) => cartViewModel!..checkLoggedUser(),
-            child: MainPage(),
+          widget: MainPage(),
+        );
+
+      case PageRouteName.productDetails:
+        final String productId = setting.arguments as String;
+
+        return MaterialPageRoute(
+          builder: (context) => ProductDetails(productId),
+          settings: setting,
+        );
+
+      case PageRouteName.bestSeller:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<BestSellerViewModel>(),
+            child: BestSellerScreen(),
           ),
         );
 

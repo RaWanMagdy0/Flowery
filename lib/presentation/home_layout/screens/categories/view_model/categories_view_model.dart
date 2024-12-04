@@ -1,10 +1,11 @@
-import 'package:flowery/domain/use_case/home/categories/categories_product_usecase.dart';
-import 'package:flowery/domain/use_case/home/categories/categories_use_case.dart';
-import 'package:flowery/presentation/home_layout/screens/categories/view_model/categories_state.dart';
 import 'package:injectable/injectable.dart';
+
 import '../../../../../core/api/api_result.dart';
 import '../../../../../core/base/base_view_model.dart';
 import '../../../../../domain/entities/home/home_category_entity.dart';
+import '../../../../../domain/use_case/home/categories/categories_product_usecase.dart';
+import '../../../../../domain/use_case/home/categories/categories_use_case.dart';
+import 'categories_state.dart';
 
 @injectable
 class CategoriesViewModel extends BaseViewModel<CategoriesState> {
@@ -20,6 +21,7 @@ class CategoriesViewModel extends BaseViewModel<CategoriesState> {
     switch (result) {
       case Success<List<HomeCategory>?>():
         emit(CategoriesSuccessState(result.data));
+        selectCategory(result.data?.first.id ?? '');
 
       case Fail<List<HomeCategory>?>():
         emit(CategoriesErrorState(result.exception));

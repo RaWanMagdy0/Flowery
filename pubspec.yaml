@@ -35,6 +35,7 @@ dependencies:
   svg_flutter: ^0.0.1
 
 dev_dependencies:
+  bloc_test: ^9.1.7
   build_runner: ^2.4.11
   flutter_lints: ^5.0.0
   flutter_test:
