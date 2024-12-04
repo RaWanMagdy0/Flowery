@@ -8,6 +8,7 @@ import '../../../../../core/routes/page_route_name.dart';
 import '../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../core/utils/widget/custom_item_card.dart';
+import '../../profile/profile/view_model/profile_cubit.dart';
 
 class CategoriesScreen extends StatefulWidget {
   const CategoriesScreen({super.key});
