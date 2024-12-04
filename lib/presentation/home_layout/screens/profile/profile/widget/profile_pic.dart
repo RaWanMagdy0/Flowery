@@ -1,18 +1,16 @@
 import 'dart:io';
 
-import 'package:flowery/core/di/di.dart';
-import 'package:flowery/core/styles/images/app_images.dart';
-import 'package:flowery/core/utils/functions/dialogs/app_dialogs.dart';
-import 'package:flowery/presentation/home_layout/screens/profile/profile/view_model/profile_state.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
+
+import '../../../../../../core/di/di.dart';
 import '../../../../../../core/styles/colors/app_colors.dart';
+import '../../../../../../core/styles/images/app_images.dart';
+import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../view_model/profile_cubit.dart';
-import 'package:image/image.dart' as img;
+import '../view_model/profile_state.dart';
 
 class CustomProfilePic extends StatefulWidget {
   const CustomProfilePic({super.key});
@@ -112,14 +110,13 @@ class _CustomProfilePicState extends State<CustomProfilePic> {
         final pngPhotoPath = '${tempDir.path}/converted_image.png';
         final pngPhoto = File(pngPhotoPath)..writeAsBytesSync(pngData);
         ****************/
-        setState(() {
+      setState(() {
         //  photo = pngPhoto;
-          viewModel.uploadPhoto(originalPhoto!);
+        viewModel.uploadPhoto(originalPhoto);
         //  debugPrint('Uploaded PNG Photo: $photo');
-        });
-      } else {
-        debugPrint('Error: Could not decode JPG image.');
-      }
+      });
+    } else {
+      debugPrint('Error: Could not decode JPG image.');
     }
   }
-
+}

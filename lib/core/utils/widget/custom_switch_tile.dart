@@ -1,4 +1,4 @@
-import 'package:flowery/core/styles/fonts/app_fonts.dart';
+import '../../styles/fonts/app_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -12,7 +12,7 @@ class SwitchTile extends StatelessWidget {
   final TextStyle? titleStyle;
 
   const SwitchTile({
-    Key? key,
+    super.key,
     required this.value,
     required this.onChanged,
     this.activeColor = Colors.white,
@@ -20,13 +20,12 @@ class SwitchTile extends StatelessWidget {
     this.inactiveThumbColor = Colors.white,
     this.inactiveTrackColor = Colors.grey,
     this.titleStyle,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-
       child: Row(
         children: [
           // Switch widget

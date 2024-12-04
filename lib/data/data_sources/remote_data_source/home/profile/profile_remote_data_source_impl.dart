@@ -1,9 +1,5 @@
-import 'dart:convert';
 import 'dart:io';
 
-import 'package:dio/dio.dart';
-import 'package:flowery/data/models/home/profile/custom_form_data.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mime/mime.dart';
 
@@ -13,6 +9,7 @@ import '../../../../../core/local/token_manger.dart';
 import '../../../../../domain/entities/home_layout/profile/User.dart';
 import '../../../../api/home_api/home_api_manager.dart';
 import '../../../../models/auth/requests/edite_profile_request_model.dart';
+import '../../../../models/home/profile/custom_form_data.dart';
 import 'profile_remote_data_source.dart';
 
 @Injectable(as: ProfileRemoteDataSource)
@@ -51,8 +48,7 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
           filename: photo.path.split("/").last,
         ),
       });
-      var response =
-          await apiManger.uploadPhoto(token, photo);
+      var response = await apiManger.uploadPhoto(token, photo);
       return response;
     });
   }
