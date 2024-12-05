@@ -9,8 +9,8 @@ import '../widget/it_is_gift.dart';
 import '../widget/payment_method.dart';
 import '../widget/total.dart';
 
-class CheckoutScreen extends StatelessWidget {
-  const CheckoutScreen({super.key});
+class CheckoutOrderScreen extends StatelessWidget {
+  const CheckoutOrderScreen({super.key});
   static const String routeName = "CheckoutScreen";
 
   @override

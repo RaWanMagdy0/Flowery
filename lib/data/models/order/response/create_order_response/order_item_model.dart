@@ -1,3 +1,5 @@
+import '../../../../../domain/entities/address/create_order/order_item.dart';
+
 class OrderItemModel {
   OrderItemModel({
       this.product, 
@@ -25,4 +27,12 @@ class OrderItemModel {
     return map;
   }
 
+  OrderItems toOrderItems() {
+    return OrderItems(
+      id: id,
+      product: id,
+      price: price,
+      quantity: quantity,
+    );
+  }
 }

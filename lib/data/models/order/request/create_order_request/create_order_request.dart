@@ -1,4 +1,4 @@
-import 'package:flowery/data/models/address/request/create_order_request/shipping_address_request.dart';
+import 'package:flowery/data/models/order/request/create_order_request/shipping_address_request.dart';
 
 class CreateOrderRequest {
   CreateOrderRequest({
