@@ -10,7 +10,7 @@ class CustomButton extends StatelessWidget {
   final String? text;
   final TextStyle? textStyle;
   final Widget? child;
-  final Color? color, textColor, disabledColor, borderColor;
+  final Color? color, textColor, disabledColor, borderColor,backgroundColor;
   final EdgeInsetsGeometry? padding;
 
   const CustomButton({
@@ -29,6 +29,7 @@ class CustomButton extends StatelessWidget {
     this.disabledColor,
     this.borderColor,
     this.padding,
+    this.backgroundColor
   });
 
   @override
@@ -48,13 +49,13 @@ class CustomButton extends StatelessWidget {
           ),
         ),
       ),
-      child: Text(
-        text ?? '',
-        style: textStyle ??
-            AppFonts.font16LightWhiteWeight500.copyWith(
-              color: textColor ?? AppColors.kLightWhite,
-            ),
-      ),
+      child: child ??
+          Text(
+            text ?? '',
+            style: textStyle ??
+                AppFonts.font16LightWhiteWeight500.copyWith(
+                  color: textColor ?? AppColors.kLightWhite,
+                ),
+          ),
     );
-  }
-}
+  }}

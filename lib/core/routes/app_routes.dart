@@ -1,3 +1,4 @@
+import 'package:flowery/presentation/checkout/view/checkout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -135,6 +136,9 @@ class AppRoutes {
                 ));
       case PageRouteName.editProfile:
         return _handleMaterialPageRoute(widget: EditProfileScreen());
+
+      case PageRouteName.checkout:
+        return _handleMaterialPageRoute(widget: CheckoutScreen());
 
 
       default:
