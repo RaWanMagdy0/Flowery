@@ -72,41 +72,29 @@ class _PaymentMethodState extends State<PaymentMethod> {
             ),
           ),
           10.verticalSpace,
-          InkWell(
-            onTap: (){
-              setState(() {
-                selectedPayment =  "Credit Card";
-              });
-              widget.onChanged(selectedPayment);
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.r),
-                border: Border.all(color: AppColors.kLighterGrey),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Credit Card",
-                      style: AppFonts.font16BlackWeight500,
-                    ),
-                    Radio<String>(
-                      activeColor: Colors.pink,
-                      value: "Credit Card",
-                      groupValue: selectedPayment,
-                      onChanged: (value) {
-                        setState(() {
-                          selectedPayment = value;
-                        });
-                        widget.onChanged(value);
-                      },
-                    ),
+          Container(
+            decoration: BoxDecoration(
+              color: AppColors.kLighterGrey,
+              borderRadius: BorderRadius.circular(15.r),
+              border: Border.all(color: AppColors.kLighterGrey),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Credit Card",
+                    style: AppFonts.font16BlackWeight500,
+                  ),
+                  Radio<String>(
+                    activeColor: AppColors.kGray,
+                    value: "Credit Card",
+                    groupValue: null,
+                    onChanged: (value) {}
+                  ),
 
-                  ],
-                ),
+                ],
               ),
             ),
           ),
