@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
@@ -11,6 +10,8 @@ import '../../models/home/category/all_categories_response_model.dart';
 import '../../models/home/home/home_data_model.dart';
 import '../../models/home/occasions/occasions_response_model.dart';
 import '../../models/home/profile/AppUserModel.dart';
+import '../../models/order/request/create_order_request/create_order_request.dart';
+import '../../models/order/response/create_order_response/create_order_model.dart';
 import '../../models/produc_details_model.dart';
 
 part 'home_api_manager.g.dart';
@@ -65,4 +66,10 @@ abstract class HomeApiManger {
 
   @GET(ApiConstants.getAllCategoriesEndpoint)
   Future<ProductDetailsModel> getCategoriesProduct();
+
+  @POST(ApiConstants.createOrder)
+  Future<CreateOrderModel?> createOrder(
+    @Header("Authorization") String token,
+    @Body() CreateOrderRequest createOrderRequest,
+  );
 }

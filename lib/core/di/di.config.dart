@@ -15,6 +15,7 @@ import 'package:injectable/injectable.dart' as _i526;
 import '../../data/api/auth_api/auth_api_manager.dart' as _i515;
 import '../../data/api/cart_api/cart_api_manager.dart' as _i1016;
 import '../../data/api/home_api/home_api_manager.dart' as _i48;
+import '../../data/api/Order_api/order_api_manager.dart' as _i301;
 import '../../data/data_sources/remote_data_source/auth/auth_remote_data_source.dart'
     as _i1056;
 import '../../data/data_sources/remote_data_source/auth/auth_remote_data_source_impl.dart'
@@ -130,6 +131,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i1016.CartApiManager(gh<_i361.Dio>()));
     gh.lazySingleton<_i48.HomeApiManger>(
         () => _i48.HomeApiManger(gh<_i361.Dio>()));
+    gh.lazySingleton<_i301.OrderApiManger>(
+        () => _i301.OrderApiManger(gh<_i361.Dio>()));
     gh.factory<_i795.HomeRemoteDataSource>(
         () => _i204.HomeRemoteDataSourceImpl(gh<_i48.HomeApiManger>()));
     gh.factory<_i823.OccassionsRemoteDataSource>(() =>

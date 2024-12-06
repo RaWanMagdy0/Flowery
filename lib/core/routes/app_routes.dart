@@ -23,6 +23,7 @@ import '../../presentation/home_layout/screens/profile/change_password/view_mode
 import '../../presentation/home_layout/screens/profile/profile/view/edit_profile_screen.dart';
 import '../../presentation/home_layout/screens/profile/profile/view/profile_main_screen.dart';
 import '../../presentation/home_layout/screens/profile/profile/view_model/profile_cubit.dart';
+import '../../presentation/order/view/checkout_order_screen.dart';
 import '../../splash/splash_screen.dart';
 import '../di/di.dart';
 import 'page_route_name.dart';
@@ -128,6 +129,9 @@ class AppRoutes {
                 ));
       case PageRouteName.editProfile:
         return _handleMaterialPageRoute(widget: EditProfileScreen());
+
+      case PageRouteName.checkout:
+        return _handleMaterialPageRoute(widget: CheckoutOrderScreen());
 
       case PageRouteName.addAndEditUserAddress:
         return MaterialPageRoute(
