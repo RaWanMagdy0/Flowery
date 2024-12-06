@@ -10,6 +10,7 @@ import '../../../../core/utils/widget/custom_text_form_field.dart';
 import '../../../../data/models/order/request/address_requests/add_address_request_body_model.dart';
 import '../../view_model/addresses_view_model.dart';
 import 'widgets/custom_drop_down.dart';
+import 'widgets/map_widget.dart';
 
 class AddAndEditUserAddressScreen extends StatefulWidget {
   static const String routeName = '/sign-up';
@@ -26,6 +27,7 @@ class _AddAndEditUserAddressScreenState
   late final TextEditingController _addressController;
   late final TextEditingController _recipientNameController;
   late final TextEditingController _phoneNumberController;
+  String? city;
 
   @override
   void initState() {
@@ -47,8 +49,8 @@ class _AddAndEditUserAddressScreenState
     if (_formKey.currentState!.validate()) {
       final AddAddressRequestBody body = AddAddressRequestBody(
         street: _addressController.text,
-        phone: _recipientNameController.text,
-        city: _phoneNumberController.text,
+        phone: _phoneNumberController.text,
+        city: city ?? "",
       );
 
       context.read<AddressesCubit>().AddAddress(body);
@@ -74,10 +76,7 @@ class _AddAndEditUserAddressScreenState
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   24.verticalSpace,
-                  Image.asset(
-                    'assets/images/map_placeholder_image.png',
-                    height: 145.h,
-                  ),
+                  MapWidget(),
                   24.verticalSpace,
                   CustomTextFormField(
                     controller: _addressController,
@@ -121,6 +120,9 @@ class _AddAndEditUserAddressScreenState
                             value: value,
                           ),
                           data: ["Cairo", "Alexandria", "Giza"],
+                          onChanged: (value) {
+                            city = value;
+                          },
                         ),
                       ),
                       16.horizontalSpace,
