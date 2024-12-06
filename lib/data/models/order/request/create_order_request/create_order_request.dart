@@ -1,11 +1,14 @@
-import 'package:flowery/data/models/order/request/create_order_request/shipping_address_request.dart';
+import 'shipping_address_request.dart';
 
 class CreateOrderRequest {
   CreateOrderRequest({
-      this.shippingAddress,});
+    this.shippingAddress,
+  });
 
   CreateOrderRequest.fromJson(dynamic json) {
-    shippingAddress = json['shippingAddress'] != null ? ShippingAddressRequest.fromJson(json['shippingAddress']) : null;
+    shippingAddress = json['shippingAddress'] != null
+        ? ShippingAddressRequest.fromJson(json['shippingAddress'])
+        : null;
   }
   ShippingAddressRequest? shippingAddress;
 
@@ -16,5 +19,4 @@ class CreateOrderRequest {
     }
     return map;
   }
-
 }

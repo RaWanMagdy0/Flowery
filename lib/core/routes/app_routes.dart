@@ -1,8 +1,8 @@
-import 'package:flowery/presentation/addresses/view/add_and_edit_user_address/add_and_edit_user_address_screen.dart';
-import 'package:flowery/presentation/addresses/view_model/addresses_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../presentation/addresses/view/add_and_edit_user_address/add_and_edit_user_address_screen.dart';
+import '../../presentation/addresses/view_model/addresses_view_model.dart';
 import '../../presentation/auth/forgot_password/view/widgets/email_verification_widget/email_verification.dart';
 import '../../presentation/auth/forgot_password/view/widgets/forgot_password_widget/forget_password_screen.dart';
 import '../../presentation/auth/forgot_password/view_model/forget_passwoed_cubit.dart';
@@ -131,7 +131,12 @@ class AppRoutes {
         return _handleMaterialPageRoute(widget: EditProfileScreen());
 
       case PageRouteName.checkout:
-        return _handleMaterialPageRoute(widget: CheckoutOrderScreen());
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<AddressesCubit>(),
+            child: CheckoutOrderScreen(),
+          ),
+        );
 
       case PageRouteName.addAndEditUserAddress:
         return MaterialPageRoute(

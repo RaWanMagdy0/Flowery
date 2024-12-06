@@ -5,12 +5,14 @@ class Validators {
     }
     return null;
   }
+
   static String? validateNotEmpty({String? title, String? value}) {
     if (_isEmpty(value)) {
       return ("$title is required");
     }
     return null;
   }
+
   static String? validateEmail(String? value) {
     if (_isEmpty(value)) {
       return ("Email is required");
@@ -60,7 +62,7 @@ class Validators {
     }
 
     var regex = RegExp(
-      r"^(?:\+20)?1[0125]\d{8}$",
+      r"^01[0125]\d{8}$",
     );
 
     if (!regex.hasMatch(value!)) {

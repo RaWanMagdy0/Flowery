@@ -1,11 +1,9 @@
-import 'package:flowery/core/styles/colors/app_colors.dart';
-import 'package:flowery/core/styles/fonts/app_fonts.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../core/styles/colors/app_colors.dart';
+import '../../../core/styles/fonts/app_fonts.dart';
 import '../../../core/utils/functions/validators/validators.dart';
-import '../../../core/utils/widget/custom_switch_tile.dart';
 import '../../../core/utils/widget/custom_text_form_field.dart';
 
 class ItIsGift extends StatefulWidget {
@@ -38,7 +36,10 @@ class _ItIsGiftState extends State<ItIsGift> {
                   },
                 ),
               ),
-              Text("It Is a gift",style: AppFonts.font18BlackWeight500,)
+              Text(
+                "It Is a gift",
+                style: AppFonts.font18BlackWeight500,
+              )
             ],
           ),
           5.verticalSpace,
@@ -62,7 +63,6 @@ class _ItIsGiftState extends State<ItIsGift> {
             ),
           ],
           10.verticalSpace,
-
         ],
       ),
     );

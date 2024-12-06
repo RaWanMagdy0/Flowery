@@ -1,4 +1,3 @@
-import '../../../../../domain/entities/address/create_order/Order.dart';
 import '../../../../../domain/entities/address/create_order/order.dart';
 import 'order_model.dart';
 
@@ -32,9 +31,8 @@ class CreateOrderModel {
       isDelivered: order?.isDelivered ?? false,
       isPaid: order?.isPaid ?? false,
       paymentType: order?.paymentType ?? 'unknown',
-      orderItems: order?.orderItems
-          ?.map((item) => item.toOrderItems())
-          .toList() ?? [],
+      orderItems:
+          order?.orderItems?.map((item) => item.toOrderItems()).toList() ?? [],
     );
   }
 }

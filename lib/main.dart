@@ -26,13 +26,14 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return BlocProvider<CartViewModel>(
-          create: (context) => getIt<CartViewModel>(),
-          child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            theme: AppTheme.appTheme,
-            initialRoute: PageRouteName.checkout,
-            onGenerateRoute: (settings) => AppRoutes.onGenerateRoute(settings),
-          ));
+            create: (context) => getIt<CartViewModel>(),
+            child: MaterialApp(
+              debugShowCheckedModeBanner: false,
+              theme: AppTheme.appTheme,
+              initialRoute: PageRouteName.splash,
+              onGenerateRoute: (settings) =>
+                  AppRoutes.onGenerateRoute(settings),
+            ));
       },
     );
   }

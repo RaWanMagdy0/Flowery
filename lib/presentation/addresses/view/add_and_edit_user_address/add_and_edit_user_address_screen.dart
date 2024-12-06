@@ -1,13 +1,15 @@
-import 'package:flowery/presentation/addresses/view/add_and_edit_user_address/widgets/custom_drop_down.dart';
-import 'package:flowery/presentation/addresses/view_model/addresses_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/utils/const/app_string.dart';
+import '../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../core/utils/functions/validators/validators.dart';
 import '../../../../core/utils/widget/custom_button.dart';
 import '../../../../core/utils/widget/custom_text_form_field.dart';
+import '../../../../data/models/order/request/address_requests/add_address_request_body_model.dart';
+import '../../view_model/addresses_view_model.dart';
+import 'widgets/custom_drop_down.dart';
 
 class AddAndEditUserAddressScreen extends StatefulWidget {
   static const String routeName = '/sign-up';
@@ -41,16 +43,23 @@ class _AddAndEditUserAddressScreenState
     super.dispose();
   }
 
-  void signUp() async {
-    if (_formKey.currentState!.validate()) {}
+  void addAddress() async {
+    if (_formKey.currentState!.validate()) {
+      final AddAddressRequestBody body = AddAddressRequestBody(
+        street: _addressController.text,
+        phone: _recipientNameController.text,
+        city: _phoneNumberController.text,
+      );
+
+      context.read<AddressesCubit>().AddAddress(body);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocListener<AddressesCubit, AddressesState>(
       bloc: context.read<AddressesCubit>(),
-      // listener: (context, state) => _handelStateChange(state),
-      listener: (context, state) {},
+      listener: (context, state) => _handelStateChange(state),
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Address"),
@@ -88,12 +97,6 @@ class _AddAndEditUserAddressScreenState
                     keyBordType: TextInputType.phone,
                     textInputAction: TextInputAction.done,
                     controller: _phoneNumberController,
-                    onChanged: (value) {
-                      if (value.trim().isEmpty) {
-                        final prefix = '+2';
-                        _phoneNumberController.text = prefix;
-                      }
-                    },
                   ),
                   24.verticalSpace,
                   CustomTextFormField(
@@ -132,7 +135,7 @@ class _AddAndEditUserAddressScreenState
                   ),
                   35.verticalSpace,
                   CustomButton(
-                    onPressed: signUp,
+                    onPressed: addAddress,
                     text: "Save address",
                   ),
                   16.verticalSpace,
@@ -145,20 +148,23 @@ class _AddAndEditUserAddressScreenState
     );
   }
 
-  // void _handelStateChange(AddressesState state) {
-  //   if (state is SignUpSuccess) {
-  //     Navigator.pop(context);
-  //     AppDialogs.showSuccessDialog(
-  //       context: context,
-  //       message: "Account Created Successfully.\n Please Login to proceed",
-  //       whenAnimationFinished: () => Navigator.pop(context),
-  //     );
-  //   } else if (state is SignUpFail) {
-  //     Navigator.pop(context);
-  //     AppDialogs.showErrorDialog(
-  //         context: context, errorMassage: state.errorMassage ?? "");
-  //   } else if (state is SignUpLoading) {
-  //     AppDialogs.showLoading(context: context);
-  //   }
-  // }
+  void _handelStateChange(AddressesState state) {
+    if (state is AddAddressesSuccess) {
+      Navigator.pop(context);
+
+      AppDialogs.showSuccessDialog(
+        context: context,
+        message: "Address Added Successfully.",
+        whenAnimationFinished: () {
+          // todo: call get all adresses function
+          Navigator.pop(context);
+        },
+      );
+    } else if (state is AddAddAddressFail) {
+      Navigator.pop(context);
+      AppDialogs.showErrorDialog(context: context, errorMassage: state.message);
+    } else if (state is AddAddressesLoading) {
+      AppDialogs.showLoading(context: context);
+    }
+  }
 }

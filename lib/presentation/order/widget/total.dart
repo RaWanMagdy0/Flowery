@@ -1,17 +1,17 @@
-import 'package:flowery/core/styles/colors/app_colors.dart';
-import 'package:flowery/core/styles/fonts/app_fonts.dart';
-import 'package:flowery/core/utils/functions/dialogs/app_dialogs.dart';
-import 'package:flowery/core/utils/widget/custom_button.dart';
-import 'package:flowery/presentation/order/view_model/order_cubit.dart';
-import 'package:flowery/presentation/order/view_model/order_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/di/di.dart';
+import '../../../core/styles/colors/app_colors.dart';
+import '../../../core/styles/fonts/app_fonts.dart';
+import '../../../core/utils/functions/dialogs/app_dialogs.dart';
+import '../../../core/utils/widget/custom_button.dart';
+import '../view_model/order_cubit.dart';
+import '../view_model/order_state.dart';
 
 class Total extends StatefulWidget {
-  Total({super.key});
+  const Total({super.key});
 
   @override
   State<Total> createState() => _TotalState();
@@ -95,8 +95,7 @@ class _TotalState extends State<Total> {
               ),
               30.verticalSpace,
               CustomButton(
-                onPressed: () {
-                },
+                onPressed: () {},
                 color: AppColors.kPink,
                 text: "Place Order",
                 textStyle: AppFonts.font16WhiteWeight500,
