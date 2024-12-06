@@ -11,8 +11,9 @@ class PageRouteName {
   static const String splash10 = "splash10";
   static const String bestSeller = "bestSeller";
   static const String occasion = "occasion page";
- // static const String resetPassword = "resetPassword";
+  // static const String resetPassword = "resetPassword";
   static const String editProfile = "edit profile screen";
   static const String mainProfile = "main profile screen";
   static const String changePassword = "changePassword";
+  static const String addAndEditUserAddress = "addAndEditUserAddress";
 }

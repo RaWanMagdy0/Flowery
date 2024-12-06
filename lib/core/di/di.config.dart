@@ -82,6 +82,8 @@ import '../../domain/use_case/home/profile/edite_profile_use_case.dart'
 import '../../domain/use_case/home/profile/get_logged_user_info_use_case.dart'
     as _i334;
 import '../../domain/use_case/home/profile/upload_photo_use_case.dart' as _i200;
+import '../../presentation/addresses/view_model/addresses_view_model.dart'
+    as _i598;
 import '../../presentation/auth/forgot_password/view_model/forget_passwoed_cubit.dart'
     as _i351;
 import '../../presentation/auth/login/view_model/login_cubit.dart' as _i97;
@@ -119,6 +121,7 @@ extension GetItInjectableX on _i174.GetIt {
     );
     final dioModule = _$DioModule();
     gh.factory<_i763.DioFactory>(() => _i763.DioFactory());
+    gh.factory<_i598.AddressesCubit>(() => _i598.AddressesCubit());
     gh.singleton<_i240.AppProvider>(() => _i240.AppProvider());
     gh.lazySingleton<_i361.Dio>(() => dioModule.dio);
     gh.lazySingleton<_i515.AuthApiManager>(
