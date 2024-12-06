@@ -12,7 +12,7 @@ class AppTheme {
         if (states.contains(MaterialState.selected)) {
           return AppColors.kPink;
         }
-        return AppColors.kPink;
+        return AppColors.kGray;
       }),
       overlayColor: WidgetStateProperty.all(AppColors.kPink),
     ),

@@ -8,14 +8,14 @@ import '../../../core/styles/fonts/app_fonts.dart';
 class PaymentMethod extends StatefulWidget {
   final ValueChanged<String?> onChanged;
 
-  const PaymentMethod({super.key,required this.onChanged});
+  const PaymentMethod({super.key, required this.onChanged});
 
   @override
   State<PaymentMethod> createState() => _PaymentMethodState();
 }
 
 class _PaymentMethodState extends State<PaymentMethod> {
-  String? selectedPayment;
+  String? selectedPayment="Cash on Delivery";
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
           ),
           10.verticalSpace,
           InkWell(
-            onTap: (){
+            onTap: () {
               setState(() {
                 selectedPayment = "Cash on Delivery";
               });
@@ -65,7 +65,6 @@ class _PaymentMethodState extends State<PaymentMethod> {
                         widget.onChanged(value);
                       },
                     ),
-
                   ],
                 ),
               ),
@@ -74,7 +73,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
           10.verticalSpace,
           Container(
             decoration: BoxDecoration(
-              color: AppColors.kLighterGrey,
+            //  color: AppColors.kLighterGrey,
               borderRadius: BorderRadius.circular(15.r),
               border: Border.all(color: AppColors.kLighterGrey),
             ),
@@ -88,18 +87,15 @@ class _PaymentMethodState extends State<PaymentMethod> {
                     style: AppFonts.font16BlackWeight500,
                   ),
                   Radio<String>(
-                    activeColor: AppColors.kGray,
-                    value: "Credit Card",
-                    groupValue: null,
-                    onChanged: (value) {}
-                  ),
-
+                      activeColor: AppColors.kGray,
+                      value: "Credit Card",
+                      groupValue: null,
+                      onChanged: (value) {}),
                 ],
               ),
             ),
           ),
           15.verticalSpace,
-
         ],
       ),
     );

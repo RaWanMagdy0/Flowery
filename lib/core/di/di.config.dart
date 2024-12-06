@@ -15,7 +15,9 @@ import 'package:injectable/injectable.dart' as _i526;
 import '../../data/api/auth_api/auth_api_manager.dart' as _i515;
 import '../../data/api/cart_api/cart_api_manager.dart' as _i1016;
 import '../../data/api/home_api/home_api_manager.dart' as _i48;
-import '../../data/api/Order_api/order_api_manager.dart' as _i301;
+import '../../data/api/order_api/order_api_manager.dart' as _i782;
+import '../../data/data_sources/remote_data_source/address/address_remote_data_source.dart'
+    as _i893;
 import '../../data/data_sources/remote_data_source/auth/auth_remote_data_source.dart'
     as _i1056;
 import '../../data/data_sources/remote_data_source/auth/auth_remote_data_source_impl.dart'
@@ -40,18 +42,27 @@ import '../../data/data_sources/remote_data_source/home/profile/profile_remote_d
     as _i418;
 import '../../data/data_sources/remote_data_source/home/profile/profile_remote_data_source_impl.dart'
     as _i1017;
+import '../../data/data_sources/remote_data_source/order/order_remote_data_source.dart'
+    as _i1041;
+import '../../data/data_sources/remote_data_source/order/order_remote_data_source_impl.dart'
+    as _i449;
+import '../../data/repository/address/address_repository_impl.dart' as _i444;
 import '../../data/repository/auth/auth_repository_impl.dart' as _i392;
 import '../../data/repository/cart/cart_repository_impl.dart' as _i756;
 import '../../data/repository/home/category_repo_impl.dart' as _i43;
 import '../../data/repository/home/home_repository_impl.dart' as _i605;
 import '../../data/repository/home/occasions_repository_impl.dart' as _i505;
 import '../../data/repository/home/profile_repository_impl.dart' as _i737;
+import '../../data/repository/order/order_repository_impl.dart' as _i348;
+import '../../domain/entities/address/create_order/order_entity.dart' as _i344;
+import '../../domain/repository/address/address_repository.dart' as _i175;
 import '../../domain/repository/auth/auth_repository.dart' as _i912;
 import '../../domain/repository/cart/cart_repository.dart' as _i1048;
 import '../../domain/repository/home/category_repository.dart' as _i599;
 import '../../domain/repository/home/home_repository.dart' as _i839;
 import '../../domain/repository/home/occasions_repository.dart' as _i256;
 import '../../domain/repository/home/profile_repository.dart' as _i539;
+import '../../domain/repository/order/order_repository.dart' as _i460;
 import '../../domain/use_case/auth/change_password_use_case.dart' as _i495;
 import '../../domain/use_case/auth/forgot_password_use_case.dart' as _i120;
 import '../../domain/use_case/auth/login_use_case.dart' as _i408;
@@ -83,6 +94,7 @@ import '../../domain/use_case/home/profile/edite_profile_use_case.dart'
 import '../../domain/use_case/home/profile/get_logged_user_info_use_case.dart'
     as _i334;
 import '../../domain/use_case/home/profile/upload_photo_use_case.dart' as _i200;
+import '../../domain/use_case/order/create_order_use_case.dart' as _i513;
 import '../../presentation/auth/forgot_password/view_model/forget_passwoed_cubit.dart'
     as _i351;
 import '../../presentation/auth/login/view_model/login_cubit.dart' as _i97;
@@ -103,6 +115,7 @@ import '../../presentation/home_layout/screens/profile/change_password/view_mode
     as _i671;
 import '../../presentation/home_layout/screens/profile/profile/view_model/profile_cubit.dart'
     as _i275;
+import '../../presentation/order/view_model/order_cubit.dart' as _i701;
 import '../api/dio/dio_factory.dart' as _i763;
 import '../api/dio/dio_module.dart' as _i223;
 import '../utils/functions/providers/app_provider.dart' as _i240;
@@ -122,14 +135,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i763.DioFactory>(() => _i763.DioFactory());
     gh.singleton<_i240.AppProvider>(() => _i240.AppProvider());
     gh.lazySingleton<_i361.Dio>(() => dioModule.dio);
+    gh.factory<_i175.AddressRepository>(() => _i444.AddressRepositoryImpl(
+        dataSource: gh<_i893.AddressRemoteDataSource>()));
     gh.lazySingleton<_i515.AuthApiManager>(
         () => _i515.AuthApiManager(gh<_i361.Dio>()));
     gh.lazySingleton<_i1016.CartApiManager>(
         () => _i1016.CartApiManager(gh<_i361.Dio>()));
     gh.lazySingleton<_i48.HomeApiManger>(
         () => _i48.HomeApiManger(gh<_i361.Dio>()));
-    gh.lazySingleton<_i301.OrderApiManger>(
-        () => _i301.OrderApiManger(gh<_i361.Dio>()));
     gh.factory<_i795.HomeRemoteDataSource>(
         () => _i204.HomeRemoteDataSourceImpl(gh<_i48.HomeApiManger>()));
     gh.factory<_i823.OccassionsRemoteDataSource>(() =>
@@ -140,6 +153,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i418.ProfileRemoteDataSource>(() =>
         _i1017.ProfileRemoteDataSourceImpl(
             apiManger: gh<_i48.HomeApiManger>()));
+    gh.factory<_i460.OrderRepository>(
+        () => _i348.OrderRepositoryImpl(gh<_i1041.OrderRemoteDataSource>()));
     gh.factory<_i870.CategoryRemoteDataSource>(() =>
         _i119.CategoryRemoteDataSourceImpl(
             apiManger: gh<_i48.HomeApiManger>()));
@@ -151,8 +166,14 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i239.OccasionsUseCase(gh<_i256.OccasionsRepository>()));
     gh.factory<_i469.CartRemoteDataSource>(
         () => _i259.CartRemoteDataSourceImpl(gh<_i1016.CartApiManager>()));
+    gh.factory<_i513.CreateOrderUseCase>(() =>
+        _i513.CreateOrderUseCase(repository: gh<_i460.OrderRepository>()));
     gh.factory<_i599.CategoryRepository>(() => _i43.CategoryRepositoryImpl(
         categoryRemoteDataSource: gh<_i870.CategoryRemoteDataSource>()));
+    gh.factory<_i701.OrderCubit>(() => _i701.OrderCubit(
+          gh<_i513.CreateOrderUseCase>(),
+          gh<_i344.OrderEntity>(),
+        ));
     gh.factory<_i839.HomeRepository>(() => _i605.HomeRepositoryImpl(
         onlineDataSource: gh<_i795.HomeRemoteDataSource>()));
     gh.factory<_i283.CategoriesProductUseCase>(

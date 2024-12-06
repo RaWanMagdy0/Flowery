@@ -16,7 +16,7 @@ class ItIsGift extends StatefulWidget {
 }
 
 class _ItIsGiftState extends State<ItIsGift> {
-  bool isGiftEnabled = true;
+  bool isGiftEnabled = false;
 
   @override
   Widget build(BuildContext context) {

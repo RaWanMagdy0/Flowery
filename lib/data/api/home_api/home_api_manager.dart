@@ -67,9 +67,4 @@ abstract class HomeApiManger {
   @GET(ApiConstants.getAllCategoriesEndpoint)
   Future<ProductDetailsModel> getCategoriesProduct();
 
-  @POST(ApiConstants.createOrder)
-  Future<CreateOrderModel?> createOrder(
-    @Header("Authorization") String token,
-    @Body() CreateOrderRequest createOrderRequest,
-  );
 }

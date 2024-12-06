@@ -18,17 +18,20 @@ class Total extends StatefulWidget {
 }
 
 class _TotalState extends State<Total> {
-  late OrderCubit viewModel;
+ // late OrderCubit viewModel;
 
   @override
   void initState() {
     super.initState();
-    viewModel = getIt.get<OrderCubit>();
+ //   viewModel = getIt.get<OrderCubit>();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<OrderCubit, OrderState>(
+    return
+    /*****************
+
+    BlocBuilder<OrderCubit, OrderState>(
       bloc: viewModel,
       builder: (context, state) {
         if (state is CheckoutLoadingState) {
@@ -49,7 +52,9 @@ class _TotalState extends State<Total> {
             );
           });
         }
-        return Padding(
+        return
+        *****************/
+          Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
@@ -62,6 +67,7 @@ class _TotalState extends State<Total> {
                   ),
                   Text(
                     "100",
+                 //   "${viewModel.subTotal}",
                     style: AppFonts.font16GreyWeight400,
                   ),
                 ],
@@ -75,6 +81,7 @@ class _TotalState extends State<Total> {
                   ),
                   Text(
                     "10",
+                 //   "${viewModel.deliveryFee}",
                     style: AppFonts.font16GreyWeight400,
                   ),
                 ],
@@ -89,6 +96,7 @@ class _TotalState extends State<Total> {
                   ),
                   Text(
                     "110",
+                   // "${viewModel.total}",
                     style: AppFonts.font18BlackWeight500,
                   ),
                 ],
@@ -96,6 +104,7 @@ class _TotalState extends State<Total> {
               30.verticalSpace,
               CustomButton(
                 onPressed: () {
+                //  viewModel.createOrder(createOrderRequest);
                 },
                 color: AppColors.kPink,
                 text: "Place Order",
@@ -105,7 +114,5 @@ class _TotalState extends State<Total> {
             ],
           ),
         );
-      },
-    );
   }
 }

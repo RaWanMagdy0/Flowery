@@ -1,4 +1,4 @@
-import '../../../domain/entities/address/create_order/order.dart';
+import '../../../domain/entities/address/create_order/order_entity.dart';
 
 sealed class OrderState {}
 final class OrderInitialState extends OrderState {}

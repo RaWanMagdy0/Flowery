@@ -22,37 +22,46 @@ class CheckoutOrderScreen extends StatelessWidget {
         automaticallyImplyLeading: false,
         flexibleSpace: CustomAppBar(),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              color: AppColors.kBackGroundGrey,
-              height: 25.h,
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    color: AppColors.kBackGroundGrey,
+                    height: 25.h,
+                  ),
+                  DeliveryAddress(
+                    onChanged: (String? value) {},
+                  ),
+                  Container(
+                    color: AppColors.kBackGroundGrey,
+                    height: 25.h,
+                  ),
+                  PaymentMethod(
+                    onChanged: (String? value) {},
+                  ),
+                  Container(
+                    color: AppColors.kBackGroundGrey,
+                    height: 25.h,
+                  ),
+                  ItIsGift(),
+                  Container(
+                    color: AppColors.kBackGroundGrey,
+                    height: 25.h,
+                  ),
+                ],
+              ),
             ),
-            Column(
-              children: [
-                DeliveryAddress(onChanged: (String? value) {  },),
-              ],
-            ),
-            Container(
-              color: AppColors.kBackGroundGrey,
-              height: 25.h,
-            ),
-            PaymentMethod(onChanged: (String? value) {  },),
-            Container(
-              color: AppColors.kBackGroundGrey,
-              height: 25.h,
-            ),
-            ItIsGift(),
-            Container(
-              color: AppColors.kBackGroundGrey,
-              height: 25.h,
-            ),
-            Total(),
-          ],
-        ),
+          ),
+          Container(
+            color: Colors.white,
+            padding: EdgeInsets.all(8.0),
+            child: Total(),
+          ),
+        ],
       ),
-
     );
   }
 }

@@ -1,4 +1,4 @@
-import 'Order.dart';
+import 'order_entity.dart';
 
 class CreateOrder {
   CreateOrder({
@@ -6,7 +6,7 @@ class CreateOrder {
       this.order,});
 
   String? message;
-  Order? order;
+  OrderEntity? order;
 
 
 }
