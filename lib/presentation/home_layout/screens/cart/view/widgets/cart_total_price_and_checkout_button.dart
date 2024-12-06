@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../../../core/routes/page_route_name.dart';
 import '../../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../core/utils/widget/custom_button.dart';
@@ -91,7 +92,8 @@ class _TotalPriceAndCheckoutButtonState
                 24.verticalSpace,
                 CustomButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, PageRouteName.checkout);
+                    Navigator.pushNamed(
+                        context, PageRouteName.addAndEditUserAddress);
                   },
                   text: 'Checkout',
                 ),

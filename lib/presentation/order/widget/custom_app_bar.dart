@@ -1,4 +1,4 @@
-import 'package:flowery/core/styles/fonts/app_fonts.dart';
+import '../../../core/styles/fonts/app_fonts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,7 +13,6 @@ class CustomAppBar extends StatelessWidget {
       child: Column(
         children: [
           50.verticalSpace,
-
           Row(
             children: [
               Icon(Icons.arrow_back_ios_rounded),
@@ -43,9 +42,7 @@ class CustomAppBar extends StatelessWidget {
           Row(
             children: [
               Row(
-                children: [
-                  Icon(Icons.access_time_rounded),
-                  Text(" instant,")],
+                children: [Icon(Icons.access_time_rounded), Text(" instant,")],
               ),
               Text(
                 "Arrive by 03 Sep 2024 , 11:00 AM",

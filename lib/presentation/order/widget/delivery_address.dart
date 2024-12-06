@@ -1,9 +1,10 @@
-import 'package:flowery/core/styles/colors/app_colors.dart';
-import 'package:flowery/core/styles/fonts/app_fonts.dart';
-import 'package:flowery/core/utils/widget/custom_button.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../core/routes/page_route_name.dart';
+import '../../../core/styles/colors/app_colors.dart';
+import '../../../core/styles/fonts/app_fonts.dart';
+import '../../../core/utils/widget/custom_button.dart';
 
 class DeliveryAddress extends StatefulWidget {
   final ValueChanged<String?> onChanged;
@@ -172,7 +173,9 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
           CustomButton(
             color: AppColors.kWhite,
             borderColor: AppColors.kLightGrey,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, PageRouteName.addAndEditUserAddress);
+            },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
