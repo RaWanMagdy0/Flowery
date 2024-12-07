@@ -10,8 +10,6 @@ import '../../models/home/category/all_categories_response_model.dart';
 import '../../models/home/home/home_data_model.dart';
 import '../../models/home/occasions/occasions_response_model.dart';
 import '../../models/home/profile/AppUserModel.dart';
-import '../../models/order/request/create_order_request/create_order_request.dart';
-import '../../models/order/response/create_order_response/create_order_model.dart';
 import '../../models/produc_details_model.dart';
 
 part 'home_api_manager.g.dart';

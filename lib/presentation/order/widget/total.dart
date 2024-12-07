@@ -1,5 +1,6 @@
 import 'package:flowery/core/styles/colors/app_colors.dart';
 import 'package:flowery/core/styles/fonts/app_fonts.dart';
+import 'package:flowery/core/utils/const/checkout_page_string.dart';
 import 'package:flowery/core/utils/functions/dialogs/app_dialogs.dart';
 import 'package:flowery/core/utils/widget/custom_button.dart';
 import 'package:flowery/presentation/order/view_model/order_cubit.dart';
@@ -62,7 +63,7 @@ class _TotalState extends State<Total> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Sub Total",
+                    CheckoutStrings.subTotal,
                     style: AppFonts.font16GreyWeight400,
                   ),
                   Text(
@@ -76,7 +77,7 @@ class _TotalState extends State<Total> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "DeliveryFee",
+                    CheckoutStrings.deliveryFee,
                     style: AppFonts.font16GreyWeight400,
                   ),
                   Text(
@@ -91,7 +92,7 @@ class _TotalState extends State<Total> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Total",
+                    CheckoutStrings.total,
                     style: AppFonts.font18BlackWeight500,
                   ),
                   Text(
@@ -107,7 +108,7 @@ class _TotalState extends State<Total> {
                 //  viewModel.createOrder(createOrderRequest);
                 },
                 color: AppColors.kPink,
-                text: "Place Order",
+                text: CheckoutStrings.placeOrder,
                 textStyle: AppFonts.font16WhiteWeight500,
               ),
               10.verticalSpace,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../../../../../core/di/di.dart';
 import '../../../../../../core/styles/colors/app_colors.dart';
@@ -11,6 +12,7 @@ import '../../../../../../core/styles/images/app_images.dart';
 import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../view_model/profile_cubit.dart';
 import '../view_model/profile_state.dart';
+import 'package:image/image.dart' as img;
 
 class CustomProfilePic extends StatefulWidget {
   const CustomProfilePic({super.key});
@@ -28,31 +30,30 @@ class _CustomProfilePicState extends State<CustomProfilePic> {
   void initState() {
     super.initState();
     viewModel = getIt.get<ProfileCubit>();
+    _loadInitialPhoto();
   }
 
   @override
   Widget build(BuildContext context) {
-    var viewModel = getIt.get<ProfileCubit>();
     return BlocProvider<ProfileCubit>(
       create: (context) => viewModel,
       child: BlocListener<ProfileCubit, ProfileState>(
         listener: (context, state) {
-          switch (state) {
-            case UploadPhotoLoadingState():
-              AppDialogs.showLoading(context: context);
-              break;
-            case UploadPhotoSuccessState():
-              AppDialogs.showSuccessDialog(
-                  context: context, message: state.message.toString());
-              setState(() {
-                viewModel.getLoggedUserInfo();
-              });
-            case UploadPhotoErrorState():
-              AppDialogs.showErrorDialog(
-                  context: context,
-                  errorMassage: state.errorMessage.toString());
-              break;
-            default:
+          if (state is UploadPhotoLoadingState) {
+            AppDialogs.showLoading(context: context);
+          } else if (state is UploadPhotoSuccessState) {
+            Navigator.pop(context);
+            AppDialogs.showSuccessDialog(
+              context: context,
+              message: state.message ?? 'Photo uploaded successfully',
+            );
+              viewModel.getLoggedUserInfo();
+          } else if (state is UploadPhotoErrorState) {
+            Navigator.pop(context);
+            AppDialogs.showErrorDialog(
+              context: context,
+              errorMassage: state.errorMessage.toString(),
+            );
           }
         },
         child: SizedBox(
@@ -61,16 +62,27 @@ class _CustomProfilePicState extends State<CustomProfilePic> {
           child: Stack(
             children: [
               ClipOval(
-                  child: Image.asset(
-                AppImages.photo,
-                fit: BoxFit.cover,
-              )),
+                child: photo != null
+                    ? Image.file(
+                  photo!,
+                  fit: BoxFit.cover,
+                  height: 90.h,
+                  width: 90.w,
+                )
+                    : (viewModel.photo != null
+                    ? Image.network(
+                  viewModel.photo!,
+                  fit: BoxFit.cover,
+                  height: 90.h,
+                  width: 90.w,
+                )
+                    : Image.asset(AppImages.photo, fit: BoxFit.cover)),
+              ),
               Positioned(
                 bottom: 10.h,
                 right: 10.w,
                 child: GestureDetector(
                   onTap: () {
-                    setState(() {});
                     uploadPhoto(ImageSource.gallery);
                   },
                   child: Container(
@@ -94,29 +106,43 @@ class _CustomProfilePicState extends State<CustomProfilePic> {
       ),
     );
   }
+  Future<void> _loadInitialPhoto() async {
+    final currentPhotoUrl = viewModel.photo;
+    if (currentPhotoUrl != null) {
+      setState(() {
+        photo = File(currentPhotoUrl);
+      });
+    }
+  }
 
-  Future<void> uploadPhoto(ImageSource imageSource) async {
-    final pickedFile = await _picker.pickImage(source: imageSource);
+  Future<void> uploadPhoto(ImageSource source) async {
+    final pickedFile = await _picker.pickImage(source: source);
     if (pickedFile != null) {
       final originalPhoto = File(pickedFile.path);
-      /**************
-      final jpgImage = img.decodeImage(originalPhoto.readAsBytesSync());
-      if (jpgImage != null) {
-        // تحويل الصورة إلى PNG
-        final pngData = img.encodePng(jpgImage);
-
-        // حفظ الصورة المحولة في ملف مؤقت
-        final tempDir = await getTemporaryDirectory();
-        final pngPhotoPath = '${tempDir.path}/converted_image.png';
-        final pngPhoto = File(pngPhotoPath)..writeAsBytesSync(pngData);
-        ****************/
-      setState(() {
-        //  photo = pngPhoto;
-        viewModel.uploadPhoto(originalPhoto);
-        //  debugPrint('Uploaded PNG Photo: $photo');
-      });
+      try {
+        final resizedPhoto = await _resizeImage(originalPhoto);
+        setState(() {
+          photo = resizedPhoto;
+        });
+        viewModel.uploadPhoto(resizedPhoto);
+      } catch (e) {
+        debugPrint('Error uploading photo: $e');
+        AppDialogs.showErrorDialog(context: context, errorMassage: 'Error processing image');
+      }
     } else {
-      debugPrint('Error: Could not decode JPG image.');
+      debugPrint('No image selected.');
     }
+  }
+
+  Future<File> _resizeImage(File imageFile) async {
+    final jpgImage = img.decodeImage(imageFile.readAsBytesSync());
+    if (jpgImage == null) throw Exception('Failed to decode image');
+
+    final resizedImage = img.copyResize(jpgImage, width: 800);
+    final tempDir = await getTemporaryDirectory();
+    final resizedPath = '${tempDir.path}/resized_profile_pic.png';
+    final resizedFile = File(resizedPath)..writeAsBytesSync(img.encodePng(resizedImage));
+
+    return resizedFile;
   }
 }

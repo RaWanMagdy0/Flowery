@@ -97,19 +97,10 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                               width: 100.w,
                               height: 100.h,
                               child: ClipOval(
-                                child: isUserProfile
-                                    ? Image.network(
-                                        state.user?.photo ?? "",
-                                        fit: BoxFit.cover,
-                                      )
-                                    : Container(
-                                        color: AppColors.kLighterGrey,
-                                        child: Icon(
-                                          Icons.person,
-                                          size: 90.sp,
-                                          color: AppColors.kGray,
-                                        ),
-                                      ),
+                                child: Image.network(
+                                  state.user?.photo ?? "",
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
 

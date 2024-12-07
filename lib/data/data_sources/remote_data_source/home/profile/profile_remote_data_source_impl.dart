@@ -1,5 +1,8 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
+import 'package:flowery/core/api/api_const.dart';
+import 'package:flowery/core/api/dio/dio_factory.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../../core/api/api_result.dart';
 import '../../../../../core/api/execute_api_call.dart';
@@ -37,8 +40,21 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   Future<Result<String?>> uploadPhoto(File photo) async {
     return await executeApiCall<String?>(() async {
       var token = await _getToken();
-      var response = await apiManger.uploadPhoto(token, photo);
-      return response;
+
+      var photoFile = await MultipartFile.fromFile(photo.path);
+      var formData = FormData.fromMap({
+        "photo": photoFile,
+      });
+      final response = await Dio().put(
+        "${ApiConstants.baseUrl}${ApiConstants.uploadPhoto}",
+        data: formData,
+        options: Options(
+          headers: {
+            'Authorization': token,
+          },
+        ),
+      );
+      return response.data;
     });
   }
 

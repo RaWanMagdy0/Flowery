@@ -14,7 +14,14 @@ class OrderRepositoryImpl extends OrderRepository {
   OrderRepositoryImpl(this.dataSource);
 
   @override
-  Future<Result<OrderEntity?>> createOrder(CreateOrderRequest createOrderRequest) {
-    return dataSource.createOrder(createOrderRequest);
-  }
+  Future<Result<OrderEntity?>> createOrder(CreateOrderRequest createOrderRequest) async{
+    final response = await dataSource.createOrder(createOrderRequest);
+
+    switch (response) {
+      case Success():
+        return Success(data: response.data?.toEntity());
+
+      case Fail():
+        return Fail(exception: response.exception);
+    }  }
 }

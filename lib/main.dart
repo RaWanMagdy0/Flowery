@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
             child: MaterialApp(
               debugShowCheckedModeBanner: false,
               theme: AppTheme.appTheme,
-              initialRoute: PageRouteName.splash,
+              initialRoute: PageRouteName.logIn,
               onGenerateRoute: (settings) =>
                   AppRoutes.onGenerateRoute(settings),
             ));

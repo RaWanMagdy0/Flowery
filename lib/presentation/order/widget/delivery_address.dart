@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/routes/page_route_name.dart';
 import '../../../core/styles/colors/app_colors.dart';
 import '../../../core/styles/fonts/app_fonts.dart';
+import '../../../core/utils/const/checkout_page_string.dart';
 import '../../../core/utils/widget/custom_button.dart';
 
 class DeliveryAddress extends StatefulWidget {
@@ -28,7 +29,7 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
           Row(
             children: [
               Text(
-                "Delivery Address",
+                CheckoutStrings.deliveryAddress,
                 style: AppFonts.font18BlackWeight500,
               ),
             ],
@@ -37,7 +38,7 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
           InkWell(
             onTap: () {
               setState(() {
-                selectedAddress = "Home";
+                selectedAddress = CheckoutStrings.home;
               });
               widget.onChanged(selectedAddress);
             },
@@ -58,7 +59,7 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
                           children: [
                             Radio<String>(
                               activeColor: Colors.pink,
-                              value: "Home",
+                              value: CheckoutStrings.home,
                               groupValue: selectedAddress,
                               onChanged: (value) {
                                 setState(() {
@@ -68,7 +69,7 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
                               },
                             ),
                             Text(
-                              "Home",
+                              CheckoutStrings.home,
                               style: AppFonts.font16BlackWeight500,
                             ),
                           ],
@@ -105,7 +106,7 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
           InkWell(
             onTap: () {
               setState(() {
-                selectedAddress = "Office";
+                selectedAddress = CheckoutStrings.office;
               });
               widget.onChanged(selectedAddress);
             },
@@ -126,7 +127,7 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
                           children: [
                             Radio<String>(
                               activeColor: Colors.pink,
-                              value: "Office",
+                              value: CheckoutStrings.office,
                               groupValue: selectedAddress,
                               onChanged: (value) {
                                 setState(() {
@@ -136,7 +137,7 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
                               },
                             ),
                             Text(
-                              "Office",
+                              CheckoutStrings.office,
                               style: AppFonts.font16BlackWeight500,
                             ),
                           ],
@@ -185,7 +186,7 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
                   size: 25.sp,
                 ),
                 Text(
-                  "Add New",
+                  CheckoutStrings.addNew,
                   style: AppFonts.font14PinkWeight500,
                 )
               ],

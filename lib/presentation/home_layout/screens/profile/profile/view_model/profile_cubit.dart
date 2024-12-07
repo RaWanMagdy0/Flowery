@@ -17,9 +17,13 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
   final EditeProfileUseCase editeProfileUseCase;
   final UploadPhotoUseCase uploadPhotoUseCase;
   final LogoutUseCase logoutUseCase;
-  ProfileCubit(this.getLoggedUserInfoUseCase, this.editeProfileUseCase,
-      this.logoutUseCase, this.uploadPhotoUseCase)
-      : super(ProfileInitialState());
+
+  ProfileCubit(
+      this.getLoggedUserInfoUseCase,
+      this.editeProfileUseCase,
+      this.logoutUseCase,
+      this.uploadPhotoUseCase,
+      ) : super(ProfileInitialState());
 
   var formKey = GlobalKey<FormState>();
   TextEditingController firstNameController = TextEditingController();
@@ -28,18 +32,21 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
   TextEditingController phoneController = TextEditingController();
   String? gender;
   String? photo;
+
   Future<void> getLoggedUserInfo() async {
     emit(GetLoggedUserInfoLoadingState());
     var result = await getLoggedUserInfoUseCase.invoke();
+
     switch (result) {
       case Success<User?>():
-        emit(GetLoggedUserInfoSuccessState(user: result.data));
-        firstNameController.text = result.data?.firstName ?? '';
-        lastNameController.text = result.data?.lastName ?? '';
-        emailController.text = result.data?.email ?? '';
-        phoneController.text = result.data?.phone ?? '';
-        gender = result.data?.gender;
-        photo = result.data?.photo;
+        var user = result.data;
+        emit(GetLoggedUserInfoSuccessState(user: user));
+        firstNameController.text = user?.firstName ?? '';
+        lastNameController.text = user?.lastName ?? '';
+        emailController.text = user?.email ?? '';
+        phoneController.text = user?.phone ?? '';
+        gender = user?.gender;
+        photo = user?.photo;
         break;
       case Fail<User?>():
         emit(GetLoggedUserInfoErrorState(
@@ -47,6 +54,7 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
     }
   }
 
+  // Update user profile
   Future<void> editeProfile() async {
     EditeProfileRequestModel editeProfile = EditeProfileRequestModel(
       firstName: firstNameController.text,
@@ -55,6 +63,7 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
       phone: phoneController.text,
     );
     emit(EditProfileLoadingState());
+
     var result = await editeProfileUseCase.invoke(editeProfile);
     switch (result) {
       case Success<User?>():
@@ -72,13 +81,10 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
     }
   }
 
+  // Profile form validation
   bool isFormField = true;
   String titleAppBar() {
-    if (isFormField) {
-      return "Profile";
-    } else {
-      return "Update";
-    }
+    return isFormField ? "Profile" : "Update";
   }
 
   void changeFormField(bool isValid) {
@@ -86,21 +92,24 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
     isFormField = isValid;
   }
 
+  // Upload profile photo
   Future<void> uploadPhoto(File photo) async {
     emit(UploadPhotoLoadingState());
     var result = await uploadPhotoUseCase.invoke(photo);
+
     if (result is Success<String?>) {
       emit(UploadPhotoSuccessState(message: result.data));
       await getLoggedUserInfo();
     } else if (result is Fail<String?>) {
       emit(UploadPhotoErrorState(
           errorMessage: getErrorMassageFromException(result.exception)));
+      debugPrint("Upload failed: ${result.exception}");
     }
   }
 
+  // Logout the user
   Future<void> logout() async {
     final response = await logoutUseCase.invoke();
-
     switch (response) {
       case Success<String?>():
         emit(LogoutSuccessState(response.data));
