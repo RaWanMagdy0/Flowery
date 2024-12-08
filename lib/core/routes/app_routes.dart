@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../presentation/about_app/view/about_app_screen.dart';
 import '../../presentation/auth/forgot_password/view/widgets/email_verification_widget/email_verification.dart';
 import '../../presentation/auth/forgot_password/view/widgets/forgot_password_widget/forget_password_screen.dart';
 import '../../presentation/auth/forgot_password/view_model/forget_passwoed_cubit.dart';
@@ -22,6 +23,7 @@ import '../../presentation/home_layout/screens/profile/change_password/view_mode
 import '../../presentation/home_layout/screens/profile/profile/view/edit_profile_screen.dart';
 import '../../presentation/home_layout/screens/profile/profile/view/profile_main_screen.dart';
 import '../../presentation/home_layout/screens/profile/profile/view_model/profile_cubit.dart';
+import '../../presentation/terms_and_conditions/view/terms_and_conditions_screen.dart';
 import '../../splash/splash_screen.dart';
 import '../di/di.dart';
 import 'page_route_name.dart';
@@ -119,6 +121,11 @@ class AppRoutes {
           settings: setting,
         );
 
+      case PageRouteName.aboutApp:
+        return _handleMaterialPageRoute(widget: const AboutAppScreen());
+
+      case PageRouteName.termsConditions:
+        return _handleMaterialPageRoute(widget: const TermsAndConditionsScreen());
       case PageRouteName.occasion:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
