@@ -1,4 +1,4 @@
-
+import 'package:flowery/data/models/order/response/address_models/address_response_model.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../core/api/api_result.dart';
@@ -24,4 +24,8 @@ class OrderRepositoryImpl extends OrderRepository {
       case Fail():
         return Fail(exception: response.exception);
     }  }
+  Future<Result<OrderEntity?>> createOrder(
+      CreateOrderRequest createOrderRequest) {
+    return dataSource.createOrder(createOrderRequest);
+  }
 }

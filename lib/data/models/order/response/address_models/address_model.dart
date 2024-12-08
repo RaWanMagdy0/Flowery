@@ -1,3 +1,5 @@
+import '../../../../../domain/entities/address/saved_addresses_entity.dart';
+
 class AddressModel {
   final String? id;
   final String? street;
@@ -11,17 +13,30 @@ class AddressModel {
     this.city,
   });
 
-  factory AddressModel.fromJson(dynamic json) => AddressModel(
-        id: json['_id'],
-        street: json['street'],
-        phone: json['phone'],
-        city: json['city'],
-      );
+  factory AddressModel.fromJson(Map<String, dynamic> json) {
+    return AddressModel(
+      id: json['_id'],
+      street: json['street'],
+      phone: json['phone'],
+      city: json['city'],
+    );
+  }
 
-  Map<String, dynamic> toJson() => {
-        '_id': id,
-        'street': street,
-        'phone': phone,
-        'city': city,
-      };
+  Map<String, dynamic> toJson() {
+    return {
+      '_id': id,
+      'street': street,
+      'phone': phone,
+      'city': city,
+    };
+  }
+
+  SavedAddressesEntity toEntity() {
+    return SavedAddressesEntity(
+      id: id ?? "",
+      city: city ?? "",
+      street: street ?? "",
+      phone: phone ?? "",
+    );
+  }
 }

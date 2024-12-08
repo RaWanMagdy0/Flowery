@@ -1,3 +1,4 @@
+import 'package:flowery/presentation/addresses/saved_addresses/view/saved_addresses_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,6 +13,7 @@ import 'presentation/home_layout/screens/cart/view_model/cart_view_model.dart';
 void main() {
   configureDependencies();
   Bloc.observer = AppBlocObserver();
+
   runApp(const MyApp());
 }
 
