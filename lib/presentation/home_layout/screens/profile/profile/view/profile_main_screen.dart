@@ -149,7 +149,10 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                               leadingIcon: Icons.location_pin,
                               title: 'Saved address',
                               trailingIcon: Icons.arrow_forward_ios,
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, PageRouteName.savedAddresses);
+                              },
                             ),
 
                             // Options List

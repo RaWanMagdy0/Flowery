@@ -1,4 +1,6 @@
 import 'package:flowery/data/api/order_api/order_api_manager.dart';
+import 'package:flowery/data/models/order/response/address_models/address_model.dart';
+import 'package:flowery/data/models/order/response/address_models/address_response_model.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../core/api/api_result.dart';
@@ -9,7 +11,7 @@ import 'address_remote_data_source.dart';
 
 @Injectable(as: AddressRemoteDataSource)
 class AddressRemoteDataSourceImpl extends AddressRemoteDataSource {
-  OrderApiManger apiManger;
+  final OrderApiManger apiManger;
 
   AddressRemoteDataSourceImpl(this.apiManger);
 
@@ -29,5 +31,24 @@ class AddressRemoteDataSourceImpl extends AddressRemoteDataSource {
 
       return true;
     });
+  }
+
+  @override
+  Future<Result<List<AddressModel>>> getAllAddresses() async {
+    return await executeApiCall<List<AddressModel>>(() async {
+      var token = await _getToken();
+      final response = await apiManger.getAllAddresses(token);
+      return response.addresses ?? [];
+    });
+  }
+
+  @override
+  Future<Result<dynamic>> deleteAddress() async {
+    return await executeApiCall(
+      () async {
+        var token = await _getToken();
+        return await apiManger.deleteAddress(token);
+      },
+    );
   }
 }

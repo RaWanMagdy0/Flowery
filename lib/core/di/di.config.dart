@@ -66,6 +66,8 @@ import '../../domain/repository/home/occasions_repository.dart' as _i256;
 import '../../domain/repository/home/profile_repository.dart' as _i539;
 import '../../domain/repository/order/order_repository.dart' as _i460;
 import '../../domain/use_case/address/add_address_use_case.dart' as _i968;
+import '../../domain/use_case/address/delete_address_use_case.dart' as _i556;
+import '../../domain/use_case/address/saved_addresses_use_case.dart' as _i703;
 import '../../domain/use_case/auth/change_password_use_case.dart' as _i495;
 import '../../domain/use_case/auth/forgot_password_use_case.dart' as _i120;
 import '../../domain/use_case/auth/login_use_case.dart' as _i408;
@@ -98,6 +100,8 @@ import '../../domain/use_case/home/profile/get_logged_user_info_use_case.dart'
     as _i334;
 import '../../domain/use_case/home/profile/upload_photo_use_case.dart' as _i200;
 import '../../domain/use_case/order/create_order_use_case.dart' as _i513;
+import '../../presentation/addresses/saved_addresses/view_model/saved_addresses_view_model.dart'
+    as _i31;
 import '../../presentation/addresses/view_model/addresses_view_model.dart'
     as _i598;
 import '../../presentation/auth/forgot_password/view_model/forget_passwoed_cubit.dart'
@@ -225,6 +229,10 @@ extension GetItInjectableX on _i174.GetIt {
         dataSource: gh<_i893.AddressRemoteDataSource>()));
     gh.factory<_i968.AddAddressUseCase>(
         () => _i968.AddAddressUseCase(gh<_i175.AddressRepository>()));
+    gh.factory<_i703.SavedAddressesUseCase>(
+        () => _i703.SavedAddressesUseCase(gh<_i175.AddressRepository>()));
+    gh.factory<_i556.DeleteAddressUseCase>(
+        () => _i556.DeleteAddressUseCase(gh<_i175.AddressRepository>()));
     gh.factory<_i423.CategoriesViewModel>(() => _i423.CategoriesViewModel(
           gh<_i787.GetAllCategoriesUseCase>(),
           gh<_i283.CategoriesProductUseCase>(),
@@ -253,6 +261,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i960.RemoveProductFromCartUseCase(gh<_i1048.CartRepository>()));
     gh.factory<_i408.LogInUseCase>(
         () => _i408.LogInUseCase(gh<_i912.AuthRepository>()));
+    gh.factory<_i31.SavedAddressesViewModel>(() => _i31.SavedAddressesViewModel(
+          gh<_i703.SavedAddressesUseCase>(),
+          gh<_i556.DeleteAddressUseCase>(),
+        ));
     gh.factory<_i134.ProductDetailsCubit>(
         () => _i134.ProductDetailsCubit(gh<_i299.GetProductDetailsUseCase>()));
     gh.factory<_i351.ForgetPasswordCubit>(() => _i351.ForgetPasswordCubit(

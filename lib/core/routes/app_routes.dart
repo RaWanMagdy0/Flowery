@@ -1,3 +1,5 @@
+import 'package:flowery/presentation/addresses/saved_addresses/view/saved_addresses_screen.dart';
+import 'package:flowery/presentation/addresses/saved_addresses/view_model/saved_addresses_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -143,6 +145,14 @@ class AppRoutes {
           builder: (context) => BlocProvider(
             create: (context) => getIt<AddressesCubit>(),
             child: AddAndEditUserAddressScreen(),
+          ),
+        );
+
+      case PageRouteName.savedAddresses:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<SavedAddressesViewModel>(),
+            child: SavedAddressScreen(),
           ),
         );
 
