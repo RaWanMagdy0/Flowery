@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../presentation/about_app/view/about_app_screen.dart';
 import '../../presentation/auth/forgot_password/view/widgets/email_verification_widget/email_verification.dart';
 import '../../presentation/auth/forgot_password/view/widgets/forgot_password_widget/forget_password_screen.dart';
 import '../../presentation/auth/forgot_password/view_model/forget_passwoed_cubit.dart';
@@ -118,6 +119,9 @@ class AppRoutes {
           ),
           settings: setting,
         );
+
+      case PageRouteName.aboutApp:
+        return _handleMaterialPageRoute(widget: const AboutAppScreen());
 
       case PageRouteName.occasion:
         return MaterialPageRoute(
