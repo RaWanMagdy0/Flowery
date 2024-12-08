@@ -18,7 +18,7 @@ class AddressRepositoryImpl extends AddressRepository {
   Future<Result<bool>> addAddress(AddAddressRequestBody address) async {
     return await dataSource.addAddress(address);
   }
-
+/**********************
   @override
   Future<Result<List<SavedAddressesEntity>>> getAllAddresses() async {
     final result = await dataSource.getAllAddresses();
@@ -33,6 +33,20 @@ class AddressRepositoryImpl extends AddressRepository {
       return Fail();
     }
   }
+******************/
+  @override
+  Future<Result<List<SavedAddressesEntity>>> getAllAddresses() async {
+    final result = await dataSource.getAllAddresses();
+
+    switch (result) {
+      case Success():
+        final entities = result.data?.map((model) => model.toEntity()).toList();
+        return Success(data: entities);
+      case Fail():
+        return Fail(exception: result.exception);
+    }
+  }
+
 
   @override
   Future<Result<dynamic>> deleteAddress() async {

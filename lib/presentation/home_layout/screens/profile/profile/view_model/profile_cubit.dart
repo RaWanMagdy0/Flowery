@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../../../core/api/api_result.dart';
 import '../../../../../../core/base/base_view_model.dart';
@@ -93,7 +94,7 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
   }
 
   // Upload profile photo
-  Future<void> uploadPhoto(File photo) async {
+  Future<void> uploadPhoto(XFile photo) async {
     emit(UploadPhotoLoadingState());
     var result = await uploadPhotoUseCase.invoke(photo);
 

@@ -135,7 +135,7 @@ class AppRoutes {
       case PageRouteName.checkout:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => getIt<AddressesCubit>(),
+            create: (context) => getIt<SavedAddressesViewModel>(),
             child: CheckoutOrderScreen(),
           ),
         );

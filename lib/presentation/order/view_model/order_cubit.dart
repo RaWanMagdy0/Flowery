@@ -5,6 +5,7 @@ import '../../../core/api/api_result.dart';
 import '../../../core/base/base_view_model.dart';
 import '../../../data/models/order/request/create_order_request/create_order_request.dart';
 import '../../../domain/entities/address/create_order/order_entity.dart';
+import '../../../domain/entities/address/saved_addresses_entity.dart';
 import '../../../domain/use_case/order/create_order_use_case.dart';
 import 'order_state.dart';
 
@@ -12,10 +13,12 @@ import 'order_state.dart';
 class OrderCubit extends BaseViewModel<OrderState> {
   OrderEntity orderEntity;
   CreateOrderUseCase useCase;
+  SavedAddressesEntity? selectedAddress;
   OrderCubit(this.useCase, this.orderEntity) : super(OrderInitialState());
 
   Future<void> createOrder(CreateOrderRequest createOrderRequest) async {
     emit(CheckoutLoadingState());
+
     var result = await useCase.invoke(createOrderRequest);
     switch (result) {
       case Success<OrderEntity?>():

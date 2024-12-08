@@ -93,7 +93,7 @@ class _TotalPriceAndCheckoutButtonState
                 CustomButton(
                   onPressed: () {
                     Navigator.pushNamed(
-                        context, PageRouteName.addAndEditUserAddress);
+                        context, PageRouteName.checkout);
                   },
                   text: 'Checkout',
                 ),

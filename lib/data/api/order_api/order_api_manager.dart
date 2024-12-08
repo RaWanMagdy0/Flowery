@@ -5,7 +5,8 @@ import 'package:retrofit/retrofit.dart';
 import '../../../core/api/api_const.dart';
 import '../../models/order/request/address_requests/add_address_request_body_model.dart';
 import '../../models/order/request/create_order_request/create_order_request.dart';
-import '../../models/order/response/create_order_response/create_order_model.dart';
+import '../../models/order/response/address_models/address_response_model.dart';
+import '../../models/order/response/create_order_response/order_model.dart';
 part 'order_api_manager.g.dart';
 
 

@@ -11,17 +11,19 @@ import '../view_model/saved_addresses_view_model.dart';
 import '../view_model/saved_addresses_states.dart';
 
 class SavedAddressScreen extends StatefulWidget {
-  const SavedAddressScreen({super.key});
-
+   SavedAddressScreen({super.key});
   @override
   State<SavedAddressScreen> createState() => _SavedAddressScreenState();
 }
 
 class _SavedAddressScreenState extends State<SavedAddressScreen> {
+  late SavedAddressesViewModel viewModel;
+
   @override
   void initState() {
     super.initState();
-    context.read<SavedAddressesViewModel>().getAllAddresses();
+   viewModel=  context.read<SavedAddressesViewModel>();
+   viewModel.getAllAddresses();
   }
 
   @override
@@ -46,6 +48,7 @@ class _SavedAddressScreenState extends State<SavedAddressScreen> {
             Expanded(
               child:
                   BlocConsumer<SavedAddressesViewModel, SavedAddressesStates>(
+                bloc: viewModel,
                 listener: (context, state) {
                   if (state is SavedAddressesFailure) {
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -61,7 +64,7 @@ class _SavedAddressScreenState extends State<SavedAddressScreen> {
                   if (state is SavedAddressesLoading) {
                     return const Center(child: CircularProgressIndicator());
                   } else if (state is SavedAddressesSuccess) {
-                    final addresses = (state).addresses;
+                    final addresses = state.addresses;
                     if (addresses.isEmpty) {
                       return const Center(child: Text("No saved addresses."));
                     }
@@ -81,8 +84,8 @@ class _SavedAddressScreenState extends State<SavedAddressScreen> {
               ),
             ),
             SavedAddressesButton(
-              onPressed: () {
-                Navigator.pushNamed(
+              onPressed: () async {
+                await Navigator.pushNamed(
                     context, PageRouteName.addAndEditUserAddress);
               },
             ),

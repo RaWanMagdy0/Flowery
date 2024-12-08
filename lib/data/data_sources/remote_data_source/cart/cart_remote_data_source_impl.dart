@@ -25,7 +25,6 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
             TokenException('Token is empty, please login and try again');
         throw tokenException;
       }
-
       token = 'Bearer $token';
 
       return await apiManager.getCartProducts(token);

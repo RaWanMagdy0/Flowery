@@ -24,8 +24,4 @@ class OrderRepositoryImpl extends OrderRepository {
       case Fail():
         return Fail(exception: response.exception);
     }  }
-  Future<Result<OrderEntity?>> createOrder(
-      CreateOrderRequest createOrderRequest) {
-    return dataSource.createOrder(createOrderRequest);
-  }
 }

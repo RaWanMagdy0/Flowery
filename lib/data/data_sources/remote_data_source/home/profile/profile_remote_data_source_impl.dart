@@ -3,7 +3,10 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flowery/core/api/api_const.dart';
 import 'package:flowery/core/api/dio/dio_factory.dart';
+import 'package:flutter/foundation.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../../../../../core/api/api_result.dart';
 import '../../../../../core/api/execute_api_call.dart';
 import '../../../../../core/local/token_manger.dart';
@@ -37,15 +40,27 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   }
 
   @override
-  Future<Result<String?>> uploadPhoto(File photo) async {
+  Future<Result<String?>> uploadPhoto(XFile photo) async {
     return await executeApiCall<String?>(() async {
       var token = await _getToken();
-
       var photoFile = await MultipartFile.fromFile(photo.path);
+      print(photo.path);
       var formData = FormData.fromMap({
-        "photo": photoFile,
+        "photo": [photoFile],
       });
-      final response = await Dio().put(
+      final dio = Dio()
+        ..interceptors.addAll(
+          [
+            !kReleaseMode
+                ? PrettyDioLogger(
+                    requestBody: true,
+                    requestHeader: true,
+                    responseHeader: true,
+                  )
+                : const Interceptor(),
+          ],
+        );
+      final response = await dio.put(
         "${ApiConstants.baseUrl}${ApiConstants.uploadPhoto}",
         data: formData,
         options: Options(

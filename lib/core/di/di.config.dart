@@ -229,10 +229,10 @@ extension GetItInjectableX on _i174.GetIt {
         dataSource: gh<_i893.AddressRemoteDataSource>()));
     gh.factory<_i968.AddAddressUseCase>(
         () => _i968.AddAddressUseCase(gh<_i175.AddressRepository>()));
-    gh.factory<_i703.SavedAddressesUseCase>(
-        () => _i703.SavedAddressesUseCase(gh<_i175.AddressRepository>()));
     gh.factory<_i556.DeleteAddressUseCase>(
         () => _i556.DeleteAddressUseCase(gh<_i175.AddressRepository>()));
+    gh.factory<_i703.SavedAddressesUseCase>(
+        () => _i703.SavedAddressesUseCase(gh<_i175.AddressRepository>()));
     gh.factory<_i423.CategoriesViewModel>(() => _i423.CategoriesViewModel(
           gh<_i787.GetAllCategoriesUseCase>(),
           gh<_i283.CategoriesProductUseCase>(),

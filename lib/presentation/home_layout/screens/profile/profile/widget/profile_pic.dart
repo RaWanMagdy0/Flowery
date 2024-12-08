@@ -118,31 +118,33 @@ class _CustomProfilePicState extends State<CustomProfilePic> {
   Future<void> uploadPhoto(ImageSource source) async {
     final pickedFile = await _picker.pickImage(source: source);
     if (pickedFile != null) {
-      final originalPhoto = File(pickedFile.path);
-      try {
-        final resizedPhoto = await _resizeImage(originalPhoto);
-        setState(() {
+      final originalPhoto = XFile(pickedFile.path);
+      viewModel.uploadPhoto(originalPhoto);
+
+      /*********************
+          try {
+          final resizedPhoto = await _resizeImage(originalPhoto);
+          setState(() {
           photo = resizedPhoto;
-        });
-        viewModel.uploadPhoto(resizedPhoto);
-      } catch (e) {
-        debugPrint('Error uploading photo: $e');
-        AppDialogs.showErrorDialog(context: context, errorMassage: 'Error processing image');
-      }
-    } else {
-      debugPrint('No image selected.');
-    }
-  }
+          });
+          } catch (e) {
+          debugPrint('Error uploading photo: $e');
+          AppDialogs.showErrorDialog(context: context, errorMassage: 'Error processing image');
+          }
+          } else {
+          debugPrint('No image selected.');
+          }
+          }
+          Future<File> _resizeImage(File imageFile) async {
+          final jpgImage = img.decodeImage(imageFile.readAsBytesSync());
+          if (jpgImage == null) throw Exception('Failed to decode image');
 
-  Future<File> _resizeImage(File imageFile) async {
-    final jpgImage = img.decodeImage(imageFile.readAsBytesSync());
-    if (jpgImage == null) throw Exception('Failed to decode image');
+          final resizedImage = img.copyResize(jpgImage, width: 800);
+          final tempDir = await getTemporaryDirectory();
+          final resizedPath = '${tempDir.path}/resized_profile_pic.png';
+          final resizedFile = XFile(resizedPath)..writeAsBytesSync(img.encodePng(resizedImage));
 
-    final resizedImage = img.copyResize(jpgImage, width: 800);
-    final tempDir = await getTemporaryDirectory();
-    final resizedPath = '${tempDir.path}/resized_profile_pic.png';
-    final resizedFile = File(resizedPath)..writeAsBytesSync(img.encodePng(resizedImage));
-
-    return resizedFile;
-  }
-}
+          return resizedFile;
+          }
+       *****************/
+    }}}
