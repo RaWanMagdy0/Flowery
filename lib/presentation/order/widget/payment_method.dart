@@ -1,8 +1,6 @@
 import 'package:flowery/core/utils/const/checkout_page_string.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../core/styles/colors/app_colors.dart';
 import '../../../core/styles/fonts/app_fonts.dart';
 

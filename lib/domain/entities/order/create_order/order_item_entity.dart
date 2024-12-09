@@ -1,5 +1,5 @@
-class OrderItems {
-  OrderItems({
+class OrderItemEntity {
+  OrderItemEntity({
       this.product, 
       this.price, 
       this.quantity, 
@@ -9,6 +9,5 @@ class OrderItems {
   int? price;
   int? quantity;
   String? id;
-
 
 }

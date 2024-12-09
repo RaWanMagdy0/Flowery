@@ -1,8 +1,6 @@
-import 'package:flowery/presentation/addresses/saved_addresses/view/saved_addresses_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'core/di/di.dart';
 import 'core/routes/app_routes.dart';
 import 'core/routes/page_route_name.dart';

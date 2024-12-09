@@ -1,4 +1,5 @@
-import '../../../../../domain/entities/address/create_order/order_item.dart';
+
+import 'package:flowery/domain/entities/order/create_order/order_item_entity.dart';
 
 class OrderItemModel {
   OrderItemModel({
@@ -27,8 +28,8 @@ class OrderItemModel {
     return map;
   }
 
-  OrderItems toOrderItems() {
-    return OrderItems(
+  OrderItemEntity toOrderItems() {
+    return OrderItemEntity(
       id: id,
       product: id,
       price: price,

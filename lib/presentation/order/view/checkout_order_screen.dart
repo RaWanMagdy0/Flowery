@@ -9,7 +9,8 @@ import '../widget/payment_method.dart';
 import '../widget/total.dart';
 
 class CheckoutOrderScreen extends StatelessWidget {
-  const CheckoutOrderScreen({super.key});
+
+   CheckoutOrderScreen({super.key});
   static const String routeName = "CheckoutScreen";
 
   @override
@@ -57,7 +58,7 @@ class CheckoutOrderScreen extends StatelessWidget {
           Container(
             color: Colors.white,
             padding: EdgeInsets.all(8.0),
-            child: Total(),
+            child: Total(totalInfo: {},),
           ),
         ],
       ),

@@ -5,7 +5,6 @@ import 'package:flowery/presentation/addresses/saved_addresses/view_model/saved_
 import 'package:injectable/injectable.dart';
 
 import '../../../../core/api/api_result.dart';
-import '../../../../domain/entities/address/saved_addresses_entity.dart';
 
 @injectable
 class SavedAddressesViewModel extends BaseViewModel<SavedAddressesStates> {

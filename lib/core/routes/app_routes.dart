@@ -1,5 +1,6 @@
 import 'package:flowery/presentation/addresses/saved_addresses/view/saved_addresses_screen.dart';
 import 'package:flowery/presentation/addresses/saved_addresses/view_model/saved_addresses_view_model.dart';
+import 'package:flowery/presentation/order/view_model/order_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -92,7 +93,6 @@ class AppRoutes {
 
       case PageRouteName.productDetails:
         final String productId = setting.arguments as String;
-
         return MaterialPageRoute(
           builder: (context) => ProductDetails(productId),
           settings: setting,
@@ -135,7 +135,7 @@ class AppRoutes {
       case PageRouteName.checkout:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => getIt<SavedAddressesViewModel>(),
+            create: (context) => getIt<OrderCubit>(),
             child: CheckoutOrderScreen(),
           ),
         );
