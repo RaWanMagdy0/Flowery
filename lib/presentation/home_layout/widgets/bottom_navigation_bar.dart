@@ -24,19 +24,23 @@ class BottomNavBar extends StatelessWidget {
       onTap: onTap,
       items: [
         BottomNavigationBarItem(
-          icon: const ImageIcon(AssetImage(AppImages.homeIcon)),
+          icon: const ImageIcon(AssetImage(AppImages.homeUnselectedIcon)),
+          activeIcon: ImageIcon(AssetImage(AppImages.homeSelectedIcon)),
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: ImageIcon(AssetImage(AppImages.categoryIcon)),
+          icon: ImageIcon(AssetImage(AppImages.categoryUnselectedIcon)),
+          activeIcon: ImageIcon(AssetImage(AppImages.categorySelectedIcon)),
           label: 'Categories',
         ),
         BottomNavigationBarItem(
-          icon: ImageIcon(AssetImage(AppImages.shoppingIcon)),
+          icon: ImageIcon(AssetImage(AppImages.cartUnselectedIcon)),
+          activeIcon: ImageIcon(AssetImage(AppImages.cartSelectedIcon)),
           label: 'Cart',
         ),
         BottomNavigationBarItem(
-          icon: ImageIcon(AssetImage(AppImages.personIcon)),
+          icon: ImageIcon(AssetImage(AppImages.profileUnselectedIcon)),
+          activeIcon: ImageIcon(AssetImage(AppImages.profileSelectedIcon)),
           label: 'Profile',
         ),
       ],

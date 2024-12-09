@@ -6,6 +6,7 @@ import 'package:svg_flutter/svg.dart';
 import '../../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../core/styles/images/app_images.dart';
+import '../../../../../../core/utils/widget/custom_cached_network_image.dart';
 import '../../../../../../domain/entities/cart/cart_product_entity.dart';
 import '../../view_model/cart_view_model.dart';
 
@@ -32,10 +33,11 @@ class CartProductItem extends StatelessWidget {
               Flexible(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.r),
-                  child: Image.network(
-                    cartProduct.product?.imgCover ?? '',
+                  child: CustomCachedNetworkImage(
+                    imageUrl: cartProduct.product?.imgCover,
                     width: 96.w,
                     height: 100.h,
+                    shimmerRadiusValue: 8.r,
                     fit: BoxFit.cover,
                   ),
                 ),

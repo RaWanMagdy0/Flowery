@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../../../core/styles/fonts/app_fonts.dart';
+import '../../../../../../../core/utils/widget/custom_cached_network_image.dart';
 import '../../../../../../../domain/entities/home/home_category_entity.dart';
 
 class HomeCategoryItem extends StatelessWidget {
@@ -27,8 +28,8 @@ class HomeCategoryItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(20.r),
             color: AppColors.kBabyPink,
           ),
-          child: Image.network(
-            categoryModel.imageUrl ?? '',
+          child: CustomCachedNetworkImage(
+            imageUrl: categoryModel.imageUrl,
             width: 24.w,
             height: 24.h,
           ),

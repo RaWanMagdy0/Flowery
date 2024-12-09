@@ -1,3 +1,4 @@
+import 'package:flowery/core/utils/widget/custom_cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -21,10 +22,11 @@ class HomeBestSellerItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.network(
-              productModel.imageUrl ?? '',
+            CustomCachedNetworkImage(
+              imageUrl: productModel.imageUrl,
               width: 131.w,
               height: 151.h,
+              shimmerRadiusValue: 0,
               fit: BoxFit.cover,
             ),
             8.verticalSpace,

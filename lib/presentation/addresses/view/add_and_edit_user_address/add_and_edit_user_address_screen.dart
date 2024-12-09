@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/utils/const/add_address_string.dart';
 import '../../../../core/utils/const/app_string.dart';
 import '../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../core/utils/functions/validators/validators.dart';
@@ -64,7 +65,7 @@ class _AddAndEditUserAddressScreenState
       listener: (context, state) => _handelStateChange(state),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Address"),
+          title: const Text(AddAddressString.address),
           forceMaterialTransparency: true,
         ),
         body: Padding(
@@ -80,11 +81,11 @@ class _AddAndEditUserAddressScreenState
                   24.verticalSpace,
                   CustomTextFormField(
                     controller: _addressController,
-                    hintText: "Enter the address",
-                    labelText: "Address",
+                    hintText: AddAddressString.enterAddress,
+                    labelText: AddAddressString.address,
                     keyBordType: TextInputType.text,
                     validator: (value) => Validators.validateNotEmpty(
-                      title: "Address",
+                      title: AddAddressString.address,
                       value: value,
                     ),
                   ),
@@ -100,8 +101,8 @@ class _AddAndEditUserAddressScreenState
                   24.verticalSpace,
                   CustomTextFormField(
                     controller: _recipientNameController,
-                    hintText: "Enter the recipient name",
-                    labelText: "Recipient Name",
+                    hintText: AddAddressString.enterRecipientName,
+                    labelText: AddAddressString.recipientName,
                     keyBordType: TextInputType.text,
                     // validator: (value) => Validators.validateNotEmpty(
                     //   title: "Recipient Name",
@@ -113,10 +114,10 @@ class _AddAndEditUserAddressScreenState
                     children: [
                       Expanded(
                         child: CustomDropDown(
-                          hintText: "City",
-                          labelText: "City",
+                          hintText: AddAddressString.city,
+                          labelText: AddAddressString.city,
                           validator: (value) => Validators.validateNotEmpty(
-                            title: "City",
+                            title: AddAddressString.city,
                             value: value,
                           ),
                           data: ["Cairo", "Alexandria", "Giza"],
@@ -128,8 +129,8 @@ class _AddAndEditUserAddressScreenState
                       16.horizontalSpace,
                       Expanded(
                         child: CustomDropDown(
-                          hintText: "Area",
-                          labelText: "Area",
+                          hintText: AddAddressString.area,
+                          labelText: AddAddressString.area,
                           data: ["Nasr City", "Maadi", "Heliopolis"],
                         ),
                       ),
@@ -138,7 +139,7 @@ class _AddAndEditUserAddressScreenState
                   35.verticalSpace,
                   CustomButton(
                     onPressed: addAddress,
-                    text: "Save address",
+                    text: AddAddressString.saveAddress,
                   ),
                   16.verticalSpace,
                 ],
@@ -156,7 +157,7 @@ class _AddAndEditUserAddressScreenState
 
       AppDialogs.showSuccessDialog(
         context: context,
-        message: "Address Added Successfully.",
+        message: AddAddressString.addressAddedSuccess,
         whenAnimationFinished: () {
           // todo: call get all adresses function
           Navigator.pop(context);

@@ -1,17 +1,18 @@
-import '../../../../../../core/routes/page_route_name.dart';
-import '../../../../../../core/styles/fonts/app_fonts.dart';
-import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
-import '../../../../../../core/utils/widget/custom_list_tile.dart';
-import '../../../../../../core/utils/widget/custom_switch_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../../core/di/di.dart';
+import '../../../../../../core/routes/page_route_name.dart';
 import '../../../../../../core/styles/colors/app_colors.dart';
+import '../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../core/styles/images/app_images.dart';
+import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../../../core/utils/widget/custom_button.dart';
+import '../../../../../../core/utils/widget/custom_cached_network_image.dart';
+import '../../../../../../core/utils/widget/custom_list_tile.dart';
+import '../../../../../../core/utils/widget/custom_switch_tile.dart';
 import '../../../cart/view_model/cart_view_model.dart';
 import '../view_model/profile_cubit.dart';
 import '../view_model/profile_state.dart';
@@ -98,8 +99,9 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                               height: 100.h,
                               child: ClipOval(
                                 child: isUserProfile
-                                    ? Image.network(
-                                        state.user?.photo ?? "",
+                                    ? CustomCachedNetworkImage(
+                                        imageUrl: state.user?.photo,
+                                        shimmerRadiusValue: 50.r,
                                         fit: BoxFit.cover,
                                       )
                                     : Container(
@@ -112,7 +114,6 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                                       ),
                               ),
                             ),
-
                             10.verticalSpace,
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,

@@ -9,9 +9,10 @@ import 'core/theme/app_theme.dart';
 import 'core/utils/bloc_observer/app_bloc_observer.dart';
 import 'presentation/home_layout/screens/cart/view_model/cart_view_model.dart';
 
-void main() {
+void main() async {
   configureDependencies();
   Bloc.observer = AppBlocObserver();
+  await ScreenUtil.ensureScreenSize();
   runApp(const MyApp());
 }
 

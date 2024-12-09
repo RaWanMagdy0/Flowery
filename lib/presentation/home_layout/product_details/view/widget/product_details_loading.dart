@@ -13,6 +13,7 @@ class ProductDetailsLoading extends StatelessWidget {
         ShimmerLoadingWidget(
           width: 1.sw,
           height: 1.sh / 2,
+          borderRadius: 0,
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
