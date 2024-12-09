@@ -13,6 +13,7 @@ import '../../../../../../core/utils/widget/custom_button.dart';
 import '../../../../../../core/utils/widget/custom_cached_network_image.dart';
 import '../../../../../../core/utils/widget/custom_list_tile.dart';
 import '../../../../../../core/utils/widget/custom_switch_tile.dart';
+import '../../../../../about_app/view/about_app_screen.dart';
 import '../../../cart/view_model/cart_view_model.dart';
 import '../view_model/profile_cubit.dart';
 import '../view_model/profile_state.dart';
@@ -182,12 +183,17 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                             CustomListTile(
                               title: 'About us',
                               trailingIcon: Icons.arrow_forward_ios,
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.pushNamed(context, PageRouteName.aboutApp);
+
+                              },
                             ),
                             CustomListTile(
                               title: 'Terms & conditions',
                               trailingIcon: Icons.arrow_forward_ios,
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.pushNamed(context, PageRouteName.termsConditions);
+                              },
                             ),
                             const SizedBox(height: 16),
                             const Divider(thickness: 1),

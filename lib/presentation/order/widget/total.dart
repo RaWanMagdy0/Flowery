@@ -15,8 +15,7 @@ import '../../../data/models/order/request/create_order_request/shipping_address
 import '../../home_layout/screens/cart/view_model/cart_view_model.dart';
 
 class Total extends StatefulWidget {
-  final Map<String, dynamic> totalInfo;
-  Total({super.key, required this.totalInfo});
+  Total({super.key});
   @override
   State<Total> createState() => _TotalState();
 }

@@ -58,7 +58,7 @@ class CheckoutOrderScreen extends StatelessWidget {
           Container(
             color: Colors.white,
             padding: EdgeInsets.all(8.0),
-            child: Total(totalInfo: {},),
+            child: Total(),
           ),
         ],
       ),
