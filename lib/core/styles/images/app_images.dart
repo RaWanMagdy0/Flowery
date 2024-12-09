@@ -7,6 +7,9 @@ class AppImages {
       "assets/animations/flowery_error_animation.json";
   static const pinkDoneAnimation =
       "assets/animations/flowery_success_animation.json";
+  static const cactusAnimation =
+      "assets/animations/cactus.json";
+
   static const emptyCart = "assets/animations/empty_cart.json";
   static const loginCart = "assets/animations/profile_animation.json";
 

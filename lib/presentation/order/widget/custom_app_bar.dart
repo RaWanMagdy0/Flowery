@@ -1,3 +1,5 @@
+import 'package:flowery/core/utils/const/checkout_page_string.dart';
+
 import '../../../core/styles/fonts/app_fonts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +20,7 @@ class CustomAppBar extends StatelessWidget {
               Icon(Icons.arrow_back_ios_rounded),
               10.horizontalSpace,
               Text(
-                "Checkout",
+                CheckoutStrings.checkout,
                 style: AppFonts.font20BlackWeight700
                     .copyWith(fontWeight: FontWeight.w500),
               )
@@ -29,11 +31,11 @@ class CustomAppBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Delivery time",
+               CheckoutStrings.deliveryTime,
                 style: AppFonts.font18BlackWeight500,
               ),
               Text(
-                "Schedule",
+                CheckoutStrings.schedule,
                 style: AppFonts.font12PinkWeight600.copyWith(fontSize: 18.sp),
               ),
             ],
@@ -42,7 +44,8 @@ class CustomAppBar extends StatelessWidget {
           Row(
             children: [
               Row(
-                children: [Icon(Icons.access_time_rounded), Text(" instant,")],
+                children: [Icon(Icons.access_time_rounded),
+                  Text(" instant,")],
               ),
               Text(
                 "Arrive by 03 Sep 2024 , 11:00 AM",

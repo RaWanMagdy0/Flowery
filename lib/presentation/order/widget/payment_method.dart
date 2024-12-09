@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flowery/core/utils/const/checkout_page_string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../core/styles/colors/app_colors.dart';
 import '../../../core/styles/fonts/app_fonts.dart';
 
@@ -15,7 +14,7 @@ class PaymentMethod extends StatefulWidget {
 }
 
 class _PaymentMethodState extends State<PaymentMethod> {
-  String? selectedPayment="Cash on Delivery";
+  String? selectedPayment=CheckoutStrings.cashOnDelivery;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
           Row(
             children: [
               Text(
-                "Payment Method ",
+                CheckoutStrings.paymentMethod,
                 style: AppFonts.font18BlackWeight500,
               ),
             ],
@@ -36,7 +35,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
           InkWell(
             onTap: () {
               setState(() {
-                selectedPayment = "Cash on Delivery";
+                selectedPayment = CheckoutStrings.cashOnDelivery;
               });
               widget.onChanged(selectedPayment);
             },
@@ -51,12 +50,12 @@ class _PaymentMethodState extends State<PaymentMethod> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Cash on Delivery",
+                      CheckoutStrings.cashOnDelivery,
                       style: AppFonts.font16BlackWeight500,
                     ),
                     Radio<String>(
                       activeColor: Colors.pink,
-                      value: "Cash on Delivery",
+                      value: CheckoutStrings.cashOnDelivery,
                       groupValue: selectedPayment,
                       onChanged: (value) {
                         setState(() {
@@ -83,12 +82,12 @@ class _PaymentMethodState extends State<PaymentMethod> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Credit Card",
+                    CheckoutStrings.creditCard,
                     style: AppFonts.font16BlackWeight500,
                   ),
                   Radio<String>(
                       activeColor: AppColors.kGray,
-                      value: "Credit Card",
+                      value: CheckoutStrings.creditCard,
                       groupValue: null,
                       onChanged: (value) {}),
                 ],

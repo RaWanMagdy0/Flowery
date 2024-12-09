@@ -159,7 +159,6 @@ class _AddAndEditUserAddressScreenState
         context: context,
         message: AddAddressString.addressAddedSuccess,
         whenAnimationFinished: () {
-          // todo: call get all adresses function
           Navigator.pop(context);
         },
       );

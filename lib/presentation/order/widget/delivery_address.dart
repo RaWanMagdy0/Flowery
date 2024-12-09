@@ -1,10 +1,16 @@
+import 'package:flowery/presentation/addresses/saved_addresses/view_model/saved_addresses_view_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import '../../../core/di/di.dart';
 import '../../../core/routes/page_route_name.dart';
 import '../../../core/styles/colors/app_colors.dart';
 import '../../../core/styles/fonts/app_fonts.dart';
+import '../../../core/utils/const/checkout_page_string.dart';
 import '../../../core/utils/widget/custom_button.dart';
+import '../../addresses/saved_addresses/view_model/saved_addresses_states.dart';
+import 'delivery_address_card.dart';
 
 class DeliveryAddress extends StatefulWidget {
   final ValueChanged<String?> onChanged;
@@ -17,183 +23,95 @@ class DeliveryAddress extends StatefulWidget {
 
 class _DeliveryAddressState extends State<DeliveryAddress> {
   String? selectedAddress;
+  late SavedAddressesViewModel viewModel;
+
+  @override
+  void initState() {
+    super.initState();
+    viewModel = getIt.get<SavedAddressesViewModel>();
+    viewModel.getAllAddresses();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          20.verticalSpace,
-          Row(
+    return BlocBuilder<SavedAddressesViewModel, SavedAddressesStates>(
+      bloc: viewModel,
+      builder: (context, state) {
+        if (state is SavedAddressesLoading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is SavedAddressesFailure) {
+          return const Center(child: Text("Failed to load addresses."));
+        } else if (state is SavedAddressesSuccess) {
+          final addresses = state.addresses;
+          if (addresses.isEmpty) {
+            return const Center(child: Text("No saved addresses."));
+          }
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Delivery Address",
-                style: AppFonts.font18BlackWeight500,
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  CheckoutStrings.deliveryAddress,
+                  style: AppFonts.font18BlackWeight500,
+                ),
               ),
+              Flexible(
+                fit: FlexFit.loose,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: addresses.length,
+                  itemBuilder: (context, index) {
+                    final address = addresses[index];
+                    final addressId = "${address.city}-${address.street}";
+                    return DeliveryAddressCard(
+                      city: address.city,
+                      street: address.street,
+                      onChanged: (String? value) {
+                        setState(() {
+                          selectedAddress = value;
+                        });
+                        widget.onChanged(selectedAddress);
+                      },
+                      selectedAddress: selectedAddress,
+                      addressId: addressId,
+                    );
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CustomButton(
+                  color: AppColors.kWhite,
+                  borderColor: AppColors.kLightGrey,
+                  onPressed: () async {
+                    await Navigator.pushNamed(
+                        context, PageRouteName.addAndEditUserAddress);
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.add,
+                        color: AppColors.kPink,
+                        size: 25.sp,
+                      ),
+                      Text(
+                        CheckoutStrings.addNew,
+                        style: AppFonts.font14PinkWeight500,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 15),
             ],
-          ),
-          10.verticalSpace,
-          InkWell(
-            onTap: () {
-              setState(() {
-                selectedAddress = "Home";
-              });
-              widget.onChanged(selectedAddress);
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.r),
-                border: Border.all(color: AppColors.kLighterGrey),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Radio<String>(
-                              activeColor: Colors.pink,
-                              value: "Home",
-                              groupValue: selectedAddress,
-                              onChanged: (value) {
-                                setState(() {
-                                  selectedAddress = value;
-                                });
-                                widget.onChanged(value);
-                              },
-                            ),
-                            Text(
-                              "Home",
-                              style: AppFonts.font16BlackWeight500,
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "2xvp+xc-sheikh zayed",
-                              style: AppFonts.font13BlackWeight400
-                                  .copyWith(color: AppColors.kGray),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.edit_outlined,
-                              color: AppColors.kGray,
-                            ),
-                          ],
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-          10.verticalSpace,
-          InkWell(
-            onTap: () {
-              setState(() {
-                selectedAddress = "Office";
-              });
-              widget.onChanged(selectedAddress);
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15.r),
-                border: Border.all(color: AppColors.kLighterGrey),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Radio<String>(
-                              activeColor: Colors.pink,
-                              value: "Office",
-                              groupValue: selectedAddress,
-                              onChanged: (value) {
-                                setState(() {
-                                  selectedAddress = value;
-                                });
-                                widget.onChanged(value);
-                              },
-                            ),
-                            Text(
-                              "Office",
-                              style: AppFonts.font16BlackWeight500,
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "2xvp+xc-sheikh zayed",
-                              style: AppFonts.font13BlackWeight400
-                                  .copyWith(color: AppColors.kGray),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.edit_outlined,
-                              color: AppColors.kGray,
-                            ),
-                          ],
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-          10.verticalSpace,
-          CustomButton(
-            color: AppColors.kWhite,
-            borderColor: AppColors.kLightGrey,
-            onPressed: () {
-              Navigator.pushNamed(context, PageRouteName.addAndEditUserAddress);
-            },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.add,
-                  color: AppColors.kPink,
-                  size: 25.sp,
-                ),
-                Text(
-                  "Add New",
-                  style: AppFonts.font14PinkWeight500,
-                )
-              ],
-            ),
-          ),
-          15.verticalSpace,
-        ],
-      ),
+          );
+        }
+        return const Center(child: Text("No data available."));
+      },
     );
   }
 }

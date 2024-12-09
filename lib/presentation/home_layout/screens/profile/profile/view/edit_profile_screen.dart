@@ -72,11 +72,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           } else if (state is EditProfileSuccessState) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               AppDialogs.showSuccessDialog(
-                  context: context,
-                  message: "Profile updated successfully",
-                  whenAnimationFinished: () {
-                    Navigator.pop(context);
-                  });
+                context: context,
+                message: "Profile updated successfully",
+                whenAnimationFinished: () {
+                  Navigator.pop(context);
+                },
+              );
+
             });
             return const SizedBox();
           } else {
