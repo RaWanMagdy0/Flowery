@@ -1,3 +1,4 @@
+import 'package:flowery/core/routes/page_route_name.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,16 +9,17 @@ class DeliveryAddressCard extends StatefulWidget {
   final ValueChanged<String?> onChanged;
   final String city;
   final String street;
+  final String phone;
   String? selectedAddress;
   final String addressId;
-  DeliveryAddressCard({
-    required this.city,
-    required this.street,
-    super.key,
-    required this.onChanged,
-    required this.addressId,
-    required this.selectedAddress,
-  });
+  DeliveryAddressCard(
+      {required this.city,
+      required this.street,
+      super.key,
+      required this.onChanged,
+      required this.addressId,
+      required this.selectedAddress,
+      required this.phone});
 
   @override
   State<DeliveryAddressCard> createState() => _DeliveryAddressCardState();
@@ -30,9 +32,6 @@ class _DeliveryAddressCardState extends State<DeliveryAddressCard> {
         padding: EdgeInsets.all(8.0),
         child: Column(children: [
           InkWell(
-            onTap: () {
-              widget.onChanged(widget.addressId);
-            },
             child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15.r),
@@ -54,6 +53,9 @@ class _DeliveryAddressCardState extends State<DeliveryAddressCard> {
                               value: widget.addressId,
                               groupValue: widget.selectedAddress,
                               onChanged: (value) {
+                                setState(() {
+                                  widget.selectedAddress = value;
+                                });
                                 widget.onChanged(value);
                               },
                             ),
@@ -68,7 +70,7 @@ class _DeliveryAddressCardState extends State<DeliveryAddressCard> {
                           child: Row(
                             children: [
                               Text(
-                                "${widget.street},${widget.city}",
+                                "${widget.street},${widget.city}, ${widget.phone}",
                                 style: AppFonts.font13BlackWeight400
                                     .copyWith(color: AppColors.kGray),
                               ),
@@ -79,9 +81,15 @@ class _DeliveryAddressCardState extends State<DeliveryAddressCard> {
                     ),
                     Column(
                       children: [
-                        Icon(
-                          Icons.edit_outlined,
-                          color: AppColors.kGray,
+                        InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(
+                                context, PageRouteName.addAndEditUserAddress);
+                          },
+                          child: Icon(
+                            Icons.edit_outlined,
+                            color: AppColors.kGray,
+                          ),
                         )
                       ],
                     )

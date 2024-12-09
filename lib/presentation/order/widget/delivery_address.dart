@@ -65,8 +65,9 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
                   itemCount: addresses.length,
                   itemBuilder: (context, index) {
                     final address = addresses[index];
-                    final addressId = "${address.city}-${address.street}";
+                    final addressId = "${address.city}-${address.street}-${address.phone}";
                     return DeliveryAddressCard(
+                      phone: address.phone,
                       city: address.city,
                       street: address.street,
                       onChanged: (String? value) {

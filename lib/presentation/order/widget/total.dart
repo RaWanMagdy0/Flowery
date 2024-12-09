@@ -8,14 +8,13 @@ import 'package:flowery/presentation/order/view_model/order_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../core/di/di.dart';
 import '../../../data/models/order/request/create_order_request/create_order_request.dart';
 import '../../../data/models/order/request/create_order_request/shipping_address_request.dart';
 import '../../home_layout/screens/cart/view_model/cart_view_model.dart';
 
 class Total extends StatefulWidget {
-  Total({super.key});
+  final String? selectedAddress;
+  const Total({super.key, required this.selectedAddress});
   @override
   State<Total> createState() => _TotalState();
 }
@@ -93,7 +92,7 @@ class _TotalState extends State<Total> {
                         style: AppFonts.font18BlackWeight500,
                       ),
                       Text(
-                        "${(context.read<CartViewModel>().cart.totalPrice ?? 0 )+ 10} EGP",
+                        "${(context.read<CartViewModel>().cart.totalPrice ?? 0) + 10} EGP",
                         style: AppFonts.font18BlackWeight500,
                       ),
                     ],
@@ -101,20 +100,28 @@ class _TotalState extends State<Total> {
                   30.verticalSpace,
                   CustomButton(
                     onPressed: () {
-                      if (selectedAddress != null) {
+                      if (widget.selectedAddress != null) {
+                        final parts = widget.selectedAddress!.split('-');
+                        final city = parts.isNotEmpty ? parts[0] : "";
+                        final street = parts.length > 1 ? parts[1] : "";
+                        final phone = parts.length > 2 ? parts[2] : "";
                         final shippingAddress = ShippingAddressRequest(
-                          city: selectedAddress!.split('-')[0],
-                          street: selectedAddress!.split('-')[1],
+                          city: city,
+                          street: street,
+                          phone: phone,
                         );
+
                         final createOrderRequest = CreateOrderRequest(
                           shippingAddress: shippingAddress,
                         );
+
                         viewModel.createOrder(createOrderRequest);
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                              content:
-                                  Text("Please select a delivery address")),
+                            backgroundColor: AppColors.kLightGrey,
+                            content: Text("Please select a delivery address."),
+                          ),
                         );
                       }
                     },
