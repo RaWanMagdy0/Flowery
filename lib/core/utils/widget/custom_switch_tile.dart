@@ -1,6 +1,8 @@
-import '../../styles/fonts/app_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../generated/l10n.dart';
+import '../../styles/fonts/app_fonts.dart';
 
 class SwitchTile extends StatelessWidget {
   final bool value;
@@ -24,6 +26,7 @@ class SwitchTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final local = S.of(context);
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       child: Row(
@@ -42,7 +45,7 @@ class SwitchTile extends StatelessWidget {
           ),
           const SizedBox(width: 8),
           Text(
-            'Notification',
+            local.notification,
             style: AppFonts.font13BlackWeight400,
           ),
           const Spacer(),

@@ -10,6 +10,9 @@ import '../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../core/styles/images/app_images.dart';
 import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../../../core/utils/widget/custom_button.dart';
+import '../../../../../../core/utils/widget/custom_list_tile.dart';
+import '../../../../../../core/utils/widget/custom_switch_tile.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../../../../core/utils/widget/custom_cached_network_image.dart';
 import '../../../../../../core/utils/widget/custom_list_tile.dart';
 import '../../../../../../core/utils/widget/custom_switch_tile.dart';
@@ -100,9 +103,8 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                               height: 100.h,
                               child: ClipOval(
                                 child: isUserProfile
-                                    ? CustomCachedNetworkImage(
-                                        imageUrl: state.user?.photo,
-                                        shimmerRadiusValue: 50.r,
+                                    ? Image.network(
+                                        state.user?.photo ?? "",
                                         fit: BoxFit.cover,
                                       )
                                     : Container(
@@ -115,6 +117,7 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                                       ),
                               ),
                             ),
+
                             10.verticalSpace,
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -143,13 +146,13 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                             // Custom List Tiles
                             CustomListTile(
                               leadingIcon: Icons.list_alt,
-                              title: 'My orders',
+                              title: local.myOrder,
                               trailingIcon: Icons.arrow_forward_ios,
                               onTap: () {},
                             ),
                             CustomListTile(
                               leadingIcon: Icons.location_pin,
-                              title: 'Saved address',
+                              title: local.savedAddress,
                               trailingIcon: Icons.arrow_forward_ios,
                               onTap: () {
                                 Navigator.pushNamed(
@@ -174,14 +177,14 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                             Divider(thickness: 1.w),
                             CustomListTile(
                               leadingIcon: Icons.translate,
-                              title: 'Language',
-                              subtitle: 'English',
+                              title: local.language,
+                              subtitle: local.english,
                               subtitleStyle:
                                   const TextStyle(color: Colors.pink),
                               onTap: () {},
                             ),
                             CustomListTile(
-                              title: 'About us',
+                              title: local.aboutAs,
                               trailingIcon: Icons.arrow_forward_ios,
                               onTap: () {
                                 Navigator.pushNamed(context, PageRouteName.aboutApp);
@@ -189,7 +192,7 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                               },
                             ),
                             CustomListTile(
-                              title: 'Terms & conditions',
+                              title: local.termsAndConditions,
                               trailingIcon: Icons.arrow_forward_ios,
                               onTap: () {
                                 Navigator.pushNamed(context, PageRouteName.termsConditions);
@@ -200,7 +203,7 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
 
                             CustomListTile(
                               leadingIcon: Icons.logout,
-                              title: 'Logout',
+                              title: local.logOut,
                               trailingIcon: Icons.logout,
                               onTap: () {
                                 showDialog(
@@ -221,7 +224,7 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                                           children: [
                                             SizedBox(height: 15.h),
                                             Text(
-                                              "LOGOUT",
+                                              local.logOut,
                                               style: AppFonts
                                                   .font18BlackWeight500
                                                   .copyWith(
@@ -230,7 +233,7 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                                             ),
                                             SizedBox(height: 5.h),
                                             Text(
-                                              "Confirm logout!!",
+                                              local.logoutConfirmationTitle,
                                               style: AppFonts
                                                   .font16BlackWeight500
                                                   .copyWith(
@@ -263,7 +266,7 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                                                     Navigator.pop(context);
                                                   },
                                                   child: Text(
-                                                    "Cancel",
+                                                    local.cancelText,
                                                     style: AppFonts
                                                         .font14GreyWeight400,
                                                   ),
@@ -293,7 +296,7 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                                                     viewModel.logout();
                                                   },
                                                   child: Text(
-                                                    "Logout",
+                                                    local.logOut,
                                                     style: AppFonts
                                                         .font15WhiteWeight500
                                                         .copyWith(

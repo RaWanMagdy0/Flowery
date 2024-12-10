@@ -1,3 +1,4 @@
+import 'package:flowery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -16,6 +17,7 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final local = S.of(context);
     return BottomNavigationBar(
       backgroundColor: AppColors.kWhite,
       type: BottomNavigationBarType.fixed,
@@ -24,24 +26,20 @@ class BottomNavBar extends StatelessWidget {
       onTap: onTap,
       items: [
         BottomNavigationBarItem(
-          icon: const ImageIcon(AssetImage(AppImages.homeUnselectedIcon)),
-          activeIcon: ImageIcon(AssetImage(AppImages.homeSelectedIcon)),
-          label: 'Home',
+          icon: ImageIcon(AssetImage(AppImages.homeIcon)),
+          label: local.homebottom,
         ),
         BottomNavigationBarItem(
-          icon: ImageIcon(AssetImage(AppImages.categoryUnselectedIcon)),
-          activeIcon: ImageIcon(AssetImage(AppImages.categorySelectedIcon)),
-          label: 'Categories',
+          icon: ImageIcon(AssetImage(AppImages.categoryIcon)),
+          label: local.categories,
         ),
         BottomNavigationBarItem(
-          icon: ImageIcon(AssetImage(AppImages.cartUnselectedIcon)),
-          activeIcon: ImageIcon(AssetImage(AppImages.cartSelectedIcon)),
-          label: 'Cart',
+          icon: ImageIcon(AssetImage(AppImages.shoppingIcon)),
+          label: local.cart,
         ),
         BottomNavigationBarItem(
-          icon: ImageIcon(AssetImage(AppImages.profileUnselectedIcon)),
-          activeIcon: ImageIcon(AssetImage(AppImages.profileSelectedIcon)),
-          label: 'Profile',
+          icon: ImageIcon(AssetImage(AppImages.personIcon)),
+          label: local.profileText,
         ),
       ],
       selectedItemColor: AppColors.kPink,

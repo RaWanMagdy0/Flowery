@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../core/utils/widget/delivery_address_widget.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../view_model/cart_view_model.dart';
 
 class CartAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -11,12 +12,13 @@ class CartAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final local = S.of(context);
     return AppBar(
       forceMaterialTransparency: true,
       centerTitle: false,
       title: Row(
         children: [
-          const Text('Cart'),
+          Text(local.cart),
           BlocBuilder<CartViewModel, CartState>(
             builder: (context, state) {
               num cartItemsCount = context.read<CartViewModel>().cartItemsCount;

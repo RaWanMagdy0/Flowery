@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../../core/routes/page_route_name.dart';
 import '../../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../../domain/entities/home/home_category_entity.dart';
+import '../../../../../../../generated/l10n.dart';
 import '../../../view_model/home_view_model.dart';
 import 'home_categories_loading.dart';
 import 'home_category_item.dart';
@@ -16,6 +17,7 @@ class HomeCategoriesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeViewModel, HomeState>(
       builder: (context, state) {
+        final local = S.of(context);
         if (state is HomeDataLoading) {
           return HomeCategoriesLoading();
         } else if (state is HomeDataError) {
@@ -36,7 +38,7 @@ class HomeCategoriesList extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Categories',
+                        local.categories,
                         style: AppFonts.font18BlackWeight500,
                       ),
                       InkWell(
@@ -45,7 +47,7 @@ class HomeCategoriesList extends StatelessWidget {
                               context, PageRouteName.categories);
                         },
                         child: Text(
-                          'View All',
+                          local.viewAll,
                           style: AppFonts.font12PinkWeight500UnderlinedPink,
                         ),
                       ),

@@ -1,3 +1,4 @@
+import 'package:flowery/generated/l10n.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -10,6 +11,7 @@ class CartLoginWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final local = S.of(context);
     return SizedBox(
       width: 1.sw,
       child: Padding(
@@ -22,7 +24,7 @@ class CartLoginWidget extends StatelessWidget {
             // ),
             // 16.verticalSpace,
             Text(
-              'Please login\nto see your cart items',
+              local.pleaseLoginToSeeCartItems,
               style: AppFonts.font16PinkWeight400,
               textAlign: TextAlign.center,
             ),

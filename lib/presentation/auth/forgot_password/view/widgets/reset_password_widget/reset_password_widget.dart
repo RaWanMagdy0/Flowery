@@ -1,3 +1,4 @@
+import 'package:flowery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,7 +6,6 @@ import 'package:get_it/get_it.dart';
 
 import '../../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../../core/styles/fonts/app_fonts.dart';
-import '../../../../../../core/utils/const/app_string.dart';
 import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../../../core/utils/functions/validators/validators.dart';
 import '../../../../../../core/utils/widget/custom_button.dart';
@@ -35,6 +35,7 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
 
   @override
   Widget build(BuildContext context) {
+    final local = S.of(context);
     return BlocListener<ForgetPasswordCubit, ForgotPasswordStates>(
       bloc: _resetPasswordViewModel,
       listener: (context, state) => _handelStateChange(state),
@@ -48,21 +49,21 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                 height: 30.h,
               ),
               Text(
-                AppStrings.resetPasswordScreenTitle,
+                local.resetPasswordScreenTitle,
                 style: AppFonts.font18BlackWeight500.copyWith(fontSize: 18),
               ),
               SizedBox(
                 height: 10.h,
               ),
-              Text(AppStrings.resetPasswordScreenDescription,
+              Text(local.resetPasswordScreenDescription,
                   textAlign: TextAlign.center,
                   style: AppFonts.font14BlackWeight400),
               SizedBox(
                 height: 20.h,
               ),
               CustomTextFormField(
-                hintText: AppStrings.passwordHintText,
-                labelText: AppStrings.passwordLabelText,
+                hintText: local.passwordHintText,
+                labelText: local.passwordLabelText,
                 controller: newPasswordController,
                 keyBordType: TextInputType.text,
                 isPassword: true,
@@ -70,8 +71,8 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
               ),
               20.verticalSpace,
               CustomTextFormField(
-                hintText: AppStrings.confirmPasswordHintText,
-                labelText: AppStrings.confirmPasswordHintText,
+                hintText: local.confirmPasswordHintText,
+                labelText: local.confirmPasswordHintText,
                 controller: confirmPasswordController,
                 keyBordType: TextInputType.text,
                 isPassword: true,
@@ -88,7 +89,7 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
                   }
                 },
                 color: AppColors.kWhite,
-                text: AppStrings.confirmTitle,
+                text: local.confirmTitle,
                 textStyle: AppFonts.font16BlackWeight500,
                 borderColor: AppColors.kGray,
               ),

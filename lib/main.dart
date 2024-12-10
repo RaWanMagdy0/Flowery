@@ -1,6 +1,9 @@
+import 'package:flowery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 import 'core/di/di.dart';
 import 'core/routes/app_routes.dart';
@@ -9,10 +12,9 @@ import 'core/theme/app_theme.dart';
 import 'core/utils/bloc_observer/app_bloc_observer.dart';
 import 'presentation/home_layout/screens/cart/view_model/cart_view_model.dart';
 
-void main() async {
+void main() {
   configureDependencies();
   Bloc.observer = AppBlocObserver();
-  await ScreenUtil.ensureScreenSize();
   runApp(const MyApp());
 }
 
@@ -29,13 +31,25 @@ class MyApp extends StatelessWidget {
         return BlocProvider<CartViewModel>(
             create: (context) => getIt<CartViewModel>(),
             child: MaterialApp(
+              locale: const Locale('ar'),
+              localizationsDelegates: [
+                S.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: S.delegate.supportedLocales,
               debugShowCheckedModeBanner: false,
               theme: AppTheme.appTheme,
-              initialRoute: PageRouteName.splash,
+              initialRoute: PageRouteName.logIn,
               onGenerateRoute: (settings) =>
                   AppRoutes.onGenerateRoute(settings),
             ));
       },
     );
   }
+}
+
+bool isArbic() {
+  return Intl.getCurrentLocale() == 'ar';
 }

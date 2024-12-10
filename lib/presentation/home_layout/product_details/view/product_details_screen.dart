@@ -1,17 +1,15 @@
+import 'package:flowery/presentation/home_layout/product_details/view/widget/product_details_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../core/di/di.dart';
 import '../../../../core/styles/colors/app_colors.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../core/utils/widget/add_to_cart_button.dart';
-import '../../../../core/utils/widget/custom_cached_network_image.dart';
 import '../../../../domain/entities/home_layout/product_details_entity.dart';
 import '../view_model/product_details_cubit.dart';
 import '../view_model/product_details_states.dart';
-import 'widget/product_details_loading.dart';
 
 class ProductDetails extends StatefulWidget {
   final String productIt;
@@ -34,6 +32,7 @@ class _ProductDetailsState extends State<ProductDetails> {
 
   @override
   Widget build(BuildContext context) {
+    final local = S.of(context);
     return Scaffold(
       body: BlocBuilder<ProductDetailsCubit, ProductDetailsStates>(
         bloc: viewModel,
@@ -74,11 +73,11 @@ class _ProductDetailsState extends State<ProductDetails> {
                                   Row(
                                     children: [
                                       Text(
-                                        "Status:",
+                                        local.status,
                                         style: AppFonts.font16BlackWeight500,
                                       ),
                                       Text(
-                                        " In stock",
+                                        local.inStock,
                                         style: AppFonts.font14GreyWeight400,
                                       ),
                                     ],
@@ -87,35 +86,25 @@ class _ProductDetailsState extends State<ProductDetails> {
                               ),
                               8.verticalSpace,
                               Text(
-                                "All prices include tax",
+                                local.allPricesIncludeTax,
                                 style: AppFonts.font13BlackWeight400,
                               ),
                               10.verticalSpace,
                               Text(
-                                product.title ?? "Product Title",
+                                product.title ?? local.productTitle,
                                 style: AppFonts.font16BlackWeight500,
                               ),
                               15.verticalSpace,
                               Text(
-                                "Description",
+                                local.description,
                                 style: AppFonts.font16BlackWeight500,
                               ),
                               5.verticalSpace,
                               Text(
                                 product.description ??
-                                    "No description available",
+                                    local.noDescriptionAvailable,
                                 style: AppFonts.font14BlackWeight400,
                               ),
-                              // ReadMoreText(
-                              //   product.description ?? "No description available",
-                              //   style: AppFonts.font14BlackWeight400,
-                              //   trimLines: 4,
-                              //   trimMode: TrimMode.Line,
-                              //   trimCollapsedText: "Show More",
-                              //   trimExpandedText: "Show Less",
-                              //   moreStyle: AppFonts.font12PinkWeight500UnderlinedPink,
-                              //   lessStyle: AppFonts.font12PinkWeight500UnderlinedPink,
-                              // ),
                             ],
                           ),
                         ),
@@ -125,15 +114,15 @@ class _ProductDetailsState extends State<ProductDetails> {
                 ],
               );
             } else {
-              return Center(child: Text("Product not found."));
+              return Center(child: Text(local.productNotFound));
             }
           } else if (state is ProductDetailsErrorState) {
             return Center(
               child:
-                  Text(state.errorMessage ?? "Error loading product details"),
+                  Text(state.errorMessage ?? local.errorLoadingProductDetails),
             );
           } else {
-            return Center(child: Text("Unexpected state."));
+            return Center(child: Text(local.unexpectedState));
           }
         },
       ),
