@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flowery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,8 +14,11 @@ import 'core/theme/app_theme.dart';
 import 'core/utils/bloc_observer/app_bloc_observer.dart';
 import 'core/utils/functions/providers/local_provider.dart';
 import 'presentation/home_layout/screens/cart/view_model/cart_view_model.dart';
-
+import 'firebase_options.dart';
 void main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   WidgetsFlutterBinding.ensureInitialized();
 
   configureDependencies();
@@ -26,6 +30,7 @@ void main() async {
   await provider.changeLanguage('en');
 
   runApp(
+
     ChangeNotifierProvider(
       create: (context) => provider,
       child: MyApp(),

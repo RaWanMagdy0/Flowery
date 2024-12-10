@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../generated/l10n.dart';
+import '../../styles/colors/app_colors.dart';
 import '../functions/providers/local_provider.dart';
 
 class LanguageBottomSheet extends StatelessWidget {
@@ -17,7 +18,7 @@ class LanguageBottomSheet extends StatelessWidget {
         children: [
           InkWell(
             onTap: () {
-              provider.changeLanguage("en"); // Change language to English
+              provider.changeLanguage("en");
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -26,9 +27,7 @@ class LanguageBottomSheet extends StatelessWidget {
                 if (provider.locale == "en")
                   Icon(
                     Icons.check,
-                    color: Theme.of(context)
-                        .colorScheme
-                        .primary, // Color for check icon
+                    color: AppColors.kPink,
                     size: 30,
                   ),
               ],
@@ -48,17 +47,14 @@ class LanguageBottomSheet extends StatelessWidget {
                   child: Text(
                     S.of(context).arabic,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: provider.locale == "ar"
-                              ? Theme.of(context)
-                                  .colorScheme
-                                  .error // Highlight for selected language
-                              : Theme.of(context).colorScheme.onSecondary,
+                          color: AppColors.kPink
                         ),
                   ),
                 ),
                 if (provider.locale == "ar")
                   Icon(
                     Icons.check,
+                    color: AppColors.kPink,
                     size: 30,
                   ),
               ],
