@@ -1,6 +1,9 @@
+import 'package:flowery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
 import 'core/di/di.dart';
 import 'core/routes/app_routes.dart';
@@ -26,14 +29,27 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return BlocProvider<CartViewModel>(
-          create: (context) => getIt<CartViewModel>(),
-          child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            theme: AppTheme.appTheme,
-            initialRoute: PageRouteName.logIn,
-            onGenerateRoute: (settings) => AppRoutes.onGenerateRoute(settings),
-          ));
+            create: (context) => getIt<CartViewModel>(),
+            child: MaterialApp(
+              locale: const Locale('ar'),
+              localizationsDelegates: [
+                S.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: S.delegate.supportedLocales,
+              debugShowCheckedModeBanner: false,
+              theme: AppTheme.appTheme,
+              initialRoute: PageRouteName.logIn,
+              onGenerateRoute: (settings) =>
+                  AppRoutes.onGenerateRoute(settings),
+            ));
       },
     );
   }
+}
+
+bool isArbic() {
+  return Intl.getCurrentLocale() == 'ar';
 }

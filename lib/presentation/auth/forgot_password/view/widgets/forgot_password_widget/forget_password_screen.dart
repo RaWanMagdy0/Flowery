@@ -5,10 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../core/routes/page_route_name.dart';
 import '../../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../../core/styles/fonts/app_fonts.dart';
-import '../../../../../../core/utils/const/app_string.dart';
 import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../../../core/utils/functions/validators/validators.dart';
 import '../../../../../../core/utils/widget/custom_text_form_field.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../view_model/forget_passwoed_cubit.dart';
 import '../../../view_model/forget_password_states.dart';
 
@@ -30,6 +30,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
 
   @override
   Widget build(BuildContext context) {
+    final local = S.of(context);
     return BlocListener<ForgetPasswordCubit, ForgotPasswordStates>(
         bloc: viewModel,
         listener: (context, state) => _handelStateChange(state),
@@ -41,7 +42,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                 Row(
                   children: [
                     Icon(Icons.arrow_back_ios_outlined),
-                    Text(AppStrings.passwordAppBarTitle,
+                    Text(local.passwordAppBarTitle,
                         style: AppFonts.font20BlackWeight500),
                   ],
                 ),
@@ -49,13 +50,13 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   height: 40.h,
                 ),
                 Text(
-                  AppStrings.forgetPasswordScreenTitle,
+                  local.forgetPasswordScreenTitle,
                   style: AppFonts.font20BlackWeight500,
                 ),
                 SizedBox(
                   height: 10.h,
                 ),
-                Text(AppStrings.forgetPasswordScreenDescription,
+                Text(local.forgetPasswordScreenDescription,
                     textAlign: TextAlign.center,
                     style: AppFonts.font14GreyWeight400),
                 SizedBox(
@@ -67,8 +68,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     key: viewModel.formKey,
                     child: CustomTextFormField(
-                      hintText: AppStrings.emailHintText,
-                      labelText: AppStrings.emailLabelText,
+                      hintText: local.emailHintText,
+                      labelText: local.emailLabelText,
                       validator: (value) => Validators.validateEmail(value),
                       keyBordType: TextInputType.text,
                       controller: viewModel.emailController,
@@ -86,7 +87,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25.r))),
                     onPressed: () => viewModel.submitForgotPassword(),
-                    child: Text(AppStrings.confirmTitle,
+                    child: Text(local.confirmTitle,
                         style: AppFonts.font15WhiteWeight500))
               ],
             ),

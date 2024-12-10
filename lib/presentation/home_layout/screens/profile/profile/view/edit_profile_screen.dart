@@ -1,3 +1,4 @@
+import 'package:flowery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
@@ -32,10 +33,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final local = S.of(context);
     return Scaffold(
       appBar: AppBar(
         forceMaterialTransparency: true,
-        title: const Text("Edit Profile"),
+        title: Text(local.editProfile),
         leading: const Icon(Icons.arrow_back_ios),
         actions: [
           Padding(
@@ -53,7 +55,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             );
           } else if (state is GetLoggedUserInfoErrorState) {
             return Center(
-              child: Text(state.errorMessage ?? 'An error occurred'),
+              child: Text(state.errorMessage ?? local.anErrorOccurred),
             );
           } else if (state is GetLoggedUserInfoSuccessState) {
             gender = state.user?.gender;
@@ -67,13 +69,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           } else if (state is EditProfileErrorState) {
             return Center(
               child: Text(state.errorMessage ??
-                  'An error occurred while updating the profile'),
+                  local.anErrorOccurredWhileUpdatingTheProfile),
             );
           } else if (state is EditProfileSuccessState) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               AppDialogs.showSuccessDialog(
                   context: context,
-                  message: "Profile updated successfully",
+                  message: local.profileUpdatedSuccessfully,
                   whenAnimationFinished: () {
                     Navigator.pop(context);
                   });

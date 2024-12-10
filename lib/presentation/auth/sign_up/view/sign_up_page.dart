@@ -1,9 +1,9 @@
+import 'package:flowery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/styles/fonts/app_fonts.dart';
-import '../../../../core/utils/const/app_string.dart';
 import '../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../core/utils/functions/validators/validators.dart';
 import '../../../../core/utils/widget/custom_button.dart';
@@ -70,12 +70,13 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
+    final local = S.of(context);
     return BlocListener<SignUpCubit, SignUpState>(
       bloc: context.read<SignUpCubit>(),
       listener: (context, state) => _handelStateChange(state),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(AppStrings.signUpTitle),
+          title: Text(local.signUpTitle),
           forceMaterialTransparency: true,
         ),
         body: Padding(
@@ -91,8 +92,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     children: [
                       Expanded(
                         child: CustomTextFormField(
-                          hintText: AppStrings.firstNameHintText,
-                          labelText: AppStrings.firstNameLabelText,
+                          hintText: local.firstNameHintText,
+                          labelText: local.firstNameLabelText,
                           validator: (value) => Validators.validateName(value),
                           keyBordType: TextInputType.text,
                           controller: _firstNameController,
@@ -101,8 +102,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       16.horizontalSpace,
                       Expanded(
                         child: CustomTextFormField(
-                          hintText: AppStrings.lastNameHintText,
-                          labelText: AppStrings.lastNameLabelText,
+                          hintText: local.lastNameHintText,
+                          labelText: local.lastNameLabelText,
                           validator: (value) => Validators.validateName(value),
                           keyBordType: TextInputType.text,
                           controller: _lastNameController,
@@ -112,8 +113,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   24.verticalSpace,
                   CustomTextFormField(
-                    hintText: AppStrings.emailHintText,
-                    labelText: AppStrings.emailLabelText,
+                    hintText: local.emailHintText,
+                    labelText: local.emailLabelText,
                     validator: (value) => Validators.validateEmail(value),
                     keyBordType: TextInputType.text,
                     controller: _emailController,
@@ -123,8 +124,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     children: [
                       Expanded(
                         child: CustomTextFormField(
-                          hintText: AppStrings.signupPasswordHintText,
-                          labelText: AppStrings.passwordLabelText,
+                          hintText: local.signupPasswordHintText,
+                          labelText: local.passwordLabelText,
                           isPassword: true,
                           validator: (value) =>
                               Validators.validatePassword(value),
@@ -135,8 +136,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       16.horizontalSpace,
                       Expanded(
                         child: CustomTextFormField(
-                          hintText: AppStrings.confirmPasswordHintText,
-                          labelText: AppStrings.confirmPasswordLabelText,
+                          hintText: local.confirmPasswordHintText,
+                          labelText: local.confirmPasswordLabelText,
                           isPassword: true,
                           validator: (value) =>
                               Validators.validatePasswordConfirmation(
@@ -151,8 +152,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   24.verticalSpace,
                   CustomTextFormField(
-                    hintText: AppStrings.phoneHintText,
-                    labelText: AppStrings.phoneLabelText,
+                    hintText: local.phoneHintText,
+                    labelText: local.phoneLabelText,
                     validator: (value) => Validators.validatePhoneNumber(value),
                     keyBordType: TextInputType.phone,
                     textInputAction: TextInputAction.done,
@@ -170,14 +171,14 @@ class _SignUpPageState extends State<SignUpPage> {
                     child: Row(
                       children: [
                         Text(
-                          AppStrings.gender,
+                          local.gender,
                           style: AppFonts.font18BlackWeight500,
                         ),
                         50.horizontalSpace,
                         Row(
                           children: [
                             Radio(
-                              value: AppStrings.female,
+                              value: local.female,
                               groupValue: _gender,
                               activeColor: Colors.pink,
                               onChanged: (value) {
@@ -187,12 +188,12 @@ class _SignUpPageState extends State<SignUpPage> {
                               },
                             ),
                             Text(
-                              AppStrings.female,
+                              local.female,
                               style: AppFonts.font14BlackWeight400,
                             ),
                             16.horizontalSpace,
                             Radio(
-                              value: AppStrings.male,
+                              value: local.male,
                               groupValue: _gender,
                               activeColor: Colors.pink,
                               onChanged: (value) {
@@ -202,7 +203,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               },
                             ),
                             Text(
-                              AppStrings.male,
+                              local.male,
                               style: AppFonts.font14BlackWeight400,
                             ),
                           ],
@@ -215,7 +216,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        AppStrings.createAccount,
+                        local.createAccount,
                         style: AppFonts.font12BlackWeight400,
                       ),
                       InkWell(
@@ -223,7 +224,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         borderRadius: BorderRadius.circular(15.r),
                         child: RichText(
                           text: TextSpan(
-                            text: AppStrings.termsAndConditions,
+                            text: local.termsAndConditions,
                             style: AppFonts.font12BlackWeight400UnderlinedBlack,
                           ),
                         ),
@@ -233,14 +234,14 @@ class _SignUpPageState extends State<SignUpPage> {
                   35.verticalSpace,
                   CustomButton(
                     onPressed: signUp,
-                    text: AppStrings.signUpTitle,
+                    text: local.signUpTitle,
                   ),
                   16.verticalSpace,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        AppStrings.alreadyHaveAccount,
+                        local.alreadyHaveAccount,
                         style: AppFonts.font16BlackWeight400,
                       ),
                       InkWell(
@@ -250,7 +251,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         borderRadius: BorderRadius.circular(15.r),
                         child: RichText(
                           text: TextSpan(
-                            text: AppStrings.loginTitle,
+                            text: local.loginTitle,
                             style: AppFonts.font16PinkWeight500UnderlinedPink,
                           ),
                         ),

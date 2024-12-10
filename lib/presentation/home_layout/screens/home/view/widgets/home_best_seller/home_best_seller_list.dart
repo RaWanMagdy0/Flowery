@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../../core/routes/page_route_name.dart';
 import '../../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../../domain/entities/home/home_best_seller_product_entity.dart';
+import '../../../../../../../generated/l10n.dart';
 import '../../../view_model/home_view_model.dart';
 import 'home_best_seller_item.dart';
 import 'home_best_seller_loading.dart';
@@ -16,6 +17,7 @@ class HomeBestSellerList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeViewModel, HomeState>(
       builder: (context, state) {
+        final local = S.of(context);
         if (state is HomeDataLoading) {
           return HomeBestSellerLoading();
         } else if (state is HomeDataError) {
@@ -37,13 +39,13 @@ class HomeBestSellerList extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Best Seller',
+                        local.bestSeller,
                         style: AppFonts.font18BlackWeight500,
                       ),
                       GestureDetector(
                         onTap: () => _navigateToBestSeller(context),
                         child: Text(
-                          'View All',
+                          local.viewAll,
                           style: AppFonts.font12PinkWeight500UnderlinedPink,
                         ),
                       ),

@@ -1,3 +1,4 @@
+import 'package:flowery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,6 +23,7 @@ class _OccasionScreenState extends State<OccasionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final local = S.of(context);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(70.h),
@@ -37,9 +39,10 @@ class _OccasionScreenState extends State<OccasionScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Occasion', style: AppFonts.font20BlackWeight500),
+                  Text(local.occasionTitle,
+                      style: AppFonts.font20BlackWeight500),
                   5.verticalSpace,
-                  Text('Bloom with our exquisite best sellers',
+                  Text(local.bloomWithBestSellers,
                       style: AppFonts.font13BlackWeight500),
                 ],
               ),
@@ -153,9 +156,7 @@ class _OccasionScreenState extends State<OccasionScreen> {
                             PageRouteName.productDetails,
                             arguments: prudact?[index]?.id,
                           ),
-                          onButtonPressed: () {
-
-                          },
+                          onButtonPressed: () {},
                         );
                       },
                     ),
