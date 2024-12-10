@@ -68,8 +68,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             );
           } else if (state is EditProfileErrorState) {
             return Center(
-              child: Text(state.errorMessage ??
-                  local.anErrorOccurredWhileUpdatingTheProfile),
+              child: Text(state.errorMessage ?? local.anErrorOccurredWhileUpdatingTheProfile),
             );
           } else if (state is EditProfileSuccessState) {
             WidgetsBinding.instance.addPostFrameCallback((_) {

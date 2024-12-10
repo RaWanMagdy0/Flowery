@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
-
+import 'package:intl/intl.dart';
 import '../../../../../../core/di/di.dart';
 import '../../../../../../core/routes/page_route_name.dart';
 import '../../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../core/styles/images/app_images.dart';
+import '../../../../../../core/utils/const/language_bottom_sheet.dart';
 import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../../../core/utils/widget/custom_button.dart';
 import '../../../../../../core/utils/widget/custom_list_tile.dart';
@@ -43,6 +44,7 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final local = S.of(context);
     return Scaffold(
       appBar: AppBar(
         forceMaterialTransparency: true,
@@ -175,14 +177,19 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                             ),
                             SizedBox(height: 14.h),
                             Divider(thickness: 1.w),
+                            /*******
                             CustomListTile(
                               leadingIcon: Icons.translate,
                               title: local.language,
                               subtitle: local.english,
                               subtitleStyle:
                                   const TextStyle(color: Colors.pink),
-                              onTap: () {},
+                              onTap: () {
+
+                              },
                             ),
+                            *********/
+                            LanguageBottomSheet(),
                             CustomListTile(
                               title: local.aboutAs,
                               trailingIcon: Icons.arrow_forward_ios,

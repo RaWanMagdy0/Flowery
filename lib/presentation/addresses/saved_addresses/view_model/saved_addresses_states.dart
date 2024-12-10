@@ -17,4 +17,8 @@ final class SavedAddressesFailure extends SavedAddressesStates {}
 
 final class DeleteAddressSuccess extends SavedAddressesStates {}
 
-final class DeleteAddressFailure extends SavedAddressesStates {}
+final class DeleteAddressFailure extends SavedAddressesStates {
+  final String message;
+  DeleteAddressFailure(this.message);
+
+}

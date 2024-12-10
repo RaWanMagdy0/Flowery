@@ -49,7 +49,14 @@ class AddressRepositoryImpl extends AddressRepository {
 
 
   @override
-  Future<Result<dynamic>> deleteAddress() async {
-    return await dataSource.deleteAddress();
+  Future<Result<dynamic>> deleteAddress(String addressId) async {
+  var response=  await dataSource.deleteAddress(addressId);
+  switch (response) {
+    case Success():
+      return Success(data: true);
+
+    case Fail():
+      return Fail(exception: response.exception);
+  }
   }
 }

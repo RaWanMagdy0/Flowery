@@ -38,13 +38,24 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
       bloc: viewModel,
       builder: (context, state) {
         if (state is SavedAddressesLoading) {
-          return const Center(child: CircularProgressIndicator());
+          return  Center(child: CircularProgressIndicator(
+            color: AppColors.kPink,
+          ));
         } else if (state is SavedAddressesFailure) {
-          return const Center(child: Text("Failed to load addresses."));
+          return  Center(
+              child: Text(
+                  "Failed to load addresses.",
+                style: AppFonts.font13BlackWeight500,
+
+              ));
         } else if (state is SavedAddressesSuccess) {
           final addresses = state.addresses;
           if (addresses.isEmpty) {
-            return const Center(child: Text("No saved addresses."));
+            return Center(
+                child: Text(
+                    "No saved addresses.",
+                  style: AppFonts.font15PinkWeight500UnderlinedPink,
+                ));
           }
           return Column(
             mainAxisSize: MainAxisSize.min,
@@ -107,11 +118,12 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
                   ),
                 ),
               ),
-              const SizedBox(height: 15),
+              15.verticalSpace,
             ],
           );
         }
-        return const Center(child: Text("No data available."));
+        return  Center(
+            child: Text("No data available.",style: AppFonts.font15PinkWeight500UnderlinedPink,));
       },
     );
   }

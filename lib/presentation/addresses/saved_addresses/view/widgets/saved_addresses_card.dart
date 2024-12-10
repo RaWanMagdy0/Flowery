@@ -1,14 +1,21 @@
+import 'package:flowery/core/routes/page_route_name.dart';
 import 'package:flowery/core/styles/colors/app_colors.dart';
 import 'package:flowery/core/styles/fonts/app_fonts.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 class SavedAddressesCard extends StatelessWidget {
   final String city;
   final String street;
-  const SavedAddressesCard(
-      {required this.city, required this.street, super.key});
+  final VoidCallback onDelete;
+
+  const SavedAddressesCard({
+    required this.city,
+    required this.street,
+    required this.onDelete,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -51,13 +58,17 @@ class SavedAddressesCard extends StatelessWidget {
             Row(
               children: [
                 IconButton(
-                  onPressed: () {},
-                  icon:
-                      Icon(Icons.delete, color: AppColors.kError, size: 20.sp),
+                  onPressed: onDelete,
+                  icon: Icon(Icons.delete,
+                      color: AppColors.kError, size: 20.sp),
                 ),
                 IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.edit, color: AppColors.kGray, size: 20.sp),
+                  onPressed: () {
+                    Navigator.pushNamed(
+                        context, PageRouteName.addAndEditUserAddress);
+                  },
+                  icon: Icon(Icons.edit,
+                      color: AppColors.kGray, size: 20.sp),
                 ),
               ],
             ),

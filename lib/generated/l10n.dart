@@ -170,6 +170,16 @@ class S {
     );
   }
 
+  /// `Arabic`
+  String get arabic {
+    return Intl.message(
+      'Arabic',
+      name: 'arabic',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Categories`
   String get categories {
     return Intl.message(

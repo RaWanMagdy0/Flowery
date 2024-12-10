@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
@@ -9,7 +8,6 @@ import '../../models/order/response/address_models/address_response_model.dart';
 import '../../models/order/response/create_order_response/order_model.dart';
 part 'order_api_manager.g.dart';
 
-
 @lazySingleton
 @RestApi(baseUrl: ApiConstants.baseUrl)
 abstract class OrderApiManger {
@@ -18,9 +16,9 @@ abstract class OrderApiManger {
 
   @POST(ApiConstants.createOrder)
   Future<OrderModel?> createOrder(
-      @Header("Authorization") String token,
-      @Body() CreateOrderRequest createOrderRequest,
-      );
+    @Header("Authorization") String token,
+    @Body() CreateOrderRequest createOrderRequest,
+  );
   @PATCH(ApiConstants.addAddress)
   Future<dynamic> addAddress(
     @Header("Authorization") String token,
@@ -31,8 +29,9 @@ abstract class OrderApiManger {
   Future<AddressResponseModel> getAllAddresses(
       @Header("Authorization") String token);
 
-  @DELETE(ApiConstants.deleteAddress)
+  @DELETE("${ApiConstants.deleteAddress}/{addressId}")
   Future<dynamic> deleteAddress(
+    @Path("addressId") String addressId,
     @Header("Authorization") String token,
   );
 }

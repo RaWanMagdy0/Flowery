@@ -3,7 +3,6 @@ import 'package:flowery/domain/entities/address/saved_addresses_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../core/styles/fonts/app_fonts.dart';
 import 'widgets/saved_addresses_button.dart';
 import 'widgets/saved_addresses_card.dart';
@@ -11,7 +10,7 @@ import '../view_model/saved_addresses_view_model.dart';
 import '../view_model/saved_addresses_states.dart';
 
 class SavedAddressScreen extends StatefulWidget {
-   SavedAddressScreen({super.key});
+  const SavedAddressScreen({super.key});
   @override
   State<SavedAddressScreen> createState() => _SavedAddressScreenState();
 }
@@ -22,8 +21,8 @@ class _SavedAddressScreenState extends State<SavedAddressScreen> {
   @override
   void initState() {
     super.initState();
-   viewModel=  context.read<SavedAddressesViewModel>();
-   viewModel.getAllAddresses();
+    viewModel = context.read<SavedAddressesViewModel>();
+    viewModel.getAllAddresses();
   }
 
   @override
@@ -56,7 +55,7 @@ class _SavedAddressScreenState extends State<SavedAddressScreen> {
                     );
                   } else if (state is DeleteAddressFailure) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Failed to delete address.")),
+                      SnackBar(content: Text(state.message)),
                     );
                   }
                 },
@@ -72,9 +71,14 @@ class _SavedAddressScreenState extends State<SavedAddressScreen> {
                       itemCount: addresses.length,
                       itemBuilder: (context, index) {
                         final address = addresses[index];
+                        final addressId=address.id;
                         return SavedAddressesCard(
                           city: address.city,
                           street: address.street,
+                          onDelete: (){
+                            viewModel.deleteAddress(addressId);
+                            print("{addressId $addressId}");
+                          },
                         );
                       },
                     );

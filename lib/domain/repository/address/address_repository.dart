@@ -7,5 +7,5 @@ abstract class AddressRepository {
 
   Future<Result<List<SavedAddressesEntity>>> getAllAddresses();
 
-  Future<Result<dynamic>> deleteAddress();
+  Future<Result<dynamic>> deleteAddress(String addressId);
 }

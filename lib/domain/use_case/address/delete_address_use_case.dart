@@ -7,7 +7,10 @@ class DeleteAddressUseCase {
   AddressRepository repository;
   DeleteAddressUseCase(this.repository);
 
-  Future<Result<dynamic>> invoke() async {
-    return await repository.deleteAddress();
+  Future<Result<dynamic>> invoke(String addressId) async {
+    return await repository.deleteAddress(addressId);
   }
+
+
+
 }

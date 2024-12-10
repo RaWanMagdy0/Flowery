@@ -7,7 +7,9 @@ import '../../../../core/di/di.dart';
 import '../../../../core/styles/colors/app_colors.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../core/utils/widget/add_to_cart_button.dart';
+import '../../../../core/utils/widget/custom_cached_network_image.dart';
 import '../../../../domain/entities/home_layout/product_details_entity.dart';
+import '../../../../generated/l10n.dart';
 import '../view_model/product_details_cubit.dart';
 import '../view_model/product_details_states.dart';
 

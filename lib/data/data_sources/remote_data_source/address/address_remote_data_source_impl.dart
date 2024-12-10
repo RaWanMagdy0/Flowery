@@ -43,11 +43,11 @@ class AddressRemoteDataSourceImpl extends AddressRemoteDataSource {
   }
 
   @override
-  Future<Result<dynamic>> deleteAddress() async {
+  Future<Result<dynamic>> deleteAddress(String addressId) async {
     return await executeApiCall(
       () async {
         var token = await _getToken();
-        return await apiManger.deleteAddress(token);
+        return await apiManger.deleteAddress(addressId, token);
       },
     );
   }

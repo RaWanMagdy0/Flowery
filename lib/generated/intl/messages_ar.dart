@@ -33,6 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "anErrorOccurredWhileUpdatingTheProfile":
             MessageLookupByLibrary.simpleMessage(
                 "حدث خطأ أثناء تحديث الملف الشخصي"),
+        "arabic": MessageLookupByLibrary.simpleMessage("العربيه"),
         "bestSeller": MessageLookupByLibrary.simpleMessage("الأكثر مبيعًا"),
         "bestSellers": MessageLookupByLibrary.simpleMessage("الأكثر مبيعًا"),
         "bloomWithBestSellers": MessageLookupByLibrary.simpleMessage(

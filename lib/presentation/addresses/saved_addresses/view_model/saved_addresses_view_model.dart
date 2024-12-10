@@ -1,4 +1,5 @@
 import 'package:flowery/core/base/base_view_model.dart';
+import 'package:flowery/domain/entities/address/saved_addresses_entity.dart';
 import 'package:flowery/domain/use_case/address/delete_address_use_case.dart';
 import 'package:flowery/domain/use_case/address/saved_addresses_use_case.dart';
 import 'package:flowery/presentation/addresses/saved_addresses/view_model/saved_addresses_states.dart';
@@ -10,6 +11,7 @@ import '../../../../core/api/api_result.dart';
 class SavedAddressesViewModel extends BaseViewModel<SavedAddressesStates> {
   final SavedAddressesUseCase _savedAddressesUseCase;
   final DeleteAddressUseCase _deleteAddressUseCase;
+
   SavedAddressesViewModel(
       this._savedAddressesUseCase, this._deleteAddressUseCase)
       : super(SavedAddressesInitial());
@@ -25,13 +27,18 @@ class SavedAddressesViewModel extends BaseViewModel<SavedAddressesStates> {
     }
   }
 
-  void deleteAddress() async {
-    final result = await _deleteAddressUseCase.invoke();
+  void deleteAddress(String addressId) async {
+    emit(SavedAddressesLoading());
+    final result = await _deleteAddressUseCase.invoke(addressId);
     switch (result) {
       case Success():
         emit(DeleteAddressSuccess());
+        getAllAddresses();
+        break;
+
       case Fail():
-        emit(DeleteAddressFailure());
+        emit(DeleteAddressFailure(
+            getErrorMassageFromException(result.exception)));
     }
   }
 }

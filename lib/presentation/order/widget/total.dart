@@ -41,9 +41,12 @@ class _TotalState extends State<Total> {
               ),
             );
           } else if (state is CheckoutErrorState) {
-            return Center(
-              child: Text(state.errorMessage.toString()),
-            );
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              AppDialogs.showErrorDialog(
+                context: context,
+                errorMassage: state.errorMessage.toString(),
+              );
+            });
           } else if (state is CheckoutSuccessState) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               AppDialogs.showSuccessDialog(
@@ -110,17 +113,18 @@ class _TotalState extends State<Total> {
                           street: street,
                           phone: phone,
                         );
-
                         final createOrderRequest = CreateOrderRequest(
                           shippingAddress: shippingAddress,
                         );
-
                         viewModel.createOrder(createOrderRequest);
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            backgroundColor: AppColors.kLightGrey,
-                            content: Text("Please select a delivery address."),
+                            backgroundColor: AppColors.kBabyPink,
+                            content: Text(
+                              "Please select a delivery address.",
+                              style: AppFonts.font14GreyWeight400,
+                            ),
                           ),
                         );
                       }
