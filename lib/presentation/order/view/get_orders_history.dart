@@ -1,12 +1,29 @@
+import 'package:flowery/core/di/di.dart';
 import 'package:flowery/core/styles/colors/app_colors.dart';
 import 'package:flowery/core/styles/fonts/app_fonts.dart';
+import 'package:flowery/presentation/order/view_model/order_cubit.dart';
+import 'package:flowery/presentation/order/view_model/order_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../widget/order_history_list.dart';
 
-class GetOrdersHistory extends StatelessWidget {
+class GetOrdersHistory extends StatefulWidget {
   const GetOrdersHistory({super.key});
+
+  @override
+  State<GetOrdersHistory> createState() => _GetOrdersHistoryState();
+}
+
+class _GetOrdersHistoryState extends State<GetOrdersHistory> {
+  late OrderCubit viewModel;
+  @override
+  void initState() {
+    super.initState();
+    viewModel = getIt.get<OrderCubit>();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +54,33 @@ class GetOrdersHistory extends StatelessWidget {
             ],
           ),
         ),
-        body: TabBarView(
-          physics: ScrollPhysics(),
-          children: [
-            OrderHistoryList(),
-            OrderHistoryList(),
-          ],
+        body: BlocBuilder<OrderCubit, OrderState>(
+          bloc: viewModel,
+          builder: (context, state) {
+            if (state is OrderLoadingState) {
+              return Center(
+                child: CircularProgressIndicator(
+                  color: AppColors.kPink,
+                ),
+              );
+            } else if (state is GetOrdersErrorState) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                AppDialogs.showErrorDialog(
+                  context: context,
+                  errorMassage: state.errorMessage.toString(),
+                );
+              });
+            } else if (state is CheckoutSuccessState) {
+              return TabBarView(
+                physics: ScrollPhysics(),
+                children: [
+                  OrderHistoryList(),
+                  OrderHistoryList(),
+                ],
+              );
+            }
+            return const Center(child: Text("No address available."));
+          },
         ),
       ),
     );

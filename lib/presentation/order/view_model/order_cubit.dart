@@ -4,6 +4,7 @@ import '../../../core/api/api_result.dart';
 import '../../../core/base/base_view_model.dart';
 import '../../../data/models/order/request/create_order_request/create_order_request.dart';
 import '../../../domain/entities/order/create_order/order_entity.dart';
+import '../../../domain/entities/order/create_order/order_item_entity.dart';
 import '../../../domain/use_case/order/create_order_use_case.dart';
 import 'order_state.dart';
 
@@ -33,9 +34,9 @@ class OrderCubit extends BaseViewModel<OrderState> {
 
     var result = await historyUseCase.invoke();
     switch (result) {
-      case Success<OrderEntity?>():
-        emit(GetOrdersSuccessState());
-      case Fail<OrderEntity?>():
+      case Success<OrderItemEntity?>():
+        emit(GetOrdersSuccessState(orderItemEntity: result.data));
+      case Fail<OrderItemEntity?>():
         emit(GetOrdersErrorState(
             errorMessage: getErrorMassageFromException(result.exception)));
     }

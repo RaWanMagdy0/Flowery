@@ -1,3 +1,4 @@
+import 'package:flowery/data/models/order/response/create_order_response/order_item_model.dart';
 import 'package:flowery/data/models/order/response/create_order_response/order_model.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../core/api/api_result.dart';
@@ -23,8 +24,8 @@ class OrderRemoteDataSourceImpl extends OrderRemoteDataSource {
   }
 
   @override
-  Future<Result<OrderModel?>> getOrdersHistory() async {
-    return await executeApiCall<OrderModel?>(() async {
+  Future<Result<OrderItemModel?>> getOrdersHistory() async {
+    return await executeApiCall<OrderItemModel?>(() async {
       var token = await _getToken();
       var response = await apiManger.getOrdersHistory(token);
       return response;
