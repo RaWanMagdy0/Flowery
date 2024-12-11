@@ -21,4 +21,5 @@ class AppImages {
   static const editIcon = "assets/images/edit_icon.png";
   static const trashIcon = "assets/icons/trash_icon.svg";
   static const languageIcon = "assets/icons/language_icon.png";
+  static const flowerImage= "assets/images/Image.png";
 }

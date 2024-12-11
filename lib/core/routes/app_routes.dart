@@ -1,3 +1,4 @@
+import 'package:flowery/presentation/order/view/get_orders_history.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -93,6 +94,10 @@ class AppRoutes {
         return _handleMaterialPageRoute(
           widget: MainPage(),
         );
+      case PageRouteName.getOrdersHistory:
+        return _handleMaterialPageRoute(
+          widget: GetOrdersHistory(),
+        );
 
       case PageRouteName.productDetails:
         final String productId = setting.arguments as String;
@@ -123,7 +128,8 @@ class AppRoutes {
         return _handleMaterialPageRoute(widget: const AboutAppScreen());
 
       case PageRouteName.termsConditions:
-        return _handleMaterialPageRoute(widget: const TermsAndConditionsScreen());
+        return _handleMaterialPageRoute(
+            widget: const TermsAndConditionsScreen());
       case PageRouteName.occasion:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -140,7 +146,6 @@ class AppRoutes {
                 ));
       case PageRouteName.editProfile:
         return _handleMaterialPageRoute(widget: EditProfileScreen());
-
 
       case PageRouteName.checkout:
         return MaterialPageRoute(

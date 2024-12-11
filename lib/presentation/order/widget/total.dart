@@ -34,7 +34,7 @@ class _TotalState extends State<Total> {
     return BlocBuilder<OrderCubit, OrderState>(
         bloc: viewModel,
         builder: (context, state) {
-          if (state is CheckoutLoadingState) {
+          if (state is OrderLoadingState) {
             return Center(
               child: CircularProgressIndicator(
                 color: AppColors.kPink,

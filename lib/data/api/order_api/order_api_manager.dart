@@ -14,11 +14,16 @@ abstract class OrderApiManger {
   @factoryMethod
   factory OrderApiManger(Dio dio) = _OrderApiManger;
 
-  @POST(ApiConstants.createOrder)
+  @POST(ApiConstants.order)
   Future<OrderModel?> createOrder(
     @Header("Authorization") String token,
     @Body() CreateOrderRequest createOrderRequest,
   );
+  @GET(ApiConstants.order)
+  Future<OrderModel?> getOrdersHistory(
+    @Header("Authorization") String token,
+  );
+
   @PATCH(ApiConstants.addAddress)
   Future<dynamic> addAddress(
     @Header("Authorization") String token,

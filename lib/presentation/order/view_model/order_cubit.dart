@@ -1,3 +1,4 @@
+import 'package:flowery/domain/use_case/order/get_order_history_use_case.dart';
 import 'package:injectable/injectable.dart';
 import '../../../core/api/api_result.dart';
 import '../../../core/base/base_view_model.dart';
@@ -9,11 +10,12 @@ import 'order_state.dart';
 @injectable
 class OrderCubit extends BaseViewModel<OrderState> {
   CreateOrderUseCase useCase;
-  OrderCubit(this.useCase) : super(OrderInitialState());
+  GetOrderHistoryUseCase historyUseCase;
+  OrderCubit(this.useCase, this.historyUseCase) : super(OrderInitialState());
 
   OrderEntity? orderEntity;
   Future<void> createOrder(CreateOrderRequest createOrderRequest) async {
-    emit(CheckoutLoadingState());
+    emit(OrderLoadingState());
 
     var result = await useCase.invoke(createOrderRequest);
     switch (result) {
@@ -26,8 +28,16 @@ class OrderCubit extends BaseViewModel<OrderState> {
     }
   }
 
-  int get subTotal => orderEntity?.totalPrice ?? 0;
-  int get deliveryFee => 10;
+  Future<void> getOrdersHistory() async {
+    emit(OrderLoadingState());
 
-  int get total => subTotal + deliveryFee;
+    var result = await historyUseCase.invoke();
+    switch (result) {
+      case Success<OrderEntity?>():
+        emit(GetOrdersSuccessState());
+      case Fail<OrderEntity?>():
+        emit(GetOrdersErrorState(
+            errorMessage: getErrorMassageFromException(result.exception)));
+    }
+  }
 }

@@ -22,6 +22,15 @@ class OrderRemoteDataSourceImpl extends OrderRemoteDataSource {
     });
   }
 
+  @override
+  Future<Result<OrderModel?>> getOrdersHistory() async {
+    return await executeApiCall<OrderModel?>(() async {
+      var token = await _getToken();
+      var response = await apiManger.getOrdersHistory(token);
+      return response;
+    });
+  }
+
   Future<String> _getToken() async {
     var token = await TokenManager.getToken();
     if (token == null || token.isEmpty) {

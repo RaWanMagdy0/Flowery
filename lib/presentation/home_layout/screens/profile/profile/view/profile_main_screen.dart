@@ -145,7 +145,9 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                               leadingIcon: Icons.list_alt,
                               title: local.myOrder,
                               trailingIcon: Icons.arrow_forward_ios,
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.pushNamed(context, PageRouteName.getOrdersHistory);
+                              },
                             ),
                             CustomListTile(
                               leadingIcon: Icons.location_pin,
