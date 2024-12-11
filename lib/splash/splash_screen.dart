@@ -94,17 +94,17 @@ class _SplashScreenState extends State<SplashScreen>
         child: _isNoInternet
             ? _buildNoInternetWidget()
             : Center(
-                child: Lottie.asset(
-                  controller: _controller,
-                  AppImages.floweryAnimation,
-                  fit: BoxFit.cover,
-                  onLoaded: (composition) {
-                    _controller
-                      ..duration = composition.duration
-                      ..forward();
-                  },
-                ),
-              ),
+          child: Lottie.asset(
+            controller: _controller,
+            AppImages.floweryAnimation,
+            fit: BoxFit.cover,
+            onLoaded: (composition) {
+              _controller
+                ..duration = composition.duration
+                ..forward();
+            },
+          ),
+        ),
       ),
     );
   }
