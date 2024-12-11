@@ -1,0 +1,39 @@
+name: Dart Linting and Auto-Fix Validation
+
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - development
+      - master
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Flutter
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.4'  # Specify Flutter 3.24.4 for consistency
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run Dart Analyzer (Linting)
+        run: flutter analyze --fatal-infos --fatal-warnings
+
+      - name: Apply Dart Fixes
+        run: dart fix --apply
+
+      - name: Run Dart Analyzer After Fixes
+        run: flutter analyze --fatal-infos --fatal-warnings
+
+      - name: Check Dart Format
+        run: dart format --set-exit-if-changed .
