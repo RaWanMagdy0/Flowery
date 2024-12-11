@@ -50,7 +50,6 @@ class CartViewModel extends BaseViewModel<CartState> {
       emit(NoUserLogged());
       return;
     }
-
     emit(CartLoading());
     cartItemsCount = 0;
 
