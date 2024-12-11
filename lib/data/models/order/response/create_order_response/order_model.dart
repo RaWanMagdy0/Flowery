@@ -2,37 +2,42 @@ import '../../../../../domain/entities/order/create_order/order_entity.dart';
 import 'order_item_model.dart';
 
 class OrderModel {
-  OrderModel(
-      {this.user,
-      this.orderItems,
-      this.totalPrice,
-      this.paymentType,
-      this.isPaid,
-      this.isDelivered,
-      this.id,
-      this.createdAt,
-      this.updatedAt,
-      this.v,
-      this.message});
+  OrderModel({
+    this.user,
+    this.orderItems,
+    this.totalPrice,
+    this.paymentType,
+    this.isPaid,
+    this.isDelivered,
+    this.id,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+    this.message,
+  });
 
   OrderModel.fromJson(dynamic json) {
-    user = json['user'];
-    if (json['orderItems'] != null) {
-      orderItems = [];
-      json['orderItems'].forEach((v) {
-        orderItems?.add(OrderItemModel.fromJson(v));
-      });
+    final orders = json['orders'];
+    if (orders != null) {
+      user = orders['user'];
+      if (orders['orderItems'] != null) {
+        orderItems = [];
+        orders['orderItems'].forEach((v) {
+          orderItems?.add(OrderItemModel.fromJson(v));
+        });
+      }
+      totalPrice = orders['totalPrice'];
+      paymentType = orders['paymentType'];
+      isPaid = orders['isPaid'];
+      isDelivered = orders['isDelivered'];
+      id = orders['_id'];
+      createdAt = orders['createdAt'];
+      updatedAt = orders['updatedAt'];
+      v = orders['__v'];
     }
-    totalPrice = json['totalPrice'];
-    paymentType = json['paymentType'];
-    isPaid = json['isPaid'];
-    isDelivered = json['isDelivered'];
-    id = json['_id'];
-    createdAt = json['createdAt'];
-    updatedAt = json['updatedAt'];
-    v = json['__v'];
     message = json['message'];
   }
+
   String? user;
   List<OrderItemModel>? orderItems;
   int? totalPrice;
@@ -67,7 +72,7 @@ class OrderModel {
     return OrderEntity(
       user: user,
       totalPrice: totalPrice,
-      id: id ,
+      id: id,
       isDelivered: isDelivered ?? false,
       isPaid: isPaid ?? false,
       paymentType: paymentType ?? 'unknown',

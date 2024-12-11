@@ -7,6 +7,6 @@ import '../../entities/order/create_order/order_item_entity.dart';
 abstract class OrderRepository {
   Future<Result<OrderEntity?>> createOrder(
       CreateOrderRequest createOrderRequest);
-  Future<Result<OrderItemEntity?>> getOrdersHistory();
+  Future<Result<OrderEntity?>> getOrdersHistory();
 
 }

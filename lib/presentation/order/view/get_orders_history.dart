@@ -6,7 +6,6 @@ import 'package:flowery/presentation/order/view_model/order_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../widget/order_history_list.dart';
 
@@ -23,6 +22,7 @@ class _GetOrdersHistoryState extends State<GetOrdersHistory> {
   void initState() {
     super.initState();
     viewModel = getIt.get<OrderCubit>();
+    viewModel.getOrdersHistory();
   }
 
   @override
@@ -70,16 +70,17 @@ class _GetOrdersHistoryState extends State<GetOrdersHistory> {
                   errorMassage: state.errorMessage.toString(),
                 );
               });
-            } else if (state is CheckoutSuccessState) {
+            } else if (state is GetOrdersSuccessState) {
               return TabBarView(
                 physics: ScrollPhysics(),
                 children: [
-                  OrderHistoryList(),
-                  OrderHistoryList(),
+                  OrderHistoryList(
+                      orderItems: state.orderEntity?.orderItems ?? [],
+                  ),
                 ],
               );
             }
-            return const Center(child: Text("No address available."));
+            return const Center(child: Text("No orders available."));
           },
         ),
       ),

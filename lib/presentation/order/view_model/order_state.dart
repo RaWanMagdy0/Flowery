@@ -18,8 +18,8 @@ final class CheckoutErrorState extends OrderState {
 }
 //getAllOrders
 final class GetOrdersSuccessState extends OrderState {
-  final OrderItemEntity? orderItemEntity;
-  GetOrdersSuccessState({required this.orderItemEntity});
+  final OrderEntity? orderEntity;
+  GetOrdersSuccessState({required this.orderEntity});
 }
 
 final class GetOrdersErrorState extends OrderState {

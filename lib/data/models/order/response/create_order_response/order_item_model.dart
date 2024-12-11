@@ -31,7 +31,7 @@ class OrderItemModel {
   OrderItemEntity toOrderItems() {
     return OrderItemEntity(
       id: id,
-      product: id,
+      product:product,
       price: price,
       quantity: quantity,
     );

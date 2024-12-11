@@ -28,11 +28,11 @@ class OrderRepositoryImpl extends OrderRepository {
   }
 
   @override
-  Future<Result<OrderItemEntity?>> getOrdersHistory() async {
+  Future<Result<OrderEntity?>> getOrdersHistory() async {
     final response = await dataSource.getOrdersHistory();
     switch (response) {
       case Success():
-        return Success(data: response.data?.toOrderItems());
+        return Success(data: response.data?.toEntity());
       case Fail():
         return Fail(exception: response.exception);
     }

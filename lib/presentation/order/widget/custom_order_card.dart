@@ -1,4 +1,5 @@
 import 'package:flowery/core/utils/widget/custom_button.dart';
+import 'package:flowery/data/models/order/response/create_order_response/order_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../core/styles/colors/app_colors.dart';
@@ -6,9 +7,10 @@ import '../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../core/styles/images/app_images.dart';
 
 class CustomOrderCard extends StatelessWidget {
-  const CustomOrderCard({
-    super.key,
-  });
+  final String productName;
+  final int price;
+  final String orderNumber;
+    const CustomOrderCard({super.key,required this.price,required this.orderNumber,required this.productName});
 
   @override
   Widget build(BuildContext context) {
@@ -37,19 +39,23 @@ class CustomOrderCard extends StatelessWidget {
               children: [
                 10.verticalSpace,
                 Text(
-                  'Red roses',
+                  productName,
                   style: AppFonts.font12BlackWeight400,
                 ),
                 4.verticalSpace,
                 Text(
-                  'Egp 500',
+                  "EGP ${price.toString()}",
                   style: AppFonts.font12BlackWeight400.copyWith(fontWeight: FontWeight.w500),
                 ),
                 6.verticalSpace,
-                Text(
-                  'order number# 8473473',
-                  style: AppFonts.font12BlackWeight400.copyWith(color: AppColors.kGray),
-                ),
+                Row(
+                  children: [
+                    Text(
+                      "Order number # \n${orderNumber}",
+                      style: AppFonts.font12BlackWeight400.copyWith(color: AppColors.kGray),
+                    ),
+                  ],
+                )      ,
                 15.verticalSpace,
                 CustomButton(
                   width: 140.w,

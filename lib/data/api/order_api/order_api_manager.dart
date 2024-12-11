@@ -21,7 +21,7 @@ abstract class OrderApiManger {
     @Body() CreateOrderRequest createOrderRequest,
   );
   @GET(ApiConstants.order)
-  Future<OrderItemModel?> getOrdersHistory(
+  Future<OrderModel?> getOrdersHistory(
     @Header("Authorization") String token,
   );
 

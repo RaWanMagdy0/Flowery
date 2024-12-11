@@ -5,5 +5,5 @@ import '../../../models/order/request/create_order_request/create_order_request.
 
 abstract class OrderRemoteDataSource {
   Future<Result<OrderModel?>> createOrder(CreateOrderRequest createOrderRequest);
-  Future<Result<OrderItemModel?>> getOrdersHistory();
+  Future<Result<OrderModel?>> getOrdersHistory();
 }
