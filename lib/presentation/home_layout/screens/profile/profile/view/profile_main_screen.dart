@@ -2,25 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
-import 'package:intl/intl.dart';
 import '../../../../../../core/di/di.dart';
 import '../../../../../../core/routes/page_route_name.dart';
 import '../../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../core/styles/images/app_images.dart';
-import '../../../../../../core/utils/const/language_bottom_sheet.dart';
 import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../../../core/utils/widget/custom_button.dart';
 import '../../../../../../core/utils/widget/custom_list_tile.dart';
 import '../../../../../../core/utils/widget/custom_switch_tile.dart';
 import '../../../../../../generated/l10n.dart';
-import '../../../../../../core/utils/widget/custom_cached_network_image.dart';
-import '../../../../../../core/utils/widget/custom_list_tile.dart';
-import '../../../../../../core/utils/widget/custom_switch_tile.dart';
-import '../../../../../about_app/view/about_app_screen.dart';
 import '../../../cart/view_model/cart_view_model.dart';
 import '../view_model/profile_cubit.dart';
 import '../view_model/profile_state.dart';
+import '../widget/local_row.dart';
 
 class ProfileMainScreen extends StatefulWidget {
   static const String routeName = 'Profile Main Screen';
@@ -177,19 +172,7 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                             ),
                             SizedBox(height: 14.h),
                             Divider(thickness: 1.w),
-                            /*******
-                            CustomListTile(
-                              leadingIcon: Icons.translate,
-                              title: local.language,
-                              subtitle: local.english,
-                              subtitleStyle:
-                                  const TextStyle(color: Colors.pink),
-                              onTap: () {
-
-                              },
-                            ),
-                            *********/
-                            LanguageBottomSheet(),
+                            LocalizationRow(),
                             CustomListTile(
                               title: local.aboutAs,
                               trailingIcon: Icons.arrow_forward_ios,

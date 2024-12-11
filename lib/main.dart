@@ -28,7 +28,7 @@ void main() async {
 
   LocalProvider provider = LocalProvider();
 
-  await provider.changeLanguage('en');
+  await provider.loadSavedLanguage();
 
   runApp(
 
@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
               supportedLocales: S.delegate.supportedLocales,
               debugShowCheckedModeBanner: false,
               theme: AppTheme.appTheme,
-              initialRoute: PageRouteName.logIn,
+              initialRoute: PageRouteName.splash,
               onGenerateRoute: (settings) =>
                   AppRoutes.onGenerateRoute(settings),
             ),
