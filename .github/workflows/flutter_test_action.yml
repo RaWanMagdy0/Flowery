@@ -37,7 +37,11 @@ jobs:
       - name: Run unit tests
         run: flutter test
 
-      # Optional: Cache Flutter dependencies to speed up the workflow
+      # Step 6: Build APK
+      - name: Build APK
+        run: flutter build apk --release
+
+      # Step 7: Cache Flutter dependencies (optional)
       - name: Cache Flutter dependencies
         uses: actions/cache@v2
         with:
@@ -45,3 +49,19 @@ jobs:
           key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.yaml') }}
           restore-keys: |
             ${{ runner.os }}-flutter-
+
+      # Step 8: Install Firebase CLI
+      - name: Install Firebase CLI
+        run: curl -sL https://firebase.tools | bash
+
+      # Step 9: Set up Google Cloud credentials using the Firebase service account key
+      - name: Set up Google Cloud credentials
+        run: echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" > $HOME/.config/gcloud/application_default_credentials.json
+
+      # Step 10: Upload APK to Firebase App Distribution
+      - name: Upload APK to Firebase App Distribution
+        run: firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk \
+          --app "your-app-id" \
+          --groups "testers"  # Specify your testers' group name in Firebase
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
