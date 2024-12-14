@@ -61,7 +61,7 @@ jobs:
       # Step 10: Upload APK to Firebase App Distribution
       - name: Upload APK to Firebase App Distribution
         run: firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk \
-          --app "your-app-id" \
+          --app "1:941362651057:android:6d3808a23b1f9afd412790" \
           --groups "testers"  # Specify your testers' group name in Firebase
         env:
           GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
