@@ -1,0 +1,46 @@
+name: Upload to Firebase App Distribution
+
+on:
+  pull_request:
+    types:
+      - labeled
+
+jobs:
+  upload-to-firebase:
+    if: contains(github.event.label.name, 'ReadyForTesting')
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repository code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Set up JDK
+      - name: Set up Java JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+
+      # Set up Android SDK
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v2
+
+      # Build the Android app
+      - name: Build Android App
+        run: ./gradlew assembleRelease
+
+      # Authenticate Firebase CLI
+      - name: Authenticate Firebase CLI
+        uses: w9jds/firebase-action@v2
+        with:
+          args: login:ci
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_AUTH_TOKEN }}
+
+      # Upload APK to Firebase App Distribution
+      - name: Upload APK to Firebase App Distribution
+        run: firebase appdistribution:distribute app/build/outputs/apk/release/app-release.apk \
+          --app "<your-firebase-app-id>" \
+          --groups "testers"
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_AUTH_TOKEN }}
