@@ -1,5 +1,4 @@
 import 'package:flowery/core/base/base_view_model.dart';
-import 'package:flowery/domain/entities/address/saved_addresses_entity.dart';
 import 'package:flowery/domain/use_case/address/delete_address_use_case.dart';
 import 'package:flowery/domain/use_case/address/saved_addresses_use_case.dart';
 import 'package:flowery/presentation/addresses/saved_addresses/view_model/saved_addresses_states.dart';

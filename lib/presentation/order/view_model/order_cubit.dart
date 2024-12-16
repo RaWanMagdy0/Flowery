@@ -3,9 +3,7 @@ import 'package:injectable/injectable.dart';
 import '../../../core/api/api_result.dart';
 import '../../../core/base/base_view_model.dart';
 import '../../../data/models/order/request/create_order_request/create_order_request.dart';
-import '../../../domain/entities/home_layout/product_details_entity.dart';
-import '../../../domain/entities/order/create_order/order_entity.dart';
-import '../../../domain/entities/order/create_order/order_item_entity.dart';
+import '../../../domain/entities/order/create_order/order_response_entity.dart';
 import '../../../domain/use_case/order/create_order_use_case.dart';
 import 'order_state.dart';
 
@@ -16,6 +14,7 @@ class OrderCubit extends BaseViewModel<OrderState> {
   OrderCubit(this.useCase, this.historyUseCase) : super(OrderInitialState());
 
   OrderEntity? orderEntity;
+
   Future<void> createOrder(CreateOrderRequest createOrderRequest) async {
     emit(OrderLoadingState());
 
@@ -31,14 +30,16 @@ class OrderCubit extends BaseViewModel<OrderState> {
 
   Future<void> getOrdersHistory() async {
     emit(OrderLoadingState());
-
     var result = await historyUseCase.invoke();
     switch (result) {
-      case Success<OrderEntity?>():
-        emit(GetOrdersSuccessState(orderEntity: result.data));
-      case Fail<OrderEntity?>():
+      case Success():
+        emit(GetOrdersSuccessState(orders: result.data));
+        break;
+      case Fail():
         emit(GetOrdersErrorState(
             errorMessage: getErrorMassageFromException(result.exception)));
+        break;
     }
   }
+
 }

@@ -1,12 +1,13 @@
-import 'package:flowery/core/di/di.dart';
 import 'package:flowery/core/styles/colors/app_colors.dart';
 import 'package:flowery/core/styles/fonts/app_fonts.dart';
-import 'package:flowery/presentation/order/view_model/order_cubit.dart';
-import 'package:flowery/presentation/order/view_model/order_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../core/di/di.dart';
 import '../../../core/utils/functions/dialogs/app_dialogs.dart';
+import '../../../domain/entities/order/create_order/order_response_entity.dart';
+import '../view_model/order_cubit.dart';
+import '../view_model/order_state.dart';
 import '../widget/order_history_list.dart';
 
 class GetOrdersHistory extends StatefulWidget {
@@ -32,10 +33,7 @@ class _GetOrdersHistoryState extends State<GetOrdersHistory> {
       child: Scaffold(
         appBar: AppBar(
           forceMaterialTransparency: true,
-          title: Text(
-            "My orders",
-            style: AppFonts.font20BlackWeight500,
-          ),
+          title: Text("My Orders", style: AppFonts.font20BlackWeight500),
           leading: Icon(Icons.arrow_back_ios_rounded),
           bottom: TabBar(
             unselectedLabelStyle: AppFonts.font16LightGreyWeight400,
@@ -45,12 +43,8 @@ class _GetOrdersHistoryState extends State<GetOrdersHistory> {
             dividerHeight: 4.h,
             indicatorColor: AppColors.kPink,
             tabs: [
-              Tab(
-                child: Text("Active"),
-              ),
-              Tab(
-                child: Text("Completed"),
-              ),
+              Tab(child: Text("Active")),
+              Tab(child: Text("Completed")),
             ],
           ),
         ),
@@ -59,10 +53,7 @@ class _GetOrdersHistoryState extends State<GetOrdersHistory> {
           builder: (context, state) {
             if (state is OrderLoadingState) {
               return Center(
-                child: CircularProgressIndicator(
-                  color: AppColors.kPink,
-                ),
-              );
+                  child: CircularProgressIndicator(color: AppColors.kPink));
             } else if (state is GetOrdersErrorState) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 AppDialogs.showErrorDialog(
@@ -71,12 +62,36 @@ class _GetOrdersHistoryState extends State<GetOrdersHistory> {
                 );
               });
             } else if (state is GetOrdersSuccessState) {
+              OrderEntity? order = state.orders;
+              List<OrderItemEntity> activeOrders = [];
+              List<OrderItemEntity> completedOrders = [];
+
+              if (order != null) {
+                activeOrders = order.orderItems
+                        ?.where((item) =>
+                            !(order.isPaid ?? false) ||
+                            !(order.isDelivered ?? false))
+                        .toList() ??
+                    [];
+                completedOrders = order.orderItems
+                        ?.where((item) =>
+                            (order.isPaid ?? false) &&
+                            (order.isDelivered ?? false))
+                        .toList() ??
+                    [];
+              }
               return TabBarView(
-                physics: ScrollPhysics(),
                 children: [
                   OrderHistoryList(
-                      orderItems: state.orderEntity?.orderItems ?? [],
+                    orderItems: activeOrders,
+                    order: order,
                   ),
+                  completedOrders.isEmpty
+                      ? Center(child: Text("No completed orders available."))
+                      : OrderHistoryList(
+                          order: order,
+                          orderItems: completedOrders,
+                        ),
                 ],
               );
             }

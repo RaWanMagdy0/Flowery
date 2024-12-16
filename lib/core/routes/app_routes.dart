@@ -1,3 +1,4 @@
+import 'package:flowery/presentation/home_layout/product_details/view_model/product_details_cubit.dart';
 import 'package:flowery/presentation/order/view/get_orders_history.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -94,14 +95,9 @@ class AppRoutes {
         return _handleMaterialPageRoute(
           widget: MainPage(),
         );
-      case PageRouteName.getOrdersHistory:
-        return _handleMaterialPageRoute(
-          widget: GetOrdersHistory(),
-        );
 
       case PageRouteName.productDetails:
         final String productId = setting.arguments as String;
-
         return MaterialPageRoute(
           builder: (context) => ProductDetails(productId),
           settings: setting,
@@ -154,6 +150,16 @@ class AppRoutes {
             child: CheckoutOrderScreen(),
           ),
         );
+      /********8888
+      case PageRouteName.getOrdersHistory:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => getIt<ProductDetailsCubit>(),
+                  child: GetOrdersHistory(),
+                ));
+***************/
+      case PageRouteName.getOrdersHistory:
+        return _handleMaterialPageRoute(widget: GetOrdersHistory());
 
       case PageRouteName.addAndEditUserAddress:
         return MaterialPageRoute(
