@@ -150,17 +150,16 @@ class AppRoutes {
             child: CheckoutOrderScreen(),
           ),
         );
-      /********8888
       case PageRouteName.getOrdersHistory:
         return MaterialPageRoute(
             builder: (context) => BlocProvider(
                   create: (context) => getIt<ProductDetailsCubit>(),
                   child: GetOrdersHistory(),
                 ));
-***************/
+/***************
       case PageRouteName.getOrdersHistory:
         return _handleMaterialPageRoute(widget: GetOrdersHistory());
-
+**************/
       case PageRouteName.addAndEditUserAddress:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
