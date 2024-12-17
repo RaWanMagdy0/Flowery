@@ -13,15 +13,14 @@ import 'core/utils/bloc_observer/app_bloc_observer.dart';
 import 'core/utils/functions/providers/local_provider.dart';
 import 'presentation/home_layout/screens/cart/view_model/cart_view_model.dart';
 import 'firebase_options.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
   configureDependencies();
-
   Bloc.observer = AppBlocObserver();
 
   LocalProvider provider = LocalProvider();
@@ -29,7 +28,6 @@ void main() async {
   await provider.loadSavedLanguage();
 
   runApp(
-
     ChangeNotifierProvider(
       create: (context) => provider,
       child: MyApp(),

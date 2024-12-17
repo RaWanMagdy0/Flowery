@@ -115,5 +115,13 @@
   "validateEmailAddress": "هذا البريد الإلكتروني غير صالح",
   "viewAll": "عرض الكل",
   "arabic": "العربيه",
-  "yourCartIsEmptyGoBackAndAddSomeItems": "سلة التسوق فارغة. عد وأضف بعض العناصر"
+  "yourCartIsEmptyGoBackAndAddSomeItems": "سلة التسوق فارغة. عد وأضف بعض العناصر",
+  "orderNumber": "رقم الاوردر",
+  "active": "نشط",
+  "completed": "مكتمل",
+  "myOrders": "طلباتي",
+  "noCompletedOrdersAvailable": "لا توجد طلبات مكتملة متاحة.",
+  "noOrdersAvailable.": "لا توجد طلبات متاحة.",
+  "egp": "ج.م",
+  "trackOrder": "اتبع الطلب "
 }

@@ -115,7 +115,15 @@
   "userProfileEditedSuccessfully": "User profile edited successfully",
   "validateEmailAddress": "This email is not valid",
   "viewAll": "View All",
-  "yourCartIsEmptyGoBackAndAddSomeItems": "Your cart is empty. Go back and add some items"
+  "yourCartIsEmptyGoBackAndAddSomeItems": "Your cart is empty. Go back and add some items",
+  "orderNumber": "order Number",
+  "active": "active",
+  "completed": "completed",
+  "myOrders": "My Orders",
+  "noCompletedOrdersAvailable": "No completed orders available.",
+  "noOrdersAvailable": "No orders available.",
+  "egp": "EGP",
+  "trackOrder": "Track Order"
 }
  
  

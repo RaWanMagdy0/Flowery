@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "aboutAs": MessageLookupByLibrary.simpleMessage("About us"),
+        "active": MessageLookupByLibrary.simpleMessage("active"),
         "addToCart": MessageLookupByLibrary.simpleMessage("Add to cart"),
         "addToCartText": MessageLookupByLibrary.simpleMessage("Add To Cart"),
         "allPricesIncludeTax":
@@ -43,6 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cart": MessageLookupByLibrary.simpleMessage("Cart"),
         "categories": MessageLookupByLibrary.simpleMessage("Categories"),
         "changeText": MessageLookupByLibrary.simpleMessage("Change"),
+        "completed": MessageLookupByLibrary.simpleMessage("completed"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm password"),
         "confirmPasswordHintText":
@@ -65,6 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "donotHaveAccountText":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
         "editProfile": MessageLookupByLibrary.simpleMessage("Edit Profile"),
+        "egp": MessageLookupByLibrary.simpleMessage("EGP"),
         "emailHintText":
             MessageLookupByLibrary.simpleMessage("Enter Your Email"),
         "emailLabelText": MessageLookupByLibrary.simpleMessage("Email"),
@@ -124,16 +127,22 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("LOGOUT"),
         "male": MessageLookupByLibrary.simpleMessage("Male"),
         "myOrder": MessageLookupByLibrary.simpleMessage("My orders"),
+        "myOrders": MessageLookupByLibrary.simpleMessage("My Orders"),
         "newPassword": MessageLookupByLibrary.simpleMessage("New password"),
         "newPasswordLabelText":
             MessageLookupByLibrary.simpleMessage("New password"),
+        "noCompletedOrdersAvailable": MessageLookupByLibrary.simpleMessage(
+            "No completed orders available."),
         "noDescriptionAvailable":
             MessageLookupByLibrary.simpleMessage("No description available"),
+        "noOrdersAvailable":
+            MessageLookupByLibrary.simpleMessage("No orders available."),
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
         "occasionAppBar": MessageLookupByLibrary.simpleMessage("Occasion"),
         "occasionTitle": MessageLookupByLibrary.simpleMessage(
             "Bloom with our exquisite best sellers"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
+        "orderNumber": MessageLookupByLibrary.simpleMessage("order Number"),
         "otpSentToEmail": MessageLookupByLibrary.simpleMessage(
             "OTP sent to your email.\n Please check your Email"),
         "passwordAppBarTitle": MessageLookupByLibrary.simpleMessage("Password"),
@@ -189,6 +198,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Terms & Conditions"),
         "termsandConditions":
             MessageLookupByLibrary.simpleMessage("Terms & Conditions"),
+        "trackOrder": MessageLookupByLibrary.simpleMessage("Track Order"),
         "unexpectedState":
             MessageLookupByLibrary.simpleMessage("Unexpected state."),
         "updateText": MessageLookupByLibrary.simpleMessage("Update"),

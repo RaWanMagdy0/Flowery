@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/di/di.dart';
 import '../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../domain/entities/order/create_order/order_response_entity.dart';
+import '../../../generated/l10n.dart';
 import '../view_model/order_cubit.dart';
 import '../view_model/order_state.dart';
 import '../widget/order_history_list.dart';
@@ -28,12 +29,13 @@ class _GetOrdersHistoryState extends State<GetOrdersHistory> {
 
   @override
   Widget build(BuildContext context) {
+    final local = S.of(context);
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         appBar: AppBar(
           forceMaterialTransparency: true,
-          title: Text("My Orders", style: AppFonts.font20BlackWeight500),
+          title: Text(local.myOrders, style: AppFonts.font20BlackWeight500),
           leading: Icon(Icons.arrow_back_ios_rounded),
           bottom: TabBar(
             unselectedLabelStyle: AppFonts.font16LightGreyWeight400,
@@ -43,8 +45,8 @@ class _GetOrdersHistoryState extends State<GetOrdersHistory> {
             dividerHeight: 4.h,
             indicatorColor: AppColors.kPink,
             tabs: [
-              Tab(child: Text("Active")),
-              Tab(child: Text("Completed")),
+              Tab(child: Text(local.active)),
+              Tab(child: Text(local.completed)),
             ],
           ),
         ),
@@ -87,7 +89,7 @@ class _GetOrdersHistoryState extends State<GetOrdersHistory> {
                     order: order,
                   ),
                   completedOrders.isEmpty
-                      ? Center(child: Text("No completed orders available."))
+                      ? Center(child: Text(local.noCompletedOrdersAvailable))
                       : OrderHistoryList(
                           order: order,
                           orderItems: completedOrders,
@@ -95,7 +97,7 @@ class _GetOrdersHistoryState extends State<GetOrdersHistory> {
                 ],
               );
             }
-            return const Center(child: Text("No orders available."));
+            return Center(child: Text(local.noOrdersAvailable));
           },
         ),
       ),

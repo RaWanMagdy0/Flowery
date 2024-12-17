@@ -9,6 +9,7 @@ import '../../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../core/di/di.dart';
 import '../../../core/utils/widget/custom_cached_network_image.dart';
+import '../../../generated/l10n.dart';
 import '../../home_layout/product_details/view_model/product_details_cubit.dart';
 import '../../home_layout/product_details/view_model/product_details_states.dart';
 
@@ -38,6 +39,8 @@ class _CustomOrderCardState extends State<CustomOrderCard> {
 
   @override
   Widget build(BuildContext context) {
+    final local = S.of(context);
+
     return BlocBuilder<ProductDetailsCubit, ProductDetailsStates>(
       bloc: viewModel,
       builder: (context, state) {
@@ -98,7 +101,7 @@ class _CustomOrderCardState extends State<CustomOrderCard> {
                           ),
                           4.verticalSpace,
                           Text(
-                            "EGP ${widget.orderItem?.price}",
+                            "${local.egp} ${widget.orderItem?.price}",
                             style: AppFonts.font12BlackWeight400
                                 .copyWith(fontWeight: FontWeight.w500),
                           ),
@@ -106,7 +109,7 @@ class _CustomOrderCardState extends State<CustomOrderCard> {
                           Row(
                             children: [
                               Text(
-                                "Order Number \n#${widget.order?.id ?? ""}",
+                                "${local.orderNumber} \n#${widget.order?.id ?? ""}",
                                 style: AppFonts.font12BlackWeight400
                                     .copyWith(color: AppColors.kGray),
                               ),
@@ -118,7 +121,7 @@ class _CustomOrderCardState extends State<CustomOrderCard> {
                             height: 35.h,
                             color: AppColors.kPink,
                             child: Text(
-                              "Track Order",
+                              local.trackOrder,
                               style: AppFonts.font16WhiteWeight500
                                   .copyWith(fontSize: 13.sp),
                             ),

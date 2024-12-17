@@ -1219,6 +1219,86 @@ class S {
       args: [],
     );
   }
+
+  /// `order Number`
+  String get orderNumber {
+    return Intl.message(
+      'order Number',
+      name: 'orderNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `active`
+  String get active {
+    return Intl.message(
+      'active',
+      name: 'active',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `completed`
+  String get completed {
+    return Intl.message(
+      'completed',
+      name: 'completed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `My Orders`
+  String get myOrders {
+    return Intl.message(
+      'My Orders',
+      name: 'myOrders',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No completed orders available.`
+  String get noCompletedOrdersAvailable {
+    return Intl.message(
+      'No completed orders available.',
+      name: 'noCompletedOrdersAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No orders available.`
+  String get noOrdersAvailable {
+    return Intl.message(
+      'No orders available.',
+      name: 'noOrdersAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `EGP`
+  String get egp {
+    return Intl.message(
+      'EGP',
+      name: 'egp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Track Order`
+  String get trackOrder {
+    return Intl.message(
+      'Track Order',
+      name: 'trackOrder',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
