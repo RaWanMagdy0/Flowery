@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../../domain/entities/home/home_discovery_entity.dart';
+import '../../../../../../../generated/l10n.dart';
 import '../../../view_model/home_view_model.dart';
 import 'home_discover_item.dart';
 import 'home_discover_loading.dart';
@@ -13,6 +14,7 @@ class HomeDiscoverList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final local = S.of(context);
     return BlocBuilder<HomeViewModel, HomeState>(
       builder: (context, state) {
         if (state is HomeDataLoading) {
@@ -32,7 +34,7 @@ class HomeDiscoverList extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
                   child: Text(
-                    'Discover something now',
+                    local.discoverSomethingNow,
                     style: AppFonts.font18BlackWeight500,
                   ),
                 ),

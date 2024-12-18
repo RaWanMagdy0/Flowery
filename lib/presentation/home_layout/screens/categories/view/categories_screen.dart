@@ -1,6 +1,9 @@
+import 'package:flowery/generated/l10n.dart';
+import 'package:flowery/core/utils/functions/dialogs/app_dialogs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../../core/routes/page_route_name.dart';
 import '../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../core/utils/widget/custom_item_card.dart';
@@ -20,6 +23,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final local = S.of(context);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(70.h),

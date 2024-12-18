@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../styles/colors/app_colors.dart';
 import '../../styles/fonts/app_fonts.dart';
+import 'custom_cached_network_image.dart';
 
 class FlowerCard extends StatelessWidget {
   final String? title;
@@ -93,17 +94,13 @@ class FlowerCard extends StatelessWidget {
                             borderRadius: BorderRadius.circular(8.r),
                           ),
                           child: Center(
-                            child: imageUrl != null
-                                ? ClipRRect(
-                                    borderRadius: BorderRadius.circular(8.r),
-                                    child: Image.network(
-                                      imageUrl!,
-                                      fit: BoxFit.cover,
-                                      width: double.infinity,
-                                      height: double.infinity,
-                                    ),
-                                  )
-                                : Icon(Icons.local_florist, size: 40.sp),
+                            child: CustomCachedNetworkImage(
+                              imageUrl: imageUrl,
+                              shimmerRadiusValue: 8.r,
+                              fit: BoxFit.cover,
+                              errorWidget:
+                                  Icon(Icons.local_florist, size: 40.sp),
+                            ),
                           ),
                         ),
                       ],

@@ -9,6 +9,7 @@ import '../../../../../../core/utils/functions/validators/validators.dart';
 import '../../../../../../core/utils/widget/custom_button.dart';
 import '../../../../../../core/utils/widget/custom_text_form_field.dart';
 import '../../../../../../domain/repository/auth/auth_repository.dart';
+import '../../../../../../generated/l10n.dart';
 import '../view_model/change_password_state.dart';
 import '../view_model/change_password_view_model.dart';
 
@@ -38,6 +39,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final local = S.of(context);
     return Scaffold(
       backgroundColor: AppColors.kWhite,
       appBar: AppBar(
@@ -47,7 +49,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
-          'Reset password',
+          local.resetPassword,
           style: TextStyle(
             fontSize: 20.sp,
             fontWeight: FontWeight.w500,
@@ -88,7 +90,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Current password',
+                    local.currentPassword,
                     style: TextStyle(
                       fontSize: 14.sp,
                       color: Colors.grey[600],
@@ -97,7 +99,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   SizedBox(height: 8.h),
                   CustomTextFormField(
                     controller: _currentPasswordController,
-                    hintText: 'Current password',
+                    hintText: local.currentPassword,
                     isPassword: true,
                     validator: (value) => Validators.validatePassword(value),
                     keyBordType: TextInputType.text,
@@ -105,7 +107,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   ),
                   SizedBox(height: 24.h),
                   Text(
-                    'New password',
+                    local.newPassword,
                     style: TextStyle(
                       fontSize: 14.sp,
                       color: Colors.grey[600],
@@ -114,7 +116,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   SizedBox(height: 8.h),
                   CustomTextFormField(
                     controller: _newPasswordController,
-                    hintText: 'New password',
+                    hintText: local.newPassword,
                     isPassword: true,
                     validator: (value) => Validators.validatePassword(value),
                     keyBordType: TextInputType.text,
@@ -122,7 +124,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   ),
                   SizedBox(height: 24.h),
                   Text(
-                    'Confirm password',
+                    local.confirmPassword,
                     style: TextStyle(
                       fontSize: 14.sp,
                       color: Colors.grey[600],
@@ -131,13 +133,13 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   SizedBox(height: 8.h),
                   CustomTextFormField(
                     controller: _confirmPasswordController,
-                    hintText: 'Confirm password',
+                    hintText: local.confirmPasswordHintText,
                     isPassword: true,
                     keyBordType: TextInputType.text,
                     labelText: '',
                     validator: (value) {
                       if (value != _newPasswordController.text) {
-                        return 'Passwords do not match';
+                        return local.passwordDontMatch;
                       }
                       return null;
                     },
@@ -145,8 +147,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   SizedBox(height: 32.h),
                   CustomButton(
                     text: state is ChangePasswordLoading
-                        ? 'Loading...'
-                        : 'Update',
+                        ? local.loadingText
+                        : local.updateText,
                     color: Colors.grey,
                     onPressed: state is ChangePasswordLoading
                         ? null

@@ -1,3 +1,4 @@
+import 'package:flowery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -11,12 +12,13 @@ class SearchBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final local = S.of(context);
     return Flexible(
       child: TextField(
         cursorColor: AppColors.kPink,
         onTapOutside: (event) => FocusScope.of(context).unfocus(),
         decoration: InputDecoration(
-          hintText: 'Search',
+          hintText: local.searchArabic,
           hintStyle: AppFonts.font14LightGreyWeight500,
           prefixIcon: Icon(Icons.search),
           prefixIconColor: WidgetStateColor.resolveWith(
@@ -29,10 +31,8 @@ class SearchBarWidget extends StatelessWidget {
               return AppColors.kLightGrey;
             },
           ),
-          constraints: BoxConstraints(
-              maxHeight: maxHeight ?? 36.h,
-            maxWidth: 300.w
-          ),
+          constraints:
+              BoxConstraints(maxHeight: maxHeight ?? 36.h, maxWidth: 300.w),
           alignLabelWithHint: true,
           contentPadding: EdgeInsets.symmetric(
             horizontal: 8.w,

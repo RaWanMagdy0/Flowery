@@ -9,6 +9,7 @@ import 'profile_pic.dart';
 
 class EditProfileWidget extends StatefulWidget {
   EditProfileWidget({super.key, required this.user});
+
   User user;
 
   @override

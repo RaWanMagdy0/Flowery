@@ -6,6 +6,7 @@ import '../../../core/routes/page_route_name.dart';
 import '../../../core/styles/colors/app_colors.dart';
 import '../../../core/utils/widget/custom_item_card.dart';
 import '../../../core/utils/widget/shimmer_loading_widget.dart';
+import '../../../generated/l10n.dart';
 import '../view_model/best_seller_state.dart';
 import '../view_model/best_seller_view_model.dart';
 
@@ -25,6 +26,7 @@ class _BestSellerScreenState extends State<BestSellerScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final local = S.of(context);
     return Scaffold(
       backgroundColor: AppColors.kLightWhite,
       appBar: PreferredSize(
@@ -43,7 +45,7 @@ class _BestSellerScreenState extends State<BestSellerScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Best Sellers',
+                    local.bestSeller,
                     style: TextStyle(
                       fontSize: 20.sp,
                       fontWeight: FontWeight.bold,
@@ -51,7 +53,7 @@ class _BestSellerScreenState extends State<BestSellerScreen> {
                   ),
                   5.verticalSpace,
                   Text(
-                    'Bloom with our exquisite best sellers',
+                    local.bloomWithBestSellers,
                     style: TextStyle(
                       fontSize: 14.sp,
                       color: Colors.grey,

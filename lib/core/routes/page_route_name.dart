@@ -15,4 +15,10 @@ class PageRouteName {
   static const String editProfile = "edit profile screen";
   static const String mainProfile = "main profile screen";
   static const String changePassword = "changePassword";
+  static const String checkout = "checkoutScreen";
+  static const String addAndEditUserAddress = "addAndEditUserAddress";
+  static const String savedAddresses = "savedAddresses";
+  static const String aboutApp = "about app screen";
+  static const String termsConditions = "terms and conditions screen";
+  static const String getOrdersHistory = "getOrdersHistory";
 }

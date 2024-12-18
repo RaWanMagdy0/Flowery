@@ -44,6 +44,7 @@ class ApiErrorHandler {
 
 ApiErrorModel _handleError(int? statusCode, dynamic data) {
   String errorMsg = "Unknown error occurred";
+  int? resolvedStatusCode;
 
   if (data is Map) {
     if (data.containsKey("error")) {
@@ -51,10 +52,17 @@ ApiErrorModel _handleError(int? statusCode, dynamic data) {
     } else if (data.containsKey("message")) {
       errorMsg = data["message"];
     }
+
+    // Safely parse statusCode
+    if (data.containsKey("code")) {
+      resolvedStatusCode = (data['code'] is int)
+          ? data['code']
+          : int.tryParse(data['code'].toString());
+    }
   }
 
   return ApiErrorModel(
-    statusCode: data['code'] ?? statusCode,
+    statusCode: resolvedStatusCode ?? statusCode,
     message: errorMsg,
   );
 }

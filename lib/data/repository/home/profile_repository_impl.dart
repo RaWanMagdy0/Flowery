@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 
@@ -25,7 +24,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
   }
 
   @override
-  Future<Result<String?>> uploadPhoto(File photo) {
+  Future<Result<String?>> uploadPhoto(XFile photo) {
     return profileRemoteDataSource.uploadPhoto(photo);
   }
 }

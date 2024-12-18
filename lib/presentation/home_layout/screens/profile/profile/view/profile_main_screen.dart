@@ -1,20 +1,21 @@
-import '../../../../../../core/routes/page_route_name.dart';
-import '../../../../../../core/styles/fonts/app_fonts.dart';
-import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
-import '../../../../../../core/utils/widget/custom_list_tile.dart';
-import '../../../../../../core/utils/widget/custom_switch_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
-
 import '../../../../../../core/di/di.dart';
+import '../../../../../../core/routes/page_route_name.dart';
 import '../../../../../../core/styles/colors/app_colors.dart';
+import '../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../core/styles/images/app_images.dart';
+import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../../../core/utils/widget/custom_button.dart';
+import '../../../../../../core/utils/widget/custom_list_tile.dart';
+import '../../../../../../core/utils/widget/custom_switch_tile.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../../cart/view_model/cart_view_model.dart';
 import '../view_model/profile_cubit.dart';
 import '../view_model/profile_state.dart';
+import '../widget/local_row.dart';
 
 class ProfileMainScreen extends StatefulWidget {
   static const String routeName = 'Profile Main Screen';
@@ -38,6 +39,7 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final local = S.of(context);
     return Scaffold(
       appBar: AppBar(
         forceMaterialTransparency: true,
@@ -141,15 +143,20 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                             // Custom List Tiles
                             CustomListTile(
                               leadingIcon: Icons.list_alt,
-                              title: 'My orders',
+                              title: local.myOrder,
                               trailingIcon: Icons.arrow_forward_ios,
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.pushNamed(context, PageRouteName.getOrdersHistory);
+                              },
                             ),
                             CustomListTile(
                               leadingIcon: Icons.location_pin,
-                              title: 'Saved address',
+                              title: local.savedAddress,
                               trailingIcon: Icons.arrow_forward_ios,
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, PageRouteName.savedAddresses);
+                              },
                             ),
 
                             // Options List
@@ -167,30 +174,28 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                             ),
                             SizedBox(height: 14.h),
                             Divider(thickness: 1.w),
+                            LocalizationRow(),
                             CustomListTile(
-                              leadingIcon: Icons.translate,
-                              title: 'Language',
-                              subtitle: 'English',
-                              subtitleStyle:
-                                  const TextStyle(color: Colors.pink),
-                              onTap: () {},
+                              title: local.aboutAs,
+                              trailingIcon: Icons.arrow_forward_ios,
+                              onTap: () {
+                                Navigator.pushNamed(context, PageRouteName.aboutApp);
+
+                              },
                             ),
                             CustomListTile(
-                              title: 'About us',
+                              title: local.termsAndConditions,
                               trailingIcon: Icons.arrow_forward_ios,
-                              onTap: () {},
-                            ),
-                            CustomListTile(
-                              title: 'Terms & conditions',
-                              trailingIcon: Icons.arrow_forward_ios,
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.pushNamed(context, PageRouteName.termsConditions);
+                              },
                             ),
                             const SizedBox(height: 16),
                             const Divider(thickness: 1),
 
                             CustomListTile(
                               leadingIcon: Icons.logout,
-                              title: 'Logout',
+                              title: local.logOut,
                               trailingIcon: Icons.logout,
                               onTap: () {
                                 showDialog(
@@ -211,7 +216,7 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                                           children: [
                                             SizedBox(height: 15.h),
                                             Text(
-                                              "LOGOUT",
+                                              local.logOut,
                                               style: AppFonts
                                                   .font18BlackWeight500
                                                   .copyWith(
@@ -220,7 +225,7 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                                             ),
                                             SizedBox(height: 5.h),
                                             Text(
-                                              "Confirm logout!!",
+                                              local.logoutConfirmationTitle,
                                               style: AppFonts
                                                   .font16BlackWeight500
                                                   .copyWith(
@@ -253,7 +258,7 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                                                     Navigator.pop(context);
                                                   },
                                                   child: Text(
-                                                    "Cancel",
+                                                    local.cancelText,
                                                     style: AppFonts
                                                         .font14GreyWeight400,
                                                   ),
@@ -283,7 +288,7 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                                                     viewModel.logout();
                                                   },
                                                   child: Text(
-                                                    "Logout",
+                                                    local.logOut,
                                                     style: AppFonts
                                                         .font15WhiteWeight500
                                                         .copyWith(

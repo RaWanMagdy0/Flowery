@@ -1,3 +1,4 @@
+import 'package:flowery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -16,6 +17,7 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final local = S.of(context);
     return BottomNavigationBar(
       backgroundColor: AppColors.kWhite,
       type: BottomNavigationBarType.fixed,
@@ -24,20 +26,20 @@ class BottomNavBar extends StatelessWidget {
       onTap: onTap,
       items: [
         BottomNavigationBarItem(
-          icon: const ImageIcon(AssetImage(AppImages.homeIcon)),
-          label: 'Home',
+          icon: ImageIcon(AssetImage(AppImages.homeIcon)),
+          label: local.homebottom,
         ),
         BottomNavigationBarItem(
           icon: ImageIcon(AssetImage(AppImages.categoryIcon)),
-          label: 'Categories',
+          label: local.categories,
         ),
         BottomNavigationBarItem(
           icon: ImageIcon(AssetImage(AppImages.shoppingIcon)),
-          label: 'Cart',
+          label: local.cart,
         ),
         BottomNavigationBarItem(
           icon: ImageIcon(AssetImage(AppImages.personIcon)),
-          label: 'Profile',
+          label: local.profileText,
         ),
       ],
       selectedItemColor: AppColors.kPink,
