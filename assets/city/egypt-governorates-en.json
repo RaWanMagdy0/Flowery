@@ -1,0 +1,350 @@
+{
+  "egyptian_governorates": [
+    {
+      "name": "Cairo",
+      "cities": [
+        "Heliopolis",
+        "Nasr City",
+        "Maadi",
+        "Helwan",
+        "Mokattam",
+        "Shubra",
+        "Ain Shams",
+        "El Zaytoun",
+        "Matareya",
+        "El Sayeda Zeinab",
+        "Zamalek",
+        "Downtown Cairo"
+      ]
+    },
+    {
+      "name": "Alexandria",
+      "cities": [
+        "Montaza",
+        "East Alexandria",
+        "Central Alexandria",
+        "Gomrok",
+        "Amreya",
+        "Borg El Arab",
+        "Agami"
+      ]
+    },
+    {
+      "name": "Giza",
+      "cities": [
+        "Dokki",
+        "Mohandessin",
+        "Agouza",
+        "Haram",
+        "Faisal",
+        "6th of October",
+        "Sheikh Zayed",
+        "Imbaba",
+        "Boulaq El Dakrour"
+      ]
+    },
+    {
+      "name": "Sharqia",
+      "cities": [
+        "Zagazig",
+        "10th of Ramadan",
+        "Belbeis",
+        "Abu Hammad",
+        "Minya El Qamh",
+        "Deyerb Negm",
+        "Faqous",
+        "El Ibrahimia"
+      ]
+    },
+    {
+      "name": "Beheira",
+      "cities": [
+        "Damanhour",
+        "Kafr El Dawwar",
+        "Rashid",
+        "Edku",
+        "Abu El Matamir",
+        "Mahmoudiyah",
+        "Itay El Baroud",
+        "Housh Eissa"
+      ]
+    },
+    {
+      "name": "Menoufia",
+      "cities": [
+        "Shebin El Kom",
+        "Quesna",
+        "Menouf",
+        "Ashmoun",
+        "El Bagour",
+        "Tala",
+        "El Shohada",
+        "Berket El Sabe"
+      ]
+    },
+    {
+      "name": "Qalyubia",
+      "cities": [
+        "Benha",
+        "Shubra El Kheima",
+        "Al Qanater El Khayreya",
+        "Qalyub",
+        "Toukh",
+        "El Obour",
+        "El Khanka",
+        "Kafr Shokr"
+      ]
+    },
+    {
+      "name": "Dakahlia",
+      "cities": [
+        "Mansoura",
+        "Talkha",
+        "Mit Ghamr",
+        "Dekernes",
+        "Aga",
+        "Menit El Nasr",
+        "El Sinbillawin",
+        "Belqas",
+        "El Manzala"
+      ]
+    },
+    {
+      "name": "Kafr El Sheikh",
+      "cities": [
+        "Kafr El Sheikh",
+        "Desouk",
+        "Fouh",
+        "Metobas",
+        "Baltim",
+        "El Hamool",
+        "Bella",
+        "El Reyad"
+      ]
+    },
+    {
+      "name": "Gharbia",
+      "cities": [
+        "Tanta",
+        "El Mahalla El Kubra",
+        "Kafr El Zayat",
+        "Zefta",
+        "El Santa",
+        "Qutour",
+        "Bassioun",
+        "Samannoud"
+      ]
+    },
+    {
+      "name": "Damietta",
+      "cities": [
+        "Damietta",
+        "New Damietta",
+        "Ras El Bar",
+        "Faraskour",
+        "Kafr Saad",
+        "El Zarqa",
+        "Kafr El Batikh",
+        "Ezbet El Borg"
+      ]
+    },
+    {
+      "name": "Port Said",
+      "cities": [
+        "Port Said",
+        "Port Fouad",
+        "El Arab",
+        "El Dawahy",
+        "El Manakh",
+        "El Zohour",
+        "El Sharq",
+        "El Ganoub"
+      ]
+    },
+    {
+      "name": "Suez",
+      "cities": [
+        "Suez",
+        "Ataka",
+        "El Ganayen",
+        "Faisal",
+        "El Arbaeen"
+      ]
+    },
+    {
+      "name": "North Sinai",
+      "cities": [
+        "El Arish",
+        "Sheikh Zuweid",
+        "Rafah",
+        "Bir al-Abed",
+        "El Hasana",
+        "Nakhl"
+      ]
+    },
+    {
+      "name": "South Sinai",
+      "cities": [
+        "Sharm El Sheikh",
+        "Taba",
+        "Dahab",
+        "Nuweiba",
+        "Tor Sinai",
+        "Saint Catherine",
+        "Abu Rudeis",
+        "Ras Sidr"
+      ]
+    },
+    {
+      "name": "Fayoum",
+      "cities": [
+        "Fayoum",
+        "Sinnuris",
+        "Etsa",
+        "Tamiya",
+        "Ibsheway",
+        "Yusuf El Seddik"
+      ]
+    },
+    {
+      "name": "Beni Suef",
+      "cities": [
+        "Beni Suef",
+        "El Wasta",
+        "Naser",
+        "Ehnasia",
+        "Beba",
+        "Samasta",
+        "El Fashn"
+      ]
+    },
+    {
+      "name": "Minya",
+      "cities": [
+        "Minya",
+        "Samalut",
+        "Matay",
+        "Beni Mazar",
+        "Maghagha",
+        "El Edwa",
+        "Mallawi",
+        "Deir Mawas",
+        "Abu Qurqas"
+      ]
+    },
+    {
+      "name": "Assiut",
+      "cities": [
+        "Assiut",
+        "Dairut",
+        "Manfalut",
+        "El Qusiya",
+        "Abnoub",
+        "Abu Tig",
+        "El Ghanayem",
+        "Sahel Selim",
+        "El Badari"
+      ]
+    },
+    {
+      "name": "Sohag",
+      "cities": [
+        "Sohag",
+        "Akhmim",
+        "El Balyana",
+        "El Maragha",
+        "El Mansha",
+        "Dar El Salam",
+        "Girga",
+        "Gehina",
+        "Sakolta",
+        "Tama",
+        "Tahta"
+      ]
+    },
+    {
+      "name": "Qena",
+      "cities": [
+        "Qena",
+        "Nag Hammadi",
+        "Dishna",
+        "El Waqf",
+        "Qift",
+        "Naqada",
+        "Farshout",
+        "Qus",
+        "Abu Tesht"
+      ]
+    },
+    {
+      "name": "Luxor",
+      "cities": [
+        "Luxor",
+        "El Zeiniya",
+        "El Bayadiya",
+        "El Qurna",
+        "Armant",
+        "El Tود",
+        "Esna"
+      ]
+    },
+    {
+      "name": "Aswan",
+      "cities": [
+        "Aswan",
+        "New Aswan",
+        "Drau",
+        "Kom Ombo",
+        "Nasr El Nuba",
+        "Edfu"
+      ]
+    },
+    {
+      "name": "Red Sea",
+      "cities": [
+        "Hurghada",
+        "Ras Ghareb",
+        "Safaga",
+        "El Quseir",
+        "Marsa Alam",
+        "Halayeb",
+        "Shalatin"
+      ]
+    },
+    {
+      "name": "Matrouh",
+      "cities": [
+        "Mersa Matruh",
+        "El Hamam",
+        "El Alamein",
+        "El Dabaa",
+        "El Negaila",
+        "Sidi Barrani",
+        "El Salloum",
+        "Siwa"
+      ]
+    },
+    {
+      "name": "New Valley",
+      "cities": [
+        "Kharga",
+        "Paris",
+        "Mout",
+        "Farafra",
+        "Balat"
+      ]
+    },
+    {
+      "name": "Ismailia",
+      "cities": [
+        "Ismailia",
+        "Fayed",
+        "El Qantara East",
+        "El Qantara West",
+        "El Tal El Kabier",
+        "Abu Sweir",
+        "El Qassasin"
+      ]
+    }
+  ]
+}

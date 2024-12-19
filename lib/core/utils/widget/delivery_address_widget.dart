@@ -6,11 +6,19 @@ import '../../styles/fonts/app_fonts.dart';
 import '../../styles/images/app_images.dart';
 
 class DeliveryAddressWidget extends StatelessWidget {
+  final String city;
+  final String lat;
+  final String lang;
+  final String? area;
   final VoidCallback? onChanged;
 
   const DeliveryAddressWidget({
     super.key,
+    required this.city,
+    required this.lat,
+    required this.lang,
     this.onChanged,
+    this.area,
   });
 
   @override
@@ -23,9 +31,13 @@ class DeliveryAddressWidget extends StatelessWidget {
           'Deliver to ',
           style: AppFonts.font14BlackWeight400,
         ),
-        Text(
-          '2XVP+XC - Sheikh Zayed',
-          style: AppFonts.font14BlackWeight500,
+        Expanded(
+          child: Text(
+            '$city - ($lat + $lang)',
+            style: AppFonts.font14BlackWeight500,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+          ),
         ),
         Icon(
           Icons.keyboard_arrow_down,

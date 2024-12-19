@@ -67,7 +67,7 @@
   "newPassword": "New password",
   "newPasswordLabelText": "New password",
   "noDescriptionAvailable": "No description available",
- "notification": "Notification",
+  "notification": "Notification",
   "occasionAppBar": "Occasion",
   "occasionTitle": "Bloom with our exquisite best sellers",
   "ok": "Ok",
@@ -125,7 +125,3 @@
   "egp": "EGP",
   "trackOrder": "Track Order"
 }
- 
- 
-
-
