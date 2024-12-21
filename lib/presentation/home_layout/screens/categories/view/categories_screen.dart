@@ -1,5 +1,3 @@
-import 'package:flowery/generated/l10n.dart';
-import 'package:flowery/core/utils/functions/dialogs/app_dialogs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/routes/page_route_name.dart';
 import '../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../core/utils/widget/custom_item_card.dart';
+import '../../../../../generated/l10n.dart';
 import '../view_model/categories_state.dart';
 import '../view_model/categories_view_model.dart';
 import 'widgets/custom_search_bar.dart';

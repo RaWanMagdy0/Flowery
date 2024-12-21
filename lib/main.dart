@@ -1,10 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flowery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import 'core/di/di.dart';
@@ -13,8 +11,10 @@ import 'core/routes/page_route_name.dart';
 import 'core/theme/app_theme.dart';
 import 'core/utils/bloc_observer/app_bloc_observer.dart';
 import 'core/utils/functions/providers/local_provider.dart';
-import 'presentation/home_layout/screens/cart/view_model/cart_view_model.dart';
 import 'firebase_options.dart';
+import 'generated/l10n.dart';
+import 'presentation/home_layout/screens/cart/view_model/cart_view_model.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -31,7 +31,6 @@ void main() async {
   await provider.loadSavedLanguage();
 
   runApp(
-
     ChangeNotifierProvider(
       create: (context) => provider,
       child: MyApp(),

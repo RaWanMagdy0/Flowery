@@ -1,8 +1,9 @@
-import 'package:flowery/core/utils/const/checkout_page_string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../core/styles/colors/app_colors.dart';
 import '../../../core/styles/fonts/app_fonts.dart';
+import '../../../core/utils/const/checkout_page_string.dart';
 
 class PaymentMethod extends StatefulWidget {
   final ValueChanged<String?> onChanged;
@@ -14,7 +15,7 @@ class PaymentMethod extends StatefulWidget {
 }
 
 class _PaymentMethodState extends State<PaymentMethod> {
-  String? selectedPayment=CheckoutStrings.cashOnDelivery;
+  String? selectedPayment = CheckoutStrings.cashOnDelivery;
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +73,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
           10.verticalSpace,
           Container(
             decoration: BoxDecoration(
-            //  color: AppColors.kLighterGrey,
+              //  color: AppColors.kLighterGrey,
               borderRadius: BorderRadius.circular(15.r),
               border: Border.all(color: AppColors.kLighterGrey),
             ),

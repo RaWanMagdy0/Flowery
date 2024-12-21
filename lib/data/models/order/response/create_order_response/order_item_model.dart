@@ -1,12 +1,12 @@
-
-import 'package:flowery/domain/entities/order/create_order/order_item_entity.dart';
+import '../../../../../domain/entities/order/create_order/order_item_entity.dart';
 
 class OrderItemModel {
   OrderItemModel({
-      this.product, 
-      this.price, 
-      this.quantity, 
-      this.id,});
+    this.product,
+    this.price,
+    this.quantity,
+    this.id,
+  });
 
   OrderItemModel.fromJson(dynamic json) {
     product = json['product'];

@@ -1,9 +1,9 @@
-import 'package:flowery/core/styles/fonts/app_fonts.dart';
-import 'package:flowery/core/styles/images/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import '../../../../../../generated/l10n.dart';
+
+import '../../../../../../core/styles/fonts/app_fonts.dart';
+import '../../../../../../core/styles/images/app_images.dart';
 import '../../../../../../core/utils/functions/providers/local_provider.dart';
 
 class LocalizationRow extends StatelessWidget {
@@ -28,13 +28,11 @@ class LocalizationRow extends StatelessWidget {
                 Row(
                   children: [
                     SizedBox(
-
-                       height: 25.h,width: 25.w,
+                        height: 25.h,
+                        width: 25.w,
                         child: Image.asset(
                           AppImages.languageIcon,
-                        )
-
-                    ),
+                        )),
                     10.horizontalSpace,
                     Text(
                       provider.locale == "en" ? "English" : "العربيه",

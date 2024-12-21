@@ -1,4 +1,3 @@
-import 'package:flowery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
@@ -6,6 +5,7 @@ import 'package:lottie/lottie.dart';
 import '../../../../../../core/di/di.dart';
 import '../../../../../../core/styles/images/app_images.dart';
 import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
+import '../../../../../../generated/l10n.dart';
 import '../view_model/profile_cubit.dart';
 import '../view_model/profile_state.dart';
 import '../widget/edit_profile_widget.dart';
@@ -68,7 +68,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             );
           } else if (state is EditProfileErrorState) {
             return Center(
-              child: Text(state.errorMessage ?? local.anErrorOccurredWhileUpdatingTheProfile),
+              child: Text(state.errorMessage ??
+                  local.anErrorOccurredWhileUpdatingTheProfile),
             );
           } else if (state is EditProfileSuccessState) {
             WidgetsBinding.instance.addPostFrameCallback((_) {

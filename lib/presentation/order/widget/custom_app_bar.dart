@@ -1,9 +1,8 @@
-import 'package:flowery/core/utils/const/checkout_page_string.dart';
-
-import '../../../core/styles/fonts/app_fonts.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../core/styles/fonts/app_fonts.dart';
+import '../../../core/utils/const/checkout_page_string.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({super.key});
@@ -31,7 +30,7 @@ class CustomAppBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-               CheckoutStrings.deliveryTime,
+                CheckoutStrings.deliveryTime,
                 style: AppFonts.font18BlackWeight500,
               ),
               Text(
@@ -44,8 +43,7 @@ class CustomAppBar extends StatelessWidget {
           Row(
             children: [
               Row(
-                children: [Icon(Icons.access_time_rounded),
-                  Text(" instant,")],
+                children: [Icon(Icons.access_time_rounded), Text(" instant,")],
               ),
               Text(
                 "Arrive by 03 Sep 2024 , 11:00 AM",

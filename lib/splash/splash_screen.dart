@@ -1,17 +1,18 @@
 import 'dart:developer';
 import 'dart:io';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flowery/core/styles/colors/app_colors.dart';
-import 'package:flowery/core/utils/widget/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
+
 import '../core/local/secure_storage.dart';
 import '../core/local/token_manger.dart';
 import '../core/routes/page_route_name.dart';
+import '../core/styles/colors/app_colors.dart';
 import '../core/styles/fonts/app_fonts.dart';
 import '../core/styles/images/app_images.dart';
-
+import '../core/utils/widget/custom_button.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -94,17 +95,17 @@ class _SplashScreenState extends State<SplashScreen>
         child: _isNoInternet
             ? _buildNoInternetWidget()
             : Center(
-          child: Lottie.asset(
-            controller: _controller,
-            AppImages.floweryAnimation,
-            fit: BoxFit.cover,
-            onLoaded: (composition) {
-              _controller
-                ..duration = composition.duration
-                ..forward();
-            },
-          ),
-        ),
+                child: Lottie.asset(
+                  controller: _controller,
+                  AppImages.floweryAnimation,
+                  fit: BoxFit.cover,
+                  onLoaded: (composition) {
+                    _controller
+                      ..duration = composition.duration
+                      ..forward();
+                  },
+                ),
+              ),
       ),
     );
   }
