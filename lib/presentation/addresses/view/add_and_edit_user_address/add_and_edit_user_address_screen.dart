@@ -54,9 +54,10 @@ class _AddAndEditUserAddressScreenState
         city: city ?? "",
       );
 
-      context.read<AddressesCubit>().AddAddress(body);
+      context.read<AddressesCubit>().addAddress(body);
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<AddressesCubit, AddressesState>(

@@ -8,7 +8,7 @@ import '../../../../../core/api/api_const.dart';
 import '../../../../../core/api/api_result.dart';
 import '../../../../../core/api/execute_api_call.dart';
 import '../../../../../core/local/token_manger.dart';
-import '../../../../../domain/entities/home_layout/profile/User.dart';
+import '../../../../../domain/entities/home_layout/profile/user.dart';
 import '../../../../api/home_api/home_api_manager.dart';
 import '../../../../models/auth/requests/edite_profile_request_model.dart';
 import 'profile_remote_data_source.dart';

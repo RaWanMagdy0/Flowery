@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:path_provider/path_provider.dart';
 
 import '../../../../../../core/di/di.dart';
 import '../../../../../../core/styles/colors/app_colors.dart';
@@ -12,7 +11,6 @@ import '../../../../../../core/styles/images/app_images.dart';
 import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../view_model/profile_cubit.dart';
 import '../view_model/profile_state.dart';
-import 'package:image/image.dart' as img;
 
 class CustomProfilePic extends StatefulWidget {
   const CustomProfilePic({super.key});
@@ -47,7 +45,7 @@ class _CustomProfilePicState extends State<CustomProfilePic> {
               context: context,
               message: state.message ?? 'Photo uploaded successfully',
             );
-              viewModel.getLoggedUserInfo();
+            viewModel.getLoggedUserInfo();
           } else if (state is UploadPhotoErrorState) {
             Navigator.pop(context);
             AppDialogs.showErrorDialog(
@@ -64,19 +62,19 @@ class _CustomProfilePicState extends State<CustomProfilePic> {
               ClipOval(
                 child: photo != null
                     ? Image.file(
-                  photo!,
-                  fit: BoxFit.cover,
-                  height: 90.h,
-                  width: 90.w,
-                )
+                        photo!,
+                        fit: BoxFit.cover,
+                        height: 90.h,
+                        width: 90.w,
+                      )
                     : (viewModel.photo != null
-                    ? Image.network(
-                  viewModel.photo!,
-                  fit: BoxFit.cover,
-                  height: 90.h,
-                  width: 90.w,
-                )
-                    : Image.asset(AppImages.photo, fit: BoxFit.cover)),
+                        ? Image.network(
+                            viewModel.photo!,
+                            fit: BoxFit.cover,
+                            height: 90.h,
+                            width: 90.w,
+                          )
+                        : Image.asset(AppImages.photo, fit: BoxFit.cover)),
               ),
               Positioned(
                 bottom: 10.h,
@@ -106,6 +104,7 @@ class _CustomProfilePicState extends State<CustomProfilePic> {
       ),
     );
   }
+
   Future<void> _loadInitialPhoto() async {
     final currentPhotoUrl = viewModel.photo;
     if (currentPhotoUrl != null) {
@@ -147,4 +146,6 @@ class _CustomProfilePicState extends State<CustomProfilePic> {
           return resizedFile;
           }
        *****************/
-    }}}
+    }
+  }
+}
