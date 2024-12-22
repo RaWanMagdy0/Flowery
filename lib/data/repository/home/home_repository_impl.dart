@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import '../../../core/api/api_result.dart';
 import '../../../domain/entities/best_seller_entity.dart';
 import '../../../domain/entities/home/home_data_entity.dart';
+import '../../../domain/entities/home_layout/product_details_entity.dart';
 import '../../../domain/repository/home/home_repository.dart';
 import '../../data_sources/remote_data_source/home/home/home_remote_data_source.dart';
 import '../../models/produc_details_model.dart';
@@ -39,18 +40,33 @@ class HomeRepositoryImpl extends HomeRepository {
     switch (result) {
       case Success():
         final products = result.data
-                ?.map((model) => BestSeller(
-                      id: model.id,
-                      title: model.title,
-                      imageUrl: model.imageUrl,
-                      price: model.price,
-                      priceAfterDiscount: model.priceAfterDiscount,
-                      occasionid: model.occasionid,
-                    ))
-                .toList() ??
+            ?.map((model) => BestSeller(
+          id: model.id,
+          title: model.title,
+          imageUrl: model.imageUrl,
+          price: model.price,
+          priceAfterDiscount: model.priceAfterDiscount,
+          occasionid: model.occasionid,
+        ))
+            .toList() ??
             [];
 
         return Success<List<BestSeller>>(data: products);
+      case Fail():
+        return Fail(exception: result.exception);
+    }
+  }
+
+  @override
+  Future<Result<List<ProductEntity>?>> searchProducts(String query) async {
+    final result = await onlineDataSource.searchProducts(query);
+
+    switch (result) {
+      case Success():
+        final products = result.data?.products
+            ?.map((model) => model.toEntity())
+            .toList();
+        return Success(data: products);
       case Fail():
         return Fail(exception: result.exception);
     }

@@ -29,6 +29,8 @@ import '../../presentation/home_layout/screens/profile/profile/view/edit_profile
 import '../../presentation/home_layout/screens/profile/profile/view/profile_main_screen.dart';
 import '../../presentation/home_layout/screens/profile/profile/view_model/profile_cubit.dart';
 import '../../presentation/order/view_model/order_cubit.dart';
+import '../../presentation/search/view/search_screen.dart';
+import '../../presentation/search/view_model/search_cubit.dart';
 import '../../presentation/terms_and_conditions/view/terms_and_conditions_screen.dart';
 import '../../presentation/order/view/checkout_order_screen.dart';
 import '../../splash/splash_screen.dart';
@@ -122,6 +124,14 @@ class AppRoutes {
             child: CategoriesScreen(),
           ),
           settings: setting,
+        );
+
+      case PageRouteName.search:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<SearchCubit>(),
+            child: const SearchScreen(),
+          ),
         );
 
       case PageRouteName.aboutApp:
