@@ -193,6 +193,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "searchArabic": MessageLookupByLibrary.simpleMessage("ابحث"),
         "searchError":
             MessageLookupByLibrary.simpleMessage("حدث خطأ أثناء البحث"),
+        "searchForProducts":
+            MessageLookupByLibrary.simpleMessage("ابحث عن المنتجات"),
         "searchHint": MessageLookupByLibrary.simpleMessage("ابحث عن المنتجات"),
         "signUpTitle": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
         "signupEmailHintText":

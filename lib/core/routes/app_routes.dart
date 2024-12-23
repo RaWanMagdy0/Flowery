@@ -127,10 +127,11 @@ class AppRoutes {
         );
 
       case PageRouteName.search:
+        final String searchQuery = setting.arguments as String;
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
             create: (context) => getIt<SearchCubit>(),
-            child: const SearchScreen(),
+            child: SearchScreen(initialQuery: searchQuery),
           ),
         );
 

@@ -1349,6 +1349,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Search for products`
+  String get searchForProducts {
+    return Intl.message(
+      'Search for products',
+      name: 'searchForProducts',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
