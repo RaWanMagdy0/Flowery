@@ -30,14 +30,13 @@ class _HomeScreenState extends State<HomeScreen> {
     context.read<HomeViewModel>().getHomeData();
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.kWhite,
       appBar: HomeAppBar(
         city: city,
-        lat: lat,
-        lang: lang,
       ),
       body: RefreshIndicator(
         onRefresh: () async {
@@ -62,16 +61,12 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
-  Future<String> getAddressFromCoordinates(
-      double latitude, double longitude) async {
-    List<Placemark> placemarks =
-        await placemarkFromCoordinates(latitude, longitude);
-    Placemark placemark = placemarks[0];
-    String address = '${placemark.name}, ${placemark.locality}';
-    return address;
+  Future<String> getAddressFromCoordinates(double latitude, double longitude) async {
+      List<Placemark> placemarks = await placemarkFromCoordinates(latitude, longitude);
+      Placemark placemark = placemarks[0];
+      String address = '${placemark.name}, ${placemark.locality}';
+      return address;
   }
-
   Future<void> _loadAddress() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -79,6 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
       lat = prefs.getString('lat') ?? '';
       lang = prefs.getString('lang') ?? '';
     });
+
     if (lat.isNotEmpty && lang.isNotEmpty) {
       double latitude = double.parse(lat);
       double longitude = double.parse(lang);
@@ -88,13 +84,12 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     }
   }
-
-  Future<void> saveAddress(
-      String city, String lat, String lang, String area) async {
+  Future<void> saveAddress(String city, String lat, String lang,String area) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('city', city);
     await prefs.setString('lat', lat);
     await prefs.setString('lang', lang);
-    await prefs.setString('area', area);
   }
+
+
 }

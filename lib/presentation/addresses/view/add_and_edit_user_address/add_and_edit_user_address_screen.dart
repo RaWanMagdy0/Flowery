@@ -4,8 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../../../../core/utils/const/add_address_string.dart';
 import '../../../../core/utils/const/app_string.dart';
 import '../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../core/utils/functions/validators/validators.dart';
@@ -46,6 +44,7 @@ class _AddAndEditUserAddressScreenState
     _phoneNumberController = TextEditingController();
     loadGovernorates();
   }
+
   @override
   void dispose() {
     _addressController.dispose();
@@ -57,98 +56,89 @@ class _AddAndEditUserAddressScreenState
   @override
   Widget build(BuildContext context) {
     return BlocListener<AddressesCubit, AddressesState>(
-        bloc: context.read<AddressesCubit>(),
-        listener: (context, state) => _handelStateChange(state),
-        child: Scaffold(
-            appBar: AppBar(
-              title: const Text(AddAddressString.address),
-              forceMaterialTransparency: true,
-            ),
-            body: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
-                child: SingleChildScrollView(
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        24.verticalSpace,
-                        MapWidget(
-                          onLocationSelected: (LatLng location) {
-                            userSelectedLocation = location;
-                          },
-                        ),
-                        24.verticalSpace,
-                        CustomTextFormField(
-                          controller: _addressController,
-                          hintText: AddAddressString.enterAddress,
-                          labelText: AddAddressString.address,
-                          keyBordType: TextInputType.text,
-                          validator: (value) => Validators.validateNotEmpty(
-                            title: AddAddressString.address,
-                            value: value,
-                          ),
-                        ),
-                        24.verticalSpace,
-                        CustomTextFormField(
-                          hintText: AppStrings.phoneHintText,
-                          labelText: AppStrings.phoneLabelText,
-                          validator: (value) =>
-                              Validators.validatePhoneNumber(value),
-                          keyBordType: TextInputType.phone,
-                          textInputAction: TextInputAction.done,
-                          controller: _phoneNumberController,
-                        ),
-                        24.verticalSpace,
-                        CustomTextFormField(
-                          controller: _recipientNameController,
-                          hintText: AddAddressString.enterRecipientName,
-                          labelText: AddAddressString.recipientName,
-                          keyBordType: TextInputType.text,
-                        ),
-                        24.verticalSpace,
-                        Row(
-                          children: [
-                            Expanded(
-                              child: CustomDropDown(
-                                hintText: AddAddressString.city,
-                                labelText: AddAddressString.city,
-                                validator: (value) =>
-                                    Validators.validateNotEmpty(
-                                  title: AddAddressString.city,
-                                  value: value,
-                                ),
-                                data: governorates
-                                    .map((gov) => gov.name)
-                                    .toList(),
-                                onChanged: updateCities,
-                              ),
-                            ),
-                            13.horizontalSpace,
-                            Expanded(
-                              child: CustomDropDown(
-                                hintText: AddAddressString.area,
-                                labelText: AddAddressString.area,
-                                data: cities,
-                                onChanged: (value) {
-                                  setState(() {
-                                    selectedArea = value;
-                                  });
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                        35.verticalSpace,
-                        CustomButton(
-                          onPressed: addAddress,
-                          text: AddAddressString.saveAddress,
-                        ),
-                        16.verticalSpace,
-                      ],
+      bloc: context.read<AddressesCubit>(),
+      listener: (context, state) => _handelStateChange(state),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Add Address"),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  24.verticalSpace,
+                  MapWidget(
+                    onLocationSelected: (LatLng location) {
+                      userSelectedLocation = location;
+                    },
+                  ),
+                  24.verticalSpace,
+                  CustomTextFormField(
+                    controller: _addressController,
+                    hintText: "Enter Address",
+                    labelText: "Address",
+                    validator: (value) => Validators.validateNotEmpty(
+                      title: "Address",
+                      value: value,
                     ),
                   ),
-                ))));
+                  24.verticalSpace,
+                  CustomTextFormField(
+                    hintText: AppStrings.phoneHintText,
+                    labelText: AppStrings.phoneLabelText,
+                    validator: (value) => Validators.validatePhoneNumber(value),
+                    keyBordType: TextInputType.phone,
+                    textInputAction: TextInputAction.done,
+                    controller: _phoneNumberController,
+                  ),
+                  24.verticalSpace,
+                  CustomTextFormField(
+                    controller: _recipientNameController,
+                    hintText: "Recipient Name",
+                    labelText: "Recipient Name",
+                  ),
+                  24.verticalSpace,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CustomDropDown(
+                          hintText: "City",
+                          labelText: "City",
+                          data: governorates.map((e) => e.name).toList(),
+                          onChanged: updateCities,
+                        ),
+                      ),
+                      13.horizontalSpace,
+                      Expanded(
+                        child: CustomDropDown(
+                          hintText: "Area",
+                          labelText: "Area",
+                          data: cities,
+                          onChanged: (value) {
+                            setState(() {
+                              selectedArea = value;
+                            });
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  35.verticalSpace,
+                  CustomButton(
+                    onPressed: addAddress,
+                    text: "Save Address",
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   void _handelStateChange(AddressesState state) {
@@ -157,7 +147,7 @@ class _AddAndEditUserAddressScreenState
 
       AppDialogs.showSuccessDialog(
         context: context,
-        message: AddAddressString.addressAddedSuccess,
+        message: "Address Added Successfully.",
         whenAnimationFinished: () {
           Navigator.pop(context);
         },
@@ -169,37 +159,29 @@ class _AddAndEditUserAddressScreenState
       AppDialogs.showLoading(context: context);
     }
   }
+
   Future<void> loadGovernorates() async {
-    try {
       final String response =
       await rootBundle.loadString('assets/city/egypt-governorates-en.json');
       final data = await json.decode(response);
-
       setState(() {
         governorates = (data['egyptian_governorates'] as List)
             .map((json) => Governorate.fromJson(json))
             .toList();
       });
-    } catch (e) {
-      print('Error loading governorates: $e');
     }
-  }
 
   void updateCities(String? selectedGovernorate) {
     setState(() {
       city = selectedGovernorate;
       selectedArea = null;
-      if (selectedGovernorate != null) {
-        final governorate = governorates.firstWhere(
-              (g) => g.name == selectedGovernorate,
-          orElse: () => Governorate(name: '', cities: []),
-        );
-        cities = governorate.cities;
-      } else {
-        cities = [];
-      }
+      cities = governorates
+          .firstWhere((g) => g.name == selectedGovernorate,
+          orElse: () => Governorate(name: '', cities: []))
+          .cities;
     });
   }
+
   void addAddress() {
     if (_formKey.currentState!.validate()) {
       if (userSelectedLocation == null) {
@@ -208,29 +190,19 @@ class _AddAndEditUserAddressScreenState
         );
         return;
       }
-      final AddAddressRequestBody request = AddAddressRequestBody(
-          street: _addressController.text,
-          phone: _phoneNumberController.text,
-          city: city ?? "",
-          lat: userSelectedLocation!.latitude.toString(),
-          lang: userSelectedLocation!.longitude.toString(),
-          username: _recipientNameController.text);
-
-      context.read<AddressesCubit>().AddAddress(request);
-      saveAddressLocally(
-        userSelectedLocation!.latitude.toString(),
-        city.toString(),
-        userSelectedLocation!.longitude.toString(),
+      final request = AddAddressRequestBody(
+        street: _addressController.text,
+        phone: _phoneNumberController.text,
+        city: city ?? "",
+        lat: userSelectedLocation!.latitude.toString(),
+        lang: userSelectedLocation!.longitude.toString(),
+        username: _recipientNameController.text,
       );
+      context.read<AddressesCubit>().AddAddress(request);
     }
   }
-  void saveAddressLocally(String lang, String city, String lat) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('city', city);
-    await prefs.setString('lang', lang);
-    await prefs.setString('lat', lat);
-  }
 }
+
 class Governorate {
   final String name;
   final List<String> cities;

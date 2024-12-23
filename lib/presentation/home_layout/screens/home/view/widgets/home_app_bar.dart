@@ -7,14 +7,9 @@ import '../../../../widgets/search_bar_widget.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String city;
-  final String lat;
-  final String lang;
-
   const HomeAppBar({
     super.key,
     required this.city,
-    required this.lat,
-    required this.lang,
   });
 
   @override
@@ -44,8 +39,6 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
             },
             child: DeliveryAddressWidget(
               city: city,
-              lat: lat,
-              lang: lang,
             ),
           ),
         ],

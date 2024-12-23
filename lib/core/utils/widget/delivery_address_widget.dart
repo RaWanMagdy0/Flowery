@@ -1,3 +1,4 @@
+import 'package:flowery/core/routes/page_route_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -7,44 +8,43 @@ import '../../styles/images/app_images.dart';
 
 class DeliveryAddressWidget extends StatelessWidget {
   final String city;
-  final String lat;
-  final String lang;
-  final String? area;
   final VoidCallback? onChanged;
 
   const DeliveryAddressWidget({
     super.key,
     required this.city,
-    required this.lat,
-    required this.lang,
     this.onChanged,
-    this.area,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Image.asset(AppImages.location),
-        8.horizontalSpace,
-        Text(
-          'Deliver to ',
-          style: AppFonts.font14BlackWeight400,
-        ),
-        Expanded(
-          child: Text(
-            '$city - ($lat + $lang)',
-            style: AppFonts.font14BlackWeight500,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
+    return InkWell(
+      onTap: (){
+        Navigator.pushNamed(context, PageRouteName.addAndEditUserAddress);
+      },
+      child: Row(
+        children: [
+          Image.asset(AppImages.location),
+          8.horizontalSpace,
+          Text(
+            'Deliver to ',
+            style: AppFonts.font14BlackWeight400,
           ),
-        ),
-        Icon(
-          Icons.keyboard_arrow_down,
-          size: 32.r,
-          color: AppColors.kPink,
-        ),
-      ],
+          Expanded(
+            child: Text(
+              '$city ',
+              style: AppFonts.font14BlackWeight500,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+            ),
+          ),
+          Icon(
+            Icons.keyboard_arrow_down,
+            size: 32.r,
+            color: AppColors.kPink,
+          ),
+        ],
+      ),
     );
   }
 }

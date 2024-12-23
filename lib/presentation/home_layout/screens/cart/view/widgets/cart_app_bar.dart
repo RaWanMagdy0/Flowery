@@ -22,7 +22,6 @@ class _CartAppBarState extends State<CartAppBar> {
   String city = 'Unknown City';
   String lat = '';
   String lang = '';
-  String address = 'Loading address...';
 
   @override
   void initState() {
@@ -46,10 +45,13 @@ class _CartAppBarState extends State<CartAppBar> {
       });
     }
   }
-  Future<String> getAddressFromCoordinates(double latitude, double longitude) async {
-    List<Placemark> placemarks = await placemarkFromCoordinates(latitude, longitude);
+
+  Future<String> getAddressFromCoordinates(
+      double latitude, double longitude) async {
+    List<Placemark> placemarks =
+        await placemarkFromCoordinates(latitude, longitude);
     Placemark placemark = placemarks[0];
-    String address = '${placemark.name}, ${placemark.locality}';
+    String address = '${placemark.name} , ${placemark.locality}';
     return address;
   }
 
@@ -91,9 +93,6 @@ class _CartAppBarState extends State<CartAppBar> {
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           child: DeliveryAddressWidget(
             city: city,
-            lat: lat,
-            lang: lang,
-            area: address,
           ),
         ),
       ),
