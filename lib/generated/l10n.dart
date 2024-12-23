@@ -1299,6 +1299,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Search`
+  String get search {
+    return Intl.message(
+      'Search',
+      name: 'search',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search for products`
+  String get searchHint {
+    return Intl.message(
+      'Search for products',
+      name: 'searchHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No products found`
+  String get noProductsFound {
+    return Intl.message(
+      'No products found',
+      name: 'noProductsFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start searching for products`
+  String get startSearching {
+    return Intl.message(
+      'Start searching for products',
+      name: 'startSearching',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error occurred while searching`
+  String get searchError {
+    return Intl.message(
+      'Error occurred while searching',
+      name: 'searchError',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

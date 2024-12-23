@@ -139,6 +139,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("لا توجد طلبات مكتملة متاحة."),
         "noDescriptionAvailable":
             MessageLookupByLibrary.simpleMessage("لا يوجد وصف متاح"),
+        "noProductsFound":
+            MessageLookupByLibrary.simpleMessage("لم يتم العثور على منتجات"),
         "notification": MessageLookupByLibrary.simpleMessage("الإشعارات"),
         "occasionAppBar": MessageLookupByLibrary.simpleMessage("المناسبة"),
         "occasionTitle": MessageLookupByLibrary.simpleMessage(
@@ -187,7 +189,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "resultText": MessageLookupByLibrary.simpleMessage("النتائج"),
         "savedAddress":
             MessageLookupByLibrary.simpleMessage("العناوين المحفوظة"),
+        "search": MessageLookupByLibrary.simpleMessage("بحث"),
         "searchArabic": MessageLookupByLibrary.simpleMessage("ابحث"),
+        "searchError":
+            MessageLookupByLibrary.simpleMessage("حدث خطأ أثناء البحث"),
+        "searchHint": MessageLookupByLibrary.simpleMessage("ابحث عن المنتجات"),
         "signUpTitle": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
         "signupEmailHintText":
             MessageLookupByLibrary.simpleMessage("أدخل البريد الإلكتروني"),
@@ -195,6 +201,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("أدخل كلمة المرور"),
         "somethingWentWrong":
             MessageLookupByLibrary.simpleMessage("حدث خطأ ما"),
+        "startSearching":
+            MessageLookupByLibrary.simpleMessage("ابدأ البحث عن المنتجات"),
         "status": MessageLookupByLibrary.simpleMessage("الحالة"),
         "statusText": MessageLookupByLibrary.simpleMessage("الحالة:"),
         "surveyText": MessageLookupByLibrary.simpleMessage("استبيان"),

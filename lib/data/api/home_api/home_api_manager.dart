@@ -60,6 +60,11 @@ abstract class HomeApiManger {
     @Part(name: "photo") File photo,
   );
 
+  @GET('${ApiConstants.products}')
+  Future<ProductDetailsModel> searchProducts(
+      @Query('keyword') String keyword,
+      );
+
   @GET(ApiConstants.getAllProducts)
   Future<ProductDetailsModel> getOccasionsProduct();
 

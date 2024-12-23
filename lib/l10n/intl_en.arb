@@ -123,5 +123,10 @@
   "noCompletedOrdersAvailable": "No completed orders available.",
   "noOrdersAvailable": "No orders available.",
   "egp": "EGP",
-  "trackOrder": "Track Order"
+  "trackOrder": "Track Order",
+  "search": "Search",
+  "searchHint": "Search for products",
+  "noProductsFound": "No products found",
+  "startSearching": "Start searching for products",
+  "searchError": "Error occurred while searching"
 }

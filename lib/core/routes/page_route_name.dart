@@ -22,4 +22,5 @@ class PageRouteName {
   static const String termsConditions = "terms and conditions screen";
   static const String notifications = "notifications screen";
   static const String getOrdersHistory = "getOrdersHistory";
+  static const String search = "search";
 }

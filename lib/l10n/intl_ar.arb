@@ -80,7 +80,7 @@
   "phoneLabelText": "رقم الهاتف",
   "pleaseCheckInternetConnection": "يرجى التحقق من اتصال الإنترنت",
   "pleaseLoginToSeeProfileDetails": "يرجى تسجيل الدخول\nلرؤية تفاصيل ملفك الشخصي",
-   "pleaseLoginToSeeCartItemsArabic": "يرجى تسجيل الدخول\nلرؤية عناصر سلة التسوق",
+  "pleaseLoginToSeeCartItemsArabic": "يرجى تسجيل الدخول\nلرؤية عناصر سلة التسوق",
   "productNotFound": "المنتج غير موجود.",
   "productTitle": "عنوان المنتج",
   "profileText": "الملف الشخصي",
@@ -123,5 +123,10 @@
   "noCompletedOrdersAvailable": "لا توجد طلبات مكتملة متاحة.",
   "noOrdersAvailable.": "لا توجد طلبات متاحة.",
   "egp": "ج.م",
-  "trackOrder": "اتبع الطلب "
+  "trackOrder": "اتبع الطلب ",
+  "search": "بحث",
+  "searchHint": "ابحث عن المنتجات",
+  "noProductsFound": "لم يتم العثور على منتجات",
+  "startSearching": "ابدأ البحث عن المنتجات",
+  "searchError": "حدث خطأ أثناء البحث"
 }

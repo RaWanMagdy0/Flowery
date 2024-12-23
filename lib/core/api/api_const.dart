@@ -24,5 +24,6 @@ class ApiConstants {
   static const String addAddress = "api/v1/addresses";
   static const String getLoggedUserAddresses = "api/v1/addresses";
   static const String deleteAddress = "api/v1/addresses";
+  static const String products = "api/v1/products";
   static const String getAllNotifications = "api/v1/notifications";
 }
