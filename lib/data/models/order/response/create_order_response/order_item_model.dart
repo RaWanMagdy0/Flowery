@@ -1,4 +1,5 @@
-import '../../../../../domain/entities/order/create_order/order_item_entity.dart';
+
+import '../../../../../domain/entities/order/create_order/order_response_entity.dart';
 
 class OrderItemModel {
   OrderItemModel({

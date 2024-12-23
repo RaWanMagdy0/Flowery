@@ -26,4 +26,6 @@ class AddressesCubit extends BaseViewModel<AddressesState> {
         emit(AddAddAddressFail(getErrorMassageFromException(result.exception)));
     }
   }
+
+
 }

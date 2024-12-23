@@ -198,7 +198,7 @@ class _AddAndEditUserAddressScreenState
         lang: userSelectedLocation!.longitude.toString(),
         username: _recipientNameController.text,
       );
-      context.read<AddressesCubit>().AddAddress(request);
+      context.read<AddressesCubit>().addAddress(request);
     }
   }
 }

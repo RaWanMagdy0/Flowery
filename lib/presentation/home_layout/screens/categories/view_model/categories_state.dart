@@ -4,7 +4,7 @@ import '../../../../../domain/entities/home_layout/product_details_entity.dart';
 abstract class CategoriesState {}
 
 class InitialState extends CategoriesState {}
-
+//getCategories
 class CategoriesLoadingState extends CategoriesState {}
 
 class CategoriesErrorState extends CategoriesState {
@@ -19,6 +19,8 @@ class CategoriesSuccessState extends CategoriesState {
   CategoriesSuccessState(this.categories);
 }
 
+
+//getCategoriesProduct
 class GetCategoriesProductLoadingState extends CategoriesState {}
 
 class GetCategoriesProductErrorState extends CategoriesState {
@@ -31,4 +33,15 @@ class GetCategoriesProductSuccessState extends CategoriesState {
   final List<ProductEntity?>? product;
 
   GetCategoriesProductSuccessState(this.product);
+}
+//getProductsByQuantityInDescending
+class ProductInitialState extends CategoriesState {}
+class ProductSortLoadingState extends CategoriesState {}
+class ProductSortSuccessState extends CategoriesState {
+  final List<ProductEntity?>? products;
+  ProductSortSuccessState(this.products);
+}
+class ProductSortErrorState extends CategoriesState {
+  final Exception? exception;
+  ProductSortErrorState(this.exception);
 }

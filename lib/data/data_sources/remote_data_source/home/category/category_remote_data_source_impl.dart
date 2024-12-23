@@ -33,4 +33,14 @@ class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
       return data!;
     });
   }
+
+  @override
+  Future<Result<List<ProductModel>>> getSortedProducts(String sort) {
+    return executeApiCall(() async {
+      final response = await apiManger.getSortedProducts(sort);
+      final data = response?.products;
+      log('Sorted products: $data', name: 'CategoryRemoteDataSource');
+      return data!;
+    });
+  }
 }

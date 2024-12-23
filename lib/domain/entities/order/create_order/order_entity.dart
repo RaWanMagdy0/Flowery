@@ -1,4 +1,5 @@
-import 'order_item_entity.dart';
+
+import 'order_response_entity.dart';
 
 class OrderEntity {
   OrderEntity({

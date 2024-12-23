@@ -5,14 +5,17 @@ import '../../../../../core/base/base_view_model.dart';
 import '../../../../../domain/entities/home/home_category_entity.dart';
 import '../../../../../domain/use_case/home/categories/categories_product_usecase.dart';
 import '../../../../../domain/use_case/home/categories/categories_use_case.dart';
+import '../../../../../domain/use_case/home/categories/quantity_in_descending_use_case.dart';
 import 'categories_state.dart';
 
 @injectable
 class CategoriesViewModel extends BaseViewModel<CategoriesState> {
   final GetAllCategoriesUseCase categoriesUseCase;
   final CategoriesProductUseCase categoriesProductUseCase;
+  final ProductSortingUseCase sortingUseCase;
 
-  CategoriesViewModel(this.categoriesUseCase, this.categoriesProductUseCase)
+  CategoriesViewModel(this.categoriesUseCase, this.categoriesProductUseCase,
+      this.sortingUseCase)
       : super(InitialState());
 
   Future<void> loadFlowers() async {
@@ -37,6 +40,17 @@ class CategoriesViewModel extends BaseViewModel<CategoriesState> {
 
       case Fail():
         emit(GetCategoriesProductErrorState(result.exception));
+    }
+  }
+
+  Future<void> sortProducts(String sortType) async {
+    emit(ProductSortLoadingState());
+    var result = await sortingUseCase.invoke(sortType);
+    switch (result) {
+      case Success():
+        emit(ProductSortSuccessState(result.data));
+      case Fail():
+        emit(ProductSortErrorState(result.exception));
     }
   }
 }
