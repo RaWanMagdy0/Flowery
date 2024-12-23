@@ -1,12 +1,10 @@
-import 'package:flowery/domain/entities/address/saved_addresses_entity.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../core/api/api_result.dart';
+import '../../../domain/entities/address/saved_addresses_entity.dart';
 import '../../../domain/repository/address/address_repository.dart';
 import '../../data_sources/remote_data_source/address/address_remote_data_source.dart';
 import '../../models/order/request/address_requests/add_address_request_body_model.dart';
-import '../../models/order/response/address_models/address_model.dart';
-import '../../models/order/response/address_models/address_response_model.dart';
 
 @Injectable(as: AddressRepository)
 class AddressRepositoryImpl extends AddressRepository {
@@ -18,6 +16,7 @@ class AddressRepositoryImpl extends AddressRepository {
   Future<Result<bool>> addAddress(AddAddressRequestBody address) async {
     return await dataSource.addAddress(address);
   }
+
 /**********************
   @override
   Future<Result<List<SavedAddressesEntity>>> getAllAddresses() async {
@@ -47,16 +46,15 @@ class AddressRepositoryImpl extends AddressRepository {
     }
   }
 
-
   @override
   Future<Result<dynamic>> deleteAddress(String addressId) async {
-  var response=  await dataSource.deleteAddress(addressId);
-  switch (response) {
-    case Success():
-      return Success(data: true);
+    var response = await dataSource.deleteAddress(addressId);
+    switch (response) {
+      case Success():
+        return Success(data: true);
 
-    case Fail():
-      return Fail(exception: response.exception);
-  }
+      case Fail():
+        return Fail(exception: response.exception);
+    }
   }
 }

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flowery/core/utils/widget/shimmer_loading_widget.dart';
 import 'package:flutter/material.dart';
+
+import 'shimmer_loading_widget.dart';
 
 class CustomCachedNetworkImage extends StatelessWidget {
   final String? imageUrl;

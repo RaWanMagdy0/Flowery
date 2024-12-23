@@ -1,11 +1,11 @@
-import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
+
 import '../../../../../../core/api/api_result.dart';
 import '../../../../../../core/base/base_view_model.dart';
 import '../../../../../../data/models/auth/requests/edite_profile_request_model.dart';
-import '../../../../../../domain/entities/home_layout/profile/User.dart';
+import '../../../../../../domain/entities/home_layout/profile/user.dart';
 import '../../../../../../domain/use_case/auth/logout_use_case.dart';
 import '../../../../../../domain/use_case/home/profile/edite_profile_use_case.dart';
 import '../../../../../../domain/use_case/home/profile/get_logged_user_info_use_case.dart';
@@ -20,11 +20,11 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
   final LogoutUseCase logoutUseCase;
 
   ProfileCubit(
-      this.getLoggedUserInfoUseCase,
-      this.editeProfileUseCase,
-      this.logoutUseCase,
-      this.uploadPhotoUseCase,
-      ) : super(ProfileInitialState());
+    this.getLoggedUserInfoUseCase,
+    this.editeProfileUseCase,
+    this.logoutUseCase,
+    this.uploadPhotoUseCase,
+  ) : super(ProfileInitialState());
 
   var formKey = GlobalKey<FormState>();
   TextEditingController firstNameController = TextEditingController();

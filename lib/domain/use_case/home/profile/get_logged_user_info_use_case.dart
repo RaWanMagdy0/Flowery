@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
 
 import '../../../../core/api/api_result.dart';
-import '../../../entities/home_layout/profile/User.dart';
+import '../../../entities/home_layout/profile/user.dart';
 import '../../../repository/home/profile_repository.dart';
 
 @injectable

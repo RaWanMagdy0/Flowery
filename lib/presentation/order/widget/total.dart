@@ -1,16 +1,17 @@
-import 'package:flowery/core/styles/colors/app_colors.dart';
-import 'package:flowery/core/styles/fonts/app_fonts.dart';
-import 'package:flowery/core/utils/const/checkout_page_string.dart';
-import 'package:flowery/core/utils/functions/dialogs/app_dialogs.dart';
-import 'package:flowery/core/utils/widget/custom_button.dart';
-import 'package:flowery/presentation/order/view_model/order_cubit.dart';
-import 'package:flowery/presentation/order/view_model/order_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../core/styles/colors/app_colors.dart';
+import '../../../core/styles/fonts/app_fonts.dart';
+import '../../../core/utils/const/checkout_page_string.dart';
+import '../../../core/utils/functions/dialogs/app_dialogs.dart';
+import '../../../core/utils/widget/custom_button.dart';
 import '../../../data/models/order/request/create_order_request/create_order_request.dart';
 import '../../../data/models/order/request/create_order_request/shipping_address_request.dart';
 import '../../home_layout/screens/cart/view_model/cart_view_model.dart';
+import '../view_model/order_cubit.dart';
+import '../view_model/order_state.dart';
 
 class Total extends StatefulWidget {
   final String? selectedAddress;

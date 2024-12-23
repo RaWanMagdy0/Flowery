@@ -1,5 +1,5 @@
-import '../../../../domain/entities/home_layout/profile/User.dart';
-import 'UserModel.dart';
+import '../../../../domain/entities/home_layout/profile/user.dart';
+import 'user_model.dart';
 
 class AppUserModel {
   AppUserModel({
@@ -33,7 +33,6 @@ class AppUserModel {
       email: user?.email,
       gender: user?.gender,
       role: user?.role,
-
     );
   }
 }

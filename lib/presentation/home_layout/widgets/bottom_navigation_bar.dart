@@ -1,9 +1,9 @@
-import 'package:flowery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/styles/colors/app_colors.dart';
 import '../../../core/styles/images/app_images.dart';
+import '../../../generated/l10n.dart';
 
 class BottomNavBar extends StatelessWidget {
   final int currentIndex;

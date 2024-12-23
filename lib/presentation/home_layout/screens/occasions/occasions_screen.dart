@@ -1,4 +1,3 @@
-import 'package:flowery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,6 +7,7 @@ import '../../../../core/styles/colors/app_colors.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../core/utils/widget/custom_item_card.dart';
 import '../../../../domain/entities/home_layout/product_details_entity.dart';
+import '../../../../generated/l10n.dart';
 import 'view_model/ocusin_cubit.dart';
 import 'view_model/ocusin_state.dart';
 
@@ -43,7 +43,7 @@ class _OccasionScreenState extends State<OccasionScreen> {
                       style: AppFonts.font20BlackWeight500),
                   5.verticalSpace,
                   Text(local.bloomWithBestSellers,
-                      style: AppFonts.font13BlackWeight500),
+                      style: AppFonts.font13GreyWeight500),
                 ],
               ),
             ],

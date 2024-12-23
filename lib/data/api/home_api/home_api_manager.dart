@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
@@ -9,7 +10,7 @@ import '../../models/home/best_seller/best_seller_response_model.dart';
 import '../../models/home/category/all_categories_response_model.dart';
 import '../../models/home/home/home_data_model.dart';
 import '../../models/home/occasions/occasions_response_model.dart';
-import '../../models/home/profile/AppUserModel.dart';
+import '../../models/home/profile/app_user_model.dart';
 import '../../models/produc_details_model.dart';
 
 part 'home_api_manager.g.dart';
@@ -64,5 +65,4 @@ abstract class HomeApiManger {
 
   @GET(ApiConstants.getAllCategoriesEndpoint)
   Future<ProductDetailsModel> getCategoriesProduct();
-
 }

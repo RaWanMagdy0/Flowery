@@ -1,4 +1,3 @@
-import 'package:flowery/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,6 +8,7 @@ import '../../../../core/utils/functions/validators/validators.dart';
 import '../../../../core/utils/widget/custom_button.dart';
 import '../../../../core/utils/widget/custom_text_form_field.dart';
 import '../../../../data/models/auth/requests/sign_up_request_model.dart';
+import '../../../../generated/l10n.dart';
 import '../view_model/sign_up_cubit.dart';
 
 class SignUpPage extends StatefulWidget {
