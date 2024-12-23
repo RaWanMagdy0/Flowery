@@ -1,6 +1,6 @@
+import 'package:flowery/presentation/home_layout/screens/categories/view/widgets/filter_sort_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../../../core/styles/colors/app_colors.dart';
 import '../../../../widgets/search_bar_widget.dart';
 
@@ -35,7 +35,18 @@ class CustomSearchBar extends StatelessWidget {
               size: 25,
             ),
             onPressed: () {
-              // Add menu button functionality here
+              showModalBottomSheet(
+                context: context,
+                backgroundColor: Colors.transparent,
+                isScrollControlled: true,
+                builder: (context) => FilterSortSheet(
+                  currentSort: null,
+                  onSortSelected: (sortOption) {
+                    print("Selected Sort Option: $sortOption");
+
+                  },
+                ),
+              );
             },
             padding: const EdgeInsets.all(12),
           ),
