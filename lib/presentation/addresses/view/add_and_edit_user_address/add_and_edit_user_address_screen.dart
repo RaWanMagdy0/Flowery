@@ -161,15 +161,15 @@ class _AddAndEditUserAddressScreenState
   }
 
   Future<void> loadGovernorates() async {
-      final String response =
-      await rootBundle.loadString('assets/city/egypt-governorates-en.json');
-      final data = await json.decode(response);
-      setState(() {
-        governorates = (data['egyptian_governorates'] as List)
-            .map((json) => Governorate.fromJson(json))
-            .toList();
-      });
-    }
+    final String response =
+        await rootBundle.loadString('assets/city/egypt-governorates-en.json');
+    final data = await json.decode(response);
+    setState(() {
+      governorates = (data['egyptian_governorates'] as List)
+          .map((json) => Governorate.fromJson(json))
+          .toList();
+    });
+  }
 
   void updateCities(String? selectedGovernorate) {
     setState(() {
@@ -177,7 +177,7 @@ class _AddAndEditUserAddressScreenState
       selectedArea = null;
       cities = governorates
           .firstWhere((g) => g.name == selectedGovernorate,
-          orElse: () => Governorate(name: '', cities: []))
+              orElse: () => Governorate(name: '', cities: []))
           .cities;
     });
   }
