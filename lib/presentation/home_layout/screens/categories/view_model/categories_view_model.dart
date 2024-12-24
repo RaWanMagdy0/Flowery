@@ -49,8 +49,10 @@ class CategoriesViewModel extends BaseViewModel<CategoriesState> {
     switch (result) {
       case Success():
         emit(ProductSortSuccessState(result.data));
+        break;
       case Fail():
         emit(ProductSortErrorState(result.exception));
+        break;
     }
   }
 }
