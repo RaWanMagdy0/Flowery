@@ -54,7 +54,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       ),
       floatingActionButton: BlocBuilder<CategoriesViewModel, CategoriesState>(
         buildWhen: (previous, current) {
-          return current is GetCategoriesProductLoadingState ||
+          return current is CategoriesLoadingState ||
+              current is CategoriesSuccessState ||
+              current is CategoriesErrorState ||
+              current is GetCategoriesProductLoadingState ||
               current is GetCategoriesProductSuccessState ||
               current is GetCategoriesProductErrorState ||
               current is ProductSortLoadingState ||
@@ -62,8 +65,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               current is ProductSortErrorState;
         },
         builder: (context, state) {
-          if (state is GetCategoriesProductLoadingState ||
-              state is ProductSortLoadingState) {
+          final isCategoriesLoading = state is CategoriesLoadingState;
+          final isProductsLoading = state is GetCategoriesProductLoadingState ||
+              state is ProductSortLoadingState;
+          if (isCategoriesLoading || isProductsLoading) {
             return SizedBox.shrink();
           }
           return Container(

@@ -1,3 +1,4 @@
+import 'package:flowery/core/styles/images/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -79,7 +80,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                   Icon(
                     Icons.filter_list,
                     color: AppColors.kWhite,
-                    size: 20.sp,
+                    size: 25.sp,
                   ),
                   5.horizontalSpace,
                   Text(
