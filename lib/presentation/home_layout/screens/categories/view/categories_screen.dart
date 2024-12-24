@@ -52,28 +52,44 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           forceMaterialTransparency: true,
         ),
       ),
-      floatingActionButton: Container(
-        margin: EdgeInsets.only(bottom: 10.h),
-        child: SizedBox(
-          height: 40.h,
-          child: FloatingActionButton.extended(
-            backgroundColor: AppColors.kPink,
-            onPressed: _showFilterBottomSheet,
-            label: Row(
-              children: [
-                Icon(Icons.filter_list, color: Colors.white),
-                5.horizontalSpace,
-                Text(
-                  'Filter',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16.sp,
-                  ),
+      floatingActionButton: BlocBuilder<CategoriesViewModel, CategoriesState>(
+        buildWhen: (previous, current) {
+          return current is GetCategoriesProductLoadingState ||
+              current is GetCategoriesProductSuccessState ||
+              current is GetCategoriesProductErrorState ||
+              current is ProductSortLoadingState ||
+              current is ProductSortSuccessState ||
+              current is ProductSortErrorState;
+        },
+        builder: (context, state) {
+          if (state is GetCategoriesProductLoadingState ||
+              state is ProductSortLoadingState) {
+            return SizedBox.shrink();
+          }
+          return Container(
+            margin: EdgeInsets.only(bottom: 10.h),
+            child: SizedBox(
+              height: 40.h,
+              child: FloatingActionButton.extended(
+                backgroundColor: AppColors.kPink,
+                onPressed: _showFilterBottomSheet,
+                label: Row(
+                  children: [
+                    Icon(Icons.filter_list, color: Colors.white),
+                    5.horizontalSpace,
+                    Text(
+                      'Filter',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16.sp,
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: Column(
