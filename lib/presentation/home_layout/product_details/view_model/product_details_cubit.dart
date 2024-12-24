@@ -10,6 +10,7 @@ import 'product_details_states.dart';
 @injectable
 class ProductDetailsCubit extends BaseViewModel<ProductDetailsStates> {
   GetProductDetailsUseCase useCase;
+  late ProductDetailsEntity product = ProductDetailsEntity(products: []);
 
   ProductDetailsCubit(this.useCase) : super(ProductDetailsInitialState());
 
@@ -24,15 +25,16 @@ class ProductDetailsCubit extends BaseViewModel<ProductDetailsStates> {
           message: result.data?.message,
           products: result.data?.products
               ?.map((e) => ProductEntity(
-                    id: e.id,
-                    title: e.title,
-                    description: e.description,
-                    images: e.images,
-                    price: e.price,
-                    slug: e.slug,
-                  ))
+            id: e.id,
+            title: e.title,
+            description: e.description,
+            images: e.images,
+            price: e.price,
+            slug: e.slug,
+          ))
               .toList(),
         );
+        product = entity;  // Update product
         emit(ProductDetailsSuccessState(success: entity));
         break;
 

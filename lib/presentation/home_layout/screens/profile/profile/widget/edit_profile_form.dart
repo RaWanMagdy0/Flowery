@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -8,7 +7,7 @@ import '../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../core/utils/functions/validators/validators.dart';
 import '../../../../../../core/utils/widget/custom_button.dart';
 import '../../../../../../core/utils/widget/custom_text_form_field.dart';
-import '../../../../../../domain/entities/home_layout/profile/User.dart';
+import '../../../../../../domain/entities/home_layout/profile/user.dart';
 import '../view_model/profile_cubit.dart';
 import 'custom_gender_row.dart';
 
@@ -18,11 +17,13 @@ class EditProfileForm extends StatefulWidget {
   @override
   State<EditProfileForm> createState() => _EditProfileFormState();
 }
+
 class _EditProfileFormState extends State<EditProfileForm> {
   late ProfileCubit viewModel;
   bool hasChanges = false;
   String? gender;
 
+  @override
   void initState() {
     super.initState();
     viewModel = getIt.get<ProfileCubit>();
@@ -142,6 +143,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
       ),
     );
   }
+
   void _checkChanges(User user) {
     setState(() {
       hasChanges = viewModel.firstNameController.text != user.firstName ||

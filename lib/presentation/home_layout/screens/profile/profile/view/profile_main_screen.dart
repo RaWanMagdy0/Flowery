@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
+
 import '../../../../../../core/di/di.dart';
 import '../../../../../../core/routes/page_route_name.dart';
 import '../../../../../../core/styles/colors/app_colors.dart';
@@ -51,7 +52,11 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: const Icon(Icons.notifications_outlined),
+            child: InkWell(
+              onTap: () =>
+                  Navigator.pushNamed(context, PageRouteName.notifications),
+              child: const Icon(Icons.notifications_outlined),
+            ),
           ),
         ],
       ),
@@ -179,15 +184,16 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                               title: local.aboutAs,
                               trailingIcon: Icons.arrow_forward_ios,
                               onTap: () {
-                                Navigator.pushNamed(context, PageRouteName.aboutApp);
-
+                                Navigator.pushNamed(
+                                    context, PageRouteName.aboutApp);
                               },
                             ),
                             CustomListTile(
                               title: local.termsAndConditions,
                               trailingIcon: Icons.arrow_forward_ios,
                               onTap: () {
-                                Navigator.pushNamed(context, PageRouteName.termsConditions);
+                                Navigator.pushNamed(
+                                    context, PageRouteName.termsConditions);
                               },
                             ),
                             const SizedBox(height: 16),

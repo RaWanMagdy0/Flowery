@@ -5,12 +5,18 @@ class AddressModel {
   final String? street;
   final String? phone;
   final String? city;
+  final String? lat;
+  final String? lang;
+  final String? username;
 
   AddressModel({
     this.id,
     this.street,
     this.phone,
     this.city,
+    this.username,
+    this.lang,
+    this.lat
   });
 
   factory AddressModel.fromJson(Map<String, dynamic> json) {
@@ -19,6 +25,9 @@ class AddressModel {
       street: json['street'],
       phone: json['phone'],
       city: json['city'],
+      lat: json['lat'],
+      lang: json['lang'],
+      username: json['username'],
     );
   }
 
@@ -28,6 +37,9 @@ class AddressModel {
       'street': street,
       'phone': phone,
       'city': city,
+      'lat': lat,
+      'lang': lang,
+      'username': username,
     };
   }
 
@@ -37,6 +49,9 @@ class AddressModel {
       city: city ?? "",
       street: street ?? "",
       phone: phone ?? "",
+      lat: lat ?? "",
+      lang: lang ?? "",
+      username: username ?? "",
     );
   }
 }

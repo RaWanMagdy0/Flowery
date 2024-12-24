@@ -122,7 +122,7 @@ class _BestSellerScreenState extends State<BestSellerScreen> {
                     imageUrl: product.imageUrl,
                     price: 'EGP ${product.priceAfterDiscount}',
                     originalPrice: product.price.toString(),
-                    descount: '$discount',
+                    descount: '$discount %',
                     descountColor: Colors.green,
                     backgroundColor: Colors.white,
                     buttonColor: AppColors.kPink,

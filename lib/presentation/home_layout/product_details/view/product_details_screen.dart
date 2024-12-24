@@ -1,8 +1,8 @@
-import 'package:flowery/presentation/home_layout/product_details/view/widget/product_details_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../core/di/di.dart';
 import '../../../../core/styles/colors/app_colors.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
@@ -12,11 +12,12 @@ import '../../../../domain/entities/home_layout/product_details_entity.dart';
 import '../../../../generated/l10n.dart';
 import '../view_model/product_details_cubit.dart';
 import '../view_model/product_details_states.dart';
+import 'widget/product_details_loading.dart';
 
 class ProductDetails extends StatefulWidget {
-  final String productIt;
+  final String productId;
 
-  const ProductDetails(this.productIt, {super.key});
+  const ProductDetails(this.productId, {super.key});
 
   @override
   State<ProductDetails> createState() => _ProductDetailsState();
@@ -29,7 +30,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   void initState() {
     super.initState();
     viewModel = getIt.get<ProductDetailsCubit>();
-    viewModel.getProductDetails(productId: widget.productIt);
+    viewModel.getProductDetails(productId: widget.productId);
   }
 
   @override
@@ -49,7 +50,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           } else if (state is ProductDetailsSuccessState) {
             final productDetailsEntity = state.success;
             final product = productDetailsEntity?.products?.firstWhere(
-              (p) => p.id == widget.productIt,
+              (p) => p.id == widget.productId,
             );
             if (product != null) {
               return CustomScrollView(
@@ -135,7 +136,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           if (state is ProductDetailsSuccessState) {
             return Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-              child: AddToCartButton(productId: widget.productIt),
+              child: AddToCartButton(productId: widget.productId),
             );
           } else {
             return SizedBox();

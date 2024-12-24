@@ -2,7 +2,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../core/api/api_result.dart';
 import '../../../../data/models/auth/requests/edite_profile_request_model.dart';
-import '../../../entities/home_layout/profile/User.dart';
+import '../../../entities/home_layout/profile/user.dart';
 import '../../../repository/home/profile_repository.dart';
 
 @injectable

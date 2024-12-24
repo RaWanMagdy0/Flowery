@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "aboutAs": MessageLookupByLibrary.simpleMessage("معلومات عنا"),
+        "active": MessageLookupByLibrary.simpleMessage("نشط"),
         "addToCart": MessageLookupByLibrary.simpleMessage("أضف إلى السلة"),
         "addToCartText": MessageLookupByLibrary.simpleMessage("أضف إلى السلة"),
         "allPricesIncludeTax":
@@ -42,6 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cart": MessageLookupByLibrary.simpleMessage("سلة التسوق"),
         "categories": MessageLookupByLibrary.simpleMessage("الفئات"),
         "changeText": MessageLookupByLibrary.simpleMessage("تغيير"),
+        "completed": MessageLookupByLibrary.simpleMessage("مكتمل"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
         "confirmPasswordHintText":
@@ -65,6 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
         "editProfile":
             MessageLookupByLibrary.simpleMessage("تعديل الملف الشخصي"),
+        "egp": MessageLookupByLibrary.simpleMessage("ج.م"),
         "emailHintText":
             MessageLookupByLibrary.simpleMessage("أدخل بريدك الإلكتروني"),
         "emailLabelText":
@@ -127,17 +130,23 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
         "male": MessageLookupByLibrary.simpleMessage("ذكر"),
         "myOrder": MessageLookupByLibrary.simpleMessage("طلباتي"),
+        "myOrders": MessageLookupByLibrary.simpleMessage("طلباتي"),
         "newPassword":
             MessageLookupByLibrary.simpleMessage("كلمة المرور الجديدة"),
         "newPasswordLabelText":
             MessageLookupByLibrary.simpleMessage("كلمة المرور الجديدة"),
+        "noCompletedOrdersAvailable":
+            MessageLookupByLibrary.simpleMessage("لا توجد طلبات مكتملة متاحة."),
         "noDescriptionAvailable":
             MessageLookupByLibrary.simpleMessage("لا يوجد وصف متاح"),
+        "noProductsFound":
+            MessageLookupByLibrary.simpleMessage("لم يتم العثور على منتجات"),
         "notification": MessageLookupByLibrary.simpleMessage("الإشعارات"),
         "occasionAppBar": MessageLookupByLibrary.simpleMessage("المناسبة"),
         "occasionTitle": MessageLookupByLibrary.simpleMessage(
             "تألق مع أفضل منتجاتنا مبيعًا"),
         "ok": MessageLookupByLibrary.simpleMessage("موافق"),
+        "orderNumber": MessageLookupByLibrary.simpleMessage("رقم الاوردر"),
         "otpSentToEmail": MessageLookupByLibrary.simpleMessage(
             "تم إرسال رمز التحقق إلى بريدك الإلكتروني.\n يرجى التحقق من بريدك الإلكتروني"),
         "passwordAppBarTitle":
@@ -180,7 +189,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "resultText": MessageLookupByLibrary.simpleMessage("النتائج"),
         "savedAddress":
             MessageLookupByLibrary.simpleMessage("العناوين المحفوظة"),
+        "search": MessageLookupByLibrary.simpleMessage("بحث"),
         "searchArabic": MessageLookupByLibrary.simpleMessage("ابحث"),
+        "searchError":
+            MessageLookupByLibrary.simpleMessage("حدث خطأ أثناء البحث"),
+        "searchHint": MessageLookupByLibrary.simpleMessage("ابحث عن المنتجات"),
         "signUpTitle": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
         "signupEmailHintText":
             MessageLookupByLibrary.simpleMessage("أدخل البريد الإلكتروني"),
@@ -188,6 +201,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("أدخل كلمة المرور"),
         "somethingWentWrong":
             MessageLookupByLibrary.simpleMessage("حدث خطأ ما"),
+        "startSearching":
+            MessageLookupByLibrary.simpleMessage("ابدأ البحث عن المنتجات"),
         "status": MessageLookupByLibrary.simpleMessage("الحالة"),
         "statusText": MessageLookupByLibrary.simpleMessage("الحالة:"),
         "surveyText": MessageLookupByLibrary.simpleMessage("استبيان"),
@@ -195,6 +210,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("الشروط والأحكام"),
         "termsandConditions":
             MessageLookupByLibrary.simpleMessage("الشروط والأحكام"),
+        "trackOrder": MessageLookupByLibrary.simpleMessage("اتبع الطلب "),
         "unexpectedState":
             MessageLookupByLibrary.simpleMessage("حالة غير متوقعة."),
         "updateText": MessageLookupByLibrary.simpleMessage("تحديث"),

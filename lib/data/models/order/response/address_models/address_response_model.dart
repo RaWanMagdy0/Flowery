@@ -1,4 +1,3 @@
-import '../../../../../domain/entities/address/saved_addresses_entity.dart';
 import 'address_model.dart';
 
 class AddressResponseModel {
@@ -18,5 +17,4 @@ class AddressResponseModel {
                 json['addresses'].map((x) => AddressModel.fromJson(x)))
             : [],
       );
-
 }

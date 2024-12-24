@@ -10,4 +10,7 @@ abstract class HomeRemoteDataSource {
       {required String productId});
 
   Future<Result<List<BestSellerModel>>> getBestSellerProducts();
+
+  Future<Result<ProductDetailsModel?>> searchProducts(String query);
 }
+

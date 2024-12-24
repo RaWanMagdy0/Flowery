@@ -11,6 +11,7 @@ class AppImages {
   static const loginCart = "assets/animations/profile_animation.json";
 
   static const personIcon = 'assets/images/person_icon.png';
+  static const filterIcon = 'assets/images/filter.png';
   static const homeIcon = 'assets/images/home_icon.png';
   static const categoryIcon = 'assets/images/category_icon.png';
   static const shoppingIcon = 'assets/images/shopping_icon.png';

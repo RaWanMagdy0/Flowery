@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:geocoding/geocoding.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../../core/styles/colors/app_colors.dart';
 import '../view_model/home_view_model.dart';
 import 'widgets/home_app_bar.dart';
@@ -18,19 +19,28 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String city = 'Unknown City';
+  String lat = '';
+  String lang = '';
+
   @override
   void initState() {
     super.initState();
+    _loadAddress();
     context.read<HomeViewModel>().getHomeData();
   }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.kWhite,
-      appBar: HomeAppBar(),
+      appBar: HomeAppBar(
+        city: city,
+      ),
       body: RefreshIndicator(
         onRefresh: () async {
+          _loadAddress();
           context.read<HomeViewModel>().getHomeData();
         },
         backgroundColor: AppColors.kBabyPink,
@@ -51,4 +61,35 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+  Future<String> getAddressFromCoordinates(double latitude, double longitude) async {
+      List<Placemark> placemarks = await placemarkFromCoordinates(latitude, longitude);
+      Placemark placemark = placemarks[0];
+      String address = '${placemark.name}, ${placemark.locality}';
+      return address;
+  }
+  Future<void> _loadAddress() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      city = prefs.getString('city') ?? 'Unknown City';
+      lat = prefs.getString('lat') ?? '';
+      lang = prefs.getString('lang') ?? '';
+    });
+
+    if (lat.isNotEmpty && lang.isNotEmpty) {
+      double latitude = double.parse(lat);
+      double longitude = double.parse(lang);
+      String address = await getAddressFromCoordinates(latitude, longitude);
+      setState(() {
+        city = address;
+      });
+    }
+  }
+  Future<void> saveAddress(String city, String lat, String lang,String area) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('city', city);
+    await prefs.setString('lat', lat);
+    await prefs.setString('lang', lang);
+  }
+
+
 }

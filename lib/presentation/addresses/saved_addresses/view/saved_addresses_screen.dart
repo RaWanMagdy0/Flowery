@@ -1,13 +1,13 @@
-import 'package:flowery/core/routes/page_route_name.dart';
-import 'package:flowery/domain/entities/address/saved_addresses_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../core/routes/page_route_name.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
+import '../view_model/saved_addresses_states.dart';
+import '../view_model/saved_addresses_view_model.dart';
 import 'widgets/saved_addresses_button.dart';
 import 'widgets/saved_addresses_card.dart';
-import '../view_model/saved_addresses_view_model.dart';
-import '../view_model/saved_addresses_states.dart';
 
 class SavedAddressScreen extends StatefulWidget {
   const SavedAddressScreen({super.key});
@@ -71,11 +71,11 @@ class _SavedAddressScreenState extends State<SavedAddressScreen> {
                       itemCount: addresses.length,
                       itemBuilder: (context, index) {
                         final address = addresses[index];
-                        final addressId=address.id;
+                        final addressId = address.id;
                         return SavedAddressesCard(
                           city: address.city,
                           street: address.street,
-                          onDelete: (){
+                          onDelete: () {
                             viewModel.deleteAddress(addressId);
                             print("{addressId $addressId}");
                           },
