@@ -67,7 +67,7 @@ abstract class HomeApiManger {
 
   @GET(ApiConstants.products)
   Future<ProductDetailsModel?> getSortedProducts(
-      @Query('sort') String sort
+      @Query('sort') String sort,
       );
 
 

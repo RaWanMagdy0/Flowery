@@ -1,10 +1,14 @@
 import '../../../../../domain/entities/home/home_category_entity.dart';
 import '../../../../../domain/entities/home_layout/product_details_entity.dart';
 
-abstract class CategoriesState {}
+abstract class CategoriesState {
+  // Base getter that returns null by default
+  List<ProductEntity?>? get product => null;
+}
 
 class InitialState extends CategoriesState {}
-//getCategories
+
+// getCategories
 class CategoriesLoadingState extends CategoriesState {}
 
 class CategoriesErrorState extends CategoriesState {
@@ -19,8 +23,7 @@ class CategoriesSuccessState extends CategoriesState {
   CategoriesSuccessState(this.categories);
 }
 
-
-//getCategoriesProduct
+// getCategoriesProduct
 class GetCategoriesProductLoadingState extends CategoriesState {}
 
 class GetCategoriesProductErrorState extends CategoriesState {
@@ -30,17 +33,24 @@ class GetCategoriesProductErrorState extends CategoriesState {
 }
 
 class GetCategoriesProductSuccessState extends CategoriesState {
+  @override
   final List<ProductEntity?>? product;
 
   GetCategoriesProductSuccessState(this.product);
 }
-//getProductsByQuantityInDescending
+
+// getProductsBySort
 class ProductInitialState extends CategoriesState {}
+
 class ProductSortLoadingState extends CategoriesState {}
+
 class ProductSortSuccessState extends CategoriesState {
-  final List<ProductEntity?>? products;
-  ProductSortSuccessState(this.products);
+  @override
+  final List<ProductEntity?>? product;
+
+  ProductSortSuccessState(this.product);
 }
+
 class ProductSortErrorState extends CategoriesState {
   final Exception? exception;
   ProductSortErrorState(this.exception);

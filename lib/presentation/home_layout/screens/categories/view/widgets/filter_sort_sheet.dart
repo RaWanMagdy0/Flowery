@@ -1,136 +1,81 @@
-import 'package:flowery/presentation/home_layout/screens/categories/view_model/categories_state.dart';
-import 'package:flutter/cupertino.dart';
+// filter_bottom_sheet.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../../../../../core/di/di.dart';
-import '../../../../../../core/styles/colors/app_colors.dart';
-import '../../../../../../core/styles/fonts/app_fonts.dart';
-import '../../../../../../generated/l10n.dart';
 import '../../view_model/categories_view_model.dart';
 
-enum SortOption {
-  priceAscending,
-  priceDescending,
-  dateAscending,
-  dateDescending,
-  discountAmount
-}
-
-class FilterSortSheet extends StatefulWidget {
-  final Function(SortOption) onSortSelected;
-  final SortOption? currentSort;
-
-  FilterSortSheet({
-    Key? key,
-    required this.onSortSelected,
-    this.currentSort,
-  }) : super(key: key);
-
-  @override
-  State<FilterSortSheet> createState() => _FilterSortSheetState();
-}
-
-class _FilterSortSheetState extends State<FilterSortSheet> {
-  late CategoriesViewModel viewModel;
-
-  @override
-  void initState() {
-    super.initState();
-    viewModel = getIt.get<CategoriesViewModel>();
-  }
+class FilterBottomSheet extends StatelessWidget {
+  const FilterBottomSheet({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16.w),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.kWhite,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20.r),
-          topRight: Radius.circular(20.r),
-        ),
+        color: Colors.white,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
-      child: BlocBuilder<CategoriesViewModel, CategoriesState>(
-        bloc: viewModel,
-        builder: (context, state) {
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Sort By',
-                    style: AppFonts.font18BlackWeight500,
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.close),
-                    onPressed: () => Navigator.pop(context),
-                  ),
-                ],
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Center(
+            child: Container(
+              width: 40,
+              height: 4,
+              margin: EdgeInsets.only(bottom: 20),
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(2),
               ),
-              Divider(),
-              _buildSortOption(
-                context: context,
-                title: 'Lowest Price',
-                option: SortOption.priceAscending,
-              ),
-              _buildSortOption(
-                context: context,
-                title: 'Highest Price',
-                option: SortOption.priceDescending,
-              ),
-              _buildSortOption(
-                context: context,
-                title: 'New',
-                option: SortOption.dateAscending,
-              ),
-              _buildSortOption(
-                context: context,
-                title: 'Old',
-                option: SortOption.dateDescending,
-              ),
-              _buildSortOption(
-                context: context,
-                title: 'Discount',
-                option: SortOption.discountAmount,
-              ),
-            ],
-          );
-        },
+            ),
+          ),
+          Text(
+            'Sort By',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 20),
+          _buildSortOption(
+            context,
+            'Price: Low to High',
+            'priceAfterDiscount',
+          ),
+          _buildSortOption(
+            context,
+            'Quantity: Low to High',
+            'quantity',
+          ),
+          _buildSortOption(
+            context,
+            'Quantity: High to Low',
+            '-quantity',
+          ),
+          SizedBox(height: 20),
+        ],
       ),
     );
   }
 
-  Widget _buildSortOption({
-    required BuildContext context,
-    required String title,
-    required SortOption option,
-  }) {
+  Widget _buildSortOption(
+      BuildContext context,
+      String title,
+      String sortType,
+      ) {
     return InkWell(
       onTap: () {
-        widget.onSortSelected(option);
+        // Get the CategoriesViewModel from the parent context
+        final viewModel = context.read<CategoriesViewModel>();
+        viewModel.sortProducts(sortType);
         Navigator.pop(context);
       },
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 12.h),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              title,
-              style: AppFonts.font16BlackWeight400,
-            ),
-            if (widget.currentSort == option)
-              Icon(
-                Icons.check,
-                color: AppColors.kPink,
-                size: 20.sp,
-              ),
-          ],
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.symmetric(vertical: 15),
+        child: Text(
+          title,
+          style: TextStyle(fontSize: 16),
         ),
       ),
     );

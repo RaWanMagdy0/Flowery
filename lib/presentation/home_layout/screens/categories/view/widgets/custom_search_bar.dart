@@ -18,40 +18,7 @@ class CustomSearchBar extends StatelessWidget {
             maxHeight: 100.h,
           ),
         ),
-        8.horizontalSpace,
-        Container(
-          width: 50.w,
-          height: 45.h,
-          decoration: BoxDecoration(
-            color: AppColors.kWhite,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: AppColors.kLightGrey,
-              width: 1.r,
-            ),
-          ),
-          child: IconButton(
-            icon: Icon(
-              Icons.sort,
-              color: AppColors.kLightGrey,
-              size: 25,
-            ),
-            onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                backgroundColor: Colors.transparent,
-                isScrollControlled: true,
-                builder: (context) => FilterSortSheet(
-                  currentSort: null,
-                  onSortSelected: (sortOption) {
-                    context.read<CategoriesViewModel>().sortProducts(sortOption.name);
-                  },
-                ),
-              );
-            },
-            padding: const EdgeInsets.all(12),
-          ),
-        ),
+        7.horizontalSpace,
       ],
     );
   }

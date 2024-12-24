@@ -35,7 +35,7 @@ class CategoryRemoteDataSourceImpl extends CategoryRemoteDataSource {
   }
 
   @override
-  Future<Result<List<ProductModel>>> getSortedProducts(String sort) {
+  Future<Result<List<ProductModel>?>> getSortedProducts(String sort) {
     return executeApiCall(() async {
       final response = await apiManger.getSortedProducts(sort);
       final data = response?.products;
