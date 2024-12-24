@@ -1,4 +1,3 @@
-// filter_bottom_sheet.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../view_model/categories_view_model.dart';
