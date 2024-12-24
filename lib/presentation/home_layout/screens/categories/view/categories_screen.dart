@@ -8,7 +8,6 @@ import '../../../../../core/utils/widget/custom_item_card.dart';
 import '../../../widgets/search_bar_widget.dart';
 import '../view_model/categories_state.dart';
 import '../view_model/categories_view_model.dart';
-import 'widgets/custom_search_bar.dart';
 
 class CategoriesScreen extends StatefulWidget {
   const CategoriesScreen({super.key});
@@ -30,40 +29,53 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             maxHeight: 100.h,
           ),
           actions: [
-            Container(
-              width: 50.w,
-              height: 45.h,
-              decoration: BoxDecoration(
-                color: AppColors.kWhite,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(
-                  color: AppColors.kLightGrey,
-                  width: 1.r,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                width: 50.w,
+                height: 45.h,
+                decoration: BoxDecoration(
+                  color: AppColors.kWhite,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(
+                    color: AppColors.kLightGrey,
+                    width: 1.r,
+                  ),
                 ),
-              ),
-              child: IconButton(
-                icon: Icon(Icons.filter_list),
-                onPressed: () {
-                  showModalBottomSheet(
-                    context: context,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-                    ),
-                    builder: (BuildContext bottomSheetContext) {
-                      // Pass the parent context's provider to the bottom sheet
-                      return BlocProvider.value(
-                        value: context.read<CategoriesViewModel>(),
-                        child: FilterBottomSheet(),
-                      );
-                    },
-                  );
-                },
+                child: IconButton(
+                  icon: Icon(Icons.filter_list),
+                  onPressed: _showFilterBottomSheet,
+                ),
               ),
             ),
           ],
           forceMaterialTransparency: true,
         ),
       ),
+      floatingActionButton: Container(
+        margin: EdgeInsets.only(bottom: 10.h),
+        child: SizedBox(
+          height: 40.h,
+          child: FloatingActionButton.extended(
+            backgroundColor: AppColors.kPink,
+            onPressed: _showFilterBottomSheet,
+            label: Row(
+              children: [
+                Icon(Icons.filter_list, color: Colors.white),
+                5.horizontalSpace,
+                Text(
+                  'Filter',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16.sp,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -95,9 +107,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                           setState(() {
                             selectedCategoryIndex = index;
                           });
-                          context
-                              .read<CategoriesViewModel>()
-                              .selectCategory(state.categories![index].id ?? '');
+                          context.read<CategoriesViewModel>().selectCategory(
+                              state.categories![index].id ?? '');
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -190,6 +201,21 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           ),
         ],
       ),
+    );
+  }
+
+  void _showFilterBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (BuildContext bottomSheetContext) {
+        return BlocProvider.value(
+          value: context.read<CategoriesViewModel>(),
+          child: FilterBottomSheet(),
+        );
+      },
     );
   }
 }

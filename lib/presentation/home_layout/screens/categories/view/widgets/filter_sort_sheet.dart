@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../../../core/styles/colors/app_colors.dart';
 import '../../view_model/categories_view_model.dart';
 
-class FilterBottomSheet extends StatelessWidget {
+class FilterBottomSheet extends StatefulWidget {
   const FilterBottomSheet({Key? key}) : super(key: key);
+
+  @override
+  State<FilterBottomSheet> createState() => _FilterBottomSheetState();
+}
+
+class _FilterBottomSheetState extends State<FilterBottomSheet> {
+  String selectedSort = 'highestPrice';
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +26,7 @@ class FilterBottomSheet extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Bottom sheet indicator
           Center(
             child: Container(
               width: 40,
@@ -28,53 +38,97 @@ class FilterBottomSheet extends StatelessWidget {
               ),
             ),
           ),
+          // Title
           Text(
-            'Sort By',
+            'Sort by',
             style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: AppColors.kPink),
           ),
           SizedBox(height: 20),
-          _buildSortOption(
-            context,
+          // Radio options
+          _buildRadioOption(
             'Price: Low to High',
             'priceAfterDiscount',
           ),
-          _buildSortOption(
-            context,
+          _buildRadioOption(
             'Quantity: Low to High',
             'quantity',
           ),
-          _buildSortOption(
-            context,
+          _buildRadioOption(
             'Quantity: High to Low',
             '-quantity',
           ),
-          SizedBox(height: 20),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: () {
+                context.read<CategoriesViewModel>().sortProducts(selectedSort);
+                Navigator.pop(context);
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.kPink,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25.r),
+                ),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.filter_list,
+                    color: AppColors.kWhite,
+                    size: 20.sp,
+                  ),
+                  5.horizontalSpace,
+                  Text(
+                    'Filter',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildSortOption(
-      BuildContext context,
-      String title,
-      String sortType,
-      ) {
+  Widget _buildRadioOption(String title, String value) {
     return InkWell(
       onTap: () {
-        // Get the CategoriesViewModel from the parent context
-        final viewModel = context.read<CategoriesViewModel>();
-        viewModel.sortProducts(sortType);
-        Navigator.pop(context);
+        setState(() {
+          selectedSort = value;
+        });
       },
-      child: Container(
-        width: double.infinity,
-        padding: EdgeInsets.symmetric(vertical: 15),
-        child: Text(
-          title,
-          style: TextStyle(fontSize: 16),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            ),
+            Radio<String>(
+              value: value,
+              groupValue: selectedSort,
+              onChanged: (String? newValue) {
+                setState(() {
+                  selectedSort = newValue!;
+                });
+              },
+              activeColor: AppColors.kPink,
+            ),
+          ],
         ),
       ),
     );

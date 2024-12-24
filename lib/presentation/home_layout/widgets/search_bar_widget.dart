@@ -28,7 +28,7 @@ class SearchBarWidget extends StatelessWidget {
         },
         child: Container(
           constraints: BoxConstraints(
-            maxHeight: maxHeight ?? 36.h,
+            maxHeight: maxHeight ?? 50.h,
             maxWidth: 300.w,
           ),
           decoration: BoxDecoration(
@@ -36,8 +36,8 @@ class SearchBarWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(8.r),
           ),
           padding: EdgeInsets.symmetric(
-            horizontal: 8.w,
-            vertical: 6.h,
+            horizontal: 10.w,
+            vertical: 10.h,
           ),
           child: Row(
             children: [
