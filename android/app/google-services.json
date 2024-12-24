@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "941362651057",
+    "project_id": "flowery-app-add84",
+    "storage_bucket": "flowery-app-add84.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:941362651057:android:6d3808a23b1f9afd412790",
+        "android_client_info": {
+          "package_name": "com.example.flowery"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGfK3wgcOQZoCLHsz4ydWjywb2MvkNJuY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

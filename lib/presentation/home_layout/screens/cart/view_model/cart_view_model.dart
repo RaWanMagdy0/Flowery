@@ -1,5 +1,5 @@
+import 'package:flowery/domain/entities/home_layout/product_details_entity.dart';
 import 'package:injectable/injectable.dart';
-
 import '../../../../../core/api/api_result.dart';
 import '../../../../../core/base/base_view_model.dart';
 import '../../../../../core/errors/custom_exceptions.dart';
@@ -32,7 +32,6 @@ class CartViewModel extends BaseViewModel<CartState> {
   bool isUserLoggedIn = false;
   num cartItemsCount = 0;
   late Cart cart;
-
   void checkLoggedUser() async {
     final token = await TokenManager.getToken();
 
@@ -50,7 +49,6 @@ class CartViewModel extends BaseViewModel<CartState> {
       emit(NoUserLogged());
       return;
     }
-
     emit(CartLoading());
     cartItemsCount = 0;
 
@@ -60,6 +58,7 @@ class CartViewModel extends BaseViewModel<CartState> {
       case Success():
         cartItemsCount = result.data?.numberOfItems ?? 0;
         cart = result.data?.cart ?? Cart();
+
         if (cart.products?.isEmpty ?? true) {
           emit(CartEmpty());
         } else {

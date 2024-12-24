@@ -5,4 +5,5 @@ import '../../../../models/produc_details_model.dart';
 abstract class CategoryRemoteDataSource {
   Future<Result<AllCategoriesResponseModel>> getAllCategories();
   Future<Result<List<ProductModel>?>> getCategoriesProduct();
+  Future<Result<List<ProductModel>?>> getSortedProducts(String sort);
 }

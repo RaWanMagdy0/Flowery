@@ -1,8 +1,7 @@
-import 'package:flowery/core/utils/widget/shimmer_loading_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/styles/fonts/app_fonts.dart';
+import '../../../../../core/utils/widget/shimmer_loading_widget.dart';
 
 class ProductDetailsLoading extends StatelessWidget {
   const ProductDetailsLoading({super.key});
@@ -13,7 +12,8 @@ class ProductDetailsLoading extends StatelessWidget {
       children: [
         ShimmerLoadingWidget(
           width: 1.sw,
-          height: 1.sh/2,
+          height: 1.sh / 2,
+          borderRadius: 0,
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -54,7 +54,6 @@ class ProductDetailsLoading extends StatelessWidget {
                 width: double.infinity,
                 height: 90.h,
               ),
-
             ],
           ),
         ),

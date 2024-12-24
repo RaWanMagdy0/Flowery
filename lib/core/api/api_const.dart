@@ -20,4 +20,13 @@ class ApiConstants {
   static const String getBestSeller = "api/v1/best-seller";
   static const String getAllCategoriesEndpoint = "api/v1/categories";
   static const String logout = "api/v1/auth/logout";
+  static const String order = "api/v1/orders";
+  static const String addAddress = "api/v1/addresses";
+  static const String getLoggedUserAddresses = "api/v1/addresses";
+  static const String deleteAddress = "api/v1/addresses";
+  static const String products = "api/v1/products";
+  static const String quantityInDescending = "api/v1/products";
+//  static const String products = "api/v1/products";
+// static const String products = "api/v1/products";
+  static const String getAllNotifications = "api/v1/notifications";
 }

@@ -29,6 +29,13 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
       return response;
     });
   }
+  @override
+  Future<Result<ProductDetailsModel?>> searchProducts(String query) {
+    return executeApiCall<ProductDetailsModel?>(() async {
+      final response = await apiManager.searchProducts(query);
+      return response;
+    });
+  }
 
   @override
   Future<Result<List<BestSellerModel>>> getBestSellerProducts() {

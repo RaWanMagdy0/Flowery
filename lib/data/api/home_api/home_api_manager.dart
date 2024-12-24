@@ -10,7 +10,7 @@ import '../../models/home/best_seller/best_seller_response_model.dart';
 import '../../models/home/category/all_categories_response_model.dart';
 import '../../models/home/home/home_data_model.dart';
 import '../../models/home/occasions/occasions_response_model.dart';
-import '../../models/home/profile/AppUserModel.dart';
+import '../../models/home/profile/app_user_model.dart';
 import '../../models/produc_details_model.dart';
 
 part 'home_api_manager.g.dart';
@@ -60,9 +60,25 @@ abstract class HomeApiManger {
     @Part(name: "photo") File photo,
   );
 
+  @GET(ApiConstants.products)
+  Future<ProductDetailsModel> searchProducts(
+    @Query('keyword') String keyword,
+  );
+
+  @GET(ApiConstants.products)
+  Future<ProductDetailsModel?> getSortedProducts(
+      @Query('sort') String sort,
+      );
+
+
   @GET(ApiConstants.getAllProducts)
   Future<ProductDetailsModel> getOccasionsProduct();
 
   @GET(ApiConstants.getAllCategoriesEndpoint)
   Future<ProductDetailsModel> getCategoriesProduct();
+}
+enum SortType {
+  quantityDescending,
+  quantityAscending,
+  priceAfterDiscountAscending
 }

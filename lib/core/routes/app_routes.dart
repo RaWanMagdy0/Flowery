@@ -1,6 +1,13 @@
+import 'package:flowery/presentation/home_layout/product_details/view_model/product_details_cubit.dart';
+import 'package:flowery/presentation/order/view/get_orders_history.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../presentation/about_app/view/about_app_screen.dart';
+import '../../presentation/addresses/saved_addresses/view/saved_addresses_screen.dart';
+import '../../presentation/addresses/saved_addresses/view_model/saved_addresses_view_model.dart';
+import '../../presentation/addresses/view/add_and_edit_user_address/add_and_edit_user_address_screen.dart';
+import '../../presentation/addresses/view_model/addresses_view_model.dart';
 import '../../presentation/auth/forgot_password/view/widgets/email_verification_widget/email_verification.dart';
 import '../../presentation/auth/forgot_password/view/widgets/forgot_password_widget/forget_password_screen.dart';
 import '../../presentation/auth/forgot_password/view_model/forget_passwoed_cubit.dart';
@@ -11,7 +18,6 @@ import '../../presentation/auth/sign_up/view_model/sign_up_cubit.dart';
 import '../../presentation/best_seller/view/best_seller_screen.dart';
 import '../../presentation/best_seller/view_model/best_seller_view_model.dart';
 import '../../presentation/home_layout/product_details/view/product_details_screen.dart';
-import '../../presentation/home_layout/screens/cart/view_model/cart_view_model.dart';
 import '../../presentation/home_layout/screens/categories/view/categories_screen.dart';
 import '../../presentation/home_layout/screens/categories/view_model/categories_view_model.dart';
 import '../../presentation/home_layout/screens/main_page/main_page.dart';
@@ -22,6 +28,13 @@ import '../../presentation/home_layout/screens/profile/change_password/view_mode
 import '../../presentation/home_layout/screens/profile/profile/view/edit_profile_screen.dart';
 import '../../presentation/home_layout/screens/profile/profile/view/profile_main_screen.dart';
 import '../../presentation/home_layout/screens/profile/profile/view_model/profile_cubit.dart';
+import '../../presentation/notifications/view/notifications_screen.dart';
+import '../../presentation/notifications/view_model/notifications_view_model.dart';
+import '../../presentation/order/view/checkout_order_screen.dart';
+import '../../presentation/order/view_model/order_cubit.dart';
+import '../../presentation/search/view/search_screen.dart';
+import '../../presentation/search/view_model/search_cubit.dart';
+import '../../presentation/terms_and_conditions/view/terms_and_conditions_screen.dart';
 import '../../splash/splash_screen.dart';
 import '../di/di.dart';
 import 'page_route_name.dart';
@@ -29,14 +42,6 @@ import 'page_route_name.dart';
 class AppRoutes {
   static Route<dynamic> onGenerateRoute(RouteSettings setting) {
     ForgetPasswordCubit? forgetPasswordCubit;
-
-    CartViewModel? cartViewModel;
-
-    CartViewModel getCartViewModel() {
-      cartViewModel ??= getIt<CartViewModel>();
-
-      return cartViewModel!;
-    }
 
     createForgetPassword() {
       forgetPasswordCubit ??= getIt<ForgetPasswordCubit>();
@@ -96,7 +101,6 @@ class AppRoutes {
 
       case PageRouteName.productDetails:
         final String productId = setting.arguments as String;
-
         return MaterialPageRoute(
           builder: (context) => ProductDetails(productId),
           settings: setting,
@@ -119,6 +123,20 @@ class AppRoutes {
           settings: setting,
         );
 
+      case PageRouteName.search:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<SearchCubit>(),
+            child: const SearchScreen(),
+          ),
+        );
+
+      case PageRouteName.aboutApp:
+        return _handleMaterialPageRoute(widget: const AboutAppScreen());
+
+      case PageRouteName.termsConditions:
+        return _handleMaterialPageRoute(
+            widget: const TermsAndConditionsScreen());
       case PageRouteName.occasion:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -136,6 +154,46 @@ class AppRoutes {
       case PageRouteName.editProfile:
         return _handleMaterialPageRoute(widget: EditProfileScreen());
 
+      case PageRouteName.checkout:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<OrderCubit>(),
+            child: CheckoutOrderScreen(),
+          ),
+        );
+      case PageRouteName.getOrdersHistory:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => getIt<ProductDetailsCubit>(),
+                  child: GetOrdersHistory(),
+                ));
+/***************
+      case PageRouteName.getOrdersHistory:
+        return _handleMaterialPageRoute(widget: GetOrdersHistory());
+**************/
+      case PageRouteName.addAndEditUserAddress:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<AddressesCubit>(),
+            child: AddAndEditUserAddressScreen(),
+          ),
+        );
+
+      case PageRouteName.savedAddresses:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<SavedAddressesViewModel>(),
+            child: SavedAddressScreen(),
+          ),
+        );
+
+      case PageRouteName.notifications:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<NotificationsViewModel>(),
+            child: NotificationsScreen(),
+          ),
+        );
 
       default:
         return _handleMaterialPageRoute(widget: const Scaffold());

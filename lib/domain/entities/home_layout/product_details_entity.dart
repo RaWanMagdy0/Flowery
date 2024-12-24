@@ -40,4 +40,5 @@ class ProductEntity {
   String? createdAt;
   String? updatedAt;
   int? v;
+  String? descount;
 }

@@ -7,6 +7,7 @@ import '../../../../core/styles/colors/app_colors.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../core/utils/widget/custom_item_card.dart';
 import '../../../../domain/entities/home_layout/product_details_entity.dart';
+import '../../../../generated/l10n.dart';
 import 'view_model/ocusin_cubit.dart';
 import 'view_model/ocusin_state.dart';
 
@@ -22,6 +23,7 @@ class _OccasionScreenState extends State<OccasionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final local = S.of(context);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(70.h),
@@ -37,10 +39,11 @@ class _OccasionScreenState extends State<OccasionScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Occasion', style: AppFonts.font20BlackWeight500),
+                  Text(local.occasionTitle,
+                      style: AppFonts.font20BlackWeight500),
                   5.verticalSpace,
-                  Text('Bloom with our exquisite best sellers',
-                      style: AppFonts.font13BlackWeight500),
+                  Text(local.bloomWithBestSellers,
+                      style: AppFonts.font13GreyWeight500),
                 ],
               ),
             ],
@@ -153,9 +156,7 @@ class _OccasionScreenState extends State<OccasionScreen> {
                             PageRouteName.productDetails,
                             arguments: prudact?[index]?.id,
                           ),
-                          onButtonPressed: () {
-
-                          },
+                          onButtonPressed: () {},
                         );
                       },
                     ),

@@ -95,7 +95,6 @@ class ProductModel {
     map['__v'] = v;
     return map;
   }
-
   ProductEntity toEntity() {
     return ProductEntity(
         id: id,
@@ -113,4 +112,5 @@ class ProductModel {
         updatedAt: updatedAt,
         v: v);
   }
+
 }

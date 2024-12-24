@@ -1,12 +1,16 @@
+import 'package:flowery/core/routes/page_route_name.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../../../core/styles/images/app_images.dart';
 import '../../../../../../core/utils/widget/delivery_address_widget.dart';
 import '../../../../widgets/search_bar_widget.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const HomeAppBar({super.key});
+  final String city;
+  const HomeAppBar({
+    super.key,
+    required this.city,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +33,14 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
             ],
           ),
           16.verticalSpace,
-          DeliveryAddressWidget(),
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, PageRouteName.addAndEditUserAddress);
+            },
+            child: DeliveryAddressWidget(
+              city: city,
+            ),
+          ),
         ],
       ),
     );

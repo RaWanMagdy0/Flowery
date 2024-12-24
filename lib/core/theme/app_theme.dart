@@ -7,12 +7,11 @@ class AppTheme {
   static ThemeData appTheme = ThemeData(
     scaffoldBackgroundColor: AppColors.kWhite,
     radioTheme: RadioThemeData(
-
       fillColor: WidgetStateProperty.resolveWith((states) {
-        if (states.contains(MaterialState.selected)) {
+        if (states.contains(WidgetState.selected)) {
           return AppColors.kPink;
         }
-        return AppColors.kPink;
+        return AppColors.kGray;
       }),
       overlayColor: WidgetStateProperty.all(AppColors.kPink),
     ),

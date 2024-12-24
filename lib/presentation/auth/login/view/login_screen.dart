@@ -5,11 +5,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/routes/page_route_name.dart';
 import '../../../../core/styles/colors/app_colors.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
-import '../../../../core/utils/const/app_string.dart';
 import '../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../core/utils/functions/validators/validators.dart';
 import '../../../../core/utils/widget/custom_button.dart';
 import '../../../../core/utils/widget/custom_text_form_field.dart';
+import '../../../../generated/l10n.dart';
 import '../view_model/login_cubit.dart';
 import '../view_model/login_state.dart';
 
@@ -48,13 +48,16 @@ class _LogInScreenState extends State<LogInScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final local = S.of(context);
     return BlocProvider<LoginViewModel>(
       create: (BuildContext context) => viewModel,
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
           forceMaterialTransparency: true,
-          title: const Text(AppStrings.loginTitle),
+          title: Text(
+            (local.loginTitle),
+          ),
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -79,7 +82,6 @@ class _LogInScreenState extends State<LogInScreen> {
                           AppDialogs.showErrorDialog(
                             context: context,
                             errorMassage: state.message ?? "",
-
                           );
                         }
                       case SuccessState():
@@ -87,7 +89,7 @@ class _LogInScreenState extends State<LogInScreen> {
                           Navigator.of(context).pop();
                           AppDialogs.showSuccessDialog(
                             context: context,
-                            message: AppStrings.userLoggedInSuccessfully,
+                            message: local.userLoggedInSuccessfully,
                             whenAnimationFinished: () {
                               Navigator.pushReplacementNamed(
                                   context, PageRouteName.homeLayout);
@@ -101,16 +103,17 @@ class _LogInScreenState extends State<LogInScreen> {
                   child: Column(
                     children: [
                       CustomTextFormField(
-                        hintText: AppStrings.emailHintText,
-                        labelText: AppStrings.emailLabelText,
+                        hintText: (local.emailHintText),
+                        labelText: (local.emailLabelText),
                         controller: _emailController,
                         keyBordType: TextInputType.text,
                         validator: (value) => Validators.validateEmail(value),
                       ),
                       24.verticalSpace,
                       CustomTextFormField(
-                        hintText: AppStrings.passwordHintText,
-                        labelText: AppStrings.passwordLabelText,
+                        hintText: (local
+                            .passwordHintText), //AppStrings.passwordHintText,
+                        labelText: (local.passwordLabelText),
                         controller: _passwordController,
                         keyBordType: TextInputType.text,
                         isPassword: true,
@@ -135,7 +138,7 @@ class _LogInScreenState extends State<LogInScreen> {
                               });
                             },
                           ),
-                          Text(AppStrings.rememberMeText,
+                          Text((local.rememberMeText),
                               style: AppFonts.font13BlackWeight400),
                           const Spacer(),
                           GestureDetector(
@@ -144,7 +147,7 @@ class _LogInScreenState extends State<LogInScreen> {
                                   context, PageRouteName.forgetPassword);
                             },
                             child: Text(
-                              AppStrings.forgetPasswordText,
+                              (S.of(context).forgetPasswordText),
                               style:
                                   AppFonts.font12BlackWeight400UnderlinedBlack,
                             ),
@@ -163,7 +166,7 @@ class _LogInScreenState extends State<LogInScreen> {
                           }
                         },
                         color: AppColors.kPink,
-                        text: AppStrings.loginTitle,
+                        text: (local.loginTitle),
                         textStyle: AppFonts.font16LightWhiteWeight500,
                       ),
                       16.verticalSpace,
@@ -173,7 +176,7 @@ class _LogInScreenState extends State<LogInScreen> {
                               context, PageRouteName.homeLayout);
                         },
                         color: AppColors.kWhite,
-                        text: AppStrings.continueAsGusetText,
+                        text: (local.continueAsGuestText),
                         textStyle: AppFonts.font16BlackWeight500,
                         borderColor: AppColors.kGray,
                       ),
@@ -185,7 +188,7 @@ class _LogInScreenState extends State<LogInScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      AppStrings.donotHaveAccountText,
+                      (local.donotHaveAccountText),
                       style: AppFonts.font16BlackWeight500,
                     ),
                     GestureDetector(
@@ -193,7 +196,7 @@ class _LogInScreenState extends State<LogInScreen> {
                         Navigator.pushNamed(context, PageRouteName.signUp);
                       },
                       child: Text(
-                        AppStrings.signUpTitle,
+                        (local.signUpTitle), //AppStrings.signUpTitle,
                         style: AppFonts.font16PinkWeight500UnderlinedPink,
                       ),
                     ),
