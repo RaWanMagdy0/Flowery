@@ -1,9 +1,12 @@
 import 'dart:developer';
+
 import 'package:injectable/injectable.dart';
+
 import '../../../../core/api/api_result.dart';
 import '../../../../domain/entities/home_layout/product_details_entity.dart';
 import '../../../domain/entities/home/home_category_entity.dart';
 import '../../../domain/repository/home/category_repository.dart';
+import '../../../presentation/home_layout/screens/categories/view_model/categories_view_model.dart';
 import '../../data_sources/remote_data_source/home/category/category_remote_data_source.dart';
 
 @Injectable(as: CategoryRepository)
@@ -63,7 +66,7 @@ class CategoryRepositoryImpl extends CategoryRepository {
 
   @override
   Future<Result<List<ProductEntity?>>> getSortedProducts(
-      String sort) async {
+      ProductFilterOption sort) async {
     final result = await categoryRemoteDataSource.getCategoriesProduct();
     switch (result) {
       case Success():

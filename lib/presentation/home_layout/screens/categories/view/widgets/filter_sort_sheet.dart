@@ -1,19 +1,26 @@
-import 'package:flowery/core/styles/images/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../../../core/styles/colors/app_colors.dart';
 import '../../view_model/categories_view_model.dart';
 
 class FilterBottomSheet extends StatefulWidget {
-  const FilterBottomSheet({Key? key}) : super(key: key);
+  const FilterBottomSheet({super.key});
 
   @override
   State<FilterBottomSheet> createState() => _FilterBottomSheetState();
 }
 
 class _FilterBottomSheetState extends State<FilterBottomSheet> {
-  String selectedSort = 'highestPrice';
+  late ProductFilterOption selectedSort;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedSort = context.read<CategoriesViewModel>().productFilterOption ??
+        ProductFilterOption.priceLowToHigh;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,15 +58,15 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
           // Radio options
           _buildRadioOption(
             'Price: Low to High',
-            'priceAfterDiscount',
+            ProductFilterOption.priceLowToHigh,
           ),
           _buildRadioOption(
             'Quantity: Low to High',
-            'quantity',
+            ProductFilterOption.quantityLowToHigh,
           ),
           _buildRadioOption(
             'Quantity: High to Low',
-            '-quantity',
+            ProductFilterOption.quantityHighToLow,
           ),
           SizedBox(
             width: double.infinity,
@@ -100,10 +107,11 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
     );
   }
 
-  Widget _buildRadioOption(String title, String value) {
+  Widget _buildRadioOption(String title, ProductFilterOption value) {
     return InkWell(
       onTap: () {
         setState(() {
+          context.read<CategoriesViewModel>().productFilterOption = value;
           selectedSort = value;
         });
       },
@@ -119,11 +127,13 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                 ),
               ),
             ),
-            Radio<String>(
+            Radio<ProductFilterOption>(
               value: value,
               groupValue: selectedSort,
-              onChanged: (String? newValue) {
+              onChanged: (newValue) {
                 setState(() {
+                  context.read<CategoriesViewModel>().productFilterOption =
+                      newValue;
                   selectedSort = newValue!;
                 });
               },
