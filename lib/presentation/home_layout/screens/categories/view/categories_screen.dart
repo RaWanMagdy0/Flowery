@@ -4,8 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/routes/page_route_name.dart';
 import '../../../../../core/styles/colors/app_colors.dart';
+import '../../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../../core/utils/widget/custom_item_card.dart';
 import '../../../widgets/search_bar_widget.dart';
+import '../../cart/view_model/cart_view_model.dart';
 import '../view_model/categories_state.dart';
 import '../view_model/categories_view_model.dart';
 
@@ -210,7 +212,20 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                             PageRouteName.productDetails,
                             arguments: product?.id,
                           ),
-                          onButtonPressed: () {},
+                          onButtonPressed: () {
+                            if (context.read<CartViewModel>().isUserLoggedIn ==
+                                false) {
+                              AppDialogs.showErrorDialog(
+                                context: context,
+                                errorMassage:
+                                    "You need to login to add products to cart",
+                              );
+                              return;
+                            }
+                            context
+                                .read<CartViewModel>()
+                                .addProductToCart(product!.id.toString());
+                          },
                         );
                       },
                     ),
