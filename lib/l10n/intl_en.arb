@@ -41,7 +41,7 @@
   "emptyUserName": "Please enter your user name",
   "english": "English",
   "enterPassword": "Enter password",
-  "errorLoadingProductDetails": "Error loading product details" ,
+  "errorLoadingProductDetails": "Error loading product details",
   "exploreText": "Explore",
   "female": "Female",
   "firstNameHintText": "Enter first name",
@@ -128,5 +128,6 @@
   "searchHint": "Search for products",
   "noProductsFound": "No products found",
   "startSearching": "Start searching for products",
-  "searchError": "Error occurred while searching"
+  "searchError": "Error occurred while searching",
+  "searchForProducts": "Search for products"
 }

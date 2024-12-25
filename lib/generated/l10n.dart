@@ -1349,6 +1349,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Search for products`
+  String get searchForProducts {
+    return Intl.message(
+      'Search for products',
+      name: 'searchForProducts',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -1357,6 +1367,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'ar'),
     ];
   }
 

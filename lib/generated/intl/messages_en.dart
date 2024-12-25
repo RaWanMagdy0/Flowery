@@ -189,6 +189,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "searchArabic": MessageLookupByLibrary.simpleMessage("Search"),
         "searchError": MessageLookupByLibrary.simpleMessage(
             "Error occurred while searching"),
+        "searchForProducts":
+            MessageLookupByLibrary.simpleMessage("Search for products"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Search for products"),
         "signUpTitle": MessageLookupByLibrary.simpleMessage("Sign up"),

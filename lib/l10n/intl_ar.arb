@@ -128,5 +128,6 @@
   "searchHint": "ابحث عن المنتجات",
   "noProductsFound": "لم يتم العثور على منتجات",
   "startSearching": "ابدأ البحث عن المنتجات",
-  "searchError": "حدث خطأ أثناء البحث"
+  "searchError": "حدث خطأ أثناء البحث",
+  "searchForProducts": "ابحث عن المنتجات"
 }

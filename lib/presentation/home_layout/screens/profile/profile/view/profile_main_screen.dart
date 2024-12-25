@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../../core/di/di.dart';
+import '../../../../../../core/local/token_manger.dart';
 import '../../../../../../core/routes/page_route_name.dart';
 import '../../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../../core/styles/fonts/app_fonts.dart';
@@ -63,11 +64,12 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
       body: context.read<CartViewModel>().isUserLoggedIn
           ? BlocListener<ProfileCubit, ProfileState>(
               bloc: viewModel,
-              listener: (context, state) {
+              listener: (context, state) async {
                 if (state is EditProfileSuccessState) {
                   viewModel.getLoggedUserInfo();
                 }
                 if (state is LogoutSuccessState) {
+                  await TokenManager.deleteToken();
                   Navigator.pushReplacementNamed(
                       context, PageRouteName.homeLayout);
                 }
@@ -151,7 +153,8 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                               title: local.myOrder,
                               trailingIcon: Icons.arrow_forward_ios,
                               onTap: () {
-                                Navigator.pushNamed(context, PageRouteName.getOrdersHistory);
+                                Navigator.pushNamed(
+                                    context, PageRouteName.getOrdersHistory);
                               },
                             ),
                             CustomListTile(
