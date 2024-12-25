@@ -1,7 +1,7 @@
+import 'package:flowery/domain/entities/address/saved_addresses_entity.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../core/api/api_result.dart';
-import '../../../domain/entities/address/saved_addresses_entity.dart';
 import '../../../domain/repository/address/address_repository.dart';
 import '../../data_sources/remote_data_source/address/address_remote_data_source.dart';
 import '../../models/order/request/address_requests/add_address_request_body_model.dart';

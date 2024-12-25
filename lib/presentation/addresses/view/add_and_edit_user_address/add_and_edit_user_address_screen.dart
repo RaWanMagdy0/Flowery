@@ -1,9 +1,11 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 import '../../../../core/utils/const/app_string.dart';
 import '../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../core/utils/functions/validators/validators.dart';
@@ -144,7 +146,6 @@ class _AddAndEditUserAddressScreenState
   void _handelStateChange(AddressesState state) {
     if (state is AddAddressesSuccess) {
       Navigator.pop(context);
-
       AppDialogs.showSuccessDialog(
         context: context,
         message: "Address Added Successfully.",
@@ -161,24 +162,34 @@ class _AddAndEditUserAddressScreenState
   }
 
   Future<void> loadGovernorates() async {
-    final String response =
-        await rootBundle.loadString('assets/city/egypt-governorates-en.json');
-    final data = await json.decode(response);
-    setState(() {
-      governorates = (data['egyptian_governorates'] as List)
-          .map((json) => Governorate.fromJson(json))
-          .toList();
-    });
+    try {
+      final String response =
+          await rootBundle.loadString('assets/city/egypt-governorates-en.json');
+      final data = await json.decode(response);
+
+      setState(() {
+        governorates = (data['egyptian_governorates'] as List)
+            .map((json) => Governorate.fromJson(json))
+            .toList();
+      });
+    } catch (e) {
+      print('Error loading governorates: $e');
+    }
   }
 
   void updateCities(String? selectedGovernorate) {
     setState(() {
       city = selectedGovernorate;
       selectedArea = null;
-      cities = governorates
-          .firstWhere((g) => g.name == selectedGovernorate,
-              orElse: () => Governorate(name: '', cities: []))
-          .cities;
+      if (selectedGovernorate != null) {
+        final governorate = governorates.firstWhere(
+          (g) => g.name == selectedGovernorate,
+          orElse: () => Governorate(name: '', cities: []),
+        );
+        cities = governorate.cities;
+      } else {
+        cities = [];
+      }
     });
   }
 

@@ -1,4 +1,4 @@
-import 'shipping_address_request.dart';
+import '../../../payment/request/payment_request_model.dart';
 
 class CreateOrderRequest {
   CreateOrderRequest({

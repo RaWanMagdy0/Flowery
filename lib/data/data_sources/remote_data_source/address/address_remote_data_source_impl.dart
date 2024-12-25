@@ -1,11 +1,11 @@
+import 'package:flowery/data/api/order_api/order_api_manager.dart';
+import 'package:flowery/data/models/order/response/address_models/address_model.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../core/api/api_result.dart';
 import '../../../../core/api/execute_api_call.dart';
 import '../../../../core/local/token_manger.dart';
-import '../../../api/order_api/order_api_manager.dart';
 import '../../../models/order/request/address_requests/add_address_request_body_model.dart';
-import '../../../models/order/response/address_models/address_model.dart';
 import 'address_remote_data_source.dart';
 
 @Injectable(as: AddressRemoteDataSource)

@@ -7,7 +7,5 @@ abstract class AddressRemoteDataSource {
 
   Future<Result<List<AddressModel>>> getAllAddresses();
 
-  Future<Result<dynamic>> deleteAddress(
-      String
-          addressId); // Add more methods for other CRUD operations on addresses
+  Future<Result<dynamic>> deleteAddress(String addressId);
 }
