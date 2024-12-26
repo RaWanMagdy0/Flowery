@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flowery/data/models/payment/response/credit_payment_response_model.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import '../../../core/api/api_const.dart';
@@ -6,6 +7,8 @@ import '../../models/order/request/address_requests/add_address_request_body_mod
 import '../../models/order/request/create_order_request/create_order_request.dart';
 import '../../models/order/response/address_models/address_response_model.dart';
 import '../../models/order/response/create_order_response/order_response_model.dart';
+import '../../models/payment/request/payment_request_model.dart';
+
 part 'order_api_manager.g.dart';
 
 @lazySingleton
@@ -15,10 +18,11 @@ abstract class OrderApiManger {
   factory OrderApiManger(Dio dio) = _OrderApiManger;
 
   @POST(ApiConstants.order)
-  Future<OrderModel?> createOrder(
+  Future<OrderModell?> createOrder(
     @Header("Authorization") String token,
     @Body() CreateOrderRequest createOrderRequest,
   );
+
   @GET(ApiConstants.order)
   Future<OrderResponseModel?> getOrdersHistory(
     @Header("Authorization") String token,
@@ -38,5 +42,17 @@ abstract class OrderApiManger {
   Future<dynamic> deleteAddress(
     @Path("addressId") String addressId,
     @Header("Authorization") String token,
+  );
+
+  @POST(ApiConstants.cash)
+  Future<OrderResponseModel> cashPaymentMethod(
+    @Header("Authorization") String token,
+    @Body() ShippingAddressRequest body,
+  );
+
+  @POST(ApiConstants.creditCard)
+  Future<CreditPaymentResponseModel> creditCardPaymentMethod(
+    @Header("Authorization") String token,
+    @Body() ShippingAddressRequest body,
   );
 }

@@ -3,8 +3,14 @@ import '../../../models/order/request/create_order_request/create_order_request.
 import '../../../models/order/response/create_order_response/order_response_model.dart';
 
 abstract class OrderRemoteDataSource {
-  Future<Result<OrderModel?>> createOrder(CreateOrderRequest createOrderRequest);
-  Future<Result<OrderModel?>> getOrdersHistory();
+  Future<Result<OrderModell?>> createOrder(
+      CreateOrderRequest createOrderRequest);
 
+  Future<Result<OrderModell?>> getOrdersHistory();
 
+  Future<Result<OrderModell?>> cashPaymentMethod(
+      ShippingAddressRequest shippingAddressRequest);
+
+  Future<Result<CreditPaymentResponseModel?>> creditCardPaymentMethod(
+      ShippingAddressRequest shippingAddressRequest);
 }

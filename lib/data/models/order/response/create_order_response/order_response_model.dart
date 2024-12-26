@@ -1,5 +1,5 @@
-
 import '../../../../../domain/entities/order/create_order/order_response_entity.dart';
+
 class OrderResponseModel {
   OrderResponseModel({
     this.message,
@@ -8,11 +8,12 @@ class OrderResponseModel {
 
   OrderResponseModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
-    orders = json['orders'] != null ? OrderModel.fromJson(json['orders']) : null;
+    orders =
+        json['orders'] != null ? OrderModell.fromJson(json['orders']) : null;
   }
 
   String? message;
-  OrderModel? orders;
+  OrderModell? orders;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -23,8 +24,9 @@ class OrderResponseModel {
     return map;
   }
 }
-class OrderModel {
-  OrderModel({
+
+class OrderModell {
+  OrderModell({
     this.id,
     this.user,
     this.orderItems,
@@ -37,7 +39,7 @@ class OrderModel {
     this.v,
   });
 
-  OrderModel.fromJson(dynamic json) {
+  OrderModell.fromJson(dynamic json) {
     id = json['_id'];
     user = json['user'];
     if (json['orderItems'] != null) {
