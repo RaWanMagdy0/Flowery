@@ -3,18 +3,22 @@ import 'package:flowery/core/styles/fonts/app_fonts.dart';
 import 'package:flowery/core/utils/const/checkout_page_string.dart';
 import 'package:flowery/core/utils/functions/dialogs/app_dialogs.dart';
 import 'package:flowery/core/utils/widget/custom_button.dart';
+import 'package:flowery/data/models/payment/request/payment_request_model.dart';
 import 'package:flowery/presentation/order/view_model/order_cubit.dart';
 import 'package:flowery/presentation/order/view_model/order_state.dart';
+import 'package:flowery/presentation/order/widget/payment_method.dart';
+import 'package:flowery/presentation/order/widget/payment_web_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../data/models/order/request/create_order_request/create_order_request.dart';
-import '../../../data/models/order/request/create_order_request/shipping_address_request.dart';
 import '../../home_layout/screens/cart/view_model/cart_view_model.dart';
 
 class Total extends StatefulWidget {
   final String? selectedAddress;
+
   const Total({super.key, required this.selectedAddress});
+
   @override
   State<Total> createState() => _TotalState();
 }
@@ -51,8 +55,46 @@ class _TotalState extends State<Total> {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               AppDialogs.showSuccessDialog(
                 context: context,
-                message: "Order placed successfully!",
+                message: "Order placed successfully",
               );
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PaymentWebView(
+                        paymentLink:
+                            "https://checkout.stripe.com/c/pay/cs_test_a12wg5AMebQdH17D1baN8S26eyPQQrQj7joTlKyXxvGUWKEdnStpalfrXr#fidkdWxOYHwnPyd1blpxYHZxWjA0SHViYl1ANVYyU2pOX2hVVW9ASmZBUElpa2FLVnBUQGo2UFduUEhIXHx9aEhjanBGZ1NxZ3RKNVVtXWxcSTJ8Qzx2aWZkUEBpMXJCXVRHTkIxZzBSZmhENTUxYHVKMUpQVycpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl"),
+                  ));
+            });
+          }
+          if (state is PaymentLoadingState) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              AppDialogs.showLoading(context: context);
+            });
+          } else if (state is CashPaymentSuccessState) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Navigator.pop(context);
+              AppDialogs.showSuccessDialog(
+                context: context,
+                message: "Order placed successfully",
+              );
+            });
+          }
+          if (state is PaymentErrorState) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Navigator.pop(context); // Close the loading dialog
+              AppDialogs.showErrorDialog(
+                  context: context, errorMassage: state.message);
+            });
+          } else if (state is CreditPaymentSuccessState) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PaymentWebView(
+                        paymentLink:
+                            "https://checkout.stripe.com/c/pay/cs_test_a12wg5AMebQdH17D1baN8S26eyPQQrQj7joTlKyXxvGUWKEdnStpalfrXr#fidkdWxOYHwnPyd1blpxYHZxWjA0SHViYl1ANVYyU2pOX2hVVW9ASmZBUElpa2FLVnBUQGo2UFduUEhIXHx9aEhjanBGZ1NxZ3RKNVVtXWxcSTJ8Qzx2aWZkUEBpMXJCXVRHTkIxZzBSZmhENTUxYHVKMUpQVycpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl"),
+                  ));
             });
           }
           return Padding(

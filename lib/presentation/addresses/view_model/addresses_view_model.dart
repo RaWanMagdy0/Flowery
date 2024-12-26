@@ -1,4 +1,8 @@
+import 'package:flowery/domain/use_case/order/payment/cash_payment_use_case.dart';
+import 'package:flowery/domain/use_case/order/payment/credit_payment_use_case.dart';
+
 import '../../../core/api/api_result.dart';
+import '../../../data/models/payment/request/payment_request_model.dart';
 import '../../../domain/use_case/address/add_address_use_case.dart';
 import 'package:injectable/injectable.dart';
 
@@ -10,8 +14,9 @@ part 'addresses_state.dart';
 @injectable
 class AddressesCubit extends BaseViewModel<AddressesState> {
   final AddAddressUseCase _addAddressUseCase;
-
-  AddressesCubit(this._addAddressUseCase) : super(AddressesInitial());
+  AddressesCubit(
+    this._addAddressUseCase,
+  ) : super(AddressesInitial());
 
   void AddAddress(final AddAddressRequestBody body) async {
     emit(AddAddressesLoading());

@@ -24,4 +24,7 @@ class ApiConstants {
   static const String addAddress = "api/v1/addresses";
   static const String getLoggedUserAddresses = "api/v1/addresses";
   static const String deleteAddress = "api/v1/addresses";
+  static const String cash = "api/v1/orders";
+  static const String creditCard =
+      "api/v1/orders/checkout?url=http://localhost:3000";
 }

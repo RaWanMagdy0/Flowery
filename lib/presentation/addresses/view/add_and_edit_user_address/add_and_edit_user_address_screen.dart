@@ -46,6 +46,7 @@ class _AddAndEditUserAddressScreenState
     _phoneNumberController = TextEditingController();
     loadGovernorates();
   }
+
   @override
   void dispose() {
     _addressController.dispose();
@@ -154,7 +155,6 @@ class _AddAndEditUserAddressScreenState
   void _handelStateChange(AddressesState state) {
     if (state is AddAddressesSuccess) {
       Navigator.pop(context);
-
       AppDialogs.showSuccessDialog(
         context: context,
         message: AddAddressString.addressAddedSuccess,
@@ -169,10 +169,11 @@ class _AddAndEditUserAddressScreenState
       AppDialogs.showLoading(context: context);
     }
   }
+
   Future<void> loadGovernorates() async {
     try {
       final String response =
-      await rootBundle.loadString('assets/city/egypt-governorates-en.json');
+          await rootBundle.loadString('assets/city/egypt-governorates-en.json');
       final data = await json.decode(response);
 
       setState(() {
@@ -191,7 +192,7 @@ class _AddAndEditUserAddressScreenState
       selectedArea = null;
       if (selectedGovernorate != null) {
         final governorate = governorates.firstWhere(
-              (g) => g.name == selectedGovernorate,
+          (g) => g.name == selectedGovernorate,
           orElse: () => Governorate(name: '', cities: []),
         );
         cities = governorate.cities;
@@ -200,6 +201,7 @@ class _AddAndEditUserAddressScreenState
       }
     });
   }
+
   void addAddress() {
     if (_formKey.currentState!.validate()) {
       if (userSelectedLocation == null) {
@@ -224,6 +226,7 @@ class _AddAndEditUserAddressScreenState
       );
     }
   }
+
   void saveAddressLocally(String lang, String city, String lat) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('city', city);
@@ -231,6 +234,7 @@ class _AddAndEditUserAddressScreenState
     await prefs.setString('lat', lat);
   }
 }
+
 class Governorate {
   final String name;
   final List<String> cities;
