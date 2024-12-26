@@ -1350,21 +1350,11 @@ class S {
     );
   }
 
-  /// `Unknown Location`
-  String get unknownLocation {
+  /// `Search for products`
+  String get searchForProducts {
     return Intl.message(
-      'Unknown Location',
-      name: 'unknownLocation',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Location Error`
-  String get locationError {
-    return Intl.message(
-      'Location Error',
-      name: 'locationError',
+      'Search for products',
+      name: 'searchForProducts',
       desc: '',
       args: [],
     );

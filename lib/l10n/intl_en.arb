@@ -128,9 +128,9 @@
   "searchHint": "Search for products",
   "noProductsFound": "No products found",
   "startSearching": "Start searching for products",
-  "searchError": "Error occurred while searching",
 
   "unknownLocation": "Unknown Location",
   "locationError": "Location Error"
+  "searchError": "Error occurred while searching",
+  "searchForProducts": "Search for products"
 }
-
