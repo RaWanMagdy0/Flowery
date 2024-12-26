@@ -130,7 +130,7 @@
   "startSearching": "Start searching for products",
 
   "unknownLocation": "Unknown Location",
-  "locationError": "Location Error"
+  "locationError": "Location Error",
   "searchError": "Error occurred while searching",
   "searchForProducts": "Search for products"
 }
