@@ -8,6 +8,12 @@ import '../../../../../domain/use_case/home/categories/categories_use_case.dart'
 import '../../../../../domain/use_case/home/categories/quantity_in_descending_use_case.dart';
 import 'categories_state.dart';
 
+enum ProductFilterOption {
+  priceLowToHigh,
+  quantityLowToHigh,
+  quantityHighToLow,
+}
+
 @injectable
 class CategoriesViewModel extends BaseViewModel<CategoriesState> {
   final GetAllCategoriesUseCase categoriesUseCase;
@@ -17,6 +23,8 @@ class CategoriesViewModel extends BaseViewModel<CategoriesState> {
   CategoriesViewModel(this.categoriesUseCase, this.categoriesProductUseCase,
       this.sortingUseCase)
       : super(InitialState());
+
+  ProductFilterOption? productFilterOption;
 
   Future<void> loadFlowers() async {
     emit(CategoriesLoadingState());
@@ -43,7 +51,7 @@ class CategoriesViewModel extends BaseViewModel<CategoriesState> {
     }
   }
 
-  Future<void> sortProducts(String sortType) async {
+  Future<void> sortProducts(ProductFilterOption sortType) async {
     emit(ProductSortLoadingState());
     var result = await sortingUseCase.invoke(sortType);
     switch (result) {

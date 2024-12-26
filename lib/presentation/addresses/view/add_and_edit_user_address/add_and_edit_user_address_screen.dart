@@ -10,6 +10,7 @@ import '../../../../core/utils/functions/validators/validators.dart';
 import '../../../../core/utils/widget/custom_button.dart';
 import '../../../../core/utils/widget/custom_text_form_field.dart';
 import '../../../../data/models/order/request/address_requests/add_address_request_body_model.dart';
+import '../../../home_layout/screens/home/view/home_screen.dart';
 import '../../view_model/addresses_view_model.dart';
 import 'widgets/custom_drop_down.dart';
 import 'widgets/map_widget.dart';
@@ -32,6 +33,7 @@ class _AddAndEditUserAddressScreenState
   late final TextEditingController _phoneNumberController;
   String? city;
   LatLng? userSelectedLocation;
+  String detailedAddress = '';
   List<Governorate> governorates = [];
   List<String> cities = [];
   String? selectedArea;
@@ -44,7 +46,6 @@ class _AddAndEditUserAddressScreenState
     _phoneNumberController = TextEditingController();
     loadGovernorates();
   }
-
   @override
   void dispose() {
     _addressController.dispose();
@@ -60,6 +61,7 @@ class _AddAndEditUserAddressScreenState
       listener: (context, state) => _handelStateChange(state),
       child: Scaffold(
         appBar: AppBar(
+          forceMaterialTransparency: true,
           title: const Text("Add Address"),
         ),
         body: Padding(
@@ -70,13 +72,17 @@ class _AddAndEditUserAddressScreenState
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  24.verticalSpace,
+                  5.verticalSpace,
                   MapWidget(
-                    onLocationSelected: (LatLng location) {
-                      userSelectedLocation = location;
+                    onLocationSelected: (LatLng location, String address) {
+                      setState(() {
+                        userSelectedLocation = location;
+                        detailedAddress = address;
+                        _addressController.text = address;
+                      });
                     },
                   ),
-                  24.verticalSpace,
+                  18.verticalSpace,
                   CustomTextFormField(
                     controller: _addressController,
                     hintText: "Enter Address",
@@ -86,7 +92,7 @@ class _AddAndEditUserAddressScreenState
                       value: value,
                     ),
                   ),
-                  24.verticalSpace,
+                  18.verticalSpace,
                   CustomTextFormField(
                     hintText: AppStrings.phoneHintText,
                     labelText: AppStrings.phoneLabelText,
@@ -95,19 +101,22 @@ class _AddAndEditUserAddressScreenState
                     textInputAction: TextInputAction.done,
                     controller: _phoneNumberController,
                   ),
-                  24.verticalSpace,
+                  18.verticalSpace,
                   CustomTextFormField(
                     controller: _recipientNameController,
                     hintText: "Recipient Name",
                     labelText: "Recipient Name",
                   ),
-                  24.verticalSpace,
+                  18.verticalSpace,
                   Row(
                     children: [
                       Expanded(
                         child: CustomDropDown(
                           hintText: "City",
                           labelText: "City",
+                          hintStyle: TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                          ),
                           data: governorates.map((e) => e.name).toList(),
                           onChanged: updateCities,
                         ),
@@ -127,7 +136,7 @@ class _AddAndEditUserAddressScreenState
                       ),
                     ],
                   ),
-                  35.verticalSpace,
+                  18.verticalSpace,
                   CustomButton(
                     onPressed: addAddress,
                     text: "Save Address",
@@ -159,7 +168,6 @@ class _AddAndEditUserAddressScreenState
       AppDialogs.showLoading(context: context);
     }
   }
-
   Future<void> loadGovernorates() async {
     final String response =
         await rootBundle.loadString('assets/city/egypt-governorates-en.json');
@@ -170,7 +178,6 @@ class _AddAndEditUserAddressScreenState
           .toList();
     });
   }
-
   void updateCities(String? selectedGovernorate) {
     setState(() {
       city = selectedGovernorate;
@@ -181,28 +188,40 @@ class _AddAndEditUserAddressScreenState
           .cities;
     });
   }
-
   void addAddress() {
     if (_formKey.currentState!.validate()) {
-      if (userSelectedLocation == null) {
+      if (userSelectedLocation == null && city == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Please select a location on the map.")),
+          const SnackBar(content: Text("Please select a location or choose city and area")),
         );
         return;
       }
+
+      final fullAddress = selectedArea != null
+          ? "$selectedArea, $city"
+          : detailedAddress;
+
       final request = AddAddressRequestBody(
         street: _addressController.text,
         phone: _phoneNumberController.text,
-        city: city ?? "",
-        lat: userSelectedLocation!.latitude.toString(),
-        lang: userSelectedLocation!.longitude.toString(),
+        city: fullAddress,
+        lat: userSelectedLocation?.latitude.toString() ?? "",
+        lang: userSelectedLocation?.longitude.toString() ?? "",
         username: _recipientNameController.text,
       );
-      context.read<AddressesCubit>().addAddress(request);
+
+      if (userSelectedLocation != null) {
+        HomeScreen.saveAddress(
+            fullAddress,
+            userSelectedLocation!.latitude.toString(),
+            userSelectedLocation!.longitude.toString()
+        );
+      }
+
+      context.read<AddressesCubit>().AddAddress(request);
     }
   }
 }
-
 class Governorate {
   final String name;
   final List<String> cities;

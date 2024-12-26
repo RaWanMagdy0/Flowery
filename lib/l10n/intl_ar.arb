@@ -128,5 +128,7 @@
   "searchHint": "ابحث عن المنتجات",
   "noProductsFound": "لم يتم العثور على منتجات",
   "startSearching": "ابدأ البحث عن المنتجات",
-  "searchError": "حدث خطأ أثناء البحث"
+  "searchError": "حدث خطأ أثناء البحث",
+  "unknownLocation": "موقع غير معروف",
+  "locationError": "خطأ في تحديد الموقع"
 }

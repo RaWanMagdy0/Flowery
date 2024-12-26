@@ -1,9 +1,7 @@
 import 'dart:developer';
-
-import 'package:flowery/presentation/order/view_model/order_cubit.dart';
+import 'package:flowery/core/styles/colors/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../../../generated/l10n.dart';
@@ -100,7 +98,7 @@ class _NewPolicyPaymentViewState extends State<PaymentWebView> {
                     child: Center(
                       child: CircularProgressIndicator(
                         valueColor:
-                            AlwaysStoppedAnimation<Color>(kColors.primary),
+                            AlwaysStoppedAnimation<Color>(AppColors.kPink),
                       ),
                     ),
                   ),

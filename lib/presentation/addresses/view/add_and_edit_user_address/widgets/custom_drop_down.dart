@@ -108,64 +108,48 @@ class CustomDropDown extends StatefulWidget {
 
 class _CustomDropDownState extends State<CustomDropDown> {
   @override
+  @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField(
       items: widget.data
           .map(
             (e) => DropdownMenuItem(
               value: e,
-              child: Text(
-                e,
+              child: Container(
+                constraints: BoxConstraints(
+                  maxWidth: MediaQuery.of(context).size.width * 0.3,
+                ),
+                child: Text(
+                  e,
+                  style:AppFonts.font14BlackWeight400,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
               ),
             ),
-          )
+      )
           .toList(),
       onChanged: (value) {
         if (widget.onChanged != null) {
           widget.onChanged!(value.toString());
         }
       },
-      dropdownColor: AppColors.kWhite,
-      validator: widget.validator,
+      dropdownColor: Colors.white,
       decoration: InputDecoration(
         labelText: widget.labelText,
-        floatingLabelStyle:
-            WidgetStateTextStyle.resolveWith((Set<WidgetState> states) {
-          if (states.contains(WidgetState.focused)) {
-            return TextStyle(color: AppColors.kPink);
-          } else if (states.contains(WidgetState.error)) {
-            return TextStyle(color: AppColors.kError);
-          }
-          return TextStyle(color: Colors.grey);
-        }),
         floatingLabelBehavior: FloatingLabelBehavior.always,
         hintText: widget.hintText,
-        hintStyle: widget.hintStyle ?? AppFonts.font14GreyWeight400,
-        fillColor: (widget.enabled != null && widget.enabled == false)
-            ? widget.disabledBackgroundColor ?? AppColors.kGray
-            : widget.backgroundColor ?? AppColors.kWhite,
-        filled: widget.isFilled ?? true,
-        prefixIcon: widget.prefixIcon,
-        prefixIconColor: AppColors.kPink,
-        suffixIcon: widget.suffixIcon,
-        counterText: "",
-        border: widget.border ??
-            OutlineInputBorder(
-              borderRadius: BorderRadius.circular(widget.borderRadius ?? 4.r),
-              borderSide: BorderSide(
-                color: widget.borderColor ?? AppColors.kGray,
-                width: widget.borderWidth ?? 1,
-              ),
-            ),
-        enabledBorder: widget.enabledBorder ??
-            OutlineInputBorder(
-              borderRadius:
-                  BorderRadius.circular(widget.enabledBorderRadius ?? 4.r),
-              borderSide: BorderSide(
-                color: widget.enabledBorderColor ?? AppColors.kGray,
-                width: widget.enabledBorderWidth ?? 1,
-              ),
-            ),
+        hintStyle: widget.hintStyle ?? AppFonts.font14BlackWeight400,
+        fillColor: Colors.white,
+        filled: true,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(4.r),
+          borderSide: const BorderSide(
+            color: AppColors.kGray,
+            width: 1,
+          ),
+        ),
         focusedBorder: widget.focusedBorder ??
             OutlineInputBorder(
               borderRadius:

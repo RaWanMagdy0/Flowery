@@ -119,6 +119,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter last name"),
         "lastNameLabelText": MessageLookupByLibrary.simpleMessage("Last name"),
         "loadingText": MessageLookupByLibrary.simpleMessage("Loading.."),
+        "locationError": MessageLookupByLibrary.simpleMessage("Location Error"),
         "logOut": MessageLookupByLibrary.simpleMessage("Logout"),
         "loginTitle": MessageLookupByLibrary.simpleMessage("Login"),
         "logoutConfirmationMessage":
@@ -210,6 +211,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "trackOrder": MessageLookupByLibrary.simpleMessage("Track Order"),
         "unexpectedState":
             MessageLookupByLibrary.simpleMessage("Unexpected state."),
+        "unknownLocation":
+            MessageLookupByLibrary.simpleMessage("Unknown Location"),
         "updateText": MessageLookupByLibrary.simpleMessage("Update"),
         "userCreatedSuccessfully":
             MessageLookupByLibrary.simpleMessage("User Created Successfully"),

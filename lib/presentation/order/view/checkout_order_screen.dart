@@ -30,10 +30,19 @@ class _CheckoutOrderScreenState extends State<CheckoutOrderScreen> {
     viewModel = context.read<OrderCubit>();
   }
 
+  void _handlePaymentMethod(bool isCash) {
+    final parts = selectedAddress!.split('-');
+    final shippingAddressRequest = ShippingAddressRequest(
+      city: parts[0],
+      street: parts[1],
+      phone: parts[2],
+    );
+
+    viewModel.handlePaymentMethod(shippingAddressRequest, isCash);
+  }
+
   @override
   Widget build(BuildContext context) {
-    final orderCubit = context.read<OrderCubit>();
-
     return RefreshIndicator(
       color: AppColors.kPink,
       onRefresh: () async {},
@@ -66,34 +75,9 @@ class _CheckoutOrderScreenState extends State<CheckoutOrderScreen> {
                       height: 25.h,
                     ),
                     PaymentMethod(
-                      onChanged: (String? value) {
-                        // Handle value change (optional)
-                      },
-                      handlePaymentMethod: (isCash) {
-                        if (selectedAddress != null) {
-                          final parts = selectedAddress!.split('-');
-                          final city = parts.isNotEmpty ? parts[0] : "";
-                          final street = parts.length > 1 ? parts[1] : "";
-                          final phone = parts.length > 2 ? parts[2] : "";
-
-                          final shippingAddressRequest = ShippingAddressRequest(
-                              city: city, street: street, phone: phone);
-
-                          orderCubit.handlePaymentMethod(
-                              shippingAddressRequest, isCash);
-                        } else {
-                          // Show an error or message if no address is selected
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              backgroundColor: AppColors.kBabyPink,
-                              content: const Text(
-                                "Please select a delivery address before proceeding.",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          );
-                        }
-                      },
+                      onChanged: (String? value) {},
+                      handlePaymentMethod: _handlePaymentMethod,
+                      hasSelectedAddress: selectedAddress != null,
                     ),
                     Container(
                       color: AppColors.kBackGroundGrey,

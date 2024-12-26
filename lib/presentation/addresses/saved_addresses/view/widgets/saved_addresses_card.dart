@@ -1,5 +1,7 @@
+import 'package:flowery/core/styles/images/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../../../core/routes/page_route_name.dart';
 import '../../../../../core/styles/colors/app_colors.dart';
@@ -32,11 +34,7 @@ class SavedAddressesCard extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(
-              Icons.location_on_outlined,
-              color: Colors.black,
-              size: 20.sp,
-            ),
+            Image.asset(AppImages.location,color: AppColors.kBlack,),
             SizedBox(width: 4.w),
             Expanded(
               child: Column(
@@ -44,7 +42,7 @@ class SavedAddressesCard extends StatelessWidget {
                 children: [
                   Text(
                     city,
-                    style: AppFonts.font16BlackWeight500.copyWith(fontSize: 16),
+                    style: AppFonts.font16BlackWeight500.copyWith(fontSize: 16.sp),
                   ),
                   SizedBox(height: 4.h),
                   Text(
@@ -59,15 +57,19 @@ class SavedAddressesCard extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: onDelete,
-                  icon:
-                      Icon(Icons.delete, color: AppColors.kError, size: 20.sp),
+                  icon:SvgPicture.asset(
+                    AppImages.trashIcon,
+                    width: 20.sp,
+                    height: 20.sp,
+                  ),
                 ),
                 IconButton(
                   onPressed: () {
                     Navigator.pushNamed(
                         context, PageRouteName.addAndEditUserAddress);
                   },
-                  icon: Icon(Icons.edit, color: AppColors.kGray, size: 20.sp),
+                  icon: Image.asset(AppImages.editIcon,color: AppColors.kBlack),
+
                 ),
               ],
             ),

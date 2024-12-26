@@ -8,11 +8,13 @@ import '../../../core/utils/const/checkout_page_string.dart';
 class PaymentMethod extends StatefulWidget {
   final ValueChanged<String?> onChanged;
   final Function(bool isCash) handlePaymentMethod;
+  final bool hasSelectedAddress;
 
   const PaymentMethod({
     super.key,
     required this.onChanged,
     required this.handlePaymentMethod,
+    required this.hasSelectedAddress,
   });
 
   @override
@@ -21,6 +23,27 @@ class PaymentMethod extends StatefulWidget {
 
 class _PaymentMethodState extends State<PaymentMethod> {
   String? selectedPayment;
+
+  void _handlePaymentSelection(String? value, bool isCash) {
+    if (!widget.hasSelectedAddress) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          backgroundColor: AppColors.kBabyPink,
+          content: const Text(
+            "Please select a delivery address before choosing payment method.",
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      );
+      return;
+    }
+
+    setState(() {
+      selectedPayment = value;
+    });
+    widget.onChanged(value);
+    widget.handlePaymentMethod(isCash);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,13 +79,7 @@ class _PaymentMethodState extends State<PaymentMethod> {
                     activeColor: Colors.pink,
                     value: CheckoutStrings.cashOnDelivery,
                     groupValue: selectedPayment,
-                    onChanged: (value) {
-                      setState(() {
-                        selectedPayment = value;
-                      });
-                      widget.onChanged(value);
-                      widget.handlePaymentMethod(true); // Cash payment
-                    },
+                    onChanged: (value) => _handlePaymentSelection(value, true),
                   ),
                 ],
               ),
@@ -84,16 +101,10 @@ class _PaymentMethodState extends State<PaymentMethod> {
                     style: AppFonts.font16BlackWeight500,
                   ),
                   Radio<String>(
-                    activeColor: AppColors.kGray,
+                    activeColor: Colors.pink,
                     value: CheckoutStrings.creditCard,
                     groupValue: selectedPayment,
-                    onChanged: (value) {
-                      setState(() {
-                        selectedPayment = value;
-                      });
-                      widget.onChanged(value);
-                      widget.handlePaymentMethod(false); // Credit card payment
-                    },
+                    onChanged: (value) => _handlePaymentSelection(value, false),
                   ),
                 ],
               ),

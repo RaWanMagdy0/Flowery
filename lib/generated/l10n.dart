@@ -1349,6 +1349,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Unknown Location`
+  String get unknownLocation {
+    return Intl.message(
+      'Unknown Location',
+      name: 'unknownLocation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Location Error`
+  String get locationError {
+    return Intl.message(
+      'Location Error',
+      name: 'locationError',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -1357,6 +1377,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'ar'),
     ];
   }
 
