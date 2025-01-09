@@ -39,10 +39,8 @@ class _SplashScreenState extends State<SplashScreen>
       }
     });
   }
-
   Future<void> _checkInternetAndNavigate() async {
     final hasInternet = await _checkInternetConnection();
-
     if (!hasInternet) {
       setState(() {
         _isNoInternet = true;
