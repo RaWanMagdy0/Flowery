@@ -17,14 +17,13 @@ import '../../../../../../domain/entities/home_layout/profile/user.dart';
 class CustomProfilePic extends StatefulWidget {
   User user;
 
-   CustomProfilePic({super.key,required this.user});
+  CustomProfilePic({super.key, required this.user});
 
   @override
   State<CustomProfilePic> createState() => _CustomProfilePicState();
 }
 
 class _CustomProfilePicState extends State<CustomProfilePic> {
-
   File? photo;
   final ImagePicker _picker = ImagePicker();
   late ProfileCubit viewModel;
@@ -67,7 +66,8 @@ class _CustomProfilePicState extends State<CustomProfilePic> {
               ClipOval(
                   child: Image.network(
                       fit: BoxFit.cover,
-                      widget.user.photo ?? Image.asset(AppImages.photo).toString())),
+                      widget.user.photo ??
+                          Image.asset(AppImages.photo).toString())),
               Positioned(
                 bottom: 10.h,
                 right: 10.w,

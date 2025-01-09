@@ -19,7 +19,6 @@ class HomeScreen extends StatefulWidget {
     await prefs.setString('lat', lat);
     await prefs.setString('lang', lang);
   }
-
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
