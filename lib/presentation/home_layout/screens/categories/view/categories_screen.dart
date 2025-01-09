@@ -218,7 +218,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                               AppDialogs.showErrorDialog(
                                 context: context,
                                 errorMassage:
-                                    "You need to login to add products to cart",
+                                "You need to login to add products to cart",
                               );
                               return;
                             }

@@ -6,11 +6,11 @@ import 'package:flowery/core/utils/widget/custom_button.dart';
 import 'package:flowery/data/models/payment/request/payment_request_model.dart';
 import 'package:flowery/presentation/order/view_model/order_cubit.dart';
 import 'package:flowery/presentation/order/view_model/order_state.dart';
+import 'package:flowery/presentation/order/widget/payment_method.dart';
 import 'package:flowery/presentation/order/widget/payment_web_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../data/models/order/request/create_order_request/create_order_request.dart';
 import '../../home_layout/screens/cart/view_model/cart_view_model.dart';
 

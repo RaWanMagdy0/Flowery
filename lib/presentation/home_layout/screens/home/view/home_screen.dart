@@ -13,15 +13,21 @@ import 'widgets/home_occasions/home_occasions_list.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+  static Future<void> saveAddress(String address, String lat, String lang) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('address', address);
+    await prefs.setString('lat', lat);
+    await prefs.setString('lang', lang);
+  }
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String city = 'Unknown City';
+  String address = 'Unknown Location';
   String lat = '';
-  String lang = '';
+  String lang ='';
 
   @override
   void initState() {
@@ -29,18 +35,16 @@ class _HomeScreenState extends State<HomeScreen> {
     _loadAddress();
     context.read<HomeViewModel>().getHomeData();
   }
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.kWhite,
       appBar: HomeAppBar(
-        city: city,
+        city: address,
       ),
       body: RefreshIndicator(
         onRefresh: () async {
-          _loadAddress();
+          await _loadAddress();
           context.read<HomeViewModel>().getHomeData();
         },
         backgroundColor: AppColors.kBabyPink,
@@ -62,34 +66,39 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
   Future<String> getAddressFromCoordinates(double latitude, double longitude) async {
+    try {
       List<Placemark> placemarks = await placemarkFromCoordinates(latitude, longitude);
+      if (placemarks.isEmpty) return 'Unknown Location';
+
       Placemark placemark = placemarks[0];
       String address = '${placemark.name}, ${placemark.locality}';
       return address;
+    } catch (e) {
+      print("Error getting address from coordinates: $e");
+      return 'Unknown Location';
+    }
   }
   Future<void> _loadAddress() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      city = prefs.getString('city') ?? 'Unknown City';
+      address = prefs.getString('address') ?? 'Unknown Location';
       lat = prefs.getString('lat') ?? '';
       lang = prefs.getString('lang') ?? '';
     });
-
     if (lat.isNotEmpty && lang.isNotEmpty) {
-      double latitude = double.parse(lat);
-      double longitude = double.parse(lang);
-      String address = await getAddressFromCoordinates(latitude, longitude);
-      setState(() {
-        city = address;
-      });
+      try {
+        double latitude = double.parse(lat);
+        double longitude = double.parse(lang);
+        String newAddress = await getAddressFromCoordinates(latitude, longitude);
+        if (newAddress != 'Unknown Location') {
+          setState(() {
+            address = newAddress;
+          });
+          await HomeScreen.saveAddress(newAddress, lat, lang);
+        }
+      } catch (e) {
+        print("Error parsing coordinates: $e");
+      }
     }
   }
-  Future<void> saveAddress(String city, String lat, String lang,String area) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('city', city);
-    await prefs.setString('lat', lat);
-    await prefs.setString('lang', lang);
-  }
-
-
 }

@@ -1,20 +1,21 @@
 import 'dart:convert';
-
+import 'package:flowery/presentation/addresses/saved_addresses/view/widgets/custom_drop_down.dart';
+import 'package:flowery/presentation/addresses/saved_addresses/view/widgets/map_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
+import '../../../../core/routes/page_route_name.dart';
 import '../../../../core/utils/const/app_string.dart';
 import '../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../core/utils/functions/validators/validators.dart';
 import '../../../../core/utils/widget/custom_button.dart';
 import '../../../../core/utils/widget/custom_text_form_field.dart';
 import '../../../../data/models/order/request/address_requests/add_address_request_body_model.dart';
-import '../../view_model/addresses_view_model.dart';
-import 'widgets/custom_drop_down.dart';
-import 'widgets/map_widget.dart';
+import '../../../home_layout/screens/home/view/home_screen.dart';
+import '../view_model/saved_addresses_states.dart';
+import '../view_model/saved_addresses_view_model.dart';
 
 class AddAndEditUserAddressScreen extends StatefulWidget {
   static const String routeName = '/add-edit-user-address';
@@ -34,6 +35,7 @@ class _AddAndEditUserAddressScreenState
   late final TextEditingController _phoneNumberController;
   String? city;
   LatLng? userSelectedLocation;
+  String detailedAddress = '';
   List<Governorate> governorates = [];
   List<String> cities = [];
   String? selectedArea;
@@ -57,11 +59,12 @@ class _AddAndEditUserAddressScreenState
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AddressesCubit, AddressesState>(
-      bloc: context.read<AddressesCubit>(),
+    return BlocListener<SavedAddressesViewModel, SavedAddressesStates>(
+      bloc: context.read<SavedAddressesViewModel>(),
       listener: (context, state) => _handelStateChange(state),
       child: Scaffold(
         appBar: AppBar(
+          forceMaterialTransparency: true,
           title: const Text("Add Address"),
         ),
         body: Padding(
@@ -72,13 +75,17 @@ class _AddAndEditUserAddressScreenState
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  24.verticalSpace,
+                  5.verticalSpace,
                   MapWidget(
-                    onLocationSelected: (LatLng location) {
-                      userSelectedLocation = location;
+                    onLocationSelected: (LatLng location, String address) {
+                      setState(() {
+                        userSelectedLocation = location;
+                        detailedAddress = address;
+                        _addressController.text = address;
+                      });
                     },
                   ),
-                  24.verticalSpace,
+                  18.verticalSpace,
                   CustomTextFormField(
                     controller: _addressController,
                     hintText: "Enter Address",
@@ -88,7 +95,7 @@ class _AddAndEditUserAddressScreenState
                       value: value,
                     ),
                   ),
-                  24.verticalSpace,
+                  18.verticalSpace,
                   CustomTextFormField(
                     hintText: AppStrings.phoneHintText,
                     labelText: AppStrings.phoneLabelText,
@@ -97,19 +104,23 @@ class _AddAndEditUserAddressScreenState
                     textInputAction: TextInputAction.done,
                     controller: _phoneNumberController,
                   ),
-                  24.verticalSpace,
+                  18.verticalSpace,
                   CustomTextFormField(
                     controller: _recipientNameController,
                     hintText: "Recipient Name",
                     labelText: "Recipient Name",
+                    validator: (value)=>Validators.validateName(value)
                   ),
-                  24.verticalSpace,
+                  18.verticalSpace,
                   Row(
                     children: [
                       Expanded(
                         child: CustomDropDown(
                           hintText: "City",
                           labelText: "City",
+                          hintStyle: TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                          ),
                           data: governorates.map((e) => e.name).toList(),
                           onChanged: updateCities,
                         ),
@@ -129,7 +140,7 @@ class _AddAndEditUserAddressScreenState
                       ),
                     ],
                   ),
-                  35.verticalSpace,
+                  18.verticalSpace,
                   CustomButton(
                     onPressed: addAddress,
                     text: "Save Address",
@@ -143,77 +154,64 @@ class _AddAndEditUserAddressScreenState
     );
   }
 
-  void _handelStateChange(AddressesState state) {
+  void _handelStateChange(SavedAddressesStates state) {
     if (state is AddAddressesSuccess) {
-      Navigator.pop(context);
-      AppDialogs.showSuccessDialog(
-        context: context,
-        message: "Address Added Successfully.",
-        whenAnimationFinished: () {
-          Navigator.pop(context);
-        },
-      );
+      Navigator.pushNamed(context, PageRouteName.savedAddresses);
     } else if (state is AddAddAddressFail) {
       Navigator.pop(context);
       AppDialogs.showErrorDialog(context: context, errorMassage: state.message);
-    } else if (state is AddAddressesLoading) {
-      AppDialogs.showLoading(context: context);
-    }
+    } else if (state is AddAddressesLoading) {}
   }
-
   Future<void> loadGovernorates() async {
-    try {
-      final String response =
-          await rootBundle.loadString('assets/city/egypt-governorates-en.json');
-      final data = await json.decode(response);
-
-      setState(() {
-        governorates = (data['egyptian_governorates'] as List)
-            .map((json) => Governorate.fromJson(json))
-            .toList();
-      });
-    } catch (e) {
-      print('Error loading governorates: $e');
-    }
+    final String response =
+        await rootBundle.loadString('assets/city/egypt-governorates-en.json');
+    final data = await json.decode(response);
+    setState(() {
+      governorates = (data['egyptian_governorates'] as List)
+          .map((json) => Governorate.fromJson(json))
+          .toList();
+    });
   }
-
   void updateCities(String? selectedGovernorate) {
     setState(() {
       city = selectedGovernorate;
       selectedArea = null;
-      if (selectedGovernorate != null) {
-        final governorate = governorates.firstWhere(
-          (g) => g.name == selectedGovernorate,
-          orElse: () => Governorate(name: '', cities: []),
-        );
-        cities = governorate.cities;
-      } else {
-        cities = [];
-      }
+      cities = governorates
+          .firstWhere((g) => g.name == selectedGovernorate,
+              orElse: () => Governorate(name: '', cities: []))
+          .cities;
     });
   }
-
   void addAddress() {
     if (_formKey.currentState!.validate()) {
-      if (userSelectedLocation == null) {
+      if (userSelectedLocation == null && city == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Please select a location on the map.")),
+          const SnackBar(content: Text("Please select a location or choose city and area")),
         );
         return;
       }
+      final fullAddress = selectedArea != null
+          ? "$selectedArea, $city"
+          : detailedAddress;
       final request = AddAddressRequestBody(
         street: _addressController.text,
         phone: _phoneNumberController.text,
-        city: city ?? "",
-        lat: userSelectedLocation!.latitude.toString(),
-        lang: userSelectedLocation!.longitude.toString(),
+        city: fullAddress,
+        lat: userSelectedLocation?.latitude.toString() ?? "",
+        lang: userSelectedLocation?.longitude.toString() ?? "",
         username: _recipientNameController.text,
       );
-      context.read<AddressesCubit>().addAddress(request);
+      if (userSelectedLocation != null) {
+        HomeScreen.saveAddress(
+            fullAddress,
+            userSelectedLocation!.latitude.toString(),
+            userSelectedLocation!.longitude.toString()
+        );
+      }
+      context.read<SavedAddressesViewModel>().addAddress(request);
     }
   }
 }
-
 class Governorate {
   final String name;
   final List<String> cities;

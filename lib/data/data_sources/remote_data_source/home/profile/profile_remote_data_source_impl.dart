@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
@@ -38,11 +40,10 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   }
 
   @override
-  Future<Result<String?>> uploadPhoto(XFile photo) async {
+  Future<Result<String?>> uploadPhoto(File photo) async {
     return await executeApiCall<String?>(() async {
       var token = await _getToken();
       var photoFile = await MultipartFile.fromFile(photo.path);
-      print(photo.path);
       var formData = FormData.fromMap({
         "photo": [photoFile],
       });

@@ -8,8 +8,6 @@ import '../../../domain/entities/order/create_order/order_response_entity.dart';
 import '../../../domain/use_case/order/create_order_use_case.dart';
 import '../../../domain/use_case/order/payment/cash_payment_use_case.dart';
 import '../../../domain/use_case/order/payment/credit_payment_use_case.dart';
-import '../../addresses/view_model/addresses_view_model.dart';
-import '../../auth/login/view_model/login_state.dart';
 import 'order_state.dart';
 
 @injectable

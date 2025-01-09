@@ -98,6 +98,8 @@ class FlowerCard extends StatelessWidget {
                               imageUrl: imageUrl,
                               shimmerRadiusValue: 8.r,
                               fit: BoxFit.cover,
+                              height: double.infinity,
+                              width: double.infinity,
                               errorWidget:
                                   Icon(Icons.local_florist, size: 40.sp),
                             ),
