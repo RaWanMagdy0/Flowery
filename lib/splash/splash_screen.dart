@@ -1,11 +1,10 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:lottie/lottie.dart';
-
 import '../core/local/secure_storage.dart';
 import '../core/local/token_manger.dart';
 import '../core/routes/page_route_name.dart';
@@ -51,6 +50,8 @@ class _SplashScreenState extends State<SplashScreen>
       return;
     }
     _navigateToInitialRoute();
+    await _requestLocationPermission();
+
   }
 
   Future<bool> _checkInternetConnection() async {
@@ -63,6 +64,28 @@ class _SplashScreenState extends State<SplashScreen>
       return lookup.isNotEmpty && lookup.first.rawAddress.isNotEmpty;
     } catch (_) {
       return false;
+    }
+  }
+
+  Future<void> _requestLocationPermission() async {
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      await Geolocator.openLocationSettings();
+      return;
+    }
+
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        print("Location permission denied");
+        return;
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      print("Location permission permanently denied");
+      return;
     }
   }
 
@@ -95,17 +118,17 @@ class _SplashScreenState extends State<SplashScreen>
         child: _isNoInternet
             ? _buildNoInternetWidget()
             : Center(
-                child: Lottie.asset(
-                  controller: _controller,
-                  AppImages.floweryAnimation,
-                  fit: BoxFit.cover,
-                  onLoaded: (composition) {
-                    _controller
-                      ..duration = composition.duration
-                      ..forward();
-                  },
-                ),
-              ),
+          child: Lottie.asset(
+            controller: _controller,
+            AppImages.floweryAnimation,
+            fit: BoxFit.cover,
+            onLoaded: (composition) {
+              _controller
+                ..duration = composition.duration
+                ..forward();
+            },
+          ),
+        ),
       ),
     );
   }
@@ -137,11 +160,5 @@ class _SplashScreenState extends State<SplashScreen>
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 }

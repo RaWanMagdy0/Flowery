@@ -1,9 +1,12 @@
+import 'package:flowery/core/styles/colors/app_colors.dart';
+import 'package:flowery/core/utils/functions/dialogs/app_dialogs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/routes/page_route_name.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
+import 'add_and_edit_user_address_screen.dart';
 import '../view_model/saved_addresses_states.dart';
 import '../view_model/saved_addresses_view_model.dart';
 import 'widgets/saved_addresses_button.dart';
@@ -53,7 +56,8 @@ class _SavedAddressScreenState extends State<SavedAddressScreen> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text("Failed to load addresses.")),
                     );
-                  } else if (state is DeleteAddressFailure) {
+                  }
+                  else if (state is DeleteAddressFailure) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text(state.message)),
                     );
@@ -61,7 +65,7 @@ class _SavedAddressScreenState extends State<SavedAddressScreen> {
                 },
                 builder: (context, state) {
                   if (state is SavedAddressesLoading) {
-                    return const Center(child: CircularProgressIndicator());
+                    return  Center(child: CircularProgressIndicator(color: AppColors.kPink,));
                   } else if (state is SavedAddressesSuccess) {
                     final addresses = state.addresses;
                     if (addresses.isEmpty) {
@@ -73,11 +77,15 @@ class _SavedAddressScreenState extends State<SavedAddressScreen> {
                         final address = addresses[index];
                         final addressId = address.id;
                         return SavedAddressesCard(
-                          city: address.city,
-                          street: address.street,
+                          address: address.city,
                           onDelete: () {
                             viewModel.deleteAddress(addressId);
-                            print("{addressId $addressId}");
+                          },
+                          onEdit: () {
+                            Navigator.pushNamed(
+                              context,
+                              PageRouteName.addAndEditUserAddress,
+                            );
                           },
                         );
                       },
@@ -89,7 +97,7 @@ class _SavedAddressScreenState extends State<SavedAddressScreen> {
             ),
             SavedAddressesButton(
               onPressed: () async {
-                await Navigator.pushNamed(
+                await Navigator.pushReplacementNamed(
                     context, PageRouteName.addAndEditUserAddress);
               },
             ),

@@ -13,9 +13,8 @@ import 'widgets/home_occasions/home_occasions_list.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
-  static Future<void> saveAddress(
-      String address, String lat, String lang) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+  static Future<void> saveAddress(String address, String lat, String lang) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('address', address);
     await prefs.setString('lat', lat);
     await prefs.setString('lang', lang);
@@ -28,7 +27,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String address = 'Unknown Location';
   String lat = '';
-  String lang = '';
+  String lang ='';
 
   @override
   void initState() {
@@ -36,7 +35,6 @@ class _HomeScreenState extends State<HomeScreen> {
     _loadAddress();
     context.read<HomeViewModel>().getHomeData();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: RefreshIndicator(
         onRefresh: () async {
-          _loadAddress();
+          await _loadAddress();
           context.read<HomeViewModel>().getHomeData();
         },
         backgroundColor: AppColors.kBabyPink,
@@ -67,16 +65,19 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+  Future<String> getAddressFromCoordinates(double latitude, double longitude) async {
+    try {
+      List<Placemark> placemarks = await placemarkFromCoordinates(latitude, longitude);
+      if (placemarks.isEmpty) return 'Unknown Location';
 
-  Future<String> getAddressFromCoordinates(
-      double latitude, double longitude) async {
-    List<Placemark> placemarks =
-        await placemarkFromCoordinates(latitude, longitude);
-    Placemark placemark = placemarks[0];
-    String address = '${placemark.name}, ${placemark.locality}';
-    return address;
+      Placemark placemark = placemarks[0];
+      String address = '${placemark.name}, ${placemark.locality}';
+      return address;
+    } catch (e) {
+      print("Error getting address from coordinates: $e");
+      return 'Unknown Location';
+    }
   }
-
   Future<void> _loadAddress() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -84,15 +85,19 @@ class _HomeScreenState extends State<HomeScreen> {
       lat = prefs.getString('lat') ?? '';
       lang = prefs.getString('lang') ?? '';
     });
-
     if (lat.isNotEmpty && lang.isNotEmpty) {
-      double latitude = double.parse(lat);
-      double longitude = double.parse(lang);
-      String newAddress = await getAddressFromCoordinates(latitude, longitude);
-      if (newAddress != 'Location Error') {
-        setState(() {
-          address = newAddress;
-        });
+      try {
+        double latitude = double.parse(lat);
+        double longitude = double.parse(lang);
+        String newAddress = await getAddressFromCoordinates(latitude, longitude);
+        if (newAddress != 'Unknown Location') {
+          setState(() {
+            address = newAddress;
+          });
+          await HomeScreen.saveAddress(newAddress, lat, lang);
+        }
+      } catch (e) {
+        print("Error parsing coordinates: $e");
       }
     }
   }

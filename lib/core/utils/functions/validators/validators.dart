@@ -6,7 +6,7 @@ class Validators {
     return null;
   }
 
-  static String? validateNotEmpty({String? title, String? value}) {
+  static String? validateNotEmpty( {String? title, String? value}) {
     if (_isEmpty(value)) {
       return ("$title is required");
     }

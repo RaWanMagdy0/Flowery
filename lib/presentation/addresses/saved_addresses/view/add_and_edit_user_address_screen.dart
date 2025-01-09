@@ -1,9 +1,12 @@
 import 'dart:convert';
+import 'package:flowery/presentation/addresses/saved_addresses/view/widgets/custom_drop_down.dart';
+import 'package:flowery/presentation/addresses/saved_addresses/view/widgets/map_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import '../../../../core/routes/page_route_name.dart';
 import '../../../../core/utils/const/app_string.dart';
 import '../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../core/utils/functions/validators/validators.dart';
@@ -11,9 +14,8 @@ import '../../../../core/utils/widget/custom_button.dart';
 import '../../../../core/utils/widget/custom_text_form_field.dart';
 import '../../../../data/models/order/request/address_requests/add_address_request_body_model.dart';
 import '../../../home_layout/screens/home/view/home_screen.dart';
-import '../../view_model/addresses_view_model.dart';
-import 'widgets/custom_drop_down.dart';
-import 'widgets/map_widget.dart';
+import '../view_model/saved_addresses_states.dart';
+import '../view_model/saved_addresses_view_model.dart';
 
 class AddAndEditUserAddressScreen extends StatefulWidget {
   static const String routeName = '/add-edit-user-address';
@@ -46,6 +48,7 @@ class _AddAndEditUserAddressScreenState
     _phoneNumberController = TextEditingController();
     loadGovernorates();
   }
+
   @override
   void dispose() {
     _addressController.dispose();
@@ -56,8 +59,8 @@ class _AddAndEditUserAddressScreenState
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AddressesCubit, AddressesState>(
-      bloc: context.read<AddressesCubit>(),
+    return BlocListener<SavedAddressesViewModel, SavedAddressesStates>(
+      bloc: context.read<SavedAddressesViewModel>(),
       listener: (context, state) => _handelStateChange(state),
       child: Scaffold(
         appBar: AppBar(
@@ -106,6 +109,7 @@ class _AddAndEditUserAddressScreenState
                     controller: _recipientNameController,
                     hintText: "Recipient Name",
                     labelText: "Recipient Name",
+                    validator: (value)=>Validators.validateName(value)
                   ),
                   18.verticalSpace,
                   Row(
@@ -150,23 +154,13 @@ class _AddAndEditUserAddressScreenState
     );
   }
 
-  void _handelStateChange(AddressesState state) {
+  void _handelStateChange(SavedAddressesStates state) {
     if (state is AddAddressesSuccess) {
-      Navigator.pop(context);
-
-      AppDialogs.showSuccessDialog(
-        context: context,
-        message: "Address Added Successfully.",
-        whenAnimationFinished: () {
-          Navigator.pop(context);
-        },
-      );
+      Navigator.pushNamed(context, PageRouteName.savedAddresses);
     } else if (state is AddAddAddressFail) {
       Navigator.pop(context);
       AppDialogs.showErrorDialog(context: context, errorMassage: state.message);
-    } else if (state is AddAddressesLoading) {
-      AppDialogs.showLoading(context: context);
-    }
+    } else if (state is AddAddressesLoading) {}
   }
   Future<void> loadGovernorates() async {
     final String response =
@@ -196,11 +190,9 @@ class _AddAndEditUserAddressScreenState
         );
         return;
       }
-
       final fullAddress = selectedArea != null
           ? "$selectedArea, $city"
           : detailedAddress;
-
       final request = AddAddressRequestBody(
         street: _addressController.text,
         phone: _phoneNumberController.text,
@@ -209,7 +201,6 @@ class _AddAndEditUserAddressScreenState
         lang: userSelectedLocation?.longitude.toString() ?? "",
         username: _recipientNameController.text,
       );
-
       if (userSelectedLocation != null) {
         HomeScreen.saveAddress(
             fullAddress,
@@ -217,8 +208,7 @@ class _AddAndEditUserAddressScreenState
             userSelectedLocation!.longitude.toString()
         );
       }
-
-      context.read<AddressesCubit>().AddAddress(request);
+      context.read<SavedAddressesViewModel>().addAddress(request);
     }
   }
 }

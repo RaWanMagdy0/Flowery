@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
@@ -25,7 +27,6 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
     this.logoutUseCase,
     this.uploadPhotoUseCase,
   ) : super(ProfileInitialState());
-
   var formKey = GlobalKey<FormState>();
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
@@ -40,7 +41,7 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
 
     switch (result) {
       case Success<User?>():
-        var user = result.data;
+       var user=result.data;
         emit(GetLoggedUserInfoSuccessState(user: user));
         firstNameController.text = user?.firstName ?? '';
         lastNameController.text = user?.lastName ?? '';
@@ -48,7 +49,6 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
         phoneController.text = user?.phone ?? '';
         gender = user?.gender;
         photo = user?.photo;
-        break;
       case Fail<User?>():
         emit(GetLoggedUserInfoErrorState(
             errorMessage: getErrorMassageFromException(result.exception)));
@@ -75,7 +75,6 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
         phoneController.text = updatedUser?.phone ?? '';
         emit(EditProfileSuccessState(user: updatedUser));
         await getLoggedUserInfo();
-        break;
       case Fail<User?>():
         emit(EditProfileErrorState(
             errorMessage: getErrorMassageFromException(result.exception)));
@@ -94,7 +93,7 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
   }
 
   // Upload profile photo
-  Future<void> uploadPhoto(XFile photo) async {
+  Future<void> uploadPhoto(File photo) async {
     emit(UploadPhotoLoadingState());
     var result = await uploadPhotoUseCase.invoke(photo);
 

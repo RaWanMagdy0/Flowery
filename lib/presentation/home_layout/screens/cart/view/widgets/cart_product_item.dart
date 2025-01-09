@@ -11,6 +11,7 @@ import '../../view_model/cart_view_model.dart';
 
 class CartProductItem extends StatelessWidget {
   final CartProduct cartProduct;
+
   const CartProductItem({super.key, required this.cartProduct});
 
   @override
@@ -77,8 +78,8 @@ class CartProductItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(50.r),
               onTap: () {
                 context.read<CartViewModel>().removeProductFromCart(
-                      cartProduct.product?.id ?? '',
-                    );
+                  cartProduct.product?.id ?? '',
+                );
               },
               child: SvgPicture.asset(AppImages.trashIcon),
             ),
@@ -95,9 +96,9 @@ class CartProductItem extends StatelessWidget {
                       final num numQuantity = cartProduct.quantity! - 1;
 
                       context.read<CartViewModel>().updateCartProductQuantity(
-                            cartProduct.product?.id ?? '',
-                            numQuantity.toInt(),
-                          );
+                        cartProduct.product?.id ?? '',
+                        numQuantity.toInt(),
+                      );
                     }
                   },
                   child: Icon(
@@ -117,9 +118,9 @@ class CartProductItem extends StatelessWidget {
                     final num numQuantity = cartProduct.quantity! + 1;
 
                     context.read<CartViewModel>().updateCartProductQuantity(
-                          cartProduct.product?.id ?? '',
-                          numQuantity.toInt(),
-                        );
+                      cartProduct.product?.id ?? '',
+                      numQuantity.toInt(),
+                    );
                   },
                   child: Icon(
                     Icons.add,

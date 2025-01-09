@@ -2,12 +2,10 @@ import 'package:flowery/presentation/home_layout/product_details/view_model/prod
 import 'package:flowery/presentation/order/view/get_orders_history.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../presentation/about_app/view/about_app_screen.dart';
 import '../../presentation/addresses/saved_addresses/view/saved_addresses_screen.dart';
 import '../../presentation/addresses/saved_addresses/view_model/saved_addresses_view_model.dart';
-import '../../presentation/addresses/view/add_and_edit_user_address/add_and_edit_user_address_screen.dart';
-import '../../presentation/addresses/view_model/addresses_view_model.dart';
+import '../../presentation/addresses/saved_addresses/view/add_and_edit_user_address_screen.dart';
 import '../../presentation/auth/forgot_password/view/widgets/email_verification_widget/email_verification.dart';
 import '../../presentation/auth/forgot_password/view/widgets/forgot_password_widget/forget_password_screen.dart';
 import '../../presentation/auth/forgot_password/view_model/forget_passwoed_cubit.dart';
@@ -152,9 +150,12 @@ class AppRoutes {
                   create: (context) => getIt<ProfileCubit>(),
                   child: ProfileMainScreen(),
                 ));
-      case PageRouteName.editProfile:
-        return _handleMaterialPageRoute(widget: EditProfileScreen());
-
+        case PageRouteName.editProfile:
+        return MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                  create: (context) => getIt<ProfileCubit>(),
+                  child: EditProfileScreen(),
+                ));
       case PageRouteName.checkout:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -168,14 +169,10 @@ class AppRoutes {
                   create: (context) => getIt<ProductDetailsCubit>(),
                   child: GetOrdersHistory(),
                 ));
-/***************
-      case PageRouteName.getOrdersHistory:
-        return _handleMaterialPageRoute(widget: GetOrdersHistory());
-**************/
       case PageRouteName.addAndEditUserAddress:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => getIt<AddressesCubit>(),
+            create: (context) => getIt<SavedAddressesViewModel>(),
             child: AddAndEditUserAddressScreen(),
           ),
         );

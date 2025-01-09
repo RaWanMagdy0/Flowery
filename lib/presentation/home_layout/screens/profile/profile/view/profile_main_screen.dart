@@ -69,7 +69,7 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                 }
                 if (state is LogoutSuccessState) {
                   Navigator.pushReplacementNamed(
-                      context, PageRouteName.homeLayout);
+                      context, PageRouteName.logIn);
                 }
                 if (state is LogoutErrorState) {
                   AppDialogs.showErrorDialog(
@@ -84,11 +84,13 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                     return Center(
                       child: Lottie.asset(AppImages.pinkLoadingAnimation),
                     );
-                  } else if (state is GetLoggedUserInfoErrorState) {
+                  }
+                  else if (state is GetLoggedUserInfoErrorState) {
                     return Center(
                       child: Text(state.errorMessage ?? 'An error occurred'),
                     );
-                  } else if (state is GetLoggedUserInfoSuccessState) {
+                  }
+                  else if (state is GetLoggedUserInfoSuccessState) {
                     bool isUserProfile;
                     if (state.user?.photo ==
                         "https://flower.elevateegy.com/uploads/default-profile.png") {

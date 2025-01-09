@@ -1,25 +1,30 @@
 import 'dart:io';
-
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:path_provider/path_provider.dart';
 import '../../../../../../core/di/di.dart';
 import '../../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../../core/styles/images/app_images.dart';
 import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../view_model/profile_cubit.dart';
 import '../view_model/profile_state.dart';
+import '../../../../../../domain/entities/home_layout/profile/user.dart';
 
 class CustomProfilePic extends StatefulWidget {
-  const CustomProfilePic({super.key});
+  User user;
+
+   CustomProfilePic({super.key,required this.user});
 
   @override
   State<CustomProfilePic> createState() => _CustomProfilePicState();
 }
 
 class _CustomProfilePicState extends State<CustomProfilePic> {
+
   File? photo;
   final ImagePicker _picker = ImagePicker();
   late ProfileCubit viewModel;
@@ -60,22 +65,9 @@ class _CustomProfilePicState extends State<CustomProfilePic> {
           child: Stack(
             children: [
               ClipOval(
-                child: photo != null
-                    ? Image.file(
-                        photo!,
-                        fit: BoxFit.cover,
-                        height: 90.h,
-                        width: 90.w,
-                      )
-                    : (viewModel.photo != null
-                        ? Image.network(
-                            viewModel.photo!,
-                            fit: BoxFit.cover,
-                            height: 90.h,
-                            width: 90.w,
-                          )
-                        : Image.asset(AppImages.photo, fit: BoxFit.cover)),
-              ),
+                  child: Image.network(
+                      fit: BoxFit.cover,
+                      widget.user.photo ?? Image.asset(AppImages.photo).toString())),
               Positioned(
                 bottom: 10.h,
                 right: 10.w,
@@ -115,37 +107,48 @@ class _CustomProfilePicState extends State<CustomProfilePic> {
   }
 
   Future<void> uploadPhoto(ImageSource source) async {
-    final pickedFile = await _picker.pickImage(source: source);
-    if (pickedFile != null) {
-      final originalPhoto = XFile(pickedFile.path);
-      viewModel.uploadPhoto(originalPhoto);
-
-      /*********************
-          try {
-          final resizedPhoto = await _resizeImage(originalPhoto);
-          setState(() {
-          photo = resizedPhoto;
-          });
-          } catch (e) {
-          debugPrint('Error uploading photo: $e');
-          AppDialogs.showErrorDialog(context: context, errorMassage: 'Error processing image');
-          }
-          } else {
-          debugPrint('No image selected.');
-          }
-          }
-          Future<File> _resizeImage(File imageFile) async {
-          final jpgImage = img.decodeImage(imageFile.readAsBytesSync());
-          if (jpgImage == null) throw Exception('Failed to decode image');
-
-          final resizedImage = img.copyResize(jpgImage, width: 800);
-          final tempDir = await getTemporaryDirectory();
-          final resizedPath = '${tempDir.path}/resized_profile_pic.png';
-          final resizedFile = XFile(resizedPath)..writeAsBytesSync(img.encodePng(resizedImage));
-
-          return resizedFile;
-          }
-       *****************/
+    try {
+      final pickedFile = await _picker.pickImage(
+        source: source,
+        imageQuality: 80,
+      );
+      if (pickedFile != null) {
+        if (mounted) {
+          AppDialogs.showLoading(context: context);
+        }
+        File imageFile = File(pickedFile.path);
+        final compressedImage = await _processImage(imageFile);
+        setState(() {
+          photo = compressedImage;
+        });
+        await viewModel.uploadPhoto(File(compressedImage.path));
+        if (mounted) {
+          Navigator.pop(context);
+        }
+      }
+    } catch (e) {
+      debugPrint('Error: $e');
+      if (mounted) {
+        Navigator.pop(context);
+        AppDialogs.showErrorDialog(
+          context: context,
+          errorMassage: e is DioException
+              ? e.response?.data['error'] ?? 'Failed to upload photo'
+              : 'Failed to process image',
+        );
+      }
     }
+  }
+
+  Future<File> _processImage(File imageFile) async {
+    final result = await FlutterImageCompress.compressAndGetFile(
+      imageFile.absolute.path,
+      '${(await getTemporaryDirectory()).path}/processed_image.jpg',
+      quality: 85,
+      minWidth: 1024,
+      minHeight: 1024,
+    );
+    if (result == null) throw Exception('Failed to compress image');
+    return File(result.path);
   }
 }

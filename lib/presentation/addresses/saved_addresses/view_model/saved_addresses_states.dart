@@ -22,3 +22,16 @@ final class DeleteAddressFailure extends SavedAddressesStates {
   DeleteAddressFailure(this.message);
 
 }
+// Add Address
+
+final class AddressesInitial extends SavedAddressesStates {}
+
+final class AddAddressesLoading extends SavedAddressesStates {}
+
+final class AddAddressesSuccess extends SavedAddressesStates {}
+
+final class AddAddAddressFail extends SavedAddressesStates {
+  final String message;
+
+  AddAddAddressFail(this.message);
+}

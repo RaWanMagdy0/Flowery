@@ -23,7 +23,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          CustomProfilePic(),
+          CustomProfilePic(user:widget.user),
           20.verticalSpace,
           EditProfileForm(user: widget.user),
         ],

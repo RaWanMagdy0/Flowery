@@ -1,6 +1,7 @@
 import 'dart:io';
 
-import 'package:dio/dio.dart';
+import 'package:dio/dio.dart' hide DioMediaType;
+import 'package:http_parser/http_parser.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -57,7 +58,7 @@ abstract class HomeApiManger {
   @MultiPart()
   Future<String?> uploadPhoto(
     @Header("Authorization") String token,
-    @Part(name: "photo") File photo,
+    @Part(name: "photo", contentType: "image/jpeg") File photo,
   );
 
   @GET(ApiConstants.products)
@@ -67,9 +68,8 @@ abstract class HomeApiManger {
 
   @GET(ApiConstants.products)
   Future<ProductDetailsModel?> getSortedProducts(
-      @Query('sort') String sort,
-      );
-
+    @Query('sort') String sort,
+  );
 
   @GET(ApiConstants.getAllProducts)
   Future<ProductDetailsModel> getOccasionsProduct();
@@ -77,6 +77,7 @@ abstract class HomeApiManger {
   @GET(ApiConstants.getAllCategoriesEndpoint)
   Future<ProductDetailsModel> getCategoriesProduct();
 }
+
 enum SortType {
   quantityDescending,
   quantityAscending,

@@ -5,9 +5,6 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '../../../../../generated/l10n.dart';
-
-
 class MapWidget extends StatefulWidget {
   final Function(LatLng, String) onLocationSelected;
   const MapWidget({required this.onLocationSelected, super.key});
@@ -30,12 +27,10 @@ class _MapWidgetState extends State<MapWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final local = S.of(context);
-
     return Stack(
       children: [
         SizedBox(
-          height: 200.0,
+          height: 280.0,
           width: double.infinity,
           child: GoogleMap(
             myLocationEnabled: true,
@@ -51,9 +46,9 @@ class _MapWidgetState extends State<MapWidget> {
               Factory<PanGestureRecognizer>(() => PanGestureRecognizer()),
               Factory<ScaleGestureRecognizer>(() => ScaleGestureRecognizer()),
               Factory<VerticalDragGestureRecognizer>(
-                      () => VerticalDragGestureRecognizer()),
+                  () => VerticalDragGestureRecognizer()),
               Factory<HorizontalDragGestureRecognizer>(
-                      () => HorizontalDragGestureRecognizer()),
+                  () => HorizontalDragGestureRecognizer()),
             },
             onMapCreated: (controller) {
               _mapController = controller;
@@ -72,6 +67,15 @@ class _MapWidgetState extends State<MapWidget> {
       ],
     );
   }
+
+  void _changeZoom(double amount) {
+    currentZoom = (currentZoom + amount).clamp(1.0, 20.0);
+    _mapController?.animateCamera(
+      CameraUpdate.newLatLngZoom(
+          selectedLocation ?? const LatLng(30.0444, 31.2357), currentZoom),
+    );
+  }
+
   Future<void> _initializeMap() async {
     try {
       Position position = await Geolocator.getCurrentPosition(
@@ -81,10 +85,18 @@ class _MapWidgetState extends State<MapWidget> {
       String address = await _getDetailedAddress(selectedLocation!);
       _updateMarker(selectedLocation!, address);
       widget.onLocationSelected(selectedLocation!, address);
+
+      _mapController?.animateCamera(
+        CameraUpdate.newLatLngZoom(selectedLocation!, currentZoom),
+      );
     } catch (e) {
       selectedLocation = const LatLng(30.0444, 31.2357);
+      _mapController?.animateCamera(
+        CameraUpdate.newLatLngZoom(selectedLocation!, currentZoom),
+      );
     }
   }
+
   Future<void> updateLocation(double lat, double lng) async {
     LatLng newLocation = LatLng(lat, lng);
     String address = await _getDetailedAddress(newLocation);
@@ -94,14 +106,9 @@ class _MapWidgetState extends State<MapWidget> {
 
   Future<String> _getDetailedAddress(LatLng location) async {
     try {
-      final local = S.of(context);
-
-      final isEnglish = local ;
-
       List<Placemark> placemarks = await placemarkFromCoordinates(
-          location.latitude,
-          location.longitude,
-
+        location.latitude,
+        location.longitude,
       );
       if (placemarks.isEmpty) return 'Unknown Location';
 
