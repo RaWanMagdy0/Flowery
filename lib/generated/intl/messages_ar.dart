@@ -122,6 +122,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lastNameLabelText":
             MessageLookupByLibrary.simpleMessage("الاسم الأخير"),
         "loadingText": MessageLookupByLibrary.simpleMessage("جارٍ التحميل.."),
+        "locationError":
+            MessageLookupByLibrary.simpleMessage("خطأ في تحديد الموقع"),
         "logOut": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
         "loginTitle": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "logoutConfirmationMessage":
@@ -215,6 +217,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "trackOrder": MessageLookupByLibrary.simpleMessage("اتبع الطلب "),
         "unexpectedState":
             MessageLookupByLibrary.simpleMessage("حالة غير متوقعة."),
+        "unknownLocation":
+            MessageLookupByLibrary.simpleMessage("موقع غير معروف"),
         "updateText": MessageLookupByLibrary.simpleMessage("تحديث"),
         "userCreatedSuccessfully":
             MessageLookupByLibrary.simpleMessage("تم إنشاء الحساب بنجاح"),

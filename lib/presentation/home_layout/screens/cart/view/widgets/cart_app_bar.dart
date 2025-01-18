@@ -29,31 +29,6 @@ class _CartAppBarState extends State<CartAppBar> {
     _loadAddress();
   }
 
-  Future<void> _loadAddress() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      city = prefs.getString('city') ?? 'Unknown City';
-      lat = prefs.getString('lat') ?? '';
-      lang = prefs.getString('lang') ?? '';
-    });
-    if (lat.isNotEmpty && lang.isNotEmpty) {
-      double latitude = double.parse(lat);
-      double longitude = double.parse(lang);
-      String address = await getAddressFromCoordinates(latitude, longitude);
-      setState(() {
-        city = address;
-      });
-    }
-  }
-
-  Future<String> getAddressFromCoordinates(
-      double latitude, double longitude) async {
-    List<Placemark> placemarks =
-        await placemarkFromCoordinates(latitude, longitude);
-    Placemark placemark = placemarks[0];
-    String address = '${placemark.name} , ${placemark.locality}';
-    return address;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,4 +73,30 @@ class _CartAppBarState extends State<CartAppBar> {
       ),
     );
   }
+  Future<void> _loadAddress() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      city = prefs.getString('city') ?? 'Unknown City';
+      lat = prefs.getString('lat') ?? '';
+      lang = prefs.getString('lang') ?? '';
+    });
+    if (lat.isNotEmpty && lang.isNotEmpty) {
+      double latitude = double.parse(lat);
+      double longitude = double.parse(lang);
+      String address = await getAddressFromCoordinates(latitude, longitude);
+      setState(() {
+        city = address;
+      });
+    }
+  }
+
+  Future<String> getAddressFromCoordinates(
+      double latitude, double longitude) async {
+    List<Placemark> placemarks =
+    await placemarkFromCoordinates(latitude, longitude);
+    Placemark placemark = placemarks[0];
+    String address = '${placemark.name} , ${placemark.locality}';
+    return address;
+  }
+
 }

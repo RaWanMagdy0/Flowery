@@ -35,7 +35,7 @@ class LocalizationRow extends StatelessWidget {
                         )),
                     10.horizontalSpace,
                     Text(
-                      provider.locale == "en" ? "English" : "العربيه",
+                      provider.locale == "en" ? "Language" : "اللغه",
                       style: AppFonts.font16BlackWeight400,
                     ),
                   ],

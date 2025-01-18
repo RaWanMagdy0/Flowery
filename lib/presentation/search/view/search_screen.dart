@@ -50,6 +50,7 @@ class _SearchScreenState extends State<SearchScreen> {
     final local = S.of(context);
     return Scaffold(
       appBar: AppBar(
+        forceMaterialTransparency: true,
         automaticallyImplyLeading: true,
         title: TextField(
           controller: _searchController,

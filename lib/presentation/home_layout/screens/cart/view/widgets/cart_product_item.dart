@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:svg_flutter/svg.dart';
-
 import '../../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../core/styles/images/app_images.dart';
@@ -79,8 +78,8 @@ class CartProductItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(50.r),
               onTap: () {
                 context.read<CartViewModel>().removeProductFromCart(
-                      cartProduct.product?.id ?? '',
-                    );
+                  cartProduct.product?.id ?? '',
+                );
               },
               child: SvgPicture.asset(AppImages.trashIcon),
             ),
@@ -97,9 +96,9 @@ class CartProductItem extends StatelessWidget {
                       final num numQuantity = cartProduct.quantity! - 1;
 
                       context.read<CartViewModel>().updateCartProductQuantity(
-                            cartProduct.product?.id ?? '',
-                            numQuantity.toInt(),
-                          );
+                        cartProduct.product?.id ?? '',
+                        numQuantity.toInt(),
+                      );
                     }
                   },
                   child: Icon(
@@ -119,9 +118,9 @@ class CartProductItem extends StatelessWidget {
                     final num numQuantity = cartProduct.quantity! + 1;
 
                     context.read<CartViewModel>().updateCartProductQuantity(
-                          cartProduct.product?.id ?? '',
-                          numQuantity.toInt(),
-                        );
+                      cartProduct.product?.id ?? '',
+                      numQuantity.toInt(),
+                    );
                   },
                   child: Icon(
                     Icons.add,

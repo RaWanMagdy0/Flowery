@@ -19,8 +19,9 @@ class AppImages {
   static const splash2 = "assets/images/splash2.jpg";
   static const photo = "assets/images/Photo.png";
   static const logoWithTitle = "assets/images/flowery_logo_with_title.png";
-  static const editIcon = "assets/images/edit_icon.png";
   static const trashIcon = "assets/icons/trash_icon.svg";
+  static const locationIcon = "assets/icons/location.png";
+  static const editIcon = "assets/icons/edit.png";
   static const languageIcon = "assets/icons/language_icon.png";
   static const flowerImage= "assets/images/Image.png";
 }

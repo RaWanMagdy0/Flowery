@@ -1340,6 +1340,26 @@ class S {
     );
   }
 
+  /// `Unknown Location`
+  String get unknownLocation {
+    return Intl.message(
+      'Unknown Location',
+      name: 'unknownLocation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Location Error`
+  String get locationError {
+    return Intl.message(
+      'Location Error',
+      name: 'locationError',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Error occurred while searching`
   String get searchError {
     return Intl.message(

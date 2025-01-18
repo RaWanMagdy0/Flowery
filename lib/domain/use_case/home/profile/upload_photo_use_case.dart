@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 
@@ -8,7 +10,7 @@ import '../../../repository/home/profile_repository.dart';
 class UploadPhotoUseCase {
   final ProfileRepository profileRepository;
   UploadPhotoUseCase({required this.profileRepository});
-  Future<Result<String?>> invoke(XFile photo) async {
+  Future<Result<String?>> invoke(File photo) async {
     return await profileRepository.uploadPhoto(photo);
   }
 }
