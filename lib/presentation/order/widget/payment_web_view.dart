@@ -1,9 +1,7 @@
 import 'dart:developer';
 
-import 'package:flowery/presentation/order/view_model/order_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../../../../generated/l10n.dart';
@@ -56,10 +54,9 @@ class _NewPolicyPaymentViewState extends State<PaymentWebView> {
                   // Add other settings if needed
                 ),
                 onLoadStart: (controller, url) {
-                  if (url.toString().startsWith(
-                          'http://139.185.43.128/index.php/payment/success') ||
-                      url.toString().startsWith(
-                          'http://139.185.43.128/index.php/policy/status?status=active')) {
+                  if (url
+                      .toString()
+                      .startsWith('http://localhost:3000/allOrders')) {
                     Navigator.of(context).pop();
                   }
                 },
