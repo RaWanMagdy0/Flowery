@@ -11,10 +11,9 @@ class CategoriesProductUseCase {
   CategoriesProductUseCase(this._repository);
 
   Future<Result<List<ProductEntity>?>> invoke(String id) async {
-    final result = await _repository.getCategoryProducts();
+    final result = await _repository.getCategoryProducts(id: id);
     switch (result) {
       case Success():
-
         List<ProductEntity>? products = [];
 
         for (var model in result.data!) {

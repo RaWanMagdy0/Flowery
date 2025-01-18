@@ -36,13 +36,14 @@ abstract class HomeApiManger {
   Future<AllCategoriesResponseModel> getAllCategories();
 
   @GET(ApiConstants.getAllProducts)
-  Future<ProductDetailsModel> getCategoryProducts();
+  Future<ProductDetailsModel> getCategoryProducts(
+      @Query('category') String category);
 
   @GET(ApiConstants.getAllOccasions)
   Future<OccasionsResponseModel> getAllOccasions();
 
   @GET(ApiConstants.getAllProducts)
-  Future<ProductDetailsModel> getOccasionProducts();
+  Future<ProductDetailsModel> getOccasionProducts(@Query('occasion') String id);
 
   @GET(ApiConstants.getLoggedUserInfo)
   Future<AppUserModel?> getLoggedUserInfo(

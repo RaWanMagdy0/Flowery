@@ -36,15 +36,21 @@ class _OccasionScreenState extends State<OccasionScreen> {
                     Navigator.pop(context);
                   },
                   icon: Icon(Icons.arrow_back_ios)),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(local.occasionTitle,
-                      style: AppFonts.font20BlackWeight500),
-                  5.verticalSpace,
-                  Text(local.bloomWithBestSellers,
-                      style: AppFonts.font13GreyWeight500),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      local.occasionTitle,
+                      style: AppFonts.font20BlackWeight500,
+                    ),
+                    5.verticalSpace,
+                    Text(
+                      local.bloomWithBestSellers,
+                      style: AppFonts.font13GreyWeight500,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

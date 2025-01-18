@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:injectable/injectable.dart';
 
 import '../../../../core/api/api_result.dart';
@@ -34,12 +32,10 @@ class CategoryRepositoryImpl extends CategoryRepository {
   }
 
   @override
-  Future<Result<List<ProductEntity>?>> getCategoryProducts() async {
-    final result = await categoryRemoteDataSource.getCategoriesProduct();
+  Future<Result<List<ProductEntity>?>> getCategoryProducts({String? id}) async {
+    final result = await categoryRemoteDataSource.getCategoriesProduct(id: id);
     switch (result) {
       case Success():
-        log('data: ${result.data}', name: 'Occasions Repository');
-
         final products = result.data
                 ?.map((model) => ProductEntity(
                       id: model.id,
@@ -56,8 +52,7 @@ class CategoryRepositoryImpl extends CategoryRepository {
                     ))
                 .toList() ??
             [];
-        log('products: ${result.data}',
-            name: 'Category Repository -- Products');
+
         return Success<List<ProductEntity>?>(data: products);
       case Fail():
         return Fail(exception: result.exception);
@@ -68,10 +63,9 @@ class CategoryRepositoryImpl extends CategoryRepository {
   Future<Result<List<ProductEntity?>>> getSortedProducts(
       ProductFilterOption sort) async {
     final result = await categoryRemoteDataSource.getCategoriesProduct();
+
     switch (result) {
       case Success():
-        log('data: ${result.data}', name: 'Occasions Repository');
-
         final products = result.data
                 ?.map((model) => ProductEntity(
                       id: model.id,
@@ -88,8 +82,7 @@ class CategoryRepositoryImpl extends CategoryRepository {
                     ))
                 .toList() ??
             [];
-        log('products: ${result.data}',
-            name: 'Category Repository -- Products');
+
         return Success<List<ProductEntity?>>(data: products);
       case Fail():
         return Fail(exception: result.exception);

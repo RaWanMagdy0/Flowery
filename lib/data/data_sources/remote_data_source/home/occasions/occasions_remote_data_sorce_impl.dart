@@ -25,11 +25,10 @@ class OccastionsRemoteDataSorceImpl extends OccassionsRemoteDataSource {
   @override
   Future<Result<List<ProductModel>?>> getOccasionsPrudact(String id) {
     return executeApiCall(() async {
-      final response = await apiManger.getOccasionProducts();
+      final response = await apiManger.getOccasionProducts(id);
       final data = response.products;
       log('data: $data', name: 'OccastionsRemoteDataSorceImpl');
       return data!;
     });
   }
-
 }
