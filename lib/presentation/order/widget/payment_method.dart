@@ -8,13 +8,11 @@ import '../../../core/utils/const/checkout_page_string.dart';
 class PaymentMethod extends StatefulWidget {
   final ValueChanged<String?> onChanged;
   final Function(bool isCash) handlePaymentMethod;
-  final bool hasSelectedAddress;
 
   const PaymentMethod({
     super.key,
     required this.onChanged,
     required this.handlePaymentMethod,
-    required this.hasSelectedAddress,
   });
 
   @override
@@ -25,19 +23,6 @@ class _PaymentMethodState extends State<PaymentMethod> {
   String? selectedPayment;
 
   void _handlePaymentSelection(String? value, bool isCash) {
-    if (!widget.hasSelectedAddress) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          backgroundColor: AppColors.kBabyPink,
-          content: const Text(
-            "Please select a delivery address before choosing payment method.",
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
-      );
-      return;
-    }
-
     setState(() {
       selectedPayment = value;
     });

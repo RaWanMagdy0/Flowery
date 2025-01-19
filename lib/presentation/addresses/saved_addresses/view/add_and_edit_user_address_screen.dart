@@ -198,7 +198,7 @@ class _AddAndEditUserAddressScreenState
         phone: _phoneNumberController.text,
         city: fullAddress,
         lat: userSelectedLocation?.latitude.toString() ?? "",
-        lang: userSelectedLocation?.longitude.toString() ?? "",
+        long: userSelectedLocation?.longitude.toString() ?? "",
         username: _recipientNameController.text,
       );
       if (userSelectedLocation != null) {

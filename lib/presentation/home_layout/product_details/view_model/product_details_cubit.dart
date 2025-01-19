@@ -36,13 +36,9 @@ class ProductDetailsCubit extends BaseViewModel<ProductDetailsStates> {
         );
         product = entity;  // Update product
         emit(ProductDetailsSuccessState(success: entity));
-        break;
-
       case Fail<ProductDetailsModel?>():
         emit(ProductDetailsErrorState(
           errorMessage: getErrorMassageFromException(result.exception),
-        ));
-        break;
-    }
+        ));}
   }
 }

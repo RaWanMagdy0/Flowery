@@ -53,6 +53,7 @@ dependencies:
   permission_handler: ^11.3.1
   flutter_inappwebview: ^6.1.5
   flutter_image_compress: ^2.4.0
+  either_dart: ^1.0.0
 
 
 

@@ -51,11 +51,43 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
         } else if (state is SavedAddressesSuccess) {
           final addresses = state.addresses;
           if (addresses.isEmpty) {
-            return Center(
-                child: Text(
-              "No saved addresses.",
-              style: AppFonts.font15PinkWeight500UnderlinedPink,
-            ));
+            return Column(
+              children: [
+                Center(
+                    child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                    "No saved addresses.",
+                    style: AppFonts.font15PinkWeight500UnderlinedPink,
+                  ),
+                )),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CustomButton(
+                    color: AppColors.kWhite,
+                    borderColor: AppColors.kLightGrey,
+                    onPressed: () {
+                      Navigator.pushNamed(
+                          context, PageRouteName.addAndEditUserAddress);
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.add,
+                          color: AppColors.kPink,
+                          size: 25.sp,
+                        ),
+                        Text(
+                          "Add New",
+                          style: AppFonts.font14PinkWeight500,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            );
           }
           return Column(
             mainAxisSize: MainAxisSize.min,
@@ -77,10 +109,10 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
                   itemBuilder: (context, index) {
                     final address = addresses[index];
                     final addressId =
-                        "${address.city}-${address.street}-${address.phone}";
+                        "${address.street.split("-")[0]}-${address.street.split("-")[1]}-${address.phone}";
+                    print(addressId);
                     return DeliveryAddressCard(
-                      phone: address.phone,
-                      city: address.city,
+                      city: address.street.split('-')[1],
                       street: address.street,
                       onChanged: (String? value) {
                         setState(() {

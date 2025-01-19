@@ -3,18 +3,18 @@ class AddAddressRequestBody {
   final String? phone;
   final String? city;
   final String? lat;
-  final String? lang;
+  final String? long;
   final String? username;
 
   AddAddressRequestBody(
-      {this.street, this.phone, this.city, this.username, this.lang, this.lat});
+      {this.street, this.phone, this.city, this.username, this.long, this.lat});
 
   Map<String, dynamic> toJson() => {
         'street': street,
         'phone': phone,
         'city': city,
         'lat': lat,
-        'lang': lang,
+        'long': long,
         'username': username,
       };
 }

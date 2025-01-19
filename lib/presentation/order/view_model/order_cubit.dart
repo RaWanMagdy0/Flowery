@@ -56,11 +56,13 @@ class OrderCubit extends BaseViewModel<OrderState> {
     var result = isCash
         ? await _cashPaymentUseCase.invoke(shippingAddressRequest)
         : await _creditPaymentUseCase.invoke(shippingAddressRequest);
-    _handleResult(result,
-        isCash ? CashPaymentSuccessState() : CreditPaymentSuccessState());
-  }
 
-  void _handleResult<T>(Result<T?> result, OrderState successState) {
+    if (result is Success<OrderEntity?>) {
+      emit(CheckoutSuccessState(orderEntity: result.data));
+    } else if (result is Fail<OrderEntity?>) {
+      emit(PaymentErrorState(getErrorMassageFromException(result.exception)));
+    }
+  }  void _handleResult<T>(Result<T?> result, OrderState successState) {
     switch (result) {
       case Success():
         emit(successState);

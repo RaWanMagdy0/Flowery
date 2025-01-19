@@ -9,7 +9,6 @@ class DeliveryAddressCard extends StatefulWidget {
   final ValueChanged<String?> onChanged;
   final String city;
   final String street;
-  final String phone;
   String? selectedAddress;
   final String addressId;
   DeliveryAddressCard(
@@ -19,7 +18,7 @@ class DeliveryAddressCard extends StatefulWidget {
       required this.onChanged,
       required this.addressId,
       required this.selectedAddress,
-      required this.phone});
+     });
 
   @override
   State<DeliveryAddressCard> createState() => _DeliveryAddressCardState();
@@ -43,41 +42,50 @@ class _DeliveryAddressCardState extends State<DeliveryAddressCard> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Radio<String>(
-                              activeColor: Colors.pink,
-                              value: widget.addressId,
-                              groupValue: widget.selectedAddress,
-                              onChanged: (value) {
-                                setState(() {
-                                  widget.selectedAddress = value;
-                                });
-                                widget.onChanged(value);
-                              },
-                            ),
-                            Text(
-                              widget.city,
-                              style: AppFonts.font16BlackWeight500,
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 20.sp),
-                          child: Row(
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
                             children: [
-                              Text(
-                                "${widget.street},${widget.city}, ${widget.phone}",
-                                style: AppFonts.font13BlackWeight400
-                                    .copyWith(color: AppColors.kGray),
+                              Radio<String>(
+                                activeColor: Colors.pink,
+                                value: widget.addressId,
+                                groupValue: widget.selectedAddress,
+                                onChanged: (value) {
+                                  setState(() {
+                                    widget.selectedAddress = value;
+                                  });
+                                  widget.onChanged(value);
+                                },
+                              ),
+                              Expanded(
+                                child: Text(
+                                  widget.city,
+                                  style: AppFonts.font16BlackWeight500,
+                                  overflow: TextOverflow.ellipsis,
+                      
+                                ),
                               ),
                             ],
                           ),
-                        )
-                      ],
+                          Padding(
+                            padding: EdgeInsets.only(left: 20.sp),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                   widget.street,
+                                    style: AppFonts.font13BlackWeight400
+                                        .copyWith(color: AppColors.kGray),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                     Column(
                       children: [
