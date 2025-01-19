@@ -2,9 +2,9 @@ import 'package:flowery/presentation/home_layout/screens/categories/view/widgets
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../../core/routes/page_route_name.dart';
 import '../../../../../core/styles/colors/app_colors.dart';
+import '../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../../core/utils/widget/custom_item_card.dart';
 import '../../../widgets/search_bar_widget.dart';
@@ -57,21 +57,14 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       ),
       floatingActionButton: BlocBuilder<CategoriesViewModel, CategoriesState>(
         buildWhen: (previous, current) {
-          return current is CategoriesLoadingState ||
-              current is CategoriesSuccessState ||
-              current is CategoriesErrorState ||
-              current is GetCategoriesProductLoadingState ||
+          return current is GetCategoriesProductLoadingState ||
               current is GetCategoriesProductSuccessState ||
-              current is GetCategoriesProductErrorState ||
-              current is ProductSortLoadingState ||
-              current is ProductSortSuccessState ||
-              current is ProductSortErrorState;
+              current is GetCategoriesProductErrorState;
         },
         builder: (context, state) {
-          final isCategoriesLoading = state is CategoriesLoadingState;
-          final isProductsLoading = state is GetCategoriesProductLoadingState ||
-              state is ProductSortLoadingState;
-          if (isCategoriesLoading || isProductsLoading) {
+          final hasProducts = state is GetCategoriesProductSuccessState &&
+              (state.product?.isNotEmpty ?? false);
+          if (!hasProducts) {
             return SizedBox.shrink();
           }
           return Container(
@@ -160,27 +153,34 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             buildWhen: (previous, current) {
               return current is GetCategoriesProductLoadingState ||
                   current is GetCategoriesProductSuccessState ||
-                  current is GetCategoriesProductErrorState ||
-                  current is ProductSortLoadingState ||
-                  current is ProductSortSuccessState ||
-                  current is ProductSortErrorState;
+                  current is GetCategoriesProductErrorState;
             },
             builder: (context, state) {
-              if (state is GetCategoriesProductLoadingState ||
-                  state is ProductSortLoadingState) {
+              if (state is GetCategoriesProductLoadingState) {
                 return Center(
                   child: CircularProgressIndicator(
                     color: AppColors.kPink,
                   ),
                 );
-              } else if (state is GetCategoriesProductErrorState ||
-                  state is ProductSortErrorState) {
-                final error = state is GetCategoriesProductErrorState
-                    ? state.exception
-                    : (state as ProductSortErrorState).exception;
-                return Center(child: Text(error.toString()));
-              } else if (state is GetCategoriesProductSuccessState ||
-                  state is ProductSortSuccessState) {
+              } else if (state is GetCategoriesProductErrorState) {
+                return Center(child: Text(state.exception.toString()));
+              } else if (state is GetCategoriesProductSuccessState) {
+                if (state.product?.isEmpty ?? true) {
+                  return Expanded(
+                    child: Center(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "There are no products available now.",
+                            style: AppFonts.font18BlackWeight500,
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }
                 return Expanded(
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -219,7 +219,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                               AppDialogs.showErrorDialog(
                                 context: context,
                                 errorMassage:
-                                    "You need to login to add products to cart",
+                                "You need to login to add products to cart",
                               );
                               return;
                             }

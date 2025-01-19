@@ -40,14 +40,14 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
         if (state is SavedAddressesLoading) {
           return Center(
               child: CircularProgressIndicator(
-            color: AppColors.kPink,
-          ));
+                color: AppColors.kPink,
+              ));
         } else if (state is SavedAddressesFailure) {
           return Center(
               child: Text(
-            "Failed to load addresses.",
-            style: AppFonts.font13GreyWeight500,
-          ));
+                "Failed to load addresses.",
+                style: AppFonts.font13GreyWeight500,
+              ));
         } else if (state is SavedAddressesSuccess) {
           final addresses = state.addresses;
           if (addresses.isEmpty) {
@@ -55,12 +55,12 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
               children: [
                 Center(
                     child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    "No saved addresses.",
-                    style: AppFonts.font15PinkWeight500UnderlinedPink,
-                  ),
-                )),
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        "No saved addresses.",
+                        style: AppFonts.font15PinkWeight500UnderlinedPink,
+                      ),
+                    )),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: CustomButton(
@@ -108,21 +108,24 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
                   itemCount: addresses.length,
                   itemBuilder: (context, index) {
                     final address = addresses[index];
-                    final addressId =
-                        "${address.street.split("-")[0]}-${address.street.split("-")[1]}-${address.phone}";
-                    print(addressId);
-                    return DeliveryAddressCard(
-                      city: address.street.split('-')[1],
-                      street: address.street,
-                      onChanged: (String? value) {
-                        setState(() {
-                          selectedAddress = value;
-                        });
-                        widget.onChanged(selectedAddress);
-                      },
-                      selectedAddress: selectedAddress,
-                      addressId: addressId,
-                    );
+                    final streetParts = address.street.split("-");
+                    if (streetParts.length >= 2) {
+                      final addressId = "${streetParts[0]}-${streetParts[1]}-${address.phone}";
+                      return DeliveryAddressCard(
+                        city: streetParts[1],
+                        street: address.street,
+                        onChanged: (String? value) {
+                          setState(() {
+                            selectedAddress = value;
+                          });
+                          widget.onChanged(selectedAddress);
+                        },
+                        selectedAddress: selectedAddress,
+                        addressId: addressId,
+                      );
+                    } else {
+                      return SizedBox.shrink();
+                    }
                   },
                 ),
               ),
@@ -157,9 +160,9 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
         }
         return Center(
             child: Text(
-          "No data available.",
-          style: AppFonts.font15PinkWeight500UnderlinedPink,
-        ));
+              "No data available.",
+              style: AppFonts.font15PinkWeight500UnderlinedPink,
+            ));
       },
     );
   }
