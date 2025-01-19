@@ -2,6 +2,7 @@ import 'package:flowery/presentation/home_layout/screens/categories/view/widgets
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../../core/routes/page_route_name.dart';
 import '../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../core/utils/functions/dialogs/app_dialogs.dart';
@@ -154,7 +155,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               return Container();
             },
           ),
-          20.verticalSpace,
+          8.verticalSpace,
           BlocBuilder<CategoriesViewModel, CategoriesState>(
             buildWhen: (previous, current) {
               return current is GetCategoriesProductLoadingState ||
@@ -182,7 +183,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   state is ProductSortSuccessState) {
                 return Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
                     child: GridView.builder(
                       itemCount: state.product?.length ?? 0,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -218,7 +219,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                               AppDialogs.showErrorDialog(
                                 context: context,
                                 errorMassage:
-                                "You need to login to add products to cart",
+                                    "You need to login to add products to cart",
                               );
                               return;
                             }
