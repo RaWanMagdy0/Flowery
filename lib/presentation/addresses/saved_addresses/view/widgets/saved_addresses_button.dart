@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../core/styles/fonts/app_fonts.dart';
+import '../../../../../generated/l10n.dart';
 
 class SavedAddressesButton extends StatelessWidget {
   VoidCallback onPressed;
@@ -10,6 +11,8 @@ class SavedAddressesButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final local = S.of(context);
+
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
@@ -20,7 +23,7 @@ class SavedAddressesButton extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 12.h),
       ),
       child: Text(
-        'Add new address',
+        local.addNewAddress,
         style: AppFonts.font18BlackWeight500.copyWith(
           color: AppColors.kWhite,
           fontSize: 16,

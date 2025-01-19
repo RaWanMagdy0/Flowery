@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/routes/page_route_name.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
+import '../../../../generated/l10n.dart';
 import 'add_and_edit_user_address_screen.dart';
 import '../view_model/saved_addresses_states.dart';
 import '../view_model/saved_addresses_view_model.dart';
@@ -30,11 +31,13 @@ class _SavedAddressScreenState extends State<SavedAddressScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final local = S.of(context);
+
     return Scaffold(
       appBar: AppBar(
         forceMaterialTransparency: true,
         title: Text(
-          "Saved Addresses",
+          local.savedAddress,
           style: AppFonts.font20BlackWeight500.copyWith(fontSize: 20),
         ),
         leading: IconButton(

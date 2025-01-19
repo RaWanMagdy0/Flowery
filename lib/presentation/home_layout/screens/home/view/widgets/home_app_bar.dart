@@ -35,7 +35,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           16.verticalSpace,
           InkWell(
             onTap: () {
-              Navigator.pushNamed(context, PageRouteName.addAndEditUserAddress);
+              Navigator.pushNamed(context, PageRouteName.savedAddresses);
             },
             child: DeliveryAddressWidget(
               city: city,

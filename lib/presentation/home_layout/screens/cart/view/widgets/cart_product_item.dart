@@ -24,31 +24,28 @@ class CartProductItem extends StatelessWidget {
           color: AppColors.kGray,
         ),
       ),
-      child: Stack(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Flexible(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.r),
-                  child: CustomCachedNetworkImage(
-                    imageUrl: cartProduct.product?.imgCover,
-                    width: 96.w,
-                    height: 100.h,
-                    shimmerRadiusValue: 8.r,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              8.horizontalSpace,
-              Flexible(
-                flex: 2,
-                child: Column(
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8.r),
+            child: CustomCachedNetworkImage(
+              imageUrl: cartProduct.product?.imgCover,
+              width: 96.w,
+              height: 100.h,
+              shimmerRadiusValue: 8.r,
+              fit: BoxFit.cover,
+            ),
+          ),
+          8.horizontalSpace,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(right: 24.w),
+                    Expanded(
                       child: Text(
                         cartProduct.product?.title ?? '',
                         style: AppFonts.font16BlackWeight500,
@@ -56,76 +53,80 @@ class CartProductItem extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    4.verticalSpace,
-                    Text(
-                      '15 Pink Rose Bouquet',
-                      style: AppFonts.font14GreyWeight400,
+                    InkWell(
+                      borderRadius: BorderRadius.circular(50.r),
+                      onTap: () {
+                        context.read<CartViewModel>().removeProductFromCart(
+                              cartProduct.product?.id ?? '',
+                            );
+                      },
+                      child: SvgPicture.asset(
+                        AppImages.trashIcon,
+                        matchTextDirection: true,
+                      ),
                     ),
-                    21.verticalSpace,
+                  ],
+                ),
+                4.verticalSpace,
+                Text(
+                  '15 Pink Rose Bouquet',
+                  style: AppFonts.font14GreyWeight400,
+                ),
+                21.verticalSpace,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
                     Text(
                       "EGP ${cartProduct.totalPrice.toString()}",
                       style: AppFonts.font14BlackWeight600,
                     ),
+                    Row(
+                      children: [
+                        InkWell(
+                          borderRadius: BorderRadius.circular(50.r),
+                          onTap: () {
+                            if ((cartProduct.quantity ?? 0) > 1) {
+                              final num numQuantity = cartProduct.quantity! - 1;
+
+                              context
+                                  .read<CartViewModel>()
+                                  .updateCartProductQuantity(
+                                    cartProduct.product?.id ?? '',
+                                    numQuantity.toInt(),
+                                  );
+                            }
+                          },
+                          child: Icon(
+                            Icons.remove,
+                            color: AppColors.kBlack,
+                          ),
+                        ),
+                        8.verticalSpace,
+                        Text(
+                          cartProduct.quantity.toString(),
+                          style: AppFonts.font14BlackWeight600,
+                        ),
+                        8.verticalSpace,
+                        InkWell(
+                          borderRadius: BorderRadius.circular(50.r),
+                          onTap: () {
+                            final num numQuantity = cartProduct.quantity! + 1;
+
+                            context
+                                .read<CartViewModel>()
+                                .updateCartProductQuantity(
+                                  cartProduct.product?.id ?? '',
+                                  numQuantity.toInt(),
+                                );
+                          },
+                          child: Icon(
+                            Icons.add,
+                            color: AppColors.kBlack,
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
-                ),
-              ),
-            ],
-          ),
-          Positioned(
-            top: 8.h,
-            right: 0,
-            child: InkWell(
-              borderRadius: BorderRadius.circular(50.r),
-              onTap: () {
-                context.read<CartViewModel>().removeProductFromCart(
-                  cartProduct.product?.id ?? '',
-                );
-              },
-              child: SvgPicture.asset(AppImages.trashIcon),
-            ),
-          ),
-          Positioned(
-            bottom: 8.h,
-            right: 0,
-            child: Row(
-              children: [
-                InkWell(
-                  borderRadius: BorderRadius.circular(50.r),
-                  onTap: () {
-                    if ((cartProduct.quantity ?? 0) > 1) {
-                      final num numQuantity = cartProduct.quantity! - 1;
-
-                      context.read<CartViewModel>().updateCartProductQuantity(
-                        cartProduct.product?.id ?? '',
-                        numQuantity.toInt(),
-                      );
-                    }
-                  },
-                  child: Icon(
-                    Icons.remove,
-                    color: AppColors.kBlack,
-                  ),
-                ),
-                8.horizontalSpace,
-                Text(
-                  cartProduct.quantity.toString(),
-                  style: AppFonts.font14BlackWeight600,
-                ),
-                8.horizontalSpace,
-                InkWell(
-                  borderRadius: BorderRadius.circular(50.r),
-                  onTap: () {
-                    final num numQuantity = cartProduct.quantity! + 1;
-
-                    context.read<CartViewModel>().updateCartProductQuantity(
-                      cartProduct.product?.id ?? '',
-                      numQuantity.toInt(),
-                    );
-                  },
-                  child: Icon(
-                    Icons.add,
-                    color: AppColors.kBlack,
-                  ),
                 ),
               ],
             ),

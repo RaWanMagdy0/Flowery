@@ -4,10 +4,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../core/styles/colors/app_colors.dart';
 
 class CustomGenderRow extends StatelessWidget {
-  const CustomGenderRow(
-      {super.key, required this.gender, required this.onChanged});
-  final String gender;
-  final ValueChanged<String> onChanged;
+  const CustomGenderRow({
+    super.key,
+    required this.gender,
+    required this.onChanged,
+  });
+
+  final String? gender;
+  final ValueChanged<String>? onChanged;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -22,26 +27,28 @@ class CustomGenderRow extends StatelessWidget {
           Row(
             children: [
               Radio(
-                  value: "female",
-                  groupValue: gender,
-                  activeColor: Colors.pink,
-                  onChanged: (value) {
-                    if (value != null) {
-                      onChanged(value);
-                    }
-                  }),
-              Text("Female"),
+                value: "female",
+                groupValue: gender,
+                activeColor: Colors.pink,
+                onChanged: (value) {
+                  if (value != null) {
+                    onChanged!(value);
+                  }
+                },
+              ),
+              const Text("Female"),
               16.horizontalSpace,
               Radio(
-                  value: "male",
-                  groupValue: gender,
-                  activeColor: Colors.pink,
-                  onChanged: (value) {
-                    if (value != null) {
-                      onChanged(value);
-                    }
-                  }),
-              Text("Male"),
+                value: "male",
+                groupValue: gender,
+                activeColor: Colors.pink,
+                onChanged: (value) {
+                  if (value != null) {
+                    onChanged!(value);
+                  }
+                },
+              ),
+              const Text("Male"),
             ],
           ),
         ],

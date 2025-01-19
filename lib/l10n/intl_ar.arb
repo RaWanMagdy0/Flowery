@@ -95,6 +95,7 @@
   "resetPasswordSuccessMessage": "لديك الآن كلمة مرور جديدة",
   "resultText": "النتائج",
   "savedAddress": "العناوين المحفوظة",
+  "addNewAddress": "اضافه عنوان جديد",
   "searchArabic": "ابحث",
   "signupEmailHintText": "أدخل البريد الإلكتروني",
   "signupPasswordHintText": "أدخل كلمة المرور",
@@ -131,5 +132,9 @@
   "unknownLocation": "موقع غير معروف",
   "locationError": "خطأ في تحديد الموقع",
   "searchError": "حدث خطأ أثناء البحث",
-  "searchForProducts": "ابحث عن المنتجات"
+  "searchForProducts": "ابحث عن المنتجات",
+  "checkout": " الدفع ",
+  "total": " الاجمالي ",
+  "deliveryFee": " مصاريف الشحن ",
+  "subTotal": " المجموع الفرعي "
 }

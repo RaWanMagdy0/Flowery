@@ -117,14 +117,12 @@ class _SavedAddressesCardState extends State<SavedAddressesCard> {
       }
     });
   }
-
   Future<String> getAddressFromCoordinates(
       double latitude, double longitude) async {
     try {
       List<Placemark> placemarks =
           await placemarkFromCoordinates(latitude, longitude);
       if (placemarks.isEmpty) return 'Unknown Location';
-
       Placemark placemark = placemarks[0];
       String address = '${placemark.name}, ${placemark.locality}';
       return address;

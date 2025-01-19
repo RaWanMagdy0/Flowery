@@ -38,11 +38,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       appBar: AppBar(
         forceMaterialTransparency: true,
         title: Text(local.editProfile),
-        leading: const Icon(Icons.arrow_back_ios),
-        actions: [
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () => Navigator.pop(context),
+        ),
+        actions: const [
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: const Icon(Icons.notifications_outlined),
+            padding: EdgeInsets.all(8.0),
+            child: Icon(Icons.notifications_outlined),
           ),
         ],
       ),
@@ -50,35 +53,24 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         bloc: viewModel,
         builder: (context, state) {
           if (state is GetLoggedUserInfoLoadingState) {
-            return Center(
-              child: Lottie.asset(AppImages.pinkLoadingAnimation),
-            );
+            return _buildLoading();
           } else if (state is GetLoggedUserInfoErrorState) {
-            return Center(
-              child: Text(state.errorMessage ?? local.anErrorOccurred),
-            );
+            return _buildError(state.errorMessage ?? local.anErrorOccurred);
           } else if (state is GetLoggedUserInfoSuccessState) {
-            gender = state.user?.gender;
             return EditProfileWidget(
               user: state.user!,
+              gender: state.user?.gender,
+              onGenderChanged: _onGenderChanged,
             );
           } else if (state is EditProfileLoadingState) {
-            return Center(
-              child: Lottie.asset(AppImages.pinkLoadingAnimation),
-            );
-          } else if (state is EditProfileErrorState) {
-            return Center(
-              child: Text(state.errorMessage ??
-                  local.anErrorOccurredWhileUpdatingTheProfile),
-            );
+            return _buildLoading();
           } else if (state is EditProfileSuccessState) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               AppDialogs.showSuccessDialog(
-                  context: context,
-                  message: local.profileUpdatedSuccessfully,
-                  whenAnimationFinished: () {
-                    Navigator.pop(context);
-                  });
+                context: context,
+                message: local.profileUpdatedSuccessfully,
+                whenAnimationFinished: () => Navigator.pop(context),
+              );
             });
             return const SizedBox();
           } else {
@@ -87,5 +79,24 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         },
       ),
     );
+  }
+
+  Widget _buildLoading() {
+    return Center(
+      child: Lottie.asset(AppImages.pinkLoadingAnimation),
+    );
+  }
+
+  Widget _buildError(String message) {
+    return Center(
+      child: Text(message),
+    );
+  }
+
+  void _onGenderChanged(String newGender) {
+    setState(() {
+      gender = newGender;
+      hasChanges = true;
+    });
   }
 }

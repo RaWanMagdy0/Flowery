@@ -7,6 +7,7 @@ import '../../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../core/utils/widget/custom_button.dart';
 import '../../../../../../core/utils/widget/shimmer_loading_widget.dart';
+import '../../../../../../generated/l10n.dart';
 import '../../view_model/cart_view_model.dart';
 import 'cart_price_info_widget.dart';
 
@@ -22,6 +23,8 @@ class _TotalPriceAndCheckoutButtonState
     extends State<TotalPriceAndCheckoutButton> {
   @override
   Widget build(BuildContext context) {
+    final local = S.of(context);
+
     return BlocBuilder<CartViewModel, CartState>(
       builder: (context, state) {
         if (state is NoUserLogged || state is CartEmpty || state is CartError) {
@@ -67,14 +70,14 @@ class _TotalPriceAndCheckoutButtonState
               mainAxisSize: MainAxisSize.min,
               children: [
                 CartPriceInfoWidget(
-                  title: 'Sub Total',
+                  title: local.subTotal,
                   value: subTotalPrice.toString(),
                   titleStyle: AppFonts.font16GreyWeight400,
                   valueStyle: AppFonts.font16GreyWeight400,
                 ),
                 8.verticalSpace,
                 CartPriceInfoWidget(
-                  title: 'Delivery Fee',
+                  title: local.deliveryFee,
                   value: deliveryFees.toString(),
                   titleStyle: AppFonts.font16GreyWeight400,
                   valueStyle: AppFonts.font16GreyWeight400,
@@ -85,7 +88,7 @@ class _TotalPriceAndCheckoutButtonState
                 ),
                 8.verticalSpace,
                 CartPriceInfoWidget(
-                  title: 'Total',
+                  title: local.total,
                   value: totalPrice.toStringAsFixed(2),
                 ),
                 24.verticalSpace,
@@ -96,7 +99,7 @@ class _TotalPriceAndCheckoutButtonState
                       PageRouteName.checkout,
                     );
                   },
-                  text: 'Checkout',
+                  text: local.checkout,
                 ),
               ],
             ),

@@ -24,6 +24,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "aboutAs": MessageLookupByLibrary.simpleMessage("معلومات عنا"),
         "active": MessageLookupByLibrary.simpleMessage("نشط"),
+        "addNewAddress":
+            MessageLookupByLibrary.simpleMessage("اضافه عنوان جديد"),
         "addToCart": MessageLookupByLibrary.simpleMessage("أضف إلى السلة"),
         "addToCartText": MessageLookupByLibrary.simpleMessage("أضف إلى السلة"),
         "allPricesIncludeTax":
@@ -43,6 +45,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cart": MessageLookupByLibrary.simpleMessage("سلة التسوق"),
         "categories": MessageLookupByLibrary.simpleMessage("الفئات"),
         "changeText": MessageLookupByLibrary.simpleMessage("تغيير"),
+        "checkout": MessageLookupByLibrary.simpleMessage(" الدفع "),
         "completed": MessageLookupByLibrary.simpleMessage("مكتمل"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
@@ -58,6 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("بإنشاء حساب، فإنك توافق على"),
         "currentPassword":
             MessageLookupByLibrary.simpleMessage("كلمة المرور الحالية"),
+        "deliveryFee": MessageLookupByLibrary.simpleMessage(" مصاريف الشحن "),
         "description": MessageLookupByLibrary.simpleMessage("الوصف"),
         "didnotReceiveCode":
             MessageLookupByLibrary.simpleMessage("لم تستلم الرمز؟"),
@@ -209,11 +213,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ابدأ البحث عن المنتجات"),
         "status": MessageLookupByLibrary.simpleMessage("الحالة"),
         "statusText": MessageLookupByLibrary.simpleMessage("الحالة:"),
+        "subTotal": MessageLookupByLibrary.simpleMessage(" المجموع الفرعي "),
         "surveyText": MessageLookupByLibrary.simpleMessage("استبيان"),
         "termsAndConditions":
             MessageLookupByLibrary.simpleMessage("الشروط والأحكام"),
         "termsandConditions":
             MessageLookupByLibrary.simpleMessage("الشروط والأحكام"),
+        "total": MessageLookupByLibrary.simpleMessage(" الاجمالي "),
         "trackOrder": MessageLookupByLibrary.simpleMessage("اتبع الطلب "),
         "unexpectedState":
             MessageLookupByLibrary.simpleMessage("حالة غير متوقعة."),

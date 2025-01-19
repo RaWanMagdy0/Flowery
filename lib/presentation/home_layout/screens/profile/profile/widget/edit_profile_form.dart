@@ -12,8 +12,17 @@ import '../view_model/profile_cubit.dart';
 import 'custom_gender_row.dart';
 
 class EditProfileForm extends StatefulWidget {
-  EditProfileForm({super.key, required this.user});
+  EditProfileForm({
+    super.key,
+    required this.user,
+    this.gender,
+    this.onGenderChanged,
+  });
+
+  final ValueChanged<String>? onGenderChanged;
+  final String? gender;
   User user;
+
   @override
   State<EditProfileForm> createState() => _EditProfileFormState();
 }
@@ -28,6 +37,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
     super.initState();
     viewModel = getIt.get<ProfileCubit>();
     viewModel.getLoggedUserInfo();
+    gender = widget.gender;
   }
 
   @override
@@ -104,31 +114,33 @@ class _EditProfileFormState extends State<EditProfileForm> {
             ),
             24.verticalSpace,
             CustomGenderRow(
-                gender: viewModel.gender.toString(),
-                onChanged: (value) {
-                  setState(() {
-                    gender = value;
-                    _checkChanges;
-                  });
-                }),
+              gender: gender,
+              onChanged: (newGender) {
+                setState(() {
+                  gender = newGender;
+                  widget.onGenderChanged?.call(newGender);
+                  _checkChanges(widget.user);
+                });
+              },
+            ),
             24.verticalSpace,
             CustomButton(
               onPressed: hasChanges
                   ? () async {
-                      if (viewModel.formKey.currentState!.validate()) {
-                        await viewModel.editeProfile();
-                        setState(() {
-                          widget.user.firstName =
-                              viewModel.firstNameController.text;
-                          widget.user.lastName =
-                              viewModel.lastNameController.text;
-                          widget.user.email = viewModel.emailController.text;
-                          widget.user.phone = viewModel.phoneController.text;
-                          widget.user.gender = viewModel.gender;
-                          hasChanges = false;
-                        });
-                      }
-                    }
+                if (viewModel.formKey.currentState!.validate()) {
+                  await viewModel.editeProfile();
+                  setState(() {
+                    widget.user.firstName =
+                        viewModel.firstNameController.text;
+                    widget.user.lastName =
+                        viewModel.lastNameController.text;
+                    widget.user.email = viewModel.emailController.text;
+                    widget.user.phone = viewModel.phoneController.text;
+                    widget.user.gender = gender;
+                    hasChanges = false;
+                  });
+                }
+              }
                   : null,
               text: "Update",
               textStyle: TextStyle(
@@ -150,7 +162,7 @@ class _EditProfileFormState extends State<EditProfileForm> {
           viewModel.lastNameController.text != user.lastName ||
           viewModel.emailController.text != user.email ||
           viewModel.phoneController.text != user.phone ||
-          viewModel.gender != user.gender;
+          gender != user.gender;
     });
   }
 }

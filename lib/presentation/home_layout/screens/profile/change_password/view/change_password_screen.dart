@@ -1,7 +1,7 @@
+import 'package:flowery/core/styles/fonts/app_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../../../core/di/di.dart';
 import '../../../../../../core/routes/page_route_name.dart';
 import '../../../../../../core/styles/colors/app_colors.dart';
@@ -13,7 +13,6 @@ import '../../../../../../generated/l10n.dart';
 import '../view_model/change_password_state.dart';
 import '../view_model/change_password_view_model.dart';
 
-// lib/presentation/auth/change_password/view/change_password_screen.dart
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({super.key});
 
@@ -60,9 +59,12 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         listener: (context, state) {
           if (state is ChangePasswordSuccess) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Password updated successfully'),
-                backgroundColor: Colors.green,
+              SnackBar(
+                content: Text(
+                  'Password updated successfully',
+                  style: AppFonts.font14GreyWeight400,
+                ),
+                backgroundColor: AppColors.kBabyPink,
               ),
             );
             getIt<AuthRepository>().logout().then((_) {

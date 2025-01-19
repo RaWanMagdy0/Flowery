@@ -1010,6 +1010,16 @@ class S {
     );
   }
 
+  /// `Add New Address`
+  String get addNewAddress {
+    return Intl.message(
+      'Add New Address',
+      name: 'addNewAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Search`
   String get searchArabic {
     return Intl.message(
@@ -1375,6 +1385,46 @@ class S {
     return Intl.message(
       'Search for products',
       name: 'searchForProducts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` Checkout `
+  String get checkout {
+    return Intl.message(
+      ' Checkout ',
+      name: 'checkout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` total `
+  String get total {
+    return Intl.message(
+      ' total ',
+      name: 'total',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` Delivery Fee `
+  String get deliveryFee {
+    return Intl.message(
+      ' Delivery Fee ',
+      name: 'deliveryFee',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` Sub Total `
+  String get subTotal {
+    return Intl.message(
+      ' Sub Total ',
+      name: 'subTotal',
       desc: '',
       args: [],
     );

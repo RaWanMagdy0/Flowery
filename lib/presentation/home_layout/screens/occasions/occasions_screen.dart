@@ -77,7 +77,7 @@ class _OccasionScreenState extends State<OccasionScreen> {
                 return Center(child: Text(state.exception.toString()));
               } else if (state is OccasionSuccessState) {
                 return SizedBox(
-                  height: 20.h,
+                  height: 30.h,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: state.occasions?.length ?? 0,
@@ -113,7 +113,7 @@ class _OccasionScreenState extends State<OccasionScreen> {
               return Container();
             },
           ),
-          32.verticalSpace,
+          15.verticalSpace,
           BlocBuilder<OccasionCubit, OccasionState>(
             buildWhen: (previous, current) {
               return current is GetOccasionPrudactLoadingState ||
@@ -129,13 +129,31 @@ class _OccasionScreenState extends State<OccasionScreen> {
               } else if (state is GetOccasionPrudactErrorState) {
                 return Center(child: Text(state.exception.toString()));
               } else if (state is GetOccasionPrudactSuccessState) {
-                final List<ProductEntity?>? prudact =
+                final List<ProductEntity?>? product =
                     context.read<OccasionCubit>().prudact;
+
+                if (product?.isEmpty ?? true) {
+                  return Expanded(
+                    child: Center(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "There are no products available now.",
+                            style: AppFonts.font18BlackWeight500,
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }
+
                 return Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: GridView.builder(
-                      itemCount: prudact?.length,
+                      itemCount: product?.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 17,
@@ -144,11 +162,11 @@ class _OccasionScreenState extends State<OccasionScreen> {
                       ),
                       itemBuilder: (context, index) {
                         return FlowerCard(
-                          title: prudact?[index]?.title,
-                          imageUrl: prudact?[index]?.imgCover,
-                          price: 'EGP ${prudact?[index]?.priceAfterDiscount}',
-                          originalPrice: prudact?[index]?.price.toString(),
-                          descount: '${prudact?[index]?.priceAfterDiscount}',
+                          title: product?[index]?.title,
+                          imageUrl: product?[index]?.imgCover,
+                          price: 'EGP ${product?[index]?.priceAfterDiscount}',
+                          originalPrice: product?[index]?.price.toString(),
+                          descount: '${product?[index]?.priceAfterDiscount}',
                           descountColor: Colors.green,
                           backgroundColor: Colors.white,
                           buttonColor: AppColors.kPink,
@@ -160,7 +178,7 @@ class _OccasionScreenState extends State<OccasionScreen> {
                           onTap: () => Navigator.pushNamed(
                             context,
                             PageRouteName.productDetails,
-                            arguments: prudact?[index]?.id,
+                            arguments: product?[index]?.id,
                           ),
                           onButtonPressed: () {},
                         );

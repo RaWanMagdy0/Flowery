@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../../../../../core/routes/page_route_name.dart';
 import '../../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
@@ -106,12 +107,20 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
       AppDialogs.showSuccessDialog(
         context: context,
         message: "Password Changed Successfully",
-        whenAnimationFinished: () => Navigator.pop(context),
+        whenAnimationFinished: () {
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            PageRouteName.logIn,
+                (route) => false,
+          );
+        },
       );
     } else if (state is ResetPasswordErrorState) {
       Navigator.pop(context);
       AppDialogs.showErrorDialog(
-          context: context, errorMassage: state.errorMassage ?? "");
+        context: context,
+        errorMassage: state.errorMassage ?? "",
+      );
     } else if (state is ResetPasswordLoadingState) {
       AppDialogs.showLoading(context: context);
     }

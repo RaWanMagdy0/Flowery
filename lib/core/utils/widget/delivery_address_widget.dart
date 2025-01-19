@@ -20,7 +20,7 @@ class DeliveryAddressWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        Navigator.pushNamed(context, PageRouteName.addAndEditUserAddress);
+        Navigator.pushNamed(context, PageRouteName.savedAddresses);
       },
       child: Row(
         children: [

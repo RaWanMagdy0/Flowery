@@ -95,6 +95,7 @@
   "resultText": "Results",
   "rememberMeText": "Remember me",
   "savedAddress": "Saved address",
+  "addNewAddress": "Add New Address",
   "searchArabic": "Search",
   "signupEmailHintText": "Enter Email",
   "signupPasswordHintText": "Enter Password",
@@ -128,9 +129,12 @@
   "searchHint": "Search for products",
   "noProductsFound": "No products found",
   "startSearching": "Start searching for products",
-
   "unknownLocation": "Unknown Location",
   "locationError": "Location Error",
   "searchError": "Error occurred while searching",
-  "searchForProducts": "Search for products"
+  "searchForProducts": "Search for products",
+  "checkout": " Checkout ",
+  "total": " total ",
+  "deliveryFee": " Delivery Fee ",
+  "subTotal": " Sub Total "
 }

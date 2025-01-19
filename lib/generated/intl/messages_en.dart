@@ -24,6 +24,8 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "aboutAs": MessageLookupByLibrary.simpleMessage("About us"),
         "active": MessageLookupByLibrary.simpleMessage("active"),
+        "addNewAddress":
+            MessageLookupByLibrary.simpleMessage("Add New Address"),
         "addToCart": MessageLookupByLibrary.simpleMessage("Add to cart"),
         "addToCartText": MessageLookupByLibrary.simpleMessage("Add To Cart"),
         "allPricesIncludeTax":
@@ -44,6 +46,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cart": MessageLookupByLibrary.simpleMessage("Cart"),
         "categories": MessageLookupByLibrary.simpleMessage("Categories"),
         "changeText": MessageLookupByLibrary.simpleMessage("Change"),
+        "checkout": MessageLookupByLibrary.simpleMessage(" Checkout "),
         "completed": MessageLookupByLibrary.simpleMessage("completed"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm password"),
@@ -59,6 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Creating an account, you agree to our\t"),
         "currentPassword":
             MessageLookupByLibrary.simpleMessage("Current password"),
+        "deliveryFee": MessageLookupByLibrary.simpleMessage(" Delivery Fee "),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "didnotReceiveCode":
             MessageLookupByLibrary.simpleMessage("Didn\'t receive code?"),
@@ -205,11 +209,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "Start searching for products"),
         "status": MessageLookupByLibrary.simpleMessage("Status"),
         "statusText": MessageLookupByLibrary.simpleMessage("Status:"),
+        "subTotal": MessageLookupByLibrary.simpleMessage(" Sub Total "),
         "surveyText": MessageLookupByLibrary.simpleMessage("Survey"),
         "termsAndConditions":
             MessageLookupByLibrary.simpleMessage("Terms & Conditions"),
         "termsandConditions":
             MessageLookupByLibrary.simpleMessage("Terms & Conditions"),
+        "total": MessageLookupByLibrary.simpleMessage(" total "),
         "trackOrder": MessageLookupByLibrary.simpleMessage("Track Order"),
         "unexpectedState":
             MessageLookupByLibrary.simpleMessage("Unexpected state."),
