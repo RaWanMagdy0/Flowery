@@ -75,7 +75,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                   Row(
                                     children: [
                                       Text(
-                                        local.status,
+                                        "${local.status}: ",
                                         style: AppFonts.font16BlackWeight500,
                                       ),
                                       Text(

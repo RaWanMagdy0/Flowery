@@ -13,13 +13,11 @@ class SavedAddressesViewModel extends BaseViewModel<SavedAddressesStates> {
   final DeleteAddressUseCase _deleteAddressUseCase;
   final AddAddressUseCase _addAddressUseCase;
 
-
   SavedAddressesViewModel(
-      this._savedAddressesUseCase, this._deleteAddressUseCase,
-  this._addAddressUseCase,
-
-  )
-      : super(SavedAddressesInitial());
+    this._savedAddressesUseCase,
+    this._deleteAddressUseCase,
+    this._addAddressUseCase,
+  ) : super(SavedAddressesInitial());
 
   void getAllAddresses() async {
     emit(SavedAddressesLoading());
@@ -31,6 +29,7 @@ class SavedAddressesViewModel extends BaseViewModel<SavedAddressesStates> {
         emit(SavedAddressesFailure());
     }
   }
+
   void addAddress(final AddAddressRequestBody body) async {
     emit(AddAddressesLoading());
     final result = await _addAddressUseCase.invoke(body);

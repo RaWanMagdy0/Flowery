@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/di/di.dart';
 import '../../../core/utils/functions/dialogs/app_dialogs.dart';
-import '../../../domain/entities/order/create_order/order_response_entity.dart';
+import '../../../domain/entities/order/create_order/order_entity.dart';
 import '../../../generated/l10n.dart';
 import '../view_model/order_cubit.dart';
 import '../view_model/order_state.dart';
@@ -20,6 +20,7 @@ class GetOrdersHistory extends StatefulWidget {
 
 class _GetOrdersHistoryState extends State<GetOrdersHistory> {
   late OrderCubit viewModel;
+
   @override
   void initState() {
     super.initState();
@@ -63,37 +64,29 @@ class _GetOrdersHistoryState extends State<GetOrdersHistory> {
                   errorMassage: state.errorMessage.toString(),
                 );
               });
+              return Center(child: Text("errorLoadingOrders"));
             } else if (state is GetOrdersSuccessState) {
-              OrderEntity? order = state.orders;
-              List<OrderItemEntity> activeOrders = [];
-              List<OrderItemEntity> completedOrders = [];
+              List<OrderEntity?> orders = state.orders;
+              List<OrderEntity?> activeOrders = [];
+              List<OrderEntity?> completedOrders = [];
 
-              if (order != null) {
-                activeOrders = order.orderItems
-                        ?.where((item) =>
-                            !(order.isPaid ?? false) ||
-                            !(order.isDelivered ?? false))
-                        .toList() ??
-                    [];
-                completedOrders = order.orderItems
-                        ?.where((item) =>
-                            (order.isPaid ?? false) &&
-                            (order.isDelivered ?? false))
-                        .toList() ??
-                    [];
-              }
+              activeOrders = orders
+                  .where((order) =>
+              !(order?.isPaid ?? false) || !(order?.isDelivered ?? false))
+                  .toList();
+              completedOrders = orders
+                  .where((order) =>
+              (order?.isPaid ?? false) && (order?.isDelivered ?? false))
+                  .toList();
+
               return TabBarView(
                 children: [
-                  OrderHistoryList(
-                    orderItems: activeOrders,
-                    order: order,
-                  ),
+                  activeOrders.isEmpty
+                      ? Center(child: Text(local.noCompletedOrdersAvailable))
+                      : OrderHistoryList(orders: activeOrders),
                   completedOrders.isEmpty
                       ? Center(child: Text(local.noCompletedOrdersAvailable))
-                      : OrderHistoryList(
-                          order: order,
-                          orderItems: completedOrders,
-                        ),
+                      : OrderHistoryList(orders: completedOrders),
                 ],
               );
             }

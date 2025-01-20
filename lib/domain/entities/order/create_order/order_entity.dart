@@ -1,28 +1,32 @@
 
-import 'order_response_entity.dart';
-
+import 'order_item.dart';
 class OrderEntity {
   OrderEntity({
-    this.user,
-    this.orderItems,
-    this.totalPrice,
-    this.paymentType,
-    this.isPaid,
-    this.isDelivered,
-    this.id,
-    this.createdAt,
-    this.updatedAt,
-    this.v,
-  });
+      this.id, 
+      this.user, 
+      this.orderItems, 
+      this.totalPrice, 
+      this.paymentType, 
+      this.isPaid, 
+      this.isDelivered, 
+      this.state, 
+      this.createdAt, 
+      this.updatedAt, 
+      this.orderNumber, 
+      this.v,});
 
+  String? id;
   String? user;
-  List<OrderItemEntity>? orderItems;
+  List<OrderItem>? orderItems;
   int? totalPrice;
   String? paymentType;
   bool? isPaid;
   bool? isDelivered;
-  String? id;
+  String? state;
   String? createdAt;
   String? updatedAt;
+  String? orderNumber;
   int? v;
+
+
 }
