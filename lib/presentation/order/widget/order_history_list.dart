@@ -1,32 +1,35 @@
 import 'package:flutter/material.dart';
-import '../../../domain/entities/order/create_order/order_response_entity.dart';
+import '../../../domain/entities/order/create_order/order_entity.dart';
 import 'custom_order_card.dart';
 
-class OrderHistoryList extends StatefulWidget {
-  final List<OrderItemEntity> orderItems;
-  final OrderEntity? order;
+class OrderHistoryList extends StatelessWidget {
+  final List<OrderEntity?> orders;
 
-  const OrderHistoryList({super.key, required this.orderItems,required this.order});
-
-  @override
-  State<OrderHistoryList> createState() => _OrderHistoryListState();
-}
-
-class _OrderHistoryListState extends State<OrderHistoryList> {
+  const OrderHistoryList({super.key, required this.orders});
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       padding: const EdgeInsets.all(8.0),
-      itemCount: widget.orderItems.length,
+      itemCount: orders.length,
       itemBuilder: (context, index) {
-        var orderItem = widget.orderItems[index];
+        final order = orders[index];
+        final orderItems = order?.orderItems ?? [];
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomOrderCard(
-              orderItem: orderItem,
-              order: widget.order,
+            ListView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: orderItems.length,
+              itemBuilder: (context, itemIndex) {
+                final orderItem = orderItems[itemIndex];
+                return CustomOrderCard(
+                  orderItem: orderItem,
+                  order: order,
+                  product: orderItem.product,
+                );
+              },
             ),
           ],
         );

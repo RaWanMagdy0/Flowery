@@ -15,7 +15,6 @@ class EditProfileWidget extends StatelessWidget {
     required this.gender,
     required this.onGenderChanged,
   });
-
   final User user;
   final String? gender;
   final ValueChanged<String> onGenderChanged;

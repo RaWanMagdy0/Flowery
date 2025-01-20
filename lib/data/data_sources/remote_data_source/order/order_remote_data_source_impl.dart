@@ -6,7 +6,7 @@ import '../../../../core/api/execute_api_call.dart';
 import '../../../../core/local/token_manger.dart';
 import '../../../api/order_api/order_api_manager.dart';
 import '../../../models/order/request/create_order_request/create_order_request.dart';
-import '../../../models/order/response/create_order_response/order_response_model.dart';
+import '../../../models/order/response/create_order/order_model.dart';
 import '../../../models/payment/request/payment_request_model.dart';
 import 'order_remote_data_source.dart';
 
@@ -17,9 +17,9 @@ class OrderRemoteDataSourceImpl extends OrderRemoteDataSource {
   OrderRemoteDataSourceImpl({required this.apiManger});
 
   @override
-  Future<Result<OrderModell?>> createOrder(
+  Future<Result<OrderModel?>> createOrder(
       CreateOrderRequest createOrderRequest) async {
-    return await executeApiCall<OrderModell?>(() async {
+    return await executeApiCall<OrderModel?>(() async {
       var token = await _getToken();
       var response = await apiManger.createOrder(token, createOrderRequest);
       return response;
@@ -27,30 +27,22 @@ class OrderRemoteDataSourceImpl extends OrderRemoteDataSource {
   }
 
   @override
-  Future<Result<OrderModell?>> getOrdersHistory() async {
-    return await executeApiCall<OrderModell?>(() async {
+  Future<Result<List<OrderModel?>>> getOrdersHistory() async {
+    return await executeApiCall<List<OrderModel?>>(() async {
       var token = await _getToken();
       var response = await apiManger.getOrdersHistory(token);
-      return response?.orders;
+      return response?.orders??[];
     });
   }
 
-  Future<String> _getToken() async {
-    var token = await TokenManager.getToken();
-    if (token == null || token.isEmpty) {
-      throw Exception("Token is missing. Please login again.");
-    }
-    return 'Bearer $token';
-  }
-
   @override
-  Future<Result<OrderModell?>> cashPaymentMethod(
+  Future<Result<OrderModel?>> cashPaymentMethod(
       ShippingAddressRequest shippingAddressRequest) async {
-    return await executeApiCall<OrderModell?>(() async {
+    return await executeApiCall<OrderModel?>(() async {
       var token = await _getToken();
       var response =
           await apiManger.cashPaymentMethod(token, shippingAddressRequest);
-      return response.orders;
+      return response;
     });
   }
 
@@ -64,4 +56,12 @@ class OrderRemoteDataSourceImpl extends OrderRemoteDataSource {
       return response;
     });
   }
+  Future<String> _getToken() async {
+    var token = await TokenManager.getToken();
+    if (token == null || token.isEmpty) {
+      throw Exception("Token is missing. Please login again.");
+    }
+    return 'Bearer $token';
+  }
+
 }

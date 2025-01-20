@@ -1,25 +1,24 @@
-import 'package:flowery/core/routes/page_route_name.dart';
 import 'package:flowery/core/utils/widget/custom_button.dart';
-import 'package:flowery/domain/entities/home_layout/product_details_entity.dart';
-import 'package:flowery/domain/entities/order/create_order/order_response_entity.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../../core/styles/fonts/app_fonts.dart';
-import '../../../core/di/di.dart';
+import '../../../core/routes/page_route_name.dart';
 import '../../../core/utils/widget/custom_cached_network_image.dart';
+import '../../../domain/entities/order/create_order/Product.dart';
+import '../../../domain/entities/order/create_order/order_entity.dart';
+import '../../../domain/entities/order/create_order/order_item.dart';
 import '../../../generated/l10n.dart';
-import '../../home_layout/product_details/view_model/product_details_cubit.dart';
-import '../../home_layout/product_details/view_model/product_details_states.dart';
 
 class CustomOrderCard extends StatefulWidget {
   final OrderEntity? order;
-  final OrderItemEntity? orderItem;
+  final OrderItem? orderItem;
+  final Product? product;
 
   const CustomOrderCard({
     super.key,
     required this.orderItem,
+    required this.product,
     required this.order,
   });
 
@@ -28,121 +27,109 @@ class CustomOrderCard extends StatefulWidget {
 }
 
 class _CustomOrderCardState extends State<CustomOrderCard> {
-  late ProductDetailsCubit viewModel;
-
   @override
   void initState() {
     super.initState();
-    viewModel = getIt.get<ProductDetailsCubit>();
-    viewModel.getProductDetails(productId: widget.orderItem?.product ?? "");
   }
 
   @override
   Widget build(BuildContext context) {
     final local = S.of(context);
 
-    return BlocBuilder<ProductDetailsCubit, ProductDetailsStates>(
-      bloc: viewModel,
-      builder: (context, state) {
-        if (state is ProductDetailsLoadingState) {
-          return Center(
-              child: CircularProgressIndicator(
-            color: AppColors.kPink,
-          ));
-        } else if (state is ProductDetailsSuccessState) {
-          final product = state.success?.products?.firstWhere(
-            (p) => p.id == widget.orderItem?.product,
-            orElse: () => ProductEntity(),
-          );
-
-          if (product?.id?.isNotEmpty ?? false) {
-            return InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, PageRouteName.productDetails,
-                    arguments: widget.orderItem?.product);
-              },
-              child: Padding(
-                padding: EdgeInsets.all(12.0.sp),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8.r),
-                    border: Border.all(
-                      color: AppColors.kGray,
-                    ),
+    return InkWell(
+        onTap: () {
+      if (widget.product?.id != null) {
+        Navigator.pushNamed(
+          context,
+          PageRouteName.productDetails,
+          arguments: widget.product!.id,
+        );
+      }
+    },
+    child:  Padding(
+      padding: EdgeInsets.all(12.0.sp),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8.r),
+          border: Border.all(
+            color: AppColors.kGray,
+          ),
+        ),
+        child: Row(
+          children: [
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CustomCachedNetworkImage(
+                    imageUrl: widget.product?.imgCover ?? "",
+                    height: 140.h,
+                    width: 120.h,
+                    shimmerRadiusValue: 8.r,
+                    fit: BoxFit.fitHeight,
                   ),
-                  child: Row(
+                ),
+              ],
+            ),
+            10.horizontalSpace,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  10.verticalSpace,
+                  Row(
                     children: [
-                      Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: CustomCachedNetworkImage(
-                              imageUrl: product?.imgCover ??
-                                  (product?.images != null &&
-                                          product!.images!.isNotEmpty
-                                      ? product.images!.first
-                                      : ''),
-                              width: 96.w,
-                              height: 120.h,
-                              shimmerRadiusValue: 8.r,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ],
-                      ),
-                      10.horizontalSpace,
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          10.verticalSpace,
-                          Text(
-                            product?.title ?? 'No Title',
-                            style: AppFonts.font12BlackWeight400,
-                          ),
-                          4.verticalSpace,
-                          Text(
-                            "${local.egp} ${widget.orderItem?.price}",
-                            style: AppFonts.font12BlackWeight400
-                                .copyWith(fontWeight: FontWeight.w500),
-                          ),
-                          6.verticalSpace,
-                          Row(
-                            children: [
-                              Text(
-                                "${local.orderNumber} \n#${widget.order?.id ?? ""}",
-                                style: AppFonts.font12BlackWeight400
-                                    .copyWith(color: AppColors.kGray),
-                              ),
-                            ],
-                          ),
-                          10.verticalSpace,
-                          CustomButton(
-                            width: 140.w,
-                            height: 35.h,
-                            color: AppColors.kPink,
-                            child: Text(
-                              local.trackOrder,
-                              style: AppFonts.font16WhiteWeight500
-                                  .copyWith(fontSize: 13.sp),
-                            ),
-                            onPressed: () {},
-                          )
-                        ],
+                      Expanded(
+                        child: Text(
+                          widget.product?.title ?? 'No Title',
+                          style: AppFonts.font12BlackWeight400,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
                       ),
                     ],
                   ),
-                ),
+                  4.verticalSpace,
+                  Text(
+                    "${local.egp} ${widget.product?.price}",
+                    style: AppFonts.font12BlackWeight400
+                        .copyWith(fontWeight: FontWeight.w500),
+                  ),
+                  6.verticalSpace,
+                  Row(
+                    children: [
+                      Text(
+                        "${local.orderNumber} \n#${widget.order?.id ?? ""}",
+                        style: AppFonts.font12BlackWeight400
+                            .copyWith(color: AppColors.kGray),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CustomButton(
+                      width: double.infinity,
+                      height: 35.h,
+                      color: AppColors.kPink,
+                      child: Text(
+                        widget.order?.isDelivered ?? false
+                            ? "reorder"
+                            : local.trackOrder,
+                        style: AppFonts.font16WhiteWeight500
+                            .copyWith(fontSize: 13.sp),
+                      ),
+                      onPressed: () {
+                        if (widget.order?.isDelivered ?? false) {
+                        } else {}
+                      },
+                    ),
+                  )
+                ],
               ),
-            );
-          } else {
-            return const Text('Product not found');
-          }
-        } else if (state is ProductDetailsErrorState) {
-          return const Text('Error loading product');
-        } else {
-          return const SizedBox();
-        }
-      },
+            ),
+          ],
+        ),
+      ),)
     );
   }
 }

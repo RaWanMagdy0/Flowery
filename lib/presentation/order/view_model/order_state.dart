@@ -1,5 +1,5 @@
 import '../../../domain/entities/home_layout/product_details_entity.dart';
-import '../../../domain/entities/order/create_order/order_response_entity.dart';
+import '../../../domain/entities/order/create_order/order_entity.dart';
 
 sealed class OrderState {}
 
@@ -22,7 +22,7 @@ final class CheckoutErrorState extends OrderState {
 
 //getAllOrders
 final class GetOrdersSuccessState extends OrderState {
-  final OrderEntity? orders;
+  final List<OrderEntity?> orders;
 
   GetOrdersSuccessState({required this.orders});
 }
