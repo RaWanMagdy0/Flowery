@@ -108,10 +108,11 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
                   itemCount: addresses.length,
                   itemBuilder: (context, index) {
                     final address = addresses[index];
-                    final addressId = address.id ;
+                    final addressId = "${address.street}-${address.city}-${address.phone}";
                     return DeliveryAddressCard(
                       city: address.city,
                       street: address.street,
+                      phone: address.phone,
                       onChanged: (String? value) {
                         setState(() {
                           selectedAddress = value;

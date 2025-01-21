@@ -8,16 +8,19 @@ class DeliveryAddressCard extends StatefulWidget {
   final ValueChanged<String?> onChanged;
   final String city;
   final String street;
+  final String phone;
   String? selectedAddress;
   final String addressId;
-  DeliveryAddressCard(
-      {required this.city,
-      required this.street,
-      super.key,
-      required this.onChanged,
-      required this.addressId,
-      required this.selectedAddress,
-     });
+
+  DeliveryAddressCard({
+    required this.city,
+    required this.street,
+    required this.phone,
+    super.key,
+    required this.onChanged,
+    required this.addressId,
+    required this.selectedAddress,
+  });
 
   @override
   State<DeliveryAddressCard> createState() => _DeliveryAddressCardState();

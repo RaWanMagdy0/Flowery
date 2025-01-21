@@ -92,6 +92,7 @@ class _CheckoutOrderScreenState extends State<CheckoutOrderScreen> {
           AppDialogs.showSuccessDialog(
             context: context,
             message: "Order Placed Successfully",
+
           );
         }
       },
