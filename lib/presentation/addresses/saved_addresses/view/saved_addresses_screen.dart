@@ -1,13 +1,10 @@
 import 'package:flowery/core/styles/colors/app_colors.dart';
-import 'package:flowery/core/utils/functions/dialogs/app_dialogs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../core/routes/page_route_name.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../generated/l10n.dart';
-import 'add_and_edit_user_address_screen.dart';
 import '../view_model/saved_addresses_states.dart';
 import '../view_model/saved_addresses_view_model.dart';
 import 'widgets/saved_addresses_button.dart';
@@ -81,6 +78,9 @@ class _SavedAddressScreenState extends State<SavedAddressScreen> {
                         final addressId = address.id;
                         return SavedAddressesCard(
                           address: address.city,
+                          long: address.lang,
+                          lat: address.lat,
+                          city: address.city,
                           onDelete: () {
                             viewModel.deleteAddress(addressId);
                           },

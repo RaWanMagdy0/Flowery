@@ -106,11 +106,10 @@ class _AddAndEditUserAddressScreenState
                   ),
                   18.verticalSpace,
                   CustomTextFormField(
-                    controller: _recipientNameController,
-                    hintText: "Recipient Name",
-                    labelText: "Recipient Name",
-                    validator: (value)=>Validators.validateName(value)
-                  ),
+                      controller: _recipientNameController,
+                      hintText: "Recipient Name",
+                      labelText: "Recipient Name",
+                      validator: (value) => Validators.validateName(value)),
                   18.verticalSpace,
                   Row(
                     children: [
@@ -156,43 +155,27 @@ class _AddAndEditUserAddressScreenState
 
   void _handelStateChange(SavedAddressesStates state) {
     if (state is AddAddressesSuccess) {
+      Navigator.pop(context);
+
       Navigator.pushNamed(context, PageRouteName.savedAddresses);
     } else if (state is AddAddAddressFail) {
       Navigator.pop(context);
       AppDialogs.showErrorDialog(context: context, errorMassage: state.message);
     } else if (state is AddAddressesLoading) {}
   }
-  Future<void> loadGovernorates() async {
-    final String response =
-        await rootBundle.loadString('assets/city/egypt-governorates-en.json');
-    final data = await json.decode(response);
-    setState(() {
-      governorates = (data['egyptian_governorates'] as List)
-          .map((json) => Governorate.fromJson(json))
-          .toList();
-    });
-  }
-  void updateCities(String? selectedGovernorate) {
-    setState(() {
-      city = selectedGovernorate;
-      selectedArea = null;
-      cities = governorates
-          .firstWhere((g) => g.name == selectedGovernorate,
-              orElse: () => Governorate(name: '', cities: []))
-          .cities;
-    });
-  }
+
   void addAddress() {
     if (_formKey.currentState!.validate()) {
       if (userSelectedLocation == null && city == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Please select a location or choose city and area")),
+          const SnackBar(
+              content:
+                  Text("Please select a location or choose city and area")),
         );
         return;
       }
-      final fullAddress = selectedArea != null
-          ? "$selectedArea, $city"
-          : detailedAddress;
+      final fullAddress =
+          selectedArea != null ? "$selectedArea, $city" : detailedAddress;
       final request = AddAddressRequestBody(
         street: _addressController.text,
         phone: _phoneNumberController.text,
@@ -205,13 +188,35 @@ class _AddAndEditUserAddressScreenState
         HomeScreen.saveAddress(
             fullAddress,
             userSelectedLocation!.latitude.toString(),
-            userSelectedLocation!.longitude.toString()
-        );
+            userSelectedLocation!.longitude.toString());
       }
       context.read<SavedAddressesViewModel>().addAddress(request);
     }
   }
+
+  Future<void> loadGovernorates() async {
+    final String response =
+        await rootBundle.loadString('assets/city/egypt-governorates-en.json');
+    final data = await json.decode(response);
+    setState(() {
+      governorates = (data['egyptian_governorates'] as List)
+          .map((json) => Governorate.fromJson(json))
+          .toList();
+    });
+  }
+
+  void updateCities(String? selectedGovernorate) {
+    setState(() {
+      city = selectedGovernorate;
+      selectedArea = null;
+      cities = governorates
+          .firstWhere((g) => g.name == selectedGovernorate,
+              orElse: () => Governorate(name: '', cities: []))
+          .cities;
+    });
+  }
 }
+
 class Governorate {
   final String name;
   final List<String> cities;

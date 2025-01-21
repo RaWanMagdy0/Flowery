@@ -148,7 +148,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               return Container();
             },
           ),
-          8.verticalSpace,          BlocBuilder<CategoriesViewModel, CategoriesState>(
+          8.verticalSpace,
+          BlocBuilder<CategoriesViewModel, CategoriesState>(
             buildWhen: (previous, current) {
               return current is GetCategoriesProductLoadingState ||
                   current is GetCategoriesProductSuccessState ||
@@ -182,7 +183,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 }
                 return Expanded(
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    padding: const EdgeInsets.all(16.0),
                     child: GridView.builder(
                       itemCount: state.product?.length ?? 0,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -218,7 +219,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                               AppDialogs.showErrorDialog(
                                 context: context,
                                 errorMassage:
-                                "You need to login to add products to cart",
+                                    "You need to login to add products to cart",
                               );
                               return;
                             }
@@ -235,7 +236,6 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               return Container();
             },
           ),
-
         ],
       ),
     );

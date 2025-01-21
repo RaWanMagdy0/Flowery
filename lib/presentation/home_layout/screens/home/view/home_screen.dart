@@ -80,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _loadAddress() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      address = prefs.getString('address') ?? 'Unknown Location';
+      address = prefs.getString('address') ?? 'Select Location';
       lat = prefs.getString('lat') ?? '';
       lang = prefs.getString('lang') ?? '';
     });

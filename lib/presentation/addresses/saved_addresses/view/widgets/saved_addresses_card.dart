@@ -2,19 +2,23 @@ import 'package:flowery/core/styles/images/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../core/styles/fonts/app_fonts.dart';
 
+
 class SavedAddressesCard extends StatefulWidget {
   final String address;
+  final String lat;
+  final String long;
+  final String city;
   final VoidCallback onDelete;
   final VoidCallback onEdit;
-
   const SavedAddressesCard({
     required this.onEdit,
     required this.address,
+    required this.long,
+    required this.lat,
+    required this.city,
     required this.onDelete,
     super.key,
   });
@@ -22,15 +26,12 @@ class SavedAddressesCard extends StatefulWidget {
   @override
   State<SavedAddressesCard> createState() => _SavedAddressesCardState();
 }
-
 class _SavedAddressesCardState extends State<SavedAddressesCard> {
-  String city = 'Unknown City';
-  String locationDetails = 'Unknown Location';
+  String? formattedAddress;
 
   @override
   void initState() {
     super.initState();
-    _loadAddress();
   }
 
   @override
@@ -54,18 +55,18 @@ class _SavedAddressesCardState extends State<SavedAddressesCard> {
               width: 24.w,
               height: 24.h,
             ),
-            SizedBox(width: 8.w),
+            8.horizontalSpace,
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.address.split(",").last.trim(),
+                    widget.city.split(",")[1],
                     style: AppFonts.font16BlackWeight500,
                   ),
-                  SizedBox(height: 4.h),
+                  4.verticalSpace,
                   Text(
-                    locationDetails,
+                    widget.city,
                     style: AppFonts.font14GreyWeight400,
                   ),
                 ],
@@ -98,37 +99,4 @@ class _SavedAddressesCardState extends State<SavedAddressesCard> {
     );
   }
 
-  Future<void> _loadAddress() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      city = prefs.getString('city') ?? 'Unknown City';
-      String lat = prefs.getString('lat') ?? '';
-      String lang = prefs.getString('lang') ?? '';
-      if (lat.isNotEmpty && lang.isNotEmpty) {
-        double latitude = double.parse(lat);
-        double longitude = double.parse(lang);
-        getAddressFromCoordinates(latitude, longitude).then((address) {
-          setState(() {
-            locationDetails = address;
-          });
-        });
-      } else {
-        locationDetails = 'Unknown Location';
-      }
-    });
-  }
-  Future<String> getAddressFromCoordinates(
-      double latitude, double longitude) async {
-    try {
-      List<Placemark> placemarks =
-          await placemarkFromCoordinates(latitude, longitude);
-      if (placemarks.isEmpty) return 'Unknown Location';
-      Placemark placemark = placemarks[0];
-      String address = '${placemark.name}, ${placemark.locality}';
-      return address;
-    } catch (e) {
-      print("Error getting address from coordinates: $e");
-      return 'Unknown Location';
-    }
-  }
 }

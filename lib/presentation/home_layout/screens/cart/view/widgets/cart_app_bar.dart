@@ -42,7 +42,6 @@ class _CartAppBarState extends State<CartAppBar> {
           BlocBuilder<CartViewModel, CartState>(
             builder: (context, state) {
               num cartItemsCount = context.read<CartViewModel>().cartItemsCount;
-
               return Text(
                 cartItemsCount != 0 ? ' ($cartItemsCount items)' : '',
                 style: AppFonts.font20GreyWeight500,
@@ -76,7 +75,7 @@ class _CartAppBarState extends State<CartAppBar> {
   Future<void> _loadAddress() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      city = prefs.getString('city') ?? 'Unknown City';
+      city = prefs.getString('city') ?? 'Select Location';
       lat = prefs.getString('lat') ?? '';
       lang = prefs.getString('lang') ?? '';
     });
