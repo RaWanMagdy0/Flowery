@@ -67,26 +67,23 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           if (!hasProducts) {
             return SizedBox.shrink();
           }
-          return Container(
-            margin: EdgeInsets.only(bottom: 10.h),
-            child: SizedBox(
-              height: 40.h,
-              child: FloatingActionButton.extended(
-                backgroundColor: AppColors.kPink,
-                onPressed: _showFilterBottomSheet,
-                label: Row(
-                  children: [
-                    Icon(Icons.filter_list, color: Colors.white),
-                    5.horizontalSpace,
-                    Text(
-                      'Filter',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.sp,
-                      ),
+          return SizedBox(
+            height: 40.h,
+            child: FloatingActionButton.extended(
+              backgroundColor: AppColors.kPink,
+              onPressed: _showFilterBottomSheet,
+              label: Row(
+                children: [
+                  Icon(Icons.filter_list, color: Colors.white),
+                  5.horizontalSpace,
+                  Text(
+                    'Filter',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16.sp,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           );
@@ -113,7 +110,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 return Center(child: Text(state.exception.toString()));
               } else if (state is CategoriesSuccessState) {
                 return SizedBox(
-                  height: 25.h,
+                  height: 30.h,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: state.categories?.length ?? 0,
@@ -149,25 +146,25 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             },
           ),
           8.verticalSpace,
-          BlocBuilder<CategoriesViewModel, CategoriesState>(
-            buildWhen: (previous, current) {
-              return current is GetCategoriesProductLoadingState ||
-                  current is GetCategoriesProductSuccessState ||
-                  current is GetCategoriesProductErrorState;
-            },
-            builder: (context, state) {
-              if (state is GetCategoriesProductLoadingState) {
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: AppColors.kPink,
-                  ),
-                );
-              } else if (state is GetCategoriesProductErrorState) {
-                return Center(child: Text(state.exception.toString()));
-              } else if (state is GetCategoriesProductSuccessState) {
-                if (state.product?.isEmpty ?? true) {
-                  return Expanded(
-                    child: Center(
+          Expanded(
+            child: BlocBuilder<CategoriesViewModel, CategoriesState>(
+              buildWhen: (previous, current) {
+                return current is GetCategoriesProductLoadingState ||
+                    current is GetCategoriesProductSuccessState ||
+                    current is GetCategoriesProductErrorState;
+              },
+              builder: (context, state) {
+                if (state is GetCategoriesProductLoadingState) {
+                  return Center(
+                    child: CircularProgressIndicator(
+                      color: AppColors.kPink,
+                    ),
+                  );
+                } else if (state is GetCategoriesProductErrorState) {
+                  return Center(child: Text(state.exception.toString()));
+                } else if (state is GetCategoriesProductSuccessState) {
+                  if (state.product?.isEmpty ?? true) {
+                    return Center(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -178,11 +175,9 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                           ),
                         ],
                       ),
-                    ),
-                  );
-                }
-                return Expanded(
-                  child: Padding(
+                    );
+                  }
+                  return Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: GridView.builder(
                       itemCount: state.product?.length ?? 0,
@@ -219,7 +214,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                               AppDialogs.showErrorDialog(
                                 context: context,
                                 errorMassage:
-                                    "You need to login to add products to cart",
+                                "You need to login to add products to cart",
                               );
                               return;
                             }
@@ -230,15 +225,14 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                         );
                       },
                     ),
-                  ),
-                );
-              }
-              return Container();
-            },
+                  );
+                }
+                return Container();
+              },
+            ),
           ),
         ],
-      ),
-    );
+      ),    );
   }
 
   void _showFilterBottomSheet() {

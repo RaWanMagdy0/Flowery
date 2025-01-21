@@ -108,24 +108,19 @@ class _DeliveryAddressState extends State<DeliveryAddress> {
                   itemCount: addresses.length,
                   itemBuilder: (context, index) {
                     final address = addresses[index];
-                    final streetParts = address.street.split("-");
-                    if (streetParts.length >= 2) {
-                      final addressId = "${streetParts[0]}-${streetParts[1]}-${address.phone}";
-                      return DeliveryAddressCard(
-                        city: streetParts[1],
-                        street: address.street,
-                        onChanged: (String? value) {
-                          setState(() {
-                            selectedAddress = value;
-                          });
-                          widget.onChanged(selectedAddress);
-                        },
-                        selectedAddress: selectedAddress,
-                        addressId: addressId,
-                      );
-                    } else {
-                      return SizedBox.shrink();
-                    }
+                    final addressId = address.id ;
+                    return DeliveryAddressCard(
+                      city: address.city,
+                      street: address.street,
+                      onChanged: (String? value) {
+                        setState(() {
+                          selectedAddress = value;
+                        });
+                        widget.onChanged(selectedAddress);
+                      },
+                      selectedAddress: selectedAddress,
+                      addressId: addressId,
+                    );
                   },
                 ),
               ),
