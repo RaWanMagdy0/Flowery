@@ -100,6 +100,7 @@
   "signupEmailHintText": "Enter Email",
   "signupPasswordHintText": "Enter Password",
   "signUpTitle": "Sign up",
+  "signInTitle": "Sign in",
   "somethingWentWrong": "Something went wrong",
   "status": "Status",
   "statusText": "Status:",
@@ -136,5 +137,7 @@
   "checkout": " Checkout ",
   "total": " total ",
   "deliveryFee": " Delivery Fee ",
-  "subTotal": " Sub Total "
+  "subTotal": " Sub Total ",
+  "shopLocalShopSafeWithFloweryOnlineApp": " Shop local, shop safe with Flowery Online App! ",
+  "ahlanNiceToMeetYou": " Ahlan! Nice To Meet You "
 }

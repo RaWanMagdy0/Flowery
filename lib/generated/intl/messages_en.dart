@@ -28,6 +28,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Add New Address"),
         "addToCart": MessageLookupByLibrary.simpleMessage("Add to cart"),
         "addToCartText": MessageLookupByLibrary.simpleMessage("Add To Cart"),
+        "ahlanNiceToMeetYou":
+            MessageLookupByLibrary.simpleMessage(" Ahlan! Nice To Meet You "),
         "allPricesIncludeTax":
             MessageLookupByLibrary.simpleMessage("All prices include tax"),
         "alreadyHaveAccount":
@@ -198,6 +200,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Search for products"),
         "searchHint":
             MessageLookupByLibrary.simpleMessage("Search for products"),
+        "shopLocalShopSafeWithFloweryOnlineApp":
+            MessageLookupByLibrary.simpleMessage(
+                " Shop local, shop safe with Flowery Online App! "),
+        "signInTitle": MessageLookupByLibrary.simpleMessage("Sign in"),
         "signUpTitle": MessageLookupByLibrary.simpleMessage("Sign up"),
         "signupEmailHintText":
             MessageLookupByLibrary.simpleMessage("Enter Email"),

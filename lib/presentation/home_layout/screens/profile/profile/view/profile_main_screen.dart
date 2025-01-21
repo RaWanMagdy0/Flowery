@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
-
 import '../../../../../../core/di/di.dart';
 import '../../../../../../core/local/token_manger.dart';
 import '../../../../../../core/routes/page_route_name.dart';
@@ -70,7 +69,7 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                 }
                 if (state is LogoutSuccessState) {
                   await TokenManager.deleteToken();
-                  Navigator.pushReplacementNamed(context, PageRouteName.logIn);
+                  Navigator.pushReplacementNamed(context, PageRouteName.homeLayout);
                 }
                 if (state is LogoutErrorState) {
                   AppDialogs.showErrorDialog(
@@ -213,7 +212,7 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                                       backgroundColor: AppColors.kWhite,
                                       content: Container(
                                         width: 260.w,
-                                        height: 155.h,
+                                        height: 150.h,
                                         decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(10),
@@ -222,25 +221,25 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: [
-                                            SizedBox(height: 15.h),
+                                            15.verticalSpace,
                                             Text(
-                                              local.logOut,
+                                              local.logoutConfirmationTitle,
                                               style: AppFonts
                                                   .font18BlackWeight500
                                                   .copyWith(
                                                       fontWeight:
                                                           FontWeight.w600),
                                             ),
-                                            SizedBox(height: 5.h),
+                                            5.verticalSpace,
                                             Text(
-                                              local.logoutConfirmationTitle,
+                                              local.logoutConfirmationMessage,
                                               style: AppFonts
                                                   .font16BlackWeight500
                                                   .copyWith(
                                                       fontWeight:
                                                           FontWeight.w400),
                                             ),
-                                            SizedBox(height: 24.h),
+                                            24.verticalSpace,
                                             Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
@@ -292,7 +291,7 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                                                   ),
                                                   onPressed: () {
                                                     Navigator.pop(
-                                                        context); // Close the dialog
+                                                        context);
                                                     viewModel.logout();
                                                   },
                                                   child: Text(
@@ -328,7 +327,7 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                       ),
                     );
                   }
-                  return Container(); // Fallback for other states
+                  return Container();
                 },
               ),
             )
@@ -337,32 +336,87 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
   }
 
   Widget _buildLoggedInWidget() {
-    return SizedBox(
-      width: 1.sw,
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Lottie.asset(
-            //   AppImages.loginCart,
-            // ),
-            // 16.verticalSpace,
-            Text(
-              'Please login\nto see your profile details',
-              style: AppFonts.font16PinkWeight400,
-              textAlign: TextAlign.center,
-            ),
-            40.verticalSpace,
-            CustomButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(PageRouteName.logIn);
-              },
-              text: 'Login',
-            ),
-          ],
-        ),
-      ),
-    );
+    final local = S.of(context);
+    return Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15.r),
+                    color: AppColors.kBabyPink),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(local.ahlanNiceToMeetYou,style: AppFonts.font18BlackWeight500,),
+                      5.verticalSpace,
+                      Text(local.shopLocalShopSafeWithFloweryOnlineApp,style: AppFonts.font12BlackWeight400,),
+                      20.verticalSpace,
+                      Center(
+                        child: CustomButton(
+                          color: AppColors.kGray,
+                          width: 5.w,
+                          onPressed: () {
+                            Navigator.of(context).pushNamed(PageRouteName.logIn);
+                          },
+                          text:"${local.loginTitle} / ${local.signUpTitle}",
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              40.verticalSpace,
+              Row(
+                children: [
+                  Text("Setting",style: AppFonts.font16BlackWeight500,),
+                ],
+              ),
+              5.verticalSpace,
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15.r),
+                    color: AppColors.kBabyPink),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      LocalizationRow(),
+                      Divider(thickness: 1.w),
+                      CustomListTile(
+                        title: local.aboutAs,
+                        trailingIcon: Icons.arrow_forward_ios,
+                        onTap: () {
+                          Navigator.pushNamed(
+                              context, PageRouteName.aboutApp);
+                        },
+                      ),
+                      CustomListTile(
+                        title: local.termsAndConditions,
+                        trailingIcon: Icons.arrow_forward_ios,
+                        onTap: () {
+                          Navigator.pushNamed(
+                              context, PageRouteName.termsConditions);
+                        },
+                      ),
+                     20.verticalSpace,
+                    ],
+                  ),
+                ),
+              ),
+              150.verticalSpace,
+              Text(
+                'v 6.3.0 - (446)',
+                style:
+                TextStyle(color: AppColors.kLightGrey, fontSize: 12.sp),
+              ),
+
+            ],
+          ),
+        ));
   }
 }

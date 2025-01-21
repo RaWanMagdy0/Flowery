@@ -28,6 +28,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("اضافه عنوان جديد"),
         "addToCart": MessageLookupByLibrary.simpleMessage("أضف إلى السلة"),
         "addToCartText": MessageLookupByLibrary.simpleMessage("أضف إلى السلة"),
+        "ahlanNiceToMeetYou":
+            MessageLookupByLibrary.simpleMessage(" اهلأ بيك! يسعدنا لقائك "),
         "allPricesIncludeTax":
             MessageLookupByLibrary.simpleMessage("تشمل جميع الأسعار الضريبة"),
         "alreadyHaveAccount":
@@ -202,6 +204,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "searchForProducts":
             MessageLookupByLibrary.simpleMessage("ابحث عن المنتجات"),
         "searchHint": MessageLookupByLibrary.simpleMessage("ابحث عن المنتجات"),
+        "shopLocalShopSafeWithFloweryOnlineApp":
+            MessageLookupByLibrary.simpleMessage(
+                "  تسوق محليًا,تسوق بأمان مع فلاوري "),
         "signUpTitle": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
         "signupEmailHintText":
             MessageLookupByLibrary.simpleMessage("أدخل البريد الإلكتروني"),

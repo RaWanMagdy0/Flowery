@@ -1060,6 +1060,16 @@ class S {
     );
   }
 
+  /// `Sign in`
+  String get signInTitle {
+    return Intl.message(
+      'Sign in',
+      name: 'signInTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Something went wrong`
   String get somethingWentWrong {
     return Intl.message(
@@ -1425,6 +1435,26 @@ class S {
     return Intl.message(
       ' Sub Total ',
       name: 'subTotal',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` Shop local, shop safe with Flowery Online App! `
+  String get shopLocalShopSafeWithFloweryOnlineApp {
+    return Intl.message(
+      ' Shop local, shop safe with Flowery Online App! ',
+      name: 'shopLocalShopSafeWithFloweryOnlineApp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` Ahlan! Nice To Meet You `
+  String get ahlanNiceToMeetYou {
+    return Intl.message(
+      ' Ahlan! Nice To Meet You ',
+      name: 'ahlanNiceToMeetYou',
       desc: '',
       args: [],
     );
