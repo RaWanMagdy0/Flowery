@@ -6,7 +6,7 @@ class Validators {
     return null;
   }
 
-  static String? validateNotEmpty( {String? title, String? value}) {
+  static String? validateNotEmpty({String? title, String? value}) {
     if (_isEmpty(value)) {
       return ("$title is required");
     }
@@ -62,12 +62,11 @@ class Validators {
     }
 
     var regex = RegExp(
-      r"^01[0125]\d{8}$",
+      r"^\+201[0125]\d{8}$",
     );
 
     if (!regex.hasMatch(value!)) {
-      return """Must be 11 digits starts with (+20)
-Prefix is 10, 11, 12 or 15 only""";
+      return "Must be 11 digits starting with (+20)";
     }
 
     return null;

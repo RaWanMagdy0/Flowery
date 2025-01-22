@@ -7,8 +7,8 @@ import '../../styles/fonts/app_fonts.dart';
 
 class CustomTextFormField extends StatefulWidget {
   final TextEditingController? controller;
-  final String hintText;
-  final String labelText;
+  final String? hintText;
+  final String? labelText;
   final String? initialTextValue, obscuringCharacter;
   final int? maxLength, maxLines, minLines, errorMaxLines;
   final bool? enabled, isPassword, isFilled;
@@ -52,8 +52,8 @@ class CustomTextFormField extends StatefulWidget {
 
   const CustomTextFormField({
     super.key,
-    required this.hintText,
-    required this.labelText,
+     this.hintText,
+    this.labelText,
     this.textInputAction,
     this.autovalidateMode,
     this.border,

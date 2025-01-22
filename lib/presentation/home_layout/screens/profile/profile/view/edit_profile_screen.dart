@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
-
 import '../../../../../../core/di/di.dart';
 import '../../../../../../core/styles/images/app_images.dart';
 import '../../../../../../core/utils/functions/dialogs/app_dialogs.dart';
