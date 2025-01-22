@@ -29,8 +29,9 @@ class ProductDetailsCubit extends BaseViewModel<ProductDetailsStates> {
             title: e.title,
             description: e.description,
             images: e.images,
-            price: e.price,
+            price: e.price??0,
             slug: e.slug,
+            priceAfterDiscount: e.priceAfterDiscount??0,
           ))
               .toList(),
         );

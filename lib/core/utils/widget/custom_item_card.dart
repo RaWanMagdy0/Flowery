@@ -133,14 +133,14 @@ class FlowerCard extends StatelessWidget {
                           ),
                         ),
                         if (originalPrice != null) ...[
-                          SizedBox(width: 8.w),
+                          SizedBox(width: 6.w),
                           Flexible(
                             fit: FlexFit.tight,
                             child: Text(
                               originalPrice!,
                               style: TextStyle(
                                   color: Colors.grey,
-                                  fontSize: 12.sp,
+                                  fontSize: 11.sp,
                                   decoration: TextDecoration.lineThrough,
                                   decorationColor: AppColors.kBlack),
                             ),

@@ -31,6 +31,7 @@ class ProductDetailsModel {
 class ProductModel {
   ProductModel({
     this.title,
+    this.discount,
     this.slug,
     this.description,
     this.imgCover,
@@ -48,6 +49,7 @@ class ProductModel {
 
   ProductModel.fromJson(dynamic json) {
     id = json['_id'];
+    discount = json['discount'];
     title = json['title'];
     slug = json['slug'];
     description = json['description'];
@@ -63,6 +65,7 @@ class ProductModel {
     v = json['__v'];
   }
   String? id;
+  int? discount;
   String? title;
   String? slug;
   String? description;
@@ -80,6 +83,7 @@ class ProductModel {
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['_id'] = id;
+    map['discount'] = discount;
     map['title'] = title;
     map['slug'] = slug;
     map['description'] = description;
@@ -98,13 +102,14 @@ class ProductModel {
   ProductEntity toEntity() {
     return ProductEntity(
         id: id,
+        discount: discount,
         title: title,
         slug: slug,
         description: description,
         imgCover: imgCover,
         images: images,
-        price: price,
-        priceAfterDiscount: priceAfterDiscount,
+        price: price??0,
+        priceAfterDiscount: priceAfterDiscount??0,
         quantity: quantity,
         category: category,
         occasion: occasion,

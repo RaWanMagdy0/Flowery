@@ -37,7 +37,7 @@ class HomeBestSellerItem extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
             Text(
-              '${productModel.priceAfterDiscount} EGP',
+              '${productModel.price} EGP',
               style: AppFonts.font14BlackWeight500,
             ),
           ],

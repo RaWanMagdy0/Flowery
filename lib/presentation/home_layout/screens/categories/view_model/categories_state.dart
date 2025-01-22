@@ -34,7 +34,7 @@ class GetCategoriesProductErrorState extends CategoriesState {
 
 class GetCategoriesProductSuccessState extends CategoriesState {
   @override
-  final List<ProductEntity?>? product;
+  final List<ProductEntity>? product;
 
   GetCategoriesProductSuccessState(this.product);
 }

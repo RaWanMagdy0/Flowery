@@ -11,13 +11,14 @@ class ProductDetailsEntity {
 class ProductEntity {
   ProductEntity({
     this.id,
+    this.discount,
     this.title,
     this.slug,
     this.description,
     this.imgCover,
     this.images,
-    this.price,
-    this.priceAfterDiscount,
+    required this.price,
+    required this.priceAfterDiscount,
     this.quantity,
     this.category,
     this.occasion,
@@ -32,13 +33,13 @@ class ProductEntity {
   String? description;
   String? imgCover;
   List<String>? images;
-  int? price;
-  int? priceAfterDiscount;
+  final int price;
+  final int priceAfterDiscount;
   int? quantity;
   String? category;
   String? occasion;
   String? createdAt;
   String? updatedAt;
   int? v;
-  String? descount;
+  int? discount;
 }

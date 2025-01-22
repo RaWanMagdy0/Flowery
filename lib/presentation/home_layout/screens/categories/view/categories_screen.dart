@@ -121,8 +121,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                           setState(() {
                             selectedCategoryIndex = index;
                           });
-                          context.read<CategoriesViewModel>().selectCategory(
-                              state.categories![index].id ?? '');
+                          final selectedCategoryId = state.categories![index].id;
+                          context.read<CategoriesViewModel>().selectCategory(selectedCategoryId!);
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -189,12 +189,18 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                       ),
                       itemBuilder: (context, index) {
                         final product = state.product?[index];
+                        final discount =
+                        ((product!.price - product.priceAfterDiscount) /
+                            product.price *
+                            100)
+                            .round();
+
                         return FlowerCard(
-                          title: product?.title,
-                          imageUrl: product?.imgCover,
-                          price: 'EGP ${product?.priceAfterDiscount}',
-                          originalPrice: product?.price.toString(),
-                          descount: '${product?.priceAfterDiscount}',
+                          title: product.title,
+                          imageUrl: product.imgCover,
+                          price: 'EGP ${product.priceAfterDiscount}',
+                          originalPrice: product.price.toString(),
+                          descount: '$discount',
                           descountColor: Colors.green,
                           backgroundColor: Colors.white,
                           buttonColor: AppColors.kPink,
@@ -206,7 +212,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                           onTap: () => Navigator.pushNamed(
                             context,
                             PageRouteName.productDetails,
-                            arguments: product?.id,
+                            arguments: product.id,
                           ),
                           onButtonPressed: () {
                             if (context.read<CartViewModel>().isUserLoggedIn ==
@@ -220,7 +226,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                             }
                             context
                                 .read<CartViewModel>()
-                                .addProductToCart(product!.id.toString());
+                                .addProductToCart(product.id.toString());
                           },
                         );
                       },

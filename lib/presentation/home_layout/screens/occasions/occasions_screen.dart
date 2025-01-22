@@ -71,8 +71,8 @@ class _OccasionScreenState extends State<OccasionScreen> {
               if (state is OccasionLoadingState) {
                 return Center(
                     child: CircularProgressIndicator(
-                  color: AppColors.kPink,
-                ));
+                      color: AppColors.kPink,
+                    ));
               } else if (state is OccasionErrorState) {
                 return Center(child: Text(state.exception.toString()));
               } else if (state is OccasionSuccessState) {
@@ -124,15 +124,14 @@ class _OccasionScreenState extends State<OccasionScreen> {
               if (state is GetOccasionPrudactLoadingState) {
                 return Center(
                     child: CircularProgressIndicator(
-                  color: AppColors.kPink,
-                ));
+                      color: AppColors.kPink,
+                    ));
               } else if (state is GetOccasionPrudactErrorState) {
                 return Center(child: Text(state.exception.toString()));
               } else if (state is GetOccasionPrudactSuccessState) {
-                final List<ProductEntity?>? product =
+                final List<ProductEntity?>? products =
                     context.read<OccasionCubit>().prudact;
-
-                if (product?.isEmpty ?? true) {
+                if (products?.isEmpty ?? true) {
                   return Expanded(
                     child: Center(
                       child: Column(
@@ -148,12 +147,11 @@ class _OccasionScreenState extends State<OccasionScreen> {
                     ),
                   );
                 }
-
                 return Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: GridView.builder(
-                      itemCount: product?.length,
+                      itemCount: products?.length ?? 0,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 17,
@@ -161,12 +159,19 @@ class _OccasionScreenState extends State<OccasionScreen> {
                         childAspectRatio: 0.7,
                       ),
                       itemBuilder: (context, index) {
+                        final product = products?[index];
+                        if (product == null) {
+                          return SizedBox.shrink();
+                        }
+                        final discount = product.price != null && product.priceAfterDiscount != null
+                            ? ((product.price! - product.priceAfterDiscount!) / product.price! * 100).round()
+                            : 0;
                         return FlowerCard(
-                          title: product?[index]?.title,
-                          imageUrl: product?[index]?.imgCover,
-                          price: 'EGP ${product?[index]?.priceAfterDiscount}',
-                          originalPrice: product?[index]?.price.toString(),
-                          descount: '${product?[index]?.priceAfterDiscount}',
+                          title: product.title,
+                          imageUrl: product.imgCover,
+                          price: 'EGP ${product.priceAfterDiscount}',
+                          originalPrice: product.price.toString(),
+                          descount: '$discount',
                           descountColor: Colors.green,
                           backgroundColor: Colors.white,
                           buttonColor: AppColors.kPink,
@@ -178,9 +183,10 @@ class _OccasionScreenState extends State<OccasionScreen> {
                           onTap: () => Navigator.pushNamed(
                             context,
                             PageRouteName.productDetails,
-                            arguments: product?[index]?.id,
+                            arguments: product.id,
                           ),
-                          onButtonPressed: () {},
+                          onButtonPressed: () {
+                          },
                         );
                       },
                     ),
