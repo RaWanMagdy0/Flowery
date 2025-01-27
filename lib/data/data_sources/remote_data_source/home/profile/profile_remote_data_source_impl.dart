@@ -40,38 +40,14 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   }
 
   @override
-  Future<Result<String?>> uploadPhoto(File photo) async {
-    return await executeApiCall<String?>(() async {
+  Future<Result<String?>> uploadPhoto(File photo) {
+    return executeApiCall(() async {
       var token = await _getToken();
-      var photoFile = await MultipartFile.fromFile(photo.path);
-      var formData = FormData.fromMap({
-        "photo": [photoFile],
-      });
-      final dio = Dio()
-        ..interceptors.addAll(
-          [
-            !kReleaseMode
-                ? PrettyDioLogger(
-                    requestBody: true,
-                    requestHeader: true,
-                    responseHeader: true,
-                  )
-                : const Interceptor(),
-          ],
-        );
-      final response = await dio.put(
-        "${ApiConstants.baseUrl}${ApiConstants.uploadPhoto}",
-        data: formData,
-        options: Options(
-          headers: {
-            'Authorization': token,
-          },
-        ),
-      );
-      return response.data;
+
+      var response = await apiManger.uploadPhoto(token, photo);
+      return response;
     });
   }
-
   Future<String> _getToken() async {
     var token = await TokenManager.getToken();
     if (token == null || token.isEmpty) {

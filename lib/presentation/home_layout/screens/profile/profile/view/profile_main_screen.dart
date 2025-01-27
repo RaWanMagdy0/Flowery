@@ -1,3 +1,4 @@
+import 'package:flowery/presentation/home_layout/screens/profile/profile/widget/custom_profile_pic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -69,7 +70,8 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                 }
                 if (state is LogoutSuccessState) {
                   await TokenManager.deleteToken();
-                  Navigator.pushReplacementNamed(context, PageRouteName.homeLayout);
+                  Navigator.pushReplacementNamed(
+                      context, PageRouteName.homeLayout);
                 }
                 if (state is LogoutErrorState) {
                   AppDialogs.showErrorDialog(
@@ -89,34 +91,18 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                       child: Text(state.errorMessage ?? 'An error occurred'),
                     );
                   } else if (state is GetLoggedUserInfoSuccessState) {
-                    bool isUserProfile;
-                    if (state.user?.photo ==
-                        "https://flower.elevateegy.com/uploads/default-profile.png") {
-                      isUserProfile = false;
-                    } else {
-                      isUserProfile = true;
-                    }
                     return SingleChildScrollView(
                       child: Center(
                         child: Column(
                           children: [
-                            SizedBox(
-                              width: 100.w,
-                              height: 100.h,
-                              child: ClipOval(
-                                child: isUserProfile
-                                    ? Image.network(
-                                        state.user?.photo ?? "",
-                                        fit: BoxFit.cover,
-                                      )
-                                    : Container(
-                                        color: AppColors.kLighterGrey,
-                                        child: Icon(
-                                          Icons.person,
-                                          size: 90.sp,
-                                          color: AppColors.kGray,
-                                        ),
-                                      ),
+                            ClipOval(
+                              child: Image.network(
+                                state.user?.photo ?? AppImages.photo,
+                                fit: BoxFit.cover,
+                                height: 100.h,
+                                width: 100.w,
+                                errorBuilder: (_, __, ___) =>
+                                    Image.asset(AppImages.photo),
                               ),
                             ),
 
@@ -290,8 +276,7 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
                                                     ),
                                                   ),
                                                   onPressed: () {
-                                                    Navigator.pop(
-                                                        context);
+                                                    Navigator.pop(context);
                                                     viewModel.logout();
                                                   },
                                                   child: Text(
@@ -339,84 +324,90 @@ class _ProfileScreenState extends State<ProfileMainScreen> {
     final local = S.of(context);
     return Scaffold(
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.r),
-                    color: AppColors.kBabyPink),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(local.ahlanNiceToMeetYou,style: AppFonts.font18BlackWeight500,),
-                      5.verticalSpace,
-                      Text(local.shopLocalShopSafeWithFloweryOnlineApp,style: AppFonts.font12BlackWeight400,),
-                      20.verticalSpace,
-                      Center(
-                        child: CustomButton(
-                          color: AppColors.kGray,
-                          width: 5.w,
-                          onPressed: () {
-                            Navigator.of(context).pushNamed(PageRouteName.logIn);
-                          },
-                          text:"${local.loginTitle} / ${local.signUpTitle}",
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              40.verticalSpace,
-              Row(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15.r),
+                color: AppColors.kBabyPink),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Setting",style: AppFonts.font16BlackWeight500,),
+                  Text(
+                    local.ahlanNiceToMeetYou,
+                    style: AppFonts.font18BlackWeight500,
+                  ),
+                  5.verticalSpace,
+                  Text(
+                    local.shopLocalShopSafeWithFloweryOnlineApp,
+                    style: AppFonts.font12BlackWeight400,
+                  ),
+                  20.verticalSpace,
+                  Center(
+                    child: CustomButton(
+                      color: AppColors.kGray,
+                      width: 5.w,
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(PageRouteName.logIn);
+                      },
+                      text: "${local.loginTitle} / ${local.signUpTitle}",
+                    ),
+                  ),
                 ],
               ),
-              5.verticalSpace,
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.r),
-                    color: AppColors.kBabyPink),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      LocalizationRow(),
-                      Divider(thickness: 1.w),
-                      CustomListTile(
-                        title: local.aboutAs,
-                        trailingIcon: Icons.arrow_forward_ios,
-                        onTap: () {
-                          Navigator.pushNamed(
-                              context, PageRouteName.aboutApp);
-                        },
-                      ),
-                      CustomListTile(
-                        title: local.termsAndConditions,
-                        trailingIcon: Icons.arrow_forward_ios,
-                        onTap: () {
-                          Navigator.pushNamed(
-                              context, PageRouteName.termsConditions);
-                        },
-                      ),
-                     20.verticalSpace,
-                    ],
-                  ),
-                ),
-              ),
-              150.verticalSpace,
+            ),
+          ),
+          40.verticalSpace,
+          Row(
+            children: [
               Text(
-                'v 6.3.0 - (446)',
-                style:
-                TextStyle(color: AppColors.kLightGrey, fontSize: 12.sp),
+                "Setting",
+                style: AppFonts.font16BlackWeight500,
               ),
-
             ],
           ),
-        ));
+          5.verticalSpace,
+          Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15.r),
+                color: AppColors.kBabyPink),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  LocalizationRow(),
+                  Divider(thickness: 1.w),
+                  CustomListTile(
+                    title: local.aboutAs,
+                    trailingIcon: Icons.arrow_forward_ios,
+                    onTap: () {
+                      Navigator.pushNamed(context, PageRouteName.aboutApp);
+                    },
+                  ),
+                  CustomListTile(
+                    title: local.termsAndConditions,
+                    trailingIcon: Icons.arrow_forward_ios,
+                    onTap: () {
+                      Navigator.pushNamed(
+                          context, PageRouteName.termsConditions);
+                    },
+                  ),
+                  20.verticalSpace,
+                ],
+              ),
+            ),
+          ),
+          150.verticalSpace,
+          Text(
+            'v 6.3.0 - (446)',
+            style: TextStyle(color: AppColors.kLightGrey, fontSize: 12.sp),
+          ),
+        ],
+      ),
+    ));
   }
 }

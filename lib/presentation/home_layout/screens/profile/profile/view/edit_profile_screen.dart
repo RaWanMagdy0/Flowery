@@ -56,10 +56,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           } else if (state is GetLoggedUserInfoErrorState) {
             return _buildError(state.errorMessage ?? local.anErrorOccurred);
           } else if (state is GetLoggedUserInfoSuccessState) {
-            return EditProfileWidget(
-              user: state.user!,
-              gender: state.user?.gender,
-              onGenderChanged: _onGenderChanged,
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+              EditProfileWidget(
+                user: state.user!,
+                gender: state.user?.gender,
+                onGenderChanged: _onGenderChanged,
+              )
+                ],
+              ),
             );
           } else if (state is EditProfileLoadingState) {
             return _buildLoading();

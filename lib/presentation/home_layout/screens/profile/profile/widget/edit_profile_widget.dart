@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../../domain/entities/home_layout/profile/user.dart';
+import 'custom_profile_pic.dart';
 import 'edit_profile_form.dart';
-import 'profile_pic.dart';
 
 class EditProfileWidget extends StatelessWidget {
   const EditProfileWidget({

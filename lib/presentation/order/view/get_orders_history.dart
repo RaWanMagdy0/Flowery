@@ -57,7 +57,8 @@ class _GetOrdersHistoryState extends State<GetOrdersHistory> {
             if (state is OrderLoadingState) {
               return Center(
                   child: CircularProgressIndicator(color: AppColors.kPink));
-            } else if (state is GetOrdersErrorState) {
+            }
+            else if (state is GetOrdersErrorState) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 AppDialogs.showErrorDialog(
                   context: context,
@@ -65,7 +66,8 @@ class _GetOrdersHistoryState extends State<GetOrdersHistory> {
                 );
               });
               return Center(child: Text("errorLoadingOrders"));
-            } else if (state is GetOrdersSuccessState) {
+            }
+            else if (state is GetOrdersSuccessState) {
               List<OrderEntity?> orders = state.orders;
               List<OrderEntity?> activeOrders = [];
               List<OrderEntity?> completedOrders = [];

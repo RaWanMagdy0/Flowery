@@ -1,9 +1,6 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
-
 import '../../../../../../core/api/api_result.dart';
 import '../../../../../../core/base/base_view_model.dart';
 import '../../../../../../data/models/auth/requests/edite_profile_request_model.dart';
@@ -34,6 +31,7 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
   TextEditingController phoneController = TextEditingController();
   String? gender;
   String? photo;
+
 
   Future<void> getLoggedUserInfo() async {
     emit(GetLoggedUserInfoLoadingState());
@@ -96,17 +94,14 @@ class ProfileCubit extends BaseViewModel<ProfileState> {
   Future<void> uploadPhoto(File photo) async {
     emit(UploadPhotoLoadingState());
     var result = await uploadPhotoUseCase.invoke(photo);
-
     if (result is Success<String?>) {
       emit(UploadPhotoSuccessState(message: result.data));
       await getLoggedUserInfo();
     } else if (result is Fail<String?>) {
       emit(UploadPhotoErrorState(
           errorMessage: getErrorMassageFromException(result.exception)));
-      debugPrint("Upload failed: ${result.exception}");
     }
   }
-
   // Logout the user
   Future<void> logout() async {
     final response = await logoutUseCase.invoke();

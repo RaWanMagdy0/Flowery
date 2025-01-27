@@ -53,6 +53,7 @@ class _EmailVerificationState extends State<EmailVerification> {
         duration: const Duration(milliseconds: 300),
         curve: Curves.bounceInOut,
       );
+      viewModel.startResendTimer();
     } else if (state is VerifyEmailCodeLoadingState) {
       AppDialogs.showLoading(context: context);
     } else if (state is VerifyEmailCodeErrorState) {
