@@ -1,8 +1,10 @@
-import 'package:flowery/core/styles/colors/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
+
 import '../../../../core/routes/page_route_name.dart';
+import '../../../../core/styles/colors/app_colors.dart';
 import '../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../generated/l10n.dart';
 import '../view_model/saved_addresses_states.dart';
@@ -56,8 +58,7 @@ class _SavedAddressScreenState extends State<SavedAddressScreen> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text("Failed to load addresses.")),
                     );
-                  }
-                  else if (state is DeleteAddressFailure) {
+                  } else if (state is DeleteAddressFailure) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text(state.message)),
                     );
@@ -65,7 +66,49 @@ class _SavedAddressScreenState extends State<SavedAddressScreen> {
                 },
                 builder: (context, state) {
                   if (state is SavedAddressesLoading) {
-                    return  Center(child: CircularProgressIndicator(color: AppColors.kPink,));
+                    // Shimmer effect for loading
+                    return ListView.builder(
+                      itemCount: 4,
+                      itemBuilder: (context, index) => Shimmer.fromColors(
+                        baseColor: Colors.grey[300]!,
+                        highlightColor: Colors.grey[100]!,
+                        child: Card(
+                          margin: EdgeInsets.only(bottom: 12.h),
+                          child: Padding(
+                            padding: EdgeInsets.all(16.w),
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: 24.w,
+                                  height: 24.h,
+                                  color: Colors.white,
+                                ),
+                                8.horizontalSpace,
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        width: 100.w,
+                                        height: 16.h,
+                                        color: Colors.white,
+                                      ),
+                                      4.verticalSpace,
+                                      Container(
+                                        width: 150.w,
+                                        height: 14.h,
+                                        color: Colors.white,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
                   } else if (state is SavedAddressesSuccess) {
                     final addresses = state.addresses;
                     if (addresses.isEmpty) {

@@ -2,11 +2,13 @@ import 'package:flowery/presentation/home_layout/screens/categories/view/widgets
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../../core/routes/page_route_name.dart';
 import '../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../core/styles/fonts/app_fonts.dart';
 import '../../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../../../../../core/utils/widget/custom_item_card.dart';
+import '../../../../../core/utils/widget/shimmer_loading_widget.dart';
 import '../../../widgets/search_bar_widget.dart';
 import '../../cart/view_model/cart_view_model.dart';
 import '../view_model/categories_state.dart';
@@ -101,9 +103,20 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             },
             builder: (context, state) {
               if (state is CategoriesLoadingState) {
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: AppColors.kPink,
+                return SizedBox(
+                  height: 30.h,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 4, // Placeholder shimmer count
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: ShimmerLoadingWidget(
+                          width: 100.w,
+                          height: 20.h,
+                        ),
+                      );
+                    },
                   ),
                 );
               } else if (state is CategoriesErrorState) {
@@ -121,8 +134,11 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                           setState(() {
                             selectedCategoryIndex = index;
                           });
-                          final selectedCategoryId = state.categories![index].id;
-                          context.read<CategoriesViewModel>().selectCategory(selectedCategoryId!);
+                          final selectedCategoryId =
+                              state.categories![index].id;
+                          context
+                              .read<CategoriesViewModel>()
+                              .selectCategory(selectedCategoryId!);
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -155,25 +171,30 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               },
               builder: (context, state) {
                 if (state is GetCategoriesProductLoadingState) {
-                  return Center(
-                    child: CircularProgressIndicator(
-                      color: AppColors.kPink,
+                  return GridView.builder(
+                    padding: EdgeInsets.all(16.w),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.78,
+                      crossAxisSpacing: 10.w,
+                      mainAxisSpacing: 16.h,
                     ),
+                    itemCount: 4, // Placeholder shimmer count
+                    itemBuilder: (context, index) {
+                      return ShimmerLoadingWidget(
+                        width: 150.w,
+                        height: 200.h,
+                      );
+                    },
                   );
                 } else if (state is GetCategoriesProductErrorState) {
                   return Center(child: Text(state.exception.toString()));
                 } else if (state is GetCategoriesProductSuccessState) {
                   if (state.product?.isEmpty ?? true) {
                     return Center(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "There are no products available now.",
-                            style: AppFonts.font18BlackWeight500,
-                          ),
-                        ],
+                      child: Text(
+                        "There are no products available now.",
+                        style: AppFonts.font18BlackWeight500,
                       ),
                     );
                   }
@@ -190,10 +211,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                       itemBuilder: (context, index) {
                         final product = state.product?[index];
                         final discount =
-                        ((product!.price - product.priceAfterDiscount) /
-                            product.price *
-                            100)
-                            .round();
+                            ((product!.price - product.priceAfterDiscount) /
+                                    product.price *
+                                    100)
+                                .round();
 
                         return FlowerCard(
                           title: product.title,
@@ -220,7 +241,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                               AppDialogs.showErrorDialog(
                                 context: context,
                                 errorMassage:
-                                "You need to login to add products to cart",
+                                    "You need to login to add products to cart",
                               );
                               return;
                             }
@@ -238,7 +259,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             ),
           ),
         ],
-      ),    );
+      ),
+    );
   }
 
   void _showFilterBottomSheet() {

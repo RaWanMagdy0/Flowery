@@ -1,18 +1,19 @@
-import 'package:flowery/core/styles/images/app_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+
 import '../../../../../core/styles/colors/app_colors.dart';
 import '../../../../../core/styles/fonts/app_fonts.dart';
+import '../../../../../core/styles/images/app_images.dart';
 
-
-class SavedAddressesCard extends StatefulWidget {
+class SavedAddressesCard extends StatelessWidget {
   final String address;
   final String lat;
   final String long;
   final String city;
   final VoidCallback onDelete;
   final VoidCallback onEdit;
+
   const SavedAddressesCard({
     required this.onEdit,
     required this.address,
@@ -24,22 +25,16 @@ class SavedAddressesCard extends StatefulWidget {
   });
 
   @override
-  State<SavedAddressesCard> createState() => _SavedAddressesCardState();
-}
-class _SavedAddressesCardState extends State<SavedAddressesCard> {
-  String? formattedAddress;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    // Split the city safely
+    final cityParts = city.split(",");
+    final cityName = cityParts.isNotEmpty ? cityParts[0] : "Unknown City";
+    final cityDetails = cityParts.length > 1 ? cityParts[1] : "";
+
     return Card(
       color: AppColors.kWhite,
       elevation: 12.sp,
-      shadowColor: Color.fromRGBO(83, 83, 83, 0.25),
+      shadowColor: const Color.fromRGBO(83, 83, 83, 0.25),
       margin: EdgeInsets.only(bottom: 12.h),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.r),
@@ -61,12 +56,12 @@ class _SavedAddressesCardState extends State<SavedAddressesCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.city.split(",")[1],
+                    cityName,
                     style: AppFonts.font16BlackWeight500,
                   ),
                   4.verticalSpace,
                   Text(
-                    widget.city,
+                    cityDetails,
                     style: AppFonts.font14GreyWeight400,
                   ),
                 ],
@@ -75,7 +70,7 @@ class _SavedAddressesCardState extends State<SavedAddressesCard> {
             Row(
               children: [
                 IconButton(
-                  onPressed: widget.onDelete,
+                  onPressed: onDelete,
                   icon: SvgPicture.asset(
                     AppImages.trashIcon,
                     width: 20.sp,
@@ -83,7 +78,7 @@ class _SavedAddressesCardState extends State<SavedAddressesCard> {
                   ),
                 ),
                 IconButton(
-                  onPressed: widget.onEdit,
+                  onPressed: onEdit,
                   icon: Image.asset(
                     AppImages.editIcon,
                     color: AppColors.kBlack,
@@ -98,5 +93,4 @@ class _SavedAddressesCardState extends State<SavedAddressesCard> {
       ),
     );
   }
-
 }
