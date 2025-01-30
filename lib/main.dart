@@ -11,16 +11,17 @@ import 'core/routes/app_routes.dart';
 import 'core/routes/page_route_name.dart';
 import 'core/theme/app_theme.dart';
 import 'core/utils/bloc_observer/app_bloc_observer.dart';
-import 'core/utils/firebase/CloudMessaging/firebase_messaging_service.dart';
 import 'core/utils/functions/providers/local_provider.dart';
+import 'firebase/flutter_notification_service.dart';
 import 'presentation/home_layout/screens/cart/view_model/cart_view_model.dart';
-import 'firebase_options.dart';
+import 'firebase/firebase_options.dart';
 
 // Background Handler
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   print("Handling a background message: ${message.messageId}");
 }
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 
 void main() async {
@@ -30,10 +31,15 @@ void main() async {
   );
   // Initialize Firebase Messaging
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  await FirebaseMessagingService.initializeFirebaseMessaging();
 
   // Dependency injection
   configureDependencies();
+  await FirebaseMessagingService.initializeFirebaseMessaging();
+  await NotificationService().showNotification(
+    title: "Welcome!",
+    body: "Welcome to Flowery App 🌸",
+  );
+
 
   // Bloc Observer
   Bloc.observer = AppBlocObserver();
@@ -46,14 +52,36 @@ void main() async {
     ChangeNotifierProvider(
       create: (context) => provider,
       child: MyApp(),
-    ),);
-
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    _initNotifications();
+    Future.delayed(Duration.zero, () async {
+      await NotificationService().showNotification(
+        title: "Welcome!",
+        body: "Welcome to Flowery App 🌸",
+      );
+    });
+  }
+
+  Future<void> _initNotifications() async {
+    await NotificationService().initNotification();
+
+    await NotificationService().showNotification();
+
+  }  @override
   Widget build(BuildContext context) {
     final provider = Provider.of<LocalProvider>(context);
 
@@ -65,6 +93,7 @@ class MyApp extends StatelessWidget {
         return BlocProvider<CartViewModel>(
           create: (context) => getIt<CartViewModel>(),
           child: MaterialApp(
+            navigatorKey: navigatorKey,
             locale: Locale(provider.locale),
             localizationsDelegates: const [
               S.delegate,

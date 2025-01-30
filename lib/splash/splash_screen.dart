@@ -96,7 +96,7 @@ class _SplashScreenState extends State<SplashScreen>
     log(rememberMe, name: 'SplashScreen rememberMe');
 
     if (rememberMe == 'true') {
-      initialRoute = PageRouteName.homeLayout;
+      initialRoute = PageRouteName.logIn;
     } else {
       TokenManager.deleteToken();
       initialRoute = PageRouteName.logIn;
