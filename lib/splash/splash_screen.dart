@@ -92,11 +92,10 @@ class _SplashScreenState extends State<SplashScreen>
 
     final rememberMe =
         await SecureStorageFactory.readData(key: 'rememberMe') ?? 'false';
-
     log(rememberMe, name: 'SplashScreen rememberMe');
 
     if (rememberMe == 'true') {
-      initialRoute = PageRouteName.logIn;
+      initialRoute = PageRouteName.homeLayout;
     } else {
       TokenManager.deleteToken();
       initialRoute = PageRouteName.logIn;

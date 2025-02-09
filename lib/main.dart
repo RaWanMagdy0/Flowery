@@ -7,6 +7,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'core/di/di.dart';
+import 'core/local/secure_storage.dart';
 import 'core/routes/app_routes.dart';
 import 'core/routes/page_route_name.dart';
 import 'core/theme/app_theme.dart';
@@ -40,6 +41,11 @@ void main() async {
     body: "Welcome to Flowery App 🌸",
   );
 
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    if (message.notification != null) {
+      print('New Notification: ${message.notification!.title}, ${message.notification!.body}');
+    }
+  });
 
   // Bloc Observer
   Bloc.observer = AppBlocObserver();
@@ -104,7 +110,7 @@ class _MyAppState extends State<MyApp> {
             supportedLocales: S.delegate.supportedLocales,
             debugShowCheckedModeBanner: false,
             theme: AppTheme.appTheme,
-            initialRoute: PageRouteName.splash,
+            initialRoute: PageRouteName.mapScreen,
             onGenerateRoute: AppRoutes.onGenerateRoute,
           ),
         );

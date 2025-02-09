@@ -16,7 +16,8 @@ abstract class CartApiManager {
 
   @GET(ApiConstants.cart)
   Future<CartResponseModel> getCartProducts(
-      @Header("Authorization") String token);
+      @Header("Authorization") String token
+      );
 
   @POST(ApiConstants.cart)
   Future<dynamic> addProductToCart(

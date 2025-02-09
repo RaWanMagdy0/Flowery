@@ -51,6 +51,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             final product = productDetailsEntity?.products?.firstWhere(
               (p) => p.id == widget.productId,
             );
+
             if (product != null) {
               return CustomScrollView(
                 slivers: [

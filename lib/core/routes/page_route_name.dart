@@ -23,4 +23,5 @@ class PageRouteName {
   static const String notifications = "notifications screen";
   static const String getOrdersHistory = "getOrdersHistory";
   static const String search = "search";
+  static const String mapScreen = "MapScreen";
 }

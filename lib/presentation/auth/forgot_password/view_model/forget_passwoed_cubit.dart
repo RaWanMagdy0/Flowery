@@ -92,6 +92,7 @@ class ForgetPasswordCubit extends BaseViewModel<ForgotPasswordStates> {
     switch (result) {
       case Success<String?>():
         emit(VerifyEmailCodeSuccessState(success: result.data));
+
       case Fail<String?>():
         emit(VerifyEmailCodeErrorState(
             errorMassage: getErrorMassageFromException(result.exception)));

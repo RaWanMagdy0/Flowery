@@ -1,4 +1,5 @@
 import 'package:flowery/presentation/home_layout/product_details/view_model/product_details_cubit.dart';
+import 'package:flowery/presentation/map/view/map_screen.dart';
 import 'package:flowery/presentation/order/view/get_orders_history.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -95,6 +96,10 @@ class AppRoutes {
       case PageRouteName.homeLayout:
         return _handleMaterialPageRoute(
           widget: MainPage(),
+        );
+        case PageRouteName.mapScreen:
+        return _handleMaterialPageRoute(
+          widget: MapScreen(),
         );
 
       case PageRouteName.productDetails:
