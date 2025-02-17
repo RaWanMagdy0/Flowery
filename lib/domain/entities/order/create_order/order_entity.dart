@@ -1,21 +1,24 @@
-
+import '../payment/cash_payment_entity.dart';
 import 'order_item.dart';
+
 class OrderEntity {
   OrderEntity({
-      this.id, 
-      this.user, 
-      this.orderItems, 
-      this.totalPrice, 
-      this.paymentType, 
-      this.isPaid, 
-      this.isDelivered, 
-      this.state, 
-      this.createdAt, 
-      this.updatedAt, 
-      this.orderNumber, 
-      this.v,});
+    this.product,
+    this.id,
+    this.user,
+    this.orderItems,
+    this.totalPrice,
+    this.paymentType,
+    this.isPaid,
+    this.isDelivered,
+    this.state,
+    this.createdAt,
+    this.updatedAt,
+    this.orderNumber,
+    this.v,});
 
   String? id;
+  Product?product;
   String? user;
   List<OrderItem>? orderItems;
   int? totalPrice;

@@ -9,6 +9,7 @@ import '../../models/order/response/address_models/address_response_model.dart';
 import '../../models/order/response/create_order/order_model.dart';
 import '../../models/order/response/create_order/order_response_model.dart';
 import '../../models/payment/request/payment_request_model.dart';
+import '../../models/pending_orders/pending_orders_response_model.dart';
 part 'order_api_manager.g.dart';
 
 @lazySingleton
@@ -55,4 +56,7 @@ abstract class OrderApiManger {
     @Header("Authorization") String token,
     @Body() ShippingAddressRequest body,
   );
+  @GET(ApiConstants.getPendingOrders)
+  Future<PendingOrdersResponseModel> getPendingOrders(
+      @Header("Authorization") String token);
 }

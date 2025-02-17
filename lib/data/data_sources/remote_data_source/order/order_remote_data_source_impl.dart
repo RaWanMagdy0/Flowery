@@ -1,6 +1,5 @@
 import 'package:flowery/data/models/payment/response/credit_payment_response_model.dart';
 import 'package:injectable/injectable.dart';
-
 import '../../../../core/api/api_result.dart';
 import '../../../../core/api/execute_api_call.dart';
 import '../../../../core/local/token_manger.dart';
@@ -8,6 +7,7 @@ import '../../../api/order_api/order_api_manager.dart';
 import '../../../models/order/request/create_order_request/create_order_request.dart';
 import '../../../models/order/response/create_order/order_model.dart';
 import '../../../models/payment/request/payment_request_model.dart';
+import '../../../models/pending_orders/order_model.dart';
 import 'order_remote_data_source.dart';
 
 @Injectable(as: OrderRemoteDataSource)
@@ -31,7 +31,7 @@ class OrderRemoteDataSourceImpl extends OrderRemoteDataSource {
     return await executeApiCall<List<OrderModel?>>(() async {
       var token = await _getToken();
       var response = await apiManger.getOrdersHistory(token);
-      return response?.orders??[];
+      return response?.orders ?? [];
     });
   }
 
@@ -56,6 +56,16 @@ class OrderRemoteDataSourceImpl extends OrderRemoteDataSource {
       return response;
     });
   }
+
+  @override
+  Future<Result<List<OrderModelDriver?>>> getPendingOrders() async {
+    return await executeApiCall<List<OrderModelDriver?>>(() async {
+      var token = await _getToken();
+      var orderModel = await apiManger.getPendingOrders(token);
+      return orderModel.orders ?? [];
+    });
+  }
+
   Future<String> _getToken() async {
     var token = await TokenManager.getToken();
     if (token == null || token.isEmpty) {
@@ -63,5 +73,4 @@ class OrderRemoteDataSourceImpl extends OrderRemoteDataSource {
     }
     return 'Bearer $token';
   }
-
 }

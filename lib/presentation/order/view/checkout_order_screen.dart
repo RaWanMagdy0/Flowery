@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flowery/core/utils/functions/dialogs/app_dialogs.dart';
 import 'package:flowery/presentation/order/view_model/order_cubit.dart';
 import 'package:flutter/material.dart';
@@ -67,9 +68,20 @@ class _CheckoutOrderScreenState extends State<CheckoutOrderScreen> {
       street: parts[0],
       phone: parts[2],
     );
-
     if (isCash!) {
       viewModel.handlePaymentMethod(shippingAddressRequest, true);
+      FirebaseFirestore.instance.collection('orders').doc().set({
+        'orderItems': viewModel.orderEntity?.orderItems,
+        'paymentType': viewModel.orderEntity?.paymentType,
+        'isPaid': viewModel.orderEntity?.isPaid,
+        'isDelivered': viewModel.orderEntity?.isDelivered,
+        'state': viewModel.orderEntity?.state,
+        'address': {
+          'city': parts[1],
+          'street': parts[0],
+          'phone': parts[2],
+        }
+      });
     } else {
       Navigator.push(
         context,
@@ -92,7 +104,6 @@ class _CheckoutOrderScreenState extends State<CheckoutOrderScreen> {
           AppDialogs.showSuccessDialog(
             context: context,
             message: "Order Placed Successfully",
-
           );
         }
       },

@@ -1,5 +1,4 @@
 import 'package:flowery/presentation/home_layout/product_details/view_model/product_details_cubit.dart';
-import 'package:flowery/presentation/map/view/map_screen.dart';
 import 'package:flowery/presentation/order/view/get_orders_history.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,6 +33,7 @@ import '../../presentation/order/view_model/order_cubit.dart';
 import '../../presentation/search/view/search_screen.dart';
 import '../../presentation/search/view_model/search_cubit.dart';
 import '../../presentation/terms_and_conditions/view/terms_and_conditions_screen.dart';
+import '../../presentation/track_order/map/view/map_screen.dart';
 import '../../splash/splash_screen.dart';
 import '../di/di.dart';
 import 'page_route_name.dart';

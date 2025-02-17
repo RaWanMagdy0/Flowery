@@ -7,7 +7,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'core/di/di.dart';
-import 'core/local/secure_storage.dart';
 import 'core/routes/app_routes.dart';
 import 'core/routes/page_route_name.dart';
 import 'core/theme/app_theme.dart';
@@ -16,6 +15,7 @@ import 'core/utils/functions/providers/local_provider.dart';
 import 'firebase/flutter_notification_service.dart';
 import 'presentation/home_layout/screens/cart/view_model/cart_view_model.dart';
 import 'firebase/firebase_options.dart';
+
 
 // Background Handler
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -27,30 +27,15 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  // Initialize Firebase Messaging
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-  // Dependency injection
+  getFcmToken();
+
   configureDependencies();
-  await FirebaseMessagingService.initializeFirebaseMessaging();
-  await NotificationService().showNotification(
-    title: "Welcome!",
-    body: "Welcome to Flowery App 🌸",
-  );
-
-  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    if (message.notification != null) {
-      print('New Notification: ${message.notification!.title}, ${message.notification!.body}');
-    }
-  });
-
-  // Bloc Observer
   Bloc.observer = AppBlocObserver();
-
-  // Load saved language
   LocalProvider provider = LocalProvider();
   await provider.loadSavedLanguage();
 
@@ -60,6 +45,11 @@ void main() async {
       child: MyApp(),
     ),
   );
+}
+
+void getFcmToken() async {
+  String? token = await FirebaseMessaging.instance.getToken();
+  print("🔥 FCM Token: $token");
 }
 
 class MyApp extends StatefulWidget {
@@ -110,7 +100,7 @@ class _MyAppState extends State<MyApp> {
             supportedLocales: S.delegate.supportedLocales,
             debugShowCheckedModeBanner: false,
             theme: AppTheme.appTheme,
-            initialRoute: PageRouteName.mapScreen,
+            initialRoute: PageRouteName.splash,
             onGenerateRoute: AppRoutes.onGenerateRoute,
           ),
         );

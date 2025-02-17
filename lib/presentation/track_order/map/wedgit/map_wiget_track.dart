@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapWidgetTrack extends StatefulWidget {
@@ -16,7 +14,7 @@ class _MapWidgetState extends State<MapWidgetTrack> {
   GoogleMapController? _mapController;
   final Set<Marker> _markers = {};
   LatLng? selectedLocation;
-  double currentZoom = 18.0;
+  double currentZoom = 20.0;
 
   @override
   void initState() {

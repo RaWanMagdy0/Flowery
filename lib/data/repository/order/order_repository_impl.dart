@@ -1,4 +1,5 @@
 import 'package:flowery/domain/entities/order/create_order/order_entity.dart';
+import 'package:flowery/domain/entities/pending_orders/order_entity.dart';
 import 'package:injectable/injectable.dart';
 import '../../../core/api/api_result.dart';
 import '../../../domain/entities/order/payment/credit_card_entity.dart';
@@ -59,6 +60,19 @@ class OrderRepositoryImpl extends OrderRepository {
     switch (response) {
       case Success():
         return Success(data: response.data?.toEntity());
+      case Fail():
+        return Fail(exception: response.exception);
+    }
+  }
+
+  @override
+  Future<Result<List<OrderEntityDriver?>>> getPendingOrders() async {
+    final response = await dataSource.getPendingOrders();
+    switch (response) {
+      case Success():
+        final entities =
+            response.data?.map((model) => model?.toEntity()).toList();
+        return Success(data: entities);
       case Fail():
         return Fail(exception: response.exception);
     }

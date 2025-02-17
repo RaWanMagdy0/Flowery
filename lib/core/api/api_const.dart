@@ -30,6 +30,6 @@ class ApiConstants {
 // static const String products = "api/v1/products";
   static const String getAllNotifications = "api/v1/notifications";
   static const String cash = "api/v1/orders";
-  static const String creditCard =
-      "api/v1/orders/checkout?url=http://localhost:3000";
+  static const String creditCard = "api/v1/orders/checkout?url=http://localhost:3000";
+  static const String getPendingOrders = "api/v1/orders/pending-orders";
 }

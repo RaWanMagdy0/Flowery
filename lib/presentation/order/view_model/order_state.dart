@@ -13,6 +13,12 @@ final class CheckoutSuccessState extends OrderState {
 
   CheckoutSuccessState({required this.orderEntity});
 }
+class OrderStatusUpdated extends OrderState {
+  final String status;
+  OrderStatusUpdated(this.status);
+}
+
+
 
 final class CheckoutErrorState extends OrderState {
   final String? errorMessage;

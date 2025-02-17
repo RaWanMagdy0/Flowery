@@ -41,7 +41,7 @@ class OrderCubit extends BaseViewModel<OrderState> {
     var result = await historyUseCase.invoke();
     switch (result) {
       case Success():
-        emit(GetOrdersSuccessState(orders: result.data??[] ));
+        emit(GetOrdersSuccessState(orders: result.data ?? []));
       case Fail():
         emit(GetOrdersErrorState(
             errorMessage: getErrorMassageFromException(result.exception)));
@@ -56,18 +56,11 @@ class OrderCubit extends BaseViewModel<OrderState> {
         : await _creditPaymentUseCase.invoke(shippingAddressRequest);
 
     if (result is Success<OrderEntity?>) {
+      // حفظ الـ orderEntity
+      orderEntity = result.data;
       emit(CheckoutSuccessState(orderEntity: result.data));
     } else if (result is Fail<OrderEntity?>) {
       emit(PaymentErrorState(getErrorMassageFromException(result.exception)));
-    }
-  }  void _handleResult<T>(Result<T?> result, OrderState successState) {
-    switch (result) {
-      case Success():
-        emit(successState);
-        break;
-      case Fail():
-        emit(PaymentErrorState(getErrorMassageFromException(result.exception)));
-        break;
     }
   }
 }

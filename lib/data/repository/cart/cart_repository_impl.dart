@@ -23,7 +23,6 @@ class CartRepositoryImpl implements CartRepository {
         return Fail(exception: response.exception);
     }
   }
-
   @override
   Future<Result<bool?>> addProductToCart(String productId) async {
     final response = await remoteDataSource.addProductToCart(productId);
