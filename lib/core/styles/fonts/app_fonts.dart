@@ -20,6 +20,11 @@ class AppFonts {
     color: AppColors.kPink,
     fontWeight: FontWeight.w600,
   );
+  static TextStyle font12LightGreyWeight400 = TextStyle(
+    fontSize: 12.sp,
+    color: AppColors.kLightGrey,
+    fontWeight: FontWeight.w400,
+  );
   static TextStyle font11PinkWeight400 = TextStyle(
     fontSize: 11.sp,
     color: AppColors.kPink,

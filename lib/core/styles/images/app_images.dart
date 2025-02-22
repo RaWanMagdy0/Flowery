@@ -24,4 +24,5 @@ class AppImages {
   static const editIcon = "assets/icons/edit.png";
   static const languageIcon = "assets/icons/language_icon.png";
   static const flowerImage= "assets/images/Image.png";
+  static const car= "assets/images/car.jpg";
 }

@@ -1,5 +1,6 @@
 import 'package:flowery/presentation/home_layout/product_details/view_model/product_details_cubit.dart';
 import 'package:flowery/presentation/order/view/get_orders_history.dart';
+import 'package:flowery/presentation/track_order/track_order/view/track_order_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../presentation/about_app/view/about_app_screen.dart';
@@ -96,6 +97,10 @@ class AppRoutes {
       case PageRouteName.homeLayout:
         return _handleMaterialPageRoute(
           widget: MainPage(),
+        );
+        case PageRouteName.trackOrderScreen:
+        return _handleMaterialPageRoute(
+          widget: TrackOrderScreen(),
         );
         case PageRouteName.mapScreen:
         return _handleMaterialPageRoute(

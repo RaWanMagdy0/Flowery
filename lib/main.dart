@@ -18,10 +18,6 @@ import 'firebase/firebase_options.dart';
 
 
 // Background Handler
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
-  print("Handling a background message: ${message.messageId}");
-}
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 

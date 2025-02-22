@@ -2,15 +2,13 @@ import 'package:flowery/core/styles/colors/app_colors.dart';
 import 'package:flowery/core/styles/fonts/app_fonts.dart';
 import 'package:flowery/core/styles/images/app_images.dart';
 import 'package:flowery/core/utils/widget/custom_button.dart';
-import 'package:flowery/domain/entities/pending_orders/order_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../../core/utils/functions/dialogs/app_dialogs.dart';
 import '../view_model/map_states.dart';
 import '../view_model/map_view_model.dart';
-import '../wedgit/map_wiget_track.dart';
+import '../widget/map_wiget_track.dart';
 
 class MapScreen extends StatelessWidget {
   const MapScreen({super.key});
