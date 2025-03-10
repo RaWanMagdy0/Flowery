@@ -24,7 +24,6 @@ class CheckoutOrderScreen extends StatefulWidget {
   @override
   State<CheckoutOrderScreen> createState() => _CheckoutOrderScreenState();
 }
-
 class _CheckoutOrderScreenState extends State<CheckoutOrderScreen> {
   late OrderCubit viewModel;
   String? selectedAddress;
@@ -62,24 +61,47 @@ class _CheckoutOrderScreenState extends State<CheckoutOrderScreen> {
       );
       return;
     }
+
     final parts = selectedAddress!.split('-');
     final shippingAddressRequest = ShippingAddressRequest(
       city: parts[1],
       street: parts[0],
       phone: parts[2],
     );
+
     if (isCash!) {
-      viewModel.handlePaymentMethod(shippingAddressRequest, true);
-      FirebaseFirestore.instance.collection('orders').doc().set({
-        'orderItems': viewModel.orderEntity?.orderItems,
-        'paymentType': viewModel.orderEntity?.paymentType,
-        'isPaid': viewModel.orderEntity?.isPaid,
-        'isDelivered': viewModel.orderEntity?.isDelivered,
-        'state': viewModel.orderEntity?.state,
-        'address': {
-          'city': parts[1],
-          'street': parts[0],
-          'phone': parts[2],
+      viewModel.handlePaymentMethod(shippingAddressRequest, true).then((_) {
+        if (viewModel.orderEntity != null) {
+          FirebaseFirestore.instance.collection('orders').add({
+            'id': viewModel.orderEntity!.id,
+            'product': viewModel.orderEntity!.product != null
+                ? {
+              'name': viewModel.orderEntity!.product!.title,
+              'price': viewModel.orderEntity!.product!.price,
+            }
+                : null,
+            'user': viewModel.orderEntity!.user,
+            'orderItems': viewModel.orderEntity!.orderItems
+                ?.map((item) => {
+              'price': item.price,
+              'quantity': item.quantity,
+            })
+                .toList(),
+            'totalPrice': viewModel.orderEntity!.totalPrice,
+            'paymentType': viewModel.orderEntity!.paymentType,
+            'isPaid': viewModel.orderEntity!.isPaid,
+            'isDelivered': viewModel.orderEntity!.isDelivered,
+            'state': viewModel.orderEntity!.state,
+            'createdAt': viewModel.orderEntity!.createdAt,
+            'updatedAt': viewModel.orderEntity!.updatedAt,
+            'orderNumber': viewModel.orderEntity!.orderNumber,
+            'v': viewModel.orderEntity!.v,
+            'address': {
+              'city': parts[1],
+              'street': parts[0],
+              'phone': parts[2],
+            },
+          });
         }
       });
     } else {
@@ -88,7 +110,7 @@ class _CheckoutOrderScreenState extends State<CheckoutOrderScreen> {
         MaterialPageRoute(
           builder: (context) => PaymentWebView(
             paymentLink:
-                "https://checkout.stripe.com/c/pay/cs_test_a12wg5AMebQdH17D1baN8S26eyPQQrQj7joTlKyXxvGUWKEdnStpalfrXr#fidkdWxOYHwnPyd1blpxYHZxWjA0SHViYl1ANVYyU2pOX2hVVW9ASmZBUElpa2FLVnBUQGo2UFduUEhIXHx9aEhjanBGZ1NxZ3RKNVVtXWxcSTJ8Qzx2aWZkUEBpMXJCXVRHTkIxZzBSZmhENTUxYHVKMUpQVycpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl",
+            "https://checkout.stripe.com/c/pay/cs_test_a12wg5AMebQdH17D1baN8S26eyPQQrQj7joTlKyXxvGUWKEdnStpalfrXr#fidkdWxOYHwnPyd1blpxYHZxWjA0SHViYl1ANVYyU2pOX2hVVW9ASmZBUElpa2FLVnBUQGo2UFduUEhIXHx9aEhjanBGZ1NxZ3RKNVVtXWxcSTJ8Qzx2aWZkUEBpMXJCXVRHTkIxZzBSZmhENTUxYHVKMUpQVycpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl",
           ),
         ),
       );

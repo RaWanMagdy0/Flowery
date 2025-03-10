@@ -20,7 +20,6 @@ class OrderDetailsCubit extends BaseViewModel<PendingOrderState> {
   Future<void> getPendingOrders() async {
     if (isClosed) return;
     emit(OrderStateLoading());
-
     var result = await orderUseCase.invoke();
     if (isClosed) return;
     switch (result) {

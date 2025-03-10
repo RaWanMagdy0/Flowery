@@ -1,10 +1,10 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart' hide DioMediaType;
 import 'package:http_parser/http_parser.dart';
+import 'package:dio/dio.dart';
+
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
-
 import '../../../core/api/api_const.dart';
 import '../../models/auth/requests/edite_profile_request_model.dart';
 import '../../models/home/best_seller/best_seller_response_model.dart';

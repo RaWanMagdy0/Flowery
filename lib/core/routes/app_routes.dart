@@ -1,6 +1,5 @@
 import 'package:flowery/presentation/home_layout/product_details/view_model/product_details_cubit.dart';
 import 'package:flowery/presentation/order/view/get_orders_history.dart';
-import 'package:flowery/presentation/track_order/track_order/view/track_order_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../presentation/about_app/view/about_app_screen.dart';
@@ -34,7 +33,8 @@ import '../../presentation/order/view_model/order_cubit.dart';
 import '../../presentation/search/view/search_screen.dart';
 import '../../presentation/search/view_model/search_cubit.dart';
 import '../../presentation/terms_and_conditions/view/terms_and_conditions_screen.dart';
-import '../../presentation/track_order/map/view/map_screen.dart';
+import '../../presentation/track_order/view/map_screen.dart';
+import '../../presentation/track_order/view/track_order_screen.dart';
 import '../../splash/splash_screen.dart';
 import '../di/di.dart';
 import 'page_route_name.dart';
@@ -98,15 +98,18 @@ class AppRoutes {
         return _handleMaterialPageRoute(
           widget: MainPage(),
         );
-        case PageRouteName.trackOrderScreen:
-        return _handleMaterialPageRoute(
-          widget: TrackOrderScreen(),
+      case PageRouteName.trackOrderScreen:
+        final args = setting.arguments as String?;
+        return MaterialPageRoute(
+          builder: (context) => TrackOrderScreen(orderId: args ?? ''),
+          settings: setting,
         );
-        case PageRouteName.mapScreen:
-        return _handleMaterialPageRoute(
-          widget: MapScreen(),
+      case PageRouteName.mapScreen:
+        final args = setting.arguments as String?;
+        return MaterialPageRoute(
+          builder: (context) =>MapScreen(orderId: args??"",),
+          settings: setting,
         );
-
       case PageRouteName.productDetails:
         final String productId = setting.arguments as String;
         return MaterialPageRoute(

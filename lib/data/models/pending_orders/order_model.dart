@@ -1,9 +1,7 @@
 import 'package:flowery/data/models/pending_orders/store_model.dart';
 import 'package:flowery/data/models/pending_orders/user_model.dart';
 
-import '../../../domain/entities/order/create_order/order_entity.dart';
 import '../../../domain/entities/pending_orders/order_entity.dart';
-import '../home/profile/user_model.dart';
 import 'order_item_model.dart';
 
 class OrderModelDriver {

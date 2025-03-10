@@ -163,8 +163,8 @@ class _OccasionScreenState extends State<OccasionScreen> {
                         if (product == null) {
                           return SizedBox.shrink();
                         }
-                        final discount = product.price != null && product.priceAfterDiscount != null
-                            ? ((product.price! - product.priceAfterDiscount!) / product.price! * 100).round()
+                        final discount = product.priceAfterDiscount != null
+                            ? ((product.price - product.priceAfterDiscount) / product.price * 100).round()
                             : 0;
                         return FlowerCard(
                           title: product.title,

@@ -1,4 +1,3 @@
-import '../../../domain/entities/home_layout/product_details_entity.dart';
 import '../../../domain/entities/order/create_order/order_entity.dart';
 
 sealed class OrderState {}

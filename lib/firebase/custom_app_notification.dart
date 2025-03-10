@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class InAppNotification extends StatefulWidget {
@@ -6,10 +5,10 @@ class InAppNotification extends StatefulWidget {
   final Duration duration;
 
   const InAppNotification({
-    Key? key,
+    super.key,
     required this.message,
     this.duration = const Duration(seconds: 3),
-  }) : super(key: key);
+  });
 
   static void show(BuildContext context, String message) {
     OverlayState? overlay = Overlay.of(context);

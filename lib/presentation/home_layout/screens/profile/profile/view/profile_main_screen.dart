@@ -1,4 +1,3 @@
-import 'package:flowery/presentation/home_layout/screens/profile/profile/widget/custom_profile_pic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

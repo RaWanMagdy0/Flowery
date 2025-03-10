@@ -27,7 +27,7 @@ class OrderHistoryList extends StatelessWidget {
                 return CustomOrderCard(
                   orderItem: orderItem,
                   order: order,
-                  product: orderItem?.product,
+                  product: orderItem.product,
                 );
               },
             ),

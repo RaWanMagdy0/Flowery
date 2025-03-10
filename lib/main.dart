@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'core/di/di.dart';
 import 'core/routes/app_routes.dart';
@@ -14,22 +15,37 @@ import 'core/utils/bloc_observer/app_bloc_observer.dart';
 import 'core/utils/functions/providers/local_provider.dart';
 import 'firebase/flutter_notification_service.dart';
 import 'presentation/home_layout/screens/cart/view_model/cart_view_model.dart';
-import 'firebase/firebase_options.dart';
 
-
-// Background Handler
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  PackageInfo packageInfo = await PackageInfo.fromPlatform();
+  String packageName = packageInfo.packageName;
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-
+  FirebaseOptions firebaseOptions;
+  if (packageName.contains("flowery_driver")) {
+    firebaseOptions = FirebaseOptions(
+      apiKey: "AIzaSyBGfK3...",
+      appId: "1:941362651057:android:3686b4f61817a842412790",
+      messagingSenderId: "941362651057",
+      projectId: "flowery-app-add84",
+    );
+  } else {
+    firebaseOptions = FirebaseOptions(
+      apiKey: "AIzaSyBGfK3...",
+      appId: "1:941362651057:android:6d3808a23b1f9afd412790",
+      messagingSenderId: "941362651057",
+      projectId: "flowery-app-add84",
+    );
+  }
+  try {
+    await Firebase.initializeApp(options: firebaseOptions);
+    print("✅ Firebase Initialized for: $packageName");
+  } on FirebaseException catch (e) {
+    print("⚠️ Firebase already initialized: ${e.message}");
+  }
   getFcmToken();
-
   configureDependencies();
   Bloc.observer = AppBlocObserver();
   LocalProvider provider = LocalProvider();
@@ -70,10 +86,10 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> _initNotifications() async {
     await NotificationService().initNotification();
-
     await NotificationService().showNotification();
+  }
 
-  }  @override
+  @override
   Widget build(BuildContext context) {
     final provider = Provider.of<LocalProvider>(context);
 

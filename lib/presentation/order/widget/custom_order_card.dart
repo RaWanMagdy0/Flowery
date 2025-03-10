@@ -120,7 +120,14 @@ class _CustomOrderCardState extends State<CustomOrderCard> {
                       ),
                       onPressed: () {
                         if (widget.order?.isDelivered ?? false) {
-                        } else {}
+                        } else {
+                          Navigator.pushNamed(
+                            context,
+                            PageRouteName.trackOrderScreen,
+                            arguments: widget.order?.id,
+                          );
+                       print(widget.order?.id);
+                        }
                       },
                     ),
                   )

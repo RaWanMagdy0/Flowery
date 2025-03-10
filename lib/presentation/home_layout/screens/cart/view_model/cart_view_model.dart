@@ -1,4 +1,3 @@
-import 'package:flowery/domain/entities/home_layout/product_details_entity.dart';
 import 'package:injectable/injectable.dart';
 import '../../../../../core/api/api_result.dart';
 import '../../../../../core/base/base_view_model.dart';

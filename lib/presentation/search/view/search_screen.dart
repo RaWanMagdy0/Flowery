@@ -147,7 +147,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   title: product.title,
                   imageUrl: product.imgCover,
                   price: 'EGP ${product.priceAfterDiscount}',
-                  originalPrice: product.price?.toString(),
+                  originalPrice: product.price.toString(),
                   backgroundColor: Colors.white,
                   buttonColor: AppColors.kPink,
                   buttonTextColor: Colors.white,

@@ -2,7 +2,6 @@ import 'package:injectable/injectable.dart';
 
 import '../../../core/api/api_result.dart';
 import '../../../core/base/base_view_model.dart';
-import '../../../domain/entities/home_layout/product_details_entity.dart';
 import '../../../domain/use_case/search/search_products_use_case.dart';
 import 'search_state.dart';
 

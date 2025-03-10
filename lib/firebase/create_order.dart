@@ -20,7 +20,7 @@ class OrderService {
       await _firestore.collection('orders').doc(order.id).set(orderData);
     } catch (e) {
       print('Error creating order: $e');
-      throw e;
+      rethrow;
     }
   }
 
@@ -56,7 +56,7 @@ class OrderService {
       await _firestore.collection('orders').doc(orderId).update(updates);
     } catch (e) {
       print('Error updating order status: $e');
-      throw e;
+      rethrow;
     }
   }
 

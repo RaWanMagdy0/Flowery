@@ -25,10 +25,11 @@ class OrderCubit extends BaseViewModel<OrderState> {
 
   Future<void> createOrder(CreateOrderRequest createOrderRequest) async {
     emit(OrderLoadingState());
-
     var result = await useCase.invoke(createOrderRequest);
     switch (result) {
       case Success<OrderEntity?>():
+        orderEntity = result.data;
+
         emit(CheckoutSuccessState(orderEntity: orderEntity));
       case Fail<OrderEntity?>():
         emit(CheckoutErrorState(
@@ -51,16 +52,26 @@ class OrderCubit extends BaseViewModel<OrderState> {
   Future<void> handlePaymentMethod(
       ShippingAddressRequest shippingAddressRequest, bool isCash) async {
     emit(PaymentLoadingState());
+
     var result = isCash
         ? await _cashPaymentUseCase.invoke(shippingAddressRequest)
         : await _creditPaymentUseCase.invoke(shippingAddressRequest);
 
+    print("Payment result: $result");
+
     if (result is Success<OrderEntity?>) {
-      // حفظ الـ orderEntity
       orderEntity = result.data;
-      emit(CheckoutSuccessState(orderEntity: result.data));
+      print("OrderEntity after payment: $orderEntity");
+
+      if (orderEntity != null) {
+        emit(CheckoutSuccessState(orderEntity: orderEntity));
+      } else {
+        emit(PaymentErrorState("Order data is missing after payment."));
+      }
     } else if (result is Fail<OrderEntity?>) {
       emit(PaymentErrorState(getErrorMassageFromException(result.exception)));
     }
   }
+
+
 }
