@@ -60,6 +60,7 @@ dependencies:
   package_info_plus: ^8.3.0
   custom_info_window: ^1.0.1
   flutter_polyline_points: ^2.1.0
+  flutter_map: ^8.1.1
 
 
 

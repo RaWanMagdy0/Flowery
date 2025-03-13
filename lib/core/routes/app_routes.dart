@@ -35,6 +35,7 @@ import '../../presentation/search/view_model/search_cubit.dart';
 import '../../presentation/terms_and_conditions/view/terms_and_conditions_screen.dart';
 import '../../presentation/track_order/view/map_screen.dart';
 import '../../presentation/track_order/view/track_order_screen.dart';
+import '../../presentation/track_order/view_model/map_view_model.dart';
 import '../../splash/splash_screen.dart';
 import '../di/di.dart';
 import 'page_route_name.dart';
@@ -104,11 +105,15 @@ class AppRoutes {
           builder: (context) => TrackOrderScreen(orderId: args ?? ''),
           settings: setting,
         );
+
       case PageRouteName.mapScreen:
         final args = setting.arguments as String?;
+
         return MaterialPageRoute(
-          builder: (context) =>MapScreen(orderId: args??"",),
-          settings: setting,
+          builder: (context) => BlocProvider(
+            create: (context) => getIt<MapCubit>(),
+            child: MapScreen(orderId: args??"",),
+          ),
         );
       case PageRouteName.productDetails:
         final String productId = setting.arguments as String;

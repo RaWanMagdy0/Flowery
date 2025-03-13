@@ -27,4 +27,5 @@ class AppImages {
   static const car= "assets/images/car.jpg";
   static const flowerIcon= "assets/icons/flowerIcon.png";
   static const locatIcon= "assets/icons/locatIcon.png";
+  static const deliveryMotorcycle= "assets/images/deliveryMotorcycle.png";
 }

@@ -39,7 +39,7 @@
         <!-- API Key for Google Services -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDgM8wOIgztPsAdRAXKBVpWwImEhydWQrM"/>
+            android:value="AIzaSyBA7Un_K8kYshyK1rVBhJPuQfVUzUha6lQ"/>
 
         <meta-data
             android:name="io.flutter.embedding.android.EnableImpeller"
