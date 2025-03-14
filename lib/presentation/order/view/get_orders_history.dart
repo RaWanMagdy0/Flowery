@@ -71,14 +71,13 @@ class _GetOrdersHistoryState extends State<GetOrdersHistory> {
               List<OrderEntity?> orders = state.orders;
               List<OrderEntity?> activeOrders = [];
               List<OrderEntity?> completedOrders = [];
-
               activeOrders = orders
                   .where((order) =>
-              !(order?.isPaid ?? false) || !(order?.isDelivered ?? false))
+              (order?.state=="inProgress" ))
                   .toList();
               completedOrders = orders
                   .where((order) =>
-              (order?.isPaid ?? false) && (order?.isDelivered ?? false))
+               (order?.state=="completed" ))
                   .toList();
 
               return TabBarView(

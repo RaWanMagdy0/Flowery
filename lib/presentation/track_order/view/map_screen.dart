@@ -59,7 +59,6 @@ class _MapScreenState extends State<MapScreen> {
     final userName = "${user['firstName']} ${user['lastName']}";
     final userPhone = user['phone'] ?? "";
     final userImage = AppImages.personIcon;
-   // final userImage = user['photo'] ??AppImages.personIcon;
     return Scaffold(
       body: isLoading
           ? Center(child: CircularProgressIndicator())

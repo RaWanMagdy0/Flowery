@@ -55,7 +55,6 @@ class _MapWidgetTrackState extends State<MapWidgetTrack> {
     return BlocConsumer<MapCubit, PendingOrderState>(
       listener: (context, state) {
         if (state is OrderLoaded && _mapController != null) {
-          // تحديث كاميرا الخريطة عند تحديث موقع السائق
           if (state.driverLocation != null) {
             _mapController?.animateCamera(CameraUpdate.newCameraPosition(
               CameraPosition(
@@ -68,20 +67,15 @@ class _MapWidgetTrackState extends State<MapWidgetTrack> {
         }
       },
       builder: (context, state) {
-        // عرض مؤشر التحميل
         if (_isLoading) {
           return Center(child: CircularProgressIndicator(color: AppColors.kPink));
         }
-
-        // عرض رسالة الخطأ
         if (state is OrderError) {
           return Center(child: Text(state.message ?? ""));
         }
-
         if (state is! OrderLoaded) {
-          return Center(child: Text("جاري تحميل بيانات الطلب..."));
+          return Center(child: Text("loading data..."));
         }
-
         final storeLocation = state.order.storeLocation;
         final driverLocation = state.driverLocation;
 
@@ -93,7 +87,7 @@ class _MapWidgetTrackState extends State<MapWidgetTrack> {
                 zoom: 14,
               ),
               mapType: MapType.normal,
-              markers: state.markers,
+             markers: state.markers,
               polylines: state.polylines,
               myLocationEnabled: false,
               compassEnabled: true,

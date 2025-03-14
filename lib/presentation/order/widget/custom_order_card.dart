@@ -112,21 +112,26 @@ class _CustomOrderCardState extends State<CustomOrderCard> {
                       height: 35.h,
                       color: AppColors.kPink,
                       child: Text(
-                        widget.order?.isDelivered ?? false
+                        widget.order?.state=="completed"
                             ? "reorder"
                             : local.trackOrder,
                         style: AppFonts.font16WhiteWeight500
                             .copyWith(fontSize: 13.sp),
                       ),
                       onPressed: () {
-                        if (widget.order?.isDelivered ?? false) {
+                        if (widget.order?.state=="completed") {
+                          Navigator.pushNamed(
+                            context,
+                            PageRouteName.productDetails,
+                            arguments: widget.product?.id,
+
+                          );
                         } else {
                           Navigator.pushNamed(
                             context,
                             PageRouteName.trackOrderScreen,
                             arguments: widget.order?.id,
                           );
-                       print(widget.order?.id);
                         }
                       },
                     ),
