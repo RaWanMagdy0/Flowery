@@ -1,16 +1,40 @@
-# flowery
+# Flowery App
 
-A new Flutter project.
+An e-commerce mobile application for ordering flowers and gifts with a smooth and elegant shopping experience.
 
-## Getting Started
+## Demo
+[Watch the App Demo](https://www.linkedin.com/posts/rawan-magdy-_proud-to-share-our-e-commerce-app-project-activity-7290787118333751298-eVRP?utm_source=share&utm_medium=member_desktop&rcm=ACoAADerwXEBNTCnnAdxCfCgPEweETIHLG1VGhk)
 
-This project is a starting point for a Flutter application.
+## Features
 
-A few resources to get you started if this is your first Flutter project:
+- Authentication (Sign Up, Login, Forgot Password, OTP Verification)
+- Browse flowers and gifts by category
+- Product details and most selling products
+- Occasions-based recommendations
+- Cart and order management
+- Home screen with personalized content
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Tech Stack
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+**Framework:** Flutter & Dart  
+**Architecture:** Clean Architecture
+
+**State Management**
+- Flutter Bloc / Cubit
+
+**Networking**
+- Dio
+- Retrofit
+- Pretty Dio Logger
+
+**UI Components**
+- Flutter ScreenUtil
+- Lottie
+- Pin Code Fields
+
+**Dependency Injection**
+- Get It
+- Injectable
+
+**Testing**
+- Mockito
